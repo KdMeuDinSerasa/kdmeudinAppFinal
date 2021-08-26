@@ -17,6 +17,7 @@
     tools:context=".MainActivity">
 
 
+
     <fragment
         android:id="@+id/hostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottomNavMain"
+        android:background="@color/purple_700"
         app:layout_constraintTop_toBottomOf="@id/hostFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

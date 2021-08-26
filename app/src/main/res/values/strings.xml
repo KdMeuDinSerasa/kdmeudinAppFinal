@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KdMeuDinheiro</string>
+    <string name="bem_vindo_login">Bem Vindo</string>
+    <string name="mantenha_me_conectado">Mantenha-me Conectado</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="cadastre_se_titulo">Cadastre-se</string>
+    <string name="cadastrar_btn">Cadastrar</string>
+    <string name="cancelar_cadastro_btn">Cancelar</string>
 </resources>
