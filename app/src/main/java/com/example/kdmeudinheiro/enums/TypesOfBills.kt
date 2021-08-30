@@ -7,5 +7,7 @@ enum class TypesOfBills(CatName: String, catId: Int) {
 
     FIX_BILLS(R.string.Fix_Bill_Label.toString(), 1),
     LEISURE_BILLS(R.string.Leisure_Bill_Label.toString(), 2),
+    MONTHLY_BILLS(R.string.MonthlyBill_Label.toString(), 3)
+
 
 }

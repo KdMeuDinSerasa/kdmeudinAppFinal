@@ -8,6 +8,7 @@
     <string name="cancelar_cadastro_btn">Cancelar</string>
     <string name="Fix_Bill_Label">Fixa</string>
     <string name="Leisure_Bill_Label">Lazer</string>
+    <string name="MonthlyBill_Label">Mensal</string>
 
 
 </resources>
