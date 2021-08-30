@@ -6,4 +6,10 @@
     <string name="cadastre_se_titulo">Cadastre-se</string>
     <string name="cadastrar_btn">Cadastrar</string>
     <string name="cancelar_cadastro_btn">Cancelar</string>
+    <string name="Fix_Bill_Label">Fixa</string>
+    <string name="Leisure_Bill_Label">Lazer</string>
+    <string name="Monthly_Bill_Label">Mensal</string>
+    <string name="Emergency_Bill_Label">Emergencial</string>
+
+
 </resources>

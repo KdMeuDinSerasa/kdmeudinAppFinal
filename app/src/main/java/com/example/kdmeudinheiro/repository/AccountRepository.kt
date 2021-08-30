@@ -25,5 +25,26 @@ class AccountRepository {
             }
     }
 
+    fun getAccounts(idUser: String, callback: (List<AccountModel>?, String?) -> Unit){
+        db.collection("table_account").whereEqualTo(KeysDatabaseAccount.IDUSER.key, idUser).get()
+            .addOnSuccessListener {
+                val accountList = mutableListOf<AccountModel>()
+                it.forEach {
+                    accountList.add(AccountModel(
+                        it.id.toInt(),
+                        it.data["key_user"] as String,
+                        it.data["key_price"] as Double,
+                        it.data["key_type"] as String,
+                        it.data["key_name"] as String,
+                        it.data["key_expiredate"] as String
+                    ))
+                    callback(accountList, null)
+                }
+            }
+            .addOnFailureListener {
+                callback(null, it.message)
+            }
+    }
+
 
 }
