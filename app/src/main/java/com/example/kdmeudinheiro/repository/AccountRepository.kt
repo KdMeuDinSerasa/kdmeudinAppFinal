@@ -15,5 +15,15 @@ class AccountRepository {
         map.put(KeysDatabaseAccount.TYPEACCOUNT.key, mAccountModel.type_account)
         map.put(KeysDatabaseAccount.NAMEACCOUNT.key, mAccountModel.name_account)
         map.put(KeysDatabaseAccount.EXPIREDATE.key, mAccountModel.expire_date)
+
+        db.collection("table_account").add(map)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener {
+                callback(false)
+            }
     }
+
+
 }
