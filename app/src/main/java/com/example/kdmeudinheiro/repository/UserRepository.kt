@@ -31,4 +31,9 @@ class UserRepository {
 
     fun getSession(): FirebaseUser? = UserControler.currentUser
 
+
+    fun logOut(){
+        UserControler.signOut()
+    }
+
 }
