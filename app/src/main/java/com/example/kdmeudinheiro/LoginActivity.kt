@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
 
             ) {
                 val mUser =
-                    UserModel(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+                    UserModel(emailAux.text.toString(), passwordAux.text.toString())
                 mUserRepository.createUserWithEmailPassword(mUser) { user, error ->
                     if (user != null) {
                         Toast.makeText(this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show()
