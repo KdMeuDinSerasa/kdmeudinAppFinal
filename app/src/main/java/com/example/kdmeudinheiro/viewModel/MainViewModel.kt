@@ -8,4 +8,8 @@ class MainViewModel() : ViewModel() {
     fun logoutUser(){
         mUserRepository.logOut()
     }
+
+
+
+
 }
