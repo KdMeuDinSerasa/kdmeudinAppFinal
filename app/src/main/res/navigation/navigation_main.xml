@@ -14,5 +14,5 @@
         android:id="@+id/BillsFragment"
         android:name="com.example.kdmeudinheiro.view.BillsFragment"
         android:label="Minhas Contas"
-        tools:layout="@layout/accounts_fragment" />
+        tools:layout="@layout/bills_fragment" />
 </navigation>
