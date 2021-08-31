@@ -48,7 +48,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BillsFragmentBinding.bind(view)
-        recyclerView = binding.recyclerViewNoXml
+        recyclerView = binding.recyclerViewIdNoXML
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
     }
