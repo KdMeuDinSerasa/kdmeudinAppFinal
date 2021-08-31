@@ -1,20 +1,20 @@
 package com.example.kdmeudinheiro.repository
 
-import com.example.kdmeudinheiro.enums.KeysDatabaseAccount
+import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BillsRepository {
     private val db = FirebaseFirestore.getInstance()
 
-    fun addAccount(mBillsModel: BillsModel, callback: (Boolean) -> Unit){
+    fun addBills(mBillsModel: BillsModel, callback: (Boolean) -> Unit){
         val map = mutableMapOf<String , String>()
-        map.put(KeysDatabaseAccount.IDACCOUNT.key, mBillsModel.id_account.toString())
-        map.put(KeysDatabaseAccount.IDUSER.key, mBillsModel.id_user)
-        map.put(KeysDatabaseAccount.PRICE.key, mBillsModel.price.toString())
-        map.put(KeysDatabaseAccount.TYPEACCOUNT.key, mBillsModel.type_account)
-        map.put(KeysDatabaseAccount.NAMEACCOUNT.key, mBillsModel.name_account)
-        map.put(KeysDatabaseAccount.EXPIREDATE.key, mBillsModel.expire_date)
+        map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_account.toString())
+        map.put(KeysDatabaseBills.IDUSER.key, mBillsModel.id_user)
+        map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price.toString())
+        map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_account)
+        map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_account)
+        map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
 
         db.collection("table_account").add(map)
             .addOnSuccessListener {
@@ -26,7 +26,7 @@ class BillsRepository {
     }
 
     fun getAccounts(idUser: String, callback: (List<BillsModel>?, String?) -> Unit){
-        db.collection("table_account").whereEqualTo(KeysDatabaseAccount.IDUSER.key, idUser).get()
+        db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
             .addOnSuccessListener {
                 val accountList = mutableListOf<BillsModel>()
                 it.forEach {
