@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import com.example.kdmeudinheiro.viewModel.AccountsViewModel
 import com.example.kdmeudinheiro.R
 
-class AccountsFragment : Fragment() {
+class BillsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AccountsFragment()
+        fun newInstance() = BillsFragment()
     }
 
     private lateinit var viewModel: AccountsViewModel

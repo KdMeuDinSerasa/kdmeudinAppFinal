@@ -1,6 +1,6 @@
 package com.example.kdmeudinheiro.model
 
-data class AccountModel(
+data class BillsModel(
     val id_account: Int,
     val id_user: String,
     val price: Double,

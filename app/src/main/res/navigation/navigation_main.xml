@@ -12,7 +12,7 @@
         tools:layout="@layout/main_fragment" />
     <fragment
         android:id="@+id/accountsFragment"
-        android:name="com.example.kdmeudinheiro.view.AccountsFragment"
+        android:name="com.example.kdmeudinheiro.view.BillsFragment"
         android:label="Minhas Contas"
         tools:layout="@layout/accounts_fragment" />
 </navigation>
