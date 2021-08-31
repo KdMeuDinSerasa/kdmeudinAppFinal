@@ -19,8 +19,8 @@ class UserRepository {
             }
     }
 
-    fun loginWithEmailPassword(mUserModel: UserModel , callback: (FirebaseUser?, String?) -> Unit) {
-        UserControler.signInWithEmailAndPassword(mUserModel.email , mUserModel.password)
+    fun loginWithEmailPassword(email: String, password: String , callback: (FirebaseUser?, String?) -> Unit) {
+        UserControler.signInWithEmailAndPassword(email , password)
             .addOnSuccessListener {
                 callback(it.user , null)
             }

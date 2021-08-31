@@ -62,9 +62,8 @@ class LoginActivity : AppCompatActivity() {
         if (!binding.etEmail.text.toString().isNullOrBlank() && !binding.etPassword.text.toString()
                 .isNullOrBlank()
         ) {
-            val mUser =
-                UserModel(binding.etEmail.text.toString(), binding.etPassword.text.toString())
-            mUserRepository.loginWithEmailPassword(mUser) { user, error ->
+
+            mUserRepository.loginWithEmailPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString()) { user, error ->
                 if (user != null) {
                     if (binding.cbRememberMe.isChecked) {
                         val mSharedPreferences =
@@ -111,6 +110,7 @@ class LoginActivity : AppCompatActivity() {
     fun checkLoginRegister() {
         val emailAux = bottomSheetView.findViewById<EditText>(R.id.etEmailRegister)
         val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordRegister)
+        val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameRegister)
 
         if (emailAux.text.toString().isNullOrBlank() && passwordAux.text.toString().isNullOrBlank())
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
