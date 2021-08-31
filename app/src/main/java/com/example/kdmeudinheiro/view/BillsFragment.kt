@@ -13,6 +13,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.model.BillsModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 
 class BillsFragment : Fragment(R.layout.bills_fragment) {
@@ -28,10 +29,10 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         adapter.refresh(it.toMutableList())
     }
     private var observerError = Observer<String> {
-        //TODO
+        Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG).show()
     }
     private var observerAddResponse = Observer<Boolean> {
-        //TODO
+        //TODO conta foi adicionada.
     }
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
@@ -49,7 +50,19 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView = binding.recyclerViewIdNoXML
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+        loadBinding(view)
     }
+
+    private fun loadBinding(view: View) {
+        binding.floatButtonAddBill.setOnClickListener {
+            callBotomSheet()
+        }
+    }
+
+    private fun callBotomSheet() {
+        TODO("Not yet implemented")
+    }
+
     private fun LoadViewModelAndsObservers() {
         viewModel.billList.observe(viewLifecycleOwner, observerGetBills)
         viewModel.error.observe(viewLifecycleOwner, observerError)
@@ -57,6 +70,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
     }
+
+
+
 
     companion object {
         fun newInstance() = BillsFragment()
