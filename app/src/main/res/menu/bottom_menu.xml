@@ -2,7 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/btnLogout"
-        android:title="Logout"
-        android:icon="@drawable/ic_logout"/>
+        android:id="@+id/btnIncome"
+        android:title="Income"
+        />
+
+    <item
+        android:id="@+id/BillsFragment"
+        android:title="Accounts"
+        />
+
+
+
+
+
 </menu>
