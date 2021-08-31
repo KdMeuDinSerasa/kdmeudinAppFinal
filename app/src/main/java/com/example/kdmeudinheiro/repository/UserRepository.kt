@@ -28,7 +28,7 @@ class UserRepository {
                 callback(null , it.message)
             }
     }
-
+    //a
     fun getSession(): FirebaseUser? = UserControler.currentUser
 
 

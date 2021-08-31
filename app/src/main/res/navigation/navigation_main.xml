@@ -10,4 +10,9 @@
         android:name="com.example.kdmeudinheiro.view.MainFragment"
         android:label="KdMeuDinheiro"
         tools:layout="@layout/main_fragment" />
+    <fragment
+        android:id="@+id/BillsFragment"
+        android:name="com.example.kdmeudinheiro.view.BillsFragment"
+        android:label="Minhas Contas"
+        tools:layout="@layout/bills_fragment" />
 </navigation>

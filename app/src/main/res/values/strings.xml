@@ -6,4 +6,16 @@
     <string name="cadastre_se_titulo">Cadastre-se</string>
     <string name="cadastrar_btn">Cadastrar</string>
     <string name="cancelar_cadastro_btn">Cancelar</string>
+    <string name="Fix_Bill_Label">Fixa</string>
+    <string name="Leisure_Bill_Label">Lazer</string>
+    <string name="Monthly_Bill_Label">Mensal</string>
+    <string name="Emergency_Bill_Label">Emergencial</string>
+    <string name="Tip_bills_fix_text">Contas Fixas são gastos quais o valores não mudam constantemente, por exemplo: Aluguel, Faculdade e afins.</string>
+    <string name="Tip_bills_Monthly_text"> Contas Mensais: são gastos que você tem todos os meses porém o valor pode variar, por exemplo: Luz, Agua, Gás, Academia. </string>
+    <string name="Tip_bills_Leisure_text"> Lazer: são gastos que sobre coisas que voce gasta com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
+    <string name="Tip_bills_Emergency_text">Emergencial: são os gastos inesperados, por exemplo: Remedios, Reparos em casa e etc..</string>
+    <string name="Bill_Name_label_list_card">Nome do gasto: </string>
+    <string name="Bill_Price_label_list_card">Valor do gasto: </string>
+    <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
+
 </resources>
