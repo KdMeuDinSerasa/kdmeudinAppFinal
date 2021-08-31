@@ -11,7 +11,7 @@
         android:label="KdMeuDinheiro"
         tools:layout="@layout/main_fragment" />
     <fragment
-        android:id="@+id/accountsFragment"
+        android:id="@+id/BillsFragment"
         android:name="com.example.kdmeudinheiro.view.BillsFragment"
         android:label="Minhas Contas"
         tools:layout="@layout/accounts_fragment" />

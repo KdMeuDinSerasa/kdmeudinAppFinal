@@ -7,7 +7,7 @@
         />
 
     <item
-        android:id="@+id/accountsFragment"
+        android:id="@+id/BillsFragment"
         android:title="Accounts"
         />
 
