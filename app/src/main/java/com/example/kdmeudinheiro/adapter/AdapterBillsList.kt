@@ -23,6 +23,11 @@ class AdapterBillsList(val onItemClick: (BillsModel) -> Unit): RecyclerView.Adap
             holder.itemView.setOnClickListener { onItemClick(this) }
         }
     }
+    fun refresh(newList: MutableList<BillsModel>){
+        listOfBills.clear()
+        listOfBills.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = listOfBills.size
 }
