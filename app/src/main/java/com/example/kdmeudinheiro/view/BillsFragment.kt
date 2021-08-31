@@ -13,6 +13,7 @@ import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
+import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -22,6 +23,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     //var goes here
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
+    private lateinit var bottomSheetBinding: InputBillLayoutBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -70,10 +72,14 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         bottomSheetDialog.show()
         bottomSheetView
 
-        loadBottomSheetComponents()
+        loadBottomSheetComponents(view)
     }
 
-    fun loadBottomSheetComponents() {
+    fun loadBottomSheetComponents(view: View) {
+        bottomSheetBinding = InputBillLayoutBinding.bind(view)
+
+        val billName = bottomSheetBinding.editTextInputBillName.text
+        //TODO
 
     }
 
