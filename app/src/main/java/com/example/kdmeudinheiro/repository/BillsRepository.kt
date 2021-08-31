@@ -25,7 +25,7 @@ class BillsRepository {
             }
     }
 
-    fun getAccounts(idUser: String, callback: (List<BillsModel>?, String?) -> Unit){
+    fun getBills(idUser: String, callback: (List<BillsModel>?, String?) -> Unit){
         db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
             .addOnSuccessListener {
                 val accountList = mutableListOf<BillsModel>()
