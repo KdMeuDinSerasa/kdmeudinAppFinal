@@ -22,7 +22,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_bill_label"
-        android:src="TODO"
+        android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewIdNoXML"
         app:layout_constraintEnd_toEndOf="parent" />
 
