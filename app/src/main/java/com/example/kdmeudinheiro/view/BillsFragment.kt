@@ -64,7 +64,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
     fun loadBottomSheet(view: View) {
 
-        bottomSheetView = View.inflate(view.context, R.layout./*TODO */, null)
+        bottomSheetView = View.inflate(view.context, R.layout.input_bill_layout, null)
         bottomSheetDialog = BottomSheetDialog(view.context)
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
