@@ -3,6 +3,7 @@ package com.example.kdmeudinheiro.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.model.BillsModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 
@@ -21,6 +23,8 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog
     private var adapter = AdapterBillsList(){
 
     }
@@ -55,12 +59,22 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun loadBinding(view: View) {
         binding.floatButtonAddBill.setOnClickListener {
-            callBotomSheet()
+            loadBottomSheet(view)
         }
     }
+    fun loadBottomSheet(view: View) {
 
-    private fun callBotomSheet() {
-        TODO("Not yet implemented")
+        bottomSheetView = View.inflate(view.context, R.layout./*TODO */, null)
+        bottomSheetDialog = BottomSheetDialog(view.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetView
+
+        loadBottomSheetComponents()
+    }
+
+    fun loadBottomSheetComponents() {
+
     }
 
     private fun LoadViewModelAndsObservers() {
