@@ -1,10 +1,10 @@
 package com.example.kdmeudinheiro.model
 
 data class BillsModel(
-    val id_account: Int,
+    val id_bill: String,
     val id_user: String,
-    val price: Double,
-    val type_account: String,
-    val name_account: String,
+    val price: String,
+    val type_bill: String,
+    val name_bill: String,
     val expire_date: String
 )

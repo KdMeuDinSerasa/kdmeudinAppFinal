@@ -14,6 +14,8 @@
     <string name="Tip_bills_Monthly_text"> Contas Mensais: são gastos que você tem todos os meses porém o valor pode variar, por exemplo: Luz, Agua, Gás, Academia. </string>
     <string name="Tip_bills_Leisure_text"> Lazer: são gastos que sobre coisas que voce gasta com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
     <string name="Tip_bills_Emergency_text">Emergencial: são os gastos inesperados, por exemplo: Remedios, Reparos em casa e etc..</string>
-
+    <string name="Bill_Name_label_list_card">Nome do gasto: </string>
+    <string name="Bill_Price_label_list_card">Valor do gasto: </string>
+    <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
 
 </resources>
