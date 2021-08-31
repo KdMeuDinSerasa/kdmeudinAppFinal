@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.kdmeudinheiro.viewModel.AccountsViewModel
+import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.example.kdmeudinheiro.R
 
 class BillsFragment : Fragment() {
@@ -15,7 +15,7 @@ class BillsFragment : Fragment() {
         fun newInstance() = BillsFragment()
     }
 
-    private lateinit var viewModel: AccountsViewModel
+    private lateinit var viewModel: BillsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +26,7 @@ class BillsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AccountsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BillsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
