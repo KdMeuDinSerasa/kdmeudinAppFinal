@@ -24,33 +24,38 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     }
     //observers gore here
-    private var observerGetBills = Observer<List<BillsModel>> {}
-    private var observerError = Observer<String> {}
-    private var observerAddResponse = Observer<Boolean> {}
+    private var observerGetBills = Observer<List<BillsModel>> {
+        adapter.refresh(it.toMutableList())
+    }
+    private var observerError = Observer<String> {
+        //TODO
+    }
+    private var observerAddResponse = Observer<Boolean> {
+        //TODO
+    }
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(BillsViewModel::class.java)
         LoadViewModelAndsObservers()
+        binding = BillsFragmentBinding.bind(view)
+        recyclerView = binding.recyclerViewIdNoXML
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
     }
-
     private fun LoadViewModelAndsObservers() {
         viewModel.billList.observe(viewLifecycleOwner, observerGetBills)
         viewModel.error.observe(viewLifecycleOwner, observerError)
         viewModel.addResponse.observe(viewLifecycleOwner, observerAddResponse)
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = BillsFragmentBinding.bind(view)
-        recyclerView = binding.recyclerViewIdNoXML
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
     }
 
     companion object {

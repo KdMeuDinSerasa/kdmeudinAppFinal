@@ -35,9 +35,9 @@ class BillsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private var binding = BillItemListBinding.bind(itemView)
 
     fun bind(bill: BillsModel){
-        binding.textViewBillNameList.text = "${R.string.Bill_Name_label_list_card} ${bill.name_bill}"
-        binding.textViewBillExpireDate.text = "${R.string.Bill_ExpireDate_label_list_card} ${bill.expire_date}"
-        binding.textViewBillPriceList.text = "${R.string.Bill_Price_label_list_card} ${bill.price.toString()}"
+        binding.textViewBillNameList.text = "${itemView.context.getString(R.string.Bill_Name_label_list_card)} ${bill.name_bill}"
+        binding.textViewBillExpireDate.text = "${itemView.context.getString(R.string.Bill_ExpireDate_label_list_card)} ${bill.expire_date}"
+        binding.textViewBillPriceList.text = "${itemView.context.getString(R.string.Bill_Price_label_list_card)} ${bill.price.toString()}"
 
     }
 }

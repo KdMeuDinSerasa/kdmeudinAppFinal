@@ -9,11 +9,11 @@ class BillsRepository {
 
     fun addBills(mBillsModel: BillsModel, callback: (Boolean) -> Unit){
         val map = mutableMapOf<String , String>()
-        map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_account.toString())
+        map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_bill.toString())
         map.put(KeysDatabaseBills.IDUSER.key, mBillsModel.id_user)
         map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price.toString())
-        map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_account)
-        map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_account)
+        map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
+        map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
         map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
 
         db.collection("table_account").add(map)
@@ -31,9 +31,9 @@ class BillsRepository {
                 val accountList = mutableListOf<BillsModel>()
                 it.forEach {
                     accountList.add(BillsModel(
-                        it.id.toInt(),
+                        it.id,
                         it.data["key_user"] as String,
-                        it.data["key_price"] as Double,
+                        it.data["key_price"] as String,
                         it.data["key_type"] as String,
                         it.data["key_name"] as String,
                         it.data["key_expiredate"] as String
