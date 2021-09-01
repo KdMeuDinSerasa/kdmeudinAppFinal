@@ -36,7 +36,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 viewModel.getAllBills(userId)
 
             } else if (type == 2) {
-                viewModel.editBill(bill)
+                viewModel.deleteBill(bill)
                 viewModel.getAllBills(userId)
 
             } else {
