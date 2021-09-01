@@ -25,13 +25,13 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     //var goes here
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
-    private lateinit var bottomSheetBinding: InputBillLayoutBinding
+    private lateinit var bottomSheetBindingAddBill: InputBillLayoutBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var userId: String
     private var adapter = AdapterBillsList() {
-
+        loadBottomSheetCrudBill(requireView(), it)
     }
 
     //observers gore here
@@ -77,17 +77,18 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun loadBinding(view: View) {
         binding.floatButtonAddBill.setOnClickListener {
-            loadBottomSheet(view)
+            loadBottomSheetAddBill(view)
         }
     }
 
-    fun loadBottomSheet(view: View) {
+    /* load and runs bottom sheet who add the bills */
+    fun loadBottomSheetAddBill(view: View) {
 
         bottomSheetView = View.inflate(view.context, R.layout.input_bill_layout, null)
         bottomSheetDialog = BottomSheetDialog(view.context)
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
-        bottomSheetBinding = InputBillLayoutBinding.bind(bottomSheetView)
+        bottomSheetBindingAddBill = InputBillLayoutBinding.bind(bottomSheetView)
 
         val listType = listOf<String>(
             TypesOfBills.EMERGENCY_BILL.catName,
@@ -96,24 +97,25 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             TypesOfBills.MONTHLY_BILLS.catName,
         )
 
-        bottomSheetBinding.spinnerBillType.adapter = ArrayAdapter(
+        bottomSheetBindingAddBill.spinnerBillType.adapter = ArrayAdapter(
             requireContext(), android.R.layout.simple_spinner_item,
             listType
         )
 
 
-        loadBottomSheetComponents(bottomSheetView)
+        loadBottomSheetAddBillsComponents(bottomSheetView)
     }
 
-    fun loadBottomSheetComponents(view: View) {
-        bottomSheetBinding.saveBillButtom.setOnClickListener {
+    fun loadBottomSheetAddBillsComponents(view: View) {
+        bottomSheetBindingAddBill.saveBillButtom.setOnClickListener {
 
-            val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
+            val selectedType = bottomSheetBindingAddBill.spinnerBillType.selectedItem.toString()
 
 
-            val billName = bottomSheetBinding.editTextInputBillName.text.toString()
-            val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-            val billExpireDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
+            val billName = bottomSheetBindingAddBill.editTextInputBillName.text.toString()
+            val billPrice = bottomSheetBindingAddBill.editTextInputBillPrice.text.toString()
+            val billExpireDate =
+                bottomSheetBindingAddBill.editTextInputBillExpireDate.text.toString()
             val billObject =
                 BillsModel(null, userId, billPrice, selectedType, billName, billExpireDate)
             viewModel.addBill(billObject)
@@ -129,6 +131,51 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.addResponse.observe(viewLifecycleOwner, observerAddResponse)
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
+    }
+
+
+    /* loads bill crud bottom sheet */
+    fun loadBottomSheetCrudBill(view: View, bill: BillsModel) {
+
+        bottomSheetView = View.inflate(view.context, R.layout.input_bill_layout, null)
+        bottomSheetDialog = BottomSheetDialog(view.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetBindingAddBill = InputBillLayoutBinding.bind(bottomSheetView)
+
+        val listType = listOf<String>(
+            TypesOfBills.EMERGENCY_BILL.catName,
+            TypesOfBills.LEISURE_BILLS.catName,
+            TypesOfBills.FIX_BILLS.catName,
+            TypesOfBills.MONTHLY_BILLS.catName,
+        )
+
+        bottomSheetBindingAddBill.spinnerBillType.adapter = ArrayAdapter(
+            requireContext(), android.R.layout.simple_spinner_item,
+            listType
+        )
+
+
+        loadBottomSheetCrudBillsComponents(bottomSheetView)
+    }
+
+    fun loadBottomSheetCrudBillsComponents(view: View) {
+        bottomSheetBindingAddBill.saveBillButtom.setOnClickListener {
+
+            val selectedType = bottomSheetBindingAddBill.spinnerBillType.selectedItem.toString()
+
+
+            val billName = bottomSheetBindingAddBill.editTextInputBillName.text.toString()
+            val billPrice = bottomSheetBindingAddBill.editTextInputBillPrice.text.toString()
+            val billExpireDate =
+                bottomSheetBindingAddBill.editTextInputBillExpireDate.text.toString()
+            val billObject =
+                BillsModel(null, userId, billPrice, selectedType, billName, billExpireDate)
+            viewModel.addBill(billObject)
+            bottomSheetDialog.dismiss()
+            viewModel.getAllBills(userId)
+        }
+
     }
 
 
