@@ -30,9 +30,14 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
-        BottomSheet(requireView(), bill){
+        BottomSheet(requireView(), bill).loadBottomBill() { bill, type ->
+            if (type == 1) {
+                //TODO add methods at view model
+            } else if (type == 2) {
+            } else {
+            }
 
-        }.loadBottomBill()
+        }
     }
 
     //observers gore here
@@ -78,12 +83,12 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun loadBinding(view: View) {
         binding.floatButtonAddBill.setOnClickListener {
-            BottomSheet(requireView(), null){ bill ->
+            BottomSheet(requireView(), null).loadBottomBill() { bill, type ->
                 bill.id_user = userId
                 viewModel.addBill(bill)
                 bottomSheetDialog.dismiss()
 
-            }.loadBottomBill()
+            }
         }
     }
 
@@ -94,6 +99,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
     }
+
     companion object {
         fun newInstance() = BillsFragment()
     }
