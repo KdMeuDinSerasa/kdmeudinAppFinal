@@ -11,7 +11,7 @@ class BillsRepository {
         val map = mutableMapOf<String , String>()
         map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_bill.toString())
         map.put(KeysDatabaseBills.IDUSER.key, mBillsModel.id_user)
-        map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price.toString())
+        map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price)
         map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
         map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
         map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
@@ -24,6 +24,33 @@ class BillsRepository {
                 callback(false)
             }
     }
+
+    fun editBill(mBillsModel: BillsModel ,callback: (Boolean) -> Unit){
+        val map = mutableMapOf<String, String>()
+        map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price)
+        map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
+        map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
+        map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
+        mBillsModel.id_bill?.let { db.collection("table_account").document(it).update(map as Map<String, Any>)
+            .addOnSuccessListener { callback(true)
+            }
+            .addOnFailureListener { callback(false)
+            }
+        }
+
+    }
+
+    fun deleteBill(mBillsModel: BillsModel, callback: (Boolean) -> Unit){
+        mBillsModel.id_bill?.let { db.collection("table_account").document(it).delete()
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener {
+                callback(false)
+            }
+        }
+    }
+
 
     fun getBills(idUser: String, callback: (List<BillsModel>?, String?) -> Unit){
         db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
