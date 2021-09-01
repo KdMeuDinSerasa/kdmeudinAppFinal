@@ -22,8 +22,13 @@
     <string name="label_bill_price_inputs">Valor da conta ou gasto</string>
     <string name="expiredate_bill_label_inputs">Data de vencimento ou pagamento</string>
     <string name="save_label">Salvar</string>
+    <string name="ok">Confirmar</string>
+    <string name="cancel">Cancelar</string>
     <string name="edit_label">Editar</string>
     <string name="delete_label">Deletar</string>
     <string name="pay_label">Pagar</string>
+
+
+
 
 </resources>
