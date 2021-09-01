@@ -12,6 +12,7 @@
         app:cardCornerRadius="20dp">
 
         <ImageView
+            android:contentDescription="@string/user_avatar_desc"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:src="@color/purple_700"
@@ -23,7 +24,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text="@string/username_label_prefs"
         android:id="@+id/userNameLoged"
         android:gravity="center"
         android:layout_marginTop="20dp"
@@ -32,7 +33,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email User"
+        android:text="@string/useremail_label_prefs"
         android:gravity="center"
         android:id="@+id/userEmailLoged"
         android:layout_marginTop="20dp"

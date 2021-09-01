@@ -10,7 +10,7 @@ class BillsRepository {
     fun addBills(mBillsModel: BillsModel, callback: (Boolean) -> Unit){
         val map = mutableMapOf<String , String>()
         map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_bill.toString())
-        map.put(KeysDatabaseBills.IDUSER.key, mBillsModel.id_user)
+        mBillsModel.id_user?.let { map.put(KeysDatabaseBills.IDUSER.key, it) }
         map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price)
         map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
         map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)

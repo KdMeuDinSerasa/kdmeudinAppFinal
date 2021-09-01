@@ -24,5 +24,15 @@
     <string name="save_label">Salvar</string>
     <string name="ok">Confirmar</string>
     <string name="cancel">Cancelar</string>
+    <string name="edit_label">Editar</string>
+    <string name="delete_label">Deletar</string>
+    <string name="pay_label">Pagar</string>
+    <string name="logout_label">Logout</string>
+    <string name="user_prefs_label">Preferências do usuário</string>
+    <string name="user_avatar_desc">User Avatar</string>
+    <string name="username_label_prefs">UserName</string>
+    <string name="useremail_label_prefs">UserEmail</string>
+    <string name="edit_info_label">Editar Informações</string>
+
 
 </resources>
