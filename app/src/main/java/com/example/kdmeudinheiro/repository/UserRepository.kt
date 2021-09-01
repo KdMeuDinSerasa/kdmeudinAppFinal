@@ -38,6 +38,24 @@ class UserRepository {
             }
     }
 
+    fun getUserById(idUser: String, callback: (UserModel?) -> Unit){
+        db.collection("table_user").whereEqualTo(KeysDatabaseUser.USERID.key, idUser).get()
+            .addOnFailureListener {
+
+            }
+            .addOnSuccessListener {
+            it.forEach {
+                callback(UserModel(
+                    it.id,
+                    it.data["user_email"] as String,
+                    "",
+                    it.data["user_name"] as String
+                ))
+            }
+
+            }
+    }
+
     fun loginWithEmailPassword(email: String, password: String , callback: (FirebaseUser?, String?) -> Unit) {
         UserControler.signInWithEmailAndPassword(email , password)
             .addOnSuccessListener {

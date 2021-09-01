@@ -121,7 +121,7 @@ class LoginActivity : AppCompatActivity() {
 
                 mUserRepository.createUserWithEmailPassword(emailAux.text.toString(), passwordAux.text.toString()) { user, error ->
                     if (user != null) {
-                        val mUser = UserModel(emailAux.text.toString(), passwordAux.text.toString(),nameAux.text.toString(), user.uid )
+                        val mUser = UserModel(user.uid ,emailAux.text.toString(), passwordAux.text.toString(),nameAux.text.toString())
                         mUserRepository.addUser(mUser){
                             if (it){
                                 Toast.makeText(this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show()
