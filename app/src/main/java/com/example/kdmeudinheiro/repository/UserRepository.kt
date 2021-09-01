@@ -65,12 +65,25 @@ class UserRepository {
                 callback(null , it.message)
             }
     }
-    //a
+
     fun getSession(): FirebaseUser? = UserControler.currentUser
 
 
     fun logOut(){
         UserControler.signOut()
+    }
+
+    fun editUser(mUserModel: UserModel, callback: (Boolean) -> Unit){
+        val map = mutableMapOf<String , String>()
+        map.put(KeysDatabaseUser.EMAIL.key, mUserModel.email)
+        map.put(KeysDatabaseUser.NAME.key, mUserModel.name)
+        db.collection("table_user").document(mUserModel.id).update(map as Map<String, Any>)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnSuccessListener {
+                callback(false)
+            }
     }
 
 }

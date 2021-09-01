@@ -9,10 +9,19 @@
         android:id="@+id/mainFragment"
         android:name="com.example.kdmeudinheiro.view.MainFragment"
         android:label="KdMeuDinheiro"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_userPreferencesFragment"
+            app:destination="@id/userPreferencesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/BillsFragment"
         android:name="com.example.kdmeudinheiro.view.BillsFragment"
         android:label="Minhas Contas"
         tools:layout="@layout/bills_fragment" />
+    <fragment
+        android:id="@+id/userPreferencesFragment"
+        android:name="com.example.kdmeudinheiro.view.UserPreferencesFragment"
+        android:label="Preferências do usuário"
+        tools:layout="@layout/user_preferences_fragment" />
 </navigation>
