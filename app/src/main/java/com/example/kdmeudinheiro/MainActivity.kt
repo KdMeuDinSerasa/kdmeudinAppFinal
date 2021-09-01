@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -11,8 +12,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
+import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.repository.UserRepository
 import com.example.kdmeudinheiro.view.MainFragment
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var mAppBarConfiguration: AppBarConfiguration
     lateinit var mNavController: NavController
     private lateinit var binding: MainActivityBinding
+    private lateinit var binding2: HeaderDrawerBinding
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +35,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
-
+        loadViewModels()
+        viewModel.userLoged()
     }
 
     fun loadComponents() {
@@ -57,6 +63,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.drawerMenuMain.setNavigationItemSelectedListener(this)
 
     }
+
+    fun loadViewModels(){
+        viewModel.mUserModel.observe(this, {
+            binding.drawerMenuMain.getHeaderView(0).apply {
+                binding2 = HeaderDrawerBinding.bind(this)
+                binding2.userEmailLoged.text = it.email
+                binding2.userNameLoged.text = it.name
+            }
+        })
+
+        viewModel.mFirebaseUser.observe(this, {
+            if (it != null) {
+                viewModel.getUserById(it.uid)
+            }
+        })
+
+    }
+
 
     /**
      * Para onde voltar quando o botao de voltar for clicado
