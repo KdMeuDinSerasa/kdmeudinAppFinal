@@ -32,15 +32,20 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { bill, type ->
             if (type == 1) {
-                //TODO add methods at view model
+                viewModel.editBill(bill)
+                bottomSheetDialog.dismiss()
             } else if (type == 2) {
+                viewModel.editBill(bill)
+                bottomSheetDialog.dismiss()
             } else {
+                //TODO
+                bottomSheetDialog.dismiss()
             }
 
         }
     }
 
-    //observers gore here
+    /* Observers goes here */
     private var observerGetBills = Observer<List<BillsModel>> {
         adapter.refresh(it.toMutableList())
     }
@@ -58,13 +63,31 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
                 .show()
         }
-
     }
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
         userId = user.uid
     }
+    private var observerEdit = Observer<Boolean> {
+        if (it == true) {
+            Snackbar.make(requireView(), "Conta Editada Com Sucesso", Snackbar.LENGTH_LONG)
+                .show()
+        } else {
+            Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
+                .show()
+        }
+    }
+    private var observerDelete = Observer<Boolean> {
+        if (it == true) {
+            Snackbar.make(requireView(), "Conta Deletada Com Sucesso", Snackbar.LENGTH_LONG)
+                .show()
+        } else {
+            Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
+                .show()
+        }
+    }
 
+    /* Lifecycle functions goes here */
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -80,6 +103,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.adapter = adapter
         loadBinding(view)
     }
+    /* Functions goes here*/
 
     private fun loadBinding(view: View) {
         binding.floatButtonAddBill.setOnClickListener {
