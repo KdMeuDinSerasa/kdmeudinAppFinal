@@ -87,4 +87,36 @@
         app:layout_constraintEnd_toEndOf="@+id/spinnerBillType"
         app:layout_constraintStart_toStartOf="@+id/spinnerBillType"
         app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
+
+    <com.google.android.material.button.MaterialButton
+        android:visibility="gone"
+        android:id="@+id/editBillButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_10dp_margin"
+        android:text="@string/edit_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/deleteBillButton"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_10dp_margin"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/payBillButton"
+        android:visibility="gone"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_10dp_margin"
+        android:text="@string/pay_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBillButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
