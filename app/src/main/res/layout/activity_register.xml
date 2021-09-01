@@ -16,10 +16,17 @@
         android:textSize="44sp" />
 
     <EditText
-        android:id="@+id/etEmailRegister"
+        android:id="@+id/etNameRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:hint="Nome" />
+
+    <EditText
+        android:id="@+id/etEmailRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Email" />
 
     <EditText
@@ -28,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Senha" />
+
+
 
     <Button
         android:id="@+id/btnRegister"

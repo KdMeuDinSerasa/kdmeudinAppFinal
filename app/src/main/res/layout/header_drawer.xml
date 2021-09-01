@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="User Name"
+        android:id="@+id/userNameLoged"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="26sp"/>
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Email User"
         android:gravity="center"
+        android:id="@+id/userEmailLoged"
         android:layout_marginTop="20dp"
         android:textSize="26sp"/>
 

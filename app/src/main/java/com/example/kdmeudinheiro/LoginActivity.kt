@@ -63,9 +63,8 @@ class LoginActivity : AppCompatActivity() {
         if (!binding.etEmail.text.toString().isNullOrBlank() && !binding.etPassword.text.toString()
                 .isNullOrBlank()
         ) {
-            val mUser =
-                UserModel(binding.etEmail.text.toString(), binding.etPassword.text.toString())
-            mUserRepository.loginWithEmailPassword(mUser) { user, error ->
+
+            mUserRepository.loginWithEmailPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString()) { user, error ->
                 if (user != null) {
                     if (binding.cbRememberMe.isChecked) {
                         val mSharedPreferences =
@@ -112,21 +111,26 @@ class LoginActivity : AppCompatActivity() {
     fun checkLoginRegister() {
         val emailAux = bottomSheetView.findViewById<EditText>(R.id.etEmailRegister)
         val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordRegister)
+        val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameRegister)
 
-        if (emailAux.text.toString().isNullOrBlank() && passwordAux.text.toString().isNullOrBlank())
+        if (emailAux.text.toString().isNullOrBlank() || passwordAux.text.toString().isNullOrBlank() || nameAux.text.toString().isNullOrBlank())
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
         else {
-
             if (emailAux.text.toString()
                     .contains("@")
-
             ) {
-                val mUser =
-                    UserModel(emailAux.text.toString(), passwordAux.text.toString())
-                mUserRepository.createUserWithEmailPassword(mUser) { user, error ->
+
+                mUserRepository.createUserWithEmailPassword(emailAux.text.toString(), passwordAux.text.toString()) { user, error ->
                     if (user != null) {
-                        Toast.makeText(this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show()
-                        bottomSheetDialog.dismiss()
+                        val mUser = UserModel(user.uid ,emailAux.text.toString(), passwordAux.text.toString(),nameAux.text.toString())
+                        mUserRepository.addUser(mUser){
+                            if (it){
+                                Toast.makeText(this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show()
+                                bottomSheetDialog.dismiss()
+                            } else
+                                Toast.makeText(this, "Erro tente novamente", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
                     if (error != null) {
                         Toast.makeText(this, "Usuario Não Encontrado", Toast.LENGTH_SHORT).show()
