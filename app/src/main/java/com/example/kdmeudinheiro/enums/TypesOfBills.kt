@@ -2,7 +2,7 @@ package com.example.kdmeudinheiro.enums
 
 import com.example.kdmeudinheiro.R
 
-enum class TypesOfBills(CatName: String, catId: Int) {
+enum class TypesOfBills(val catName: String, val catId: Int) {
     //All Enum Strings must be at strings archive.
 
     FIX_BILLS(R.string.Fix_Bill_Label.toString(), 1),
