@@ -27,6 +27,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var recyclerView: RecyclerView
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var userId: String
     private var adapter = AdapterBillsList(){
 
     }
@@ -44,6 +45,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
+        userId = user.uid
     }
 
     override fun onAttach(context: Context) {
@@ -72,15 +74,20 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         bottomSheetDialog = BottomSheetDialog(view.context)
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
+        bottomSheetBinding = InputBillLayoutBinding.bind(bottomSheetView)
 
+        bottomSheetBinding
 
         loadBottomSheetComponents(bottomSheetView)
     }
 
     fun loadBottomSheetComponents(view: View) {
-        bottomSheetBinding = InputBillLayoutBinding.bind(view)
 
-        val billName = bottomSheetBinding.editTextInputBillName.text
+
+        val billName = bottomSheetBinding.editTextInputBillName.text.toString()
+        val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
+        val billExpireDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
+        val billObject = BillsModel(userId, billPrice, null, billName, billExpireDate )
 
     }
 
