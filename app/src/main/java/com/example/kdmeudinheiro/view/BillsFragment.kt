@@ -106,18 +106,19 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
 
     fun loadBottomSheetComponents(view: View) {
-
-        val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
-
-
-        val billName = bottomSheetBinding.editTextInputBillName.text.toString()
-        val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-        val billExpireDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
-        val billObject =
-            BillsModel(null, userId, billPrice, selectedType, billName, billExpireDate)
-
         bottomSheetBinding.saveBillButtom.setOnClickListener {
+
+            val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
+
+
+            val billName = bottomSheetBinding.editTextInputBillName.text.toString()
+            val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
+            val billExpireDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
+            val billObject =
+                BillsModel(null, userId, billPrice, selectedType, billName, billExpireDate)
             viewModel.addBill(billObject)
+            bottomSheetDialog.dismiss()
+            viewModel.getAllBills(userId)
         }
 
     }
