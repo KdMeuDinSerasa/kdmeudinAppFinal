@@ -9,6 +9,7 @@
 
 
     <ImageView
+        android:contentDescription="@string/user_avatar_desc"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="40dp"
@@ -19,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="UserName"
+        android:text="@string/username_label_prefs"
         android:id="@+id/tvUserName"
         android:gravity="center"
         android:textSize="20sp"/>
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="UserEmail"
+        android:text="@string/useremail_label_prefs"
         android:id="@+id/tvUserEmail"
         android:gravity="center"/>
 
@@ -36,6 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Editar Informações"
+        android:text="@string/edit_info_label"
         android:id="@+id/btnEdit"/>
 </LinearLayout>
