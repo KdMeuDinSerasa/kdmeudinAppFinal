@@ -116,7 +116,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         val billObject =
             BillsModel(null, userId, billPrice, selectedType, billName, billExpireDate)
 
-        viewModel.addBill(billObject)
+        bottomSheetBinding.saveBillButtom.setOnClickListener {
+            viewModel.addBill(billObject)
+        }
 
     }
 

@@ -1,14 +1,15 @@
 package com.example.kdmeudinheiro.enums
 
+import androidx.core.content.res.TypedArrayUtils.getString
 import com.example.kdmeudinheiro.R
 
 enum class TypesOfBills(val catName: String, val catId: Int) {
-    //All Enum Strings must be at strings archive.
+    //All Enum Strings must be at strings archive. or not
 
-    FIX_BILLS(R.string.Fix_Bill_Label.toString(), 1),
-    LEISURE_BILLS(R.string.Leisure_Bill_Label.toString(), 2),
-    MONTHLY_BILLS(R.string.Monthly_Bill_Label.toString(), 3),
-    EMERGENCY_BILL(R.string.Emergency_Bill_Label.toString(), 4)
+    FIX_BILLS("Fixa", 1),
+    LEISURE_BILLS("Lazer", 2),
+    MONTHLY_BILLS("Mensal", 3),
+    EMERGENCY_BILL("Emergencial", 4)
 
 
 }
