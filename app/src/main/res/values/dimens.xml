@@ -2,4 +2,5 @@
 <resources>
     <dimen name="default_card_border_radius">10dp</dimen>
     <dimen name="default_10dp_margin">10dp</dimen>
+    <dimen name="default_0dp">0dp</dimen>
 </resources>
