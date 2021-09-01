@@ -115,8 +115,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             BottomSheet(requireView(), null).loadBottomBill() { bill, type ->
                 bill.id_user = userId
                 viewModel.addBill(bill)
-
-
+                viewModel.getAllBills(userId)
             }
         }
     }

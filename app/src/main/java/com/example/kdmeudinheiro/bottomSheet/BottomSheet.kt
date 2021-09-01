@@ -64,8 +64,11 @@ class BottomSheet(
 
 
         } else {
+            bottomSheetBinding.editTextInputBillName.setText(bill.name_bill)
+            bottomSheetBinding.editTextInputBillPrice.setText(bill.price)
+            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date)
             bottomSheetBinding.saveBillButtom.visibility = View.GONE
-            bottomSheetBinding.editTextInputBillExpireDate.visibility = View.GONE
+            bottomSheetBinding.editTextInputBillExpireDate.visibility = View.VISIBLE
             bottomSheetBinding.editBillButton.visibility = View.VISIBLE
             bottomSheetBinding.deleteBillButton.visibility = View.VISIBLE
             bottomSheetBinding.payBillButton.visibility = View.VISIBLE
@@ -73,8 +76,9 @@ class BottomSheet(
                 val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
                 val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                 val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
+                val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
                 val billObject =
-                    BillsModel(bill.id_bill, bill.id_user, billPrice, selectedType, billName, bill.expire_date)
+                    BillsModel(bill.id_bill, bill.id_user, billPrice, selectedType, billName, billDate)
                 callback(billObject, 1)
                 bottomSheetDialog.dismiss()
             }
