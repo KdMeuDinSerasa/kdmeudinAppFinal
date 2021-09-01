@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_test_bill_fragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutBillName"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_bill_label_inputs"
+        android:layout_margin="5dp"
+        app:boxCornerRadiusTopStart="@dimen/default_10dp_margin"
+        app:boxCornerRadiusBottomStart="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusBottomEnd="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextInputBillName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutBillPrice"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="@string/label_bill_price_inputs"
+        app:boxCornerRadiusBottomEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusBottomStart="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopStart="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextInputBillPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutBillExpireDate"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/expiredate_bill_label_inputs"
+        android:layout_margin="5dp"
+        app:boxCornerRadiusBottomEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusBottomStart="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopStart="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillPrice">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextInputBillExpireDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinnerBillType"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBillExpireDate"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutBillExpireDate"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillExpireDate" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveBillButtom"
+        android:layout_width="@dimen/default_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save_label"
+        android:layout_margin="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerBillType"
+        app:layout_constraintStart_toStartOf="@+id/spinnerBillType"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
+</androidx.constraintlayout.widget.ConstraintLayout>

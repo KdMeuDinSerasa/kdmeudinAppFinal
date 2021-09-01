@@ -18,5 +18,9 @@
     <string name="Bill_Price_label_list_card">Valor do gasto: </string>
     <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
     <string name="add_bill_label">Adicionar Conta</string>
+    <string name="name_bill_label_inputs">Nome da conta ou gasto</string>
+    <string name="label_bill_price_inputs">Valor da conta ou gasto</string>
+    <string name="expiredate_bill_label_inputs">Data de vencimento ou pagamento</string>
+    <string name="save_label">Salvar</string>
 
 </resources>
