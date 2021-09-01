@@ -5,4 +5,9 @@
         android:id="@+id/btnLogout"
         android:title="Logout"
         android:icon="@drawable/ic_logout"/>
+
+    <item
+        android:id="@+id/btnUserPreferences"
+        android:title="Preferências do usuário"
+        android:icon="@drawable/ic_profile"/>
 </menu>
