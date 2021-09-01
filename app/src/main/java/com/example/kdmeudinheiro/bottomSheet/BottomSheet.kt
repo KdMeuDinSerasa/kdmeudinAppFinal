@@ -18,7 +18,7 @@ class BottomSheet(
 
 ) {
     private lateinit var bottomSheetView: View
-    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
 
 
@@ -58,6 +58,7 @@ class BottomSheet(
                 val billObject =
                     BillsModel(null, null, billPrice, selectedType, billName, billExpireDate)
                 callback(billObject, 0)
+                bottomSheetDialog.dismiss()
 
             }
 
@@ -75,19 +76,21 @@ class BottomSheet(
                 val billObject =
                     BillsModel(bill.id_bill, bill.id_user, billPrice, selectedType, billName, bill.expire_date)
                 callback(billObject, 1)
+                bottomSheetDialog.dismiss()
             }
             bottomSheetBinding.deleteBillButton.setOnClickListener {
                 callback(bill, 2)
+                bottomSheetDialog.dismiss()
             }
             bottomSheetBinding.payBillButton.setOnClickListener {
                 //TODO
+                bottomSheetDialog.dismiss()
             }
 
 
         }
 
+
     }
-
-
 }
 

@@ -27,22 +27,26 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var bottomSheetDialog: BottomSheetDialog
+
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { bill, type ->
             if (type == 1) {
                 viewModel.editBill(bill)
-                bottomSheetDialog.dismiss()
+                viewModel.getAllBills(userId)
+
             } else if (type == 2) {
                 viewModel.editBill(bill)
-                bottomSheetDialog.dismiss()
+                viewModel.getAllBills(userId)
+
             } else {
                 //TODO
-                bottomSheetDialog.dismiss()
+                viewModel.getAllBills(userId)
+
             }
 
         }
+
     }
 
     /* Observers goes here */
@@ -55,6 +59,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 .show()
         }
     }
+
     private var observerAddResponse = Observer<Boolean> {
         if (it == true) {
             Snackbar.make(requireView(), "Conta Adicionada Com Sucesso", Snackbar.LENGTH_LONG)
@@ -110,7 +115,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             BottomSheet(requireView(), null).loadBottomBill() { bill, type ->
                 bill.id_user = userId
                 viewModel.addBill(bill)
-                bottomSheetDialog.dismiss()
+
 
             }
         }
@@ -122,6 +127,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.addResponse.observe(viewLifecycleOwner, observerAddResponse)
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
+
     }
 
     companion object {
