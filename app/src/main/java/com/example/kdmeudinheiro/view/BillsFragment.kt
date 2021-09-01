@@ -35,10 +35,12 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         adapter.refresh(it.toMutableList())
     }
     private var observerError = Observer<String> {
-        Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG).show()
+        if(it != null) {
+            Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG).show()
+        }
     }
     private var observerAddResponse = Observer<Boolean> {
-        //TODO conta foi adicionada.
+
     }
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
@@ -70,16 +72,15 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         bottomSheetDialog = BottomSheetDialog(view.context)
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
-        bottomSheetView
 
-        loadBottomSheetComponents(view)
+
+        loadBottomSheetComponents(bottomSheetView)
     }
 
     fun loadBottomSheetComponents(view: View) {
         bottomSheetBinding = InputBillLayoutBinding.bind(view)
 
         val billName = bottomSheetBinding.editTextInputBillName.text
-        //TODO
 
     }
 
