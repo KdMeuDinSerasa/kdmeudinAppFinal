@@ -42,4 +42,22 @@ class BillsViewModel : ViewModel() {
         }
 
     }
+
+    private val _editResponse = MutableLiveData<Boolean>()
+    var editResponse: LiveData<Boolean> = _editResponse
+
+    fun editBill(bill: BillsModel) {
+        billRepo.editBill(bill) { resp ->
+            _editResponse.value = resp
+        }
+    }
+
+    private val _deleteResponse = MutableLiveData<Boolean>()
+    var deleteResponse: LiveData<Boolean> = _deleteResponse
+
+    fun deleteBill(bill: BillsModel){
+        billRepo.deleteBill(bill){ resp ->
+            _deleteResponse.value = resp
+        }
+    }
 }
