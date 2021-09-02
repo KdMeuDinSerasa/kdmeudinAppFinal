@@ -33,6 +33,8 @@
     <string name="username_label_prefs">UserName</string>
     <string name="useremail_label_prefs">UserEmail</string>
     <string name="edit_info_label">Editar Informações</string>
+    <string name="voltar">Voltar</string>
+    <string name="about_label_desc">Botao Sobre</string>
 
 
 </resources>

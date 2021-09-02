@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
+import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
+import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
@@ -16,13 +18,13 @@ class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
 
-) {
+    ) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
 
 
-    fun loadBottomBill(callback: (BillsModel, Int?) -> Unit,) {
+    fun loadBottomBill(callback: (BillsModel, Int?) -> Unit) {
 
         bottomSheetView = View.inflate(parentView.context, R.layout.input_bill_layout, null)
         bottomSheetDialog = BottomSheetDialog(parentView.context)
@@ -78,7 +80,14 @@ class BottomSheet(
                 val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                 val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
                 val billObject =
-                    BillsModel(bill.id_bill, bill.id_user, billPrice, selectedType, billName, billDate)
+                    BillsModel(
+                        bill.id_bill,
+                        bill.id_user,
+                        billPrice,
+                        selectedType,
+                        billName,
+                        billDate
+                    )
                 callback(billObject, 1)
                 bottomSheetDialog.dismiss()
             }
@@ -98,3 +107,28 @@ class BottomSheet(
     }
 }
 
+class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
+
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
+
+
+    fun loadTip() {
+
+           if (typeTip == TipType.TIP_BILL_CATEGORY){
+               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
+               bottomSheetDialog = BottomSheetDialog(parentView.context)
+               bottomSheetDialog.setContentView(bottomSheetView)
+               bottomSheetDialog.show()
+               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
+               bottomSheetBinding.backButton.setOnClickListener {
+                   bottomSheetDialog.dismiss()
+               }
+
+           }
+            else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
+            else if(typeTip == TipType.TIP_CHART){/* TODO */}
+
+
+    }
+}
