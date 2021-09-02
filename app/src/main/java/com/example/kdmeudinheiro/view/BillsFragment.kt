@@ -118,6 +118,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 viewModel.getAllBills(userId)
             }
         }
+        binding.About.setOnClickListener {
+
+        }
     }
 
     private fun LoadViewModelAndsObservers() {

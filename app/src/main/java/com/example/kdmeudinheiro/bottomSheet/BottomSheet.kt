@@ -16,13 +16,13 @@ class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
 
-) {
+    ) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
 
 
-    fun loadBottomBill(callback: (BillsModel, Int?) -> Unit,) {
+    fun loadBottomBill(callback: (BillsModel, Int?) -> Unit) {
 
         bottomSheetView = View.inflate(parentView.context, R.layout.input_bill_layout, null)
         bottomSheetDialog = BottomSheetDialog(parentView.context)
@@ -78,7 +78,14 @@ class BottomSheet(
                 val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                 val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
                 val billObject =
-                    BillsModel(bill.id_bill, bill.id_user, billPrice, selectedType, billName, billDate)
+                    BillsModel(
+                        bill.id_bill,
+                        bill.id_user,
+                        billPrice,
+                        selectedType,
+                        billName,
+                        billDate
+                    )
                 callback(billObject, 1)
                 bottomSheetDialog.dismiss()
             }
@@ -98,3 +105,20 @@ class BottomSheet(
     }
 }
 
+class bottomSheetTips(val parentView: View, val typeTip: Int,) {
+
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
+
+
+    fun loadTip() {
+
+
+        bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetBinding = (bottomSheetView)
+
+    }
+}
