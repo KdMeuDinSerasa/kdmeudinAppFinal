@@ -107,7 +107,7 @@ class BottomSheet(
     }
 }
 
-class bottomSheetTips(val parentView: View, val typeTip: TipType,) {
+class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/

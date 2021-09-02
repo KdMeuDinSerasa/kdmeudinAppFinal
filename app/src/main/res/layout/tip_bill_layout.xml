@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewBillTipDialog"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_10dp_margin"
         app:cardCornerRadius="@dimen/default_card_border_radius"
         app:layout_constraintTop_toTopOf="parent"
