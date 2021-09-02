@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
+import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
+import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
@@ -105,7 +107,7 @@ class BottomSheet(
     }
 }
 
-class bottomSheetTips(val parentView: View, val typeTip: Int,) {
+class bottomSheetTips(val parentView: View, val typeTip: TipType,) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -113,12 +115,20 @@ class bottomSheetTips(val parentView: View, val typeTip: Int,) {
 
     fun loadTip() {
 
+           if (typeTip == TipType.TIP_BILL_CATEGORY){
+               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
+               bottomSheetDialog = BottomSheetDialog(parentView.context)
+               bottomSheetDialog.setContentView(bottomSheetView)
+               bottomSheetDialog.show()
+               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
+               bottomSheetBinding.backButton.setOnClickListener {
+                   bottomSheetDialog.dismiss()
+               }
 
-        bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-        bottomSheetDialog = BottomSheetDialog(parentView.context)
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
-        bottomSheetBinding = (bottomSheetView)
+           }
+            else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
+            else if(typeTip == TipType.TIP_CHART){/* TODO */}
+
 
     }
 }
