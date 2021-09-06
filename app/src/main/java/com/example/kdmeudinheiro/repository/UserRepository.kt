@@ -1,8 +1,6 @@
 package com.example.kdmeudinheiro.repository
 
-import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.enums.KeysDatabaseUser
-import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -44,15 +42,16 @@ class UserRepository {
 
             }
             .addOnSuccessListener {
-            it.forEach {
-                callback(UserModel(
-                    it.id,
-                    it.data["user_email"] as String,
-                    "",
-                    it.data["user_name"] as String
-                ))
-            }
-
+                it.forEach {
+                    callback(
+                        UserModel(
+                            it.id,
+                            it.data["user_email"] as String,
+                            "",
+                            it.data["user_name"] as String
+                        )
+                    )
+                }
             }
     }
 
@@ -71,6 +70,19 @@ class UserRepository {
 
     fun logOut(){
         UserControler.signOut()
+    }
+
+    fun editUser(mUserModel: UserModel, callback: (Boolean) -> Unit){
+        val map = mutableMapOf<String , String>()
+        map.put(KeysDatabaseUser.EMAIL.key, mUserModel.email)
+        map.put(KeysDatabaseUser.NAME.key, mUserModel.name)
+        db.collection("table_user").document(mUserModel.id).update(map as Map<String, Any>)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnSuccessListener {
+                callback(false)
+            }
     }
 
 }

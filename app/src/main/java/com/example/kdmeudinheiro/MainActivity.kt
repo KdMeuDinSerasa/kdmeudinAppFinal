@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -90,12 +91,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.btnLogout) {
-            viewModel.logoutUser()
-            val initi = Intent(this, LoginActivity::class.java)
-            startActivity(initi)
+        //close menu when clicked
+        binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+        when(item.itemId){
+            R.id.btnLogout -> {
+                viewModel.logoutUser()
+                val initi = Intent(this, LoginActivity::class.java)
+                startActivity(initi)
+            }
+            R.id.btnUserPreferences -> {
+                mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
+            }
         }
-
         return true
     }
 }

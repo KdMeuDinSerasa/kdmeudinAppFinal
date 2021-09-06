@@ -1,6 +1,6 @@
 package com.example.kdmeudinheiro.enums
 
-enum class KeysDatabaseBills(val key: String, ) {
+enum class KeysDatabaseBills(val key: String ) {
     IDBILL("key_bill"),
     IDUSER("key_user"),
     PRICE("key_price"),
