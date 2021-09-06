@@ -1,13 +1,8 @@
 package com.example.kdmeudinheiro.bottomSheet
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 18fc29c3a2ef5d35c66598f3b9b5ab4cc1282b60
 import android.app.DatePickerDialog
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
@@ -15,19 +10,12 @@ import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
-<<<<<<< HEAD
 import java.util.*
-
-=======
-import com.google.android.material.snackbar.Snackbar
-import java.util.*
->>>>>>> 18fc29c3a2ef5d35c66598f3b9b5ab4cc1282b60
 
 class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
     ) {
-
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
@@ -74,53 +62,6 @@ class BottomSheet(
             bottomSheetBinding.editBillButton.visibility = View.GONE
             bottomSheetBinding.deleteBillButton.visibility = View.GONE
             bottomSheetBinding.payBillButton.visibility = View.GONE
-<<<<<<< HEAD
-
-            bottomSheetBinding.saveBillButtom.setOnClickListener {
-                if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()
-                ) {
-
-                    val selectedType =
-                        bottomSheetBinding.spinnerBillType.selectedItem.toString()
-                    val billName = bottomSheetBinding.editTextInputBillName.text.toString()
-                    val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-                    val billExpireDate =
-                        bottomSheetBinding.editTextInputBillExpireDate.text.toString()
-
-                    val billObject =
-                        BillsModel(
-                            null,
-                            null,
-                            billPrice,
-                            selectedType,
-                            billName,
-                            billExpireDate
-                        )
-                    callback(billObject, 0)
-                    bottomSheetDialog.dismiss()
-
-                    true
-                } else
-                    false
-            }
-
-            bottomSheetBinding.saveBillButtom.setOnClickListener {
-
-                val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
-
-
-                val billName = bottomSheetBinding.editTextInputBillName.text.toString()
-                val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-                val billExpireDate =
-                    bottomSheetBinding.editTextInputBillExpireDate.text.toString()
-                val billObject =
-                    BillsModel(null, null, billPrice, selectedType, billName, billExpireDate)
-                callback(billObject, 0)
-                bottomSheetDialog.dismiss()
-=======
->>>>>>> 18fc29c3a2ef5d35c66598f3b9b5ab4cc1282b60
 
             bottomSheetBinding.saveBillButtom.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
@@ -155,36 +96,6 @@ class BottomSheet(
             bottomSheetBinding.deleteBillButton.visibility = View.VISIBLE
             bottomSheetBinding.payBillButton.visibility = View.VISIBLE
 
-<<<<<<< HEAD
-            bottomSheetBinding.editBillButton.setOnClickListener {
-                if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()
-                ) {
-                    val selectedType =
-                        bottomSheetBinding.spinnerBillType.selectedItem.toString()
-                    val billName = bottomSheetBinding.editTextInputBillName.text.toString()
-                    val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-                    val billDate =
-                        bottomSheetBinding.editTextInputBillExpireDate.text.toString()
-
-                    val billObject =
-                        BillsModel(
-                            bill.id_bill,
-                            bill.id_user,
-                            billPrice,
-                            selectedType,
-                            billName,
-                            billDate
-                        )
-                    callback(billObject, 1)
-                    bottomSheetDialog.dismiss()
-                } else
-                    Toast.makeText(bottomSheetView.context, "alo", Toast.LENGTH_SHORT).show()
-            }
-
-=======
->>>>>>> 18fc29c3a2ef5d35c66598f3b9b5ab4cc1282b60
             bottomSheetBinding.editBillButton.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
                     !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
@@ -210,7 +121,6 @@ class BottomSheet(
                     callback(bill, 3)
                     bottomSheetDialog.dismiss()
                 }
-
             }
 
             bottomSheetBinding.deleteBillButton.setOnClickListener {
@@ -232,7 +142,6 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
 
     fun loadTip() {
 
-<<<<<<< HEAD
         if (typeTip == TipType.TIP_BILL_CATEGORY) {
             bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
             bottomSheetDialog = BottomSheetDialog(parentView.context)
@@ -245,9 +154,6 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
         } else if (typeTip == TipType.TIP_INCOME) { /* TODO */
         } else if (typeTip == TipType.TIP_CHART) {/* TODO */
         }
-
-
-=======
            if (typeTip == TipType.TIP_BILL_CATEGORY){
                bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
                bottomSheetDialog = BottomSheetDialog(parentView.context)
@@ -260,11 +166,9 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
            }
             else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
             else if(typeTip == TipType.TIP_CHART){/* TODO */}
->>>>>>> 18fc29c3a2ef5d35c66598f3b9b5ab4cc1282b60
     }
 //    else if (typeTip == TipType.TIP_INCOME)
 //    { /* TODO */ }
 //    else if(typeTip == TipType.TIP_CHART)
 //    {/* TODO */ }
-
 }
