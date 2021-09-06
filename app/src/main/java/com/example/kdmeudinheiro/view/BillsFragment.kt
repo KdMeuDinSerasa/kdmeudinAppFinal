@@ -3,24 +3,18 @@ package com.example.kdmeudinheiro.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.bottomSheet.BottomSheet
-import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
-import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
-import com.example.kdmeudinheiro.enums.TipType
-import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 
@@ -36,19 +30,17 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             if (type == 1) {
                 viewModel.editBill(billFromCb)
                 viewModel.getAllBills(userId)
+                observerEdit.onChanged(true)
 
             } else if (type == 2) {
                 viewModel.deleteBill(billFromCb)
                 viewModel.getAllBills(userId)
 
-            } else {
-                //TODO
-                viewModel.getAllBills(userId)
-
-            }
-
+            } else if (type == 3){
+                observerEdit.onChanged(false)
+                
+            } else viewModel.getAllBills(userId)
         }
-
     }
 
     /* Observers goes here */
@@ -71,10 +63,12 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 .show()
         }
     }
+
     private var observerUser = Observer<FirebaseUser> { user ->
         viewModel.getAllBills(user.uid)
         userId = user.uid
     }
+
     private var observerEdit = Observer<Boolean> {
         if (it == true) {
             Snackbar.make(requireView(), "Conta Editada Com Sucesso", Snackbar.LENGTH_LONG)
@@ -97,7 +91,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     /* Lifecycle functions goes here */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,7 +103,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.adapter = adapter
         loadBinding()
     }
-    /* Functions goes here*/
 
     private fun loadBinding() {
         binding.floatButtonAddBill.setOnClickListener {
@@ -120,9 +112,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 viewModel.getAllBills(userId)
             }
         }
-        binding.About.setOnClickListener {
-            BottomSheetTips(requireView(), TipType.TIP_BILL_CATEGORY).loadTip()
-        }
     }
 
     private fun LoadViewModelAndsObservers() {
@@ -131,7 +120,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.addResponse.observe(viewLifecycleOwner, observerAddResponse)
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getUserId()
-
     }
 
     companion object {
