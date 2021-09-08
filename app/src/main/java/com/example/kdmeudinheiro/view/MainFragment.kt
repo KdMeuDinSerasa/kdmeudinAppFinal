@@ -31,6 +31,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         loadComponents()
         viewModel.userLoged()
 
+
     }
 
     fun loadViewModels(){
@@ -38,6 +39,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             if (it != null) {
                 userId = it.uid
                 viewModel.getIncome(userId)
+                viewModel.getOutcome(userId)
             }
         })
 
@@ -50,6 +52,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         })
         viewModel.mError.observe(viewLifecycleOwner, {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
+        })
+        viewModel.outCome.observe(viewLifecycleOwner, {
+            binding.tvOutcome.text = it.toString()
         })
     }
     fun loadComponents(){
@@ -68,6 +73,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }  else Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             
         }
+
+
     }
 
 
