@@ -48,6 +48,11 @@ class MainViewModel() : ViewModel() {
             if (error != null) _mError.value = error
         }
     }
+    fun editIncome(mIncomeModel: IncomeModel){
+        mIncomeRepository.editIncome(mIncomeModel){
+            if (!it) _mError.value = "Erro ao editar"
+        }
+    }
 
     fun addIncome(mIncomeModel: IncomeModel){
         mIncomeRepository.addIncome(mIncomeModel){
