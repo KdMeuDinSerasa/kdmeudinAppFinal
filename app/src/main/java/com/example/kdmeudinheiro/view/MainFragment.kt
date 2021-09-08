@@ -21,6 +21,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
     private var userId = ""
+    private var incomeValue: IncomeModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +44,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.incomeValue.text = it.income
+                binding.btnAddIncome.text = "Editar"
+                incomeValue = it
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
@@ -51,9 +54,19 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
     fun loadComponents(){
         binding.btnAddIncome.setOnClickListener {
-        if (!binding.incomeValue.text.toString().isNullOrBlank())
-            viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
-            viewModel.getIncome(userId)
+        if (!binding.addIncome.text.toString().isNullOrBlank()){
+            if (incomeValue == null){
+                viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
+                binding.btnAddIncome.isClickable = false
+                viewModel.getIncome(userId)
+            } else {
+                incomeValue!!.income = binding.addIncome.text.toString()
+                viewModel.editIncome(incomeValue!!)
+                viewModel.getIncome(userId)
+            }
+
+        }  else Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+            
         }
     }
 
