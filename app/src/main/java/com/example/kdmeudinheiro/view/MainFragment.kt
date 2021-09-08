@@ -45,7 +45,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
             if (it != null) {
-                binding.incomeValue.text = it.income
+                binding.incomeValue.text = "Renda Mensal: ${it.income}"
                 binding.btnAddIncome.text = "Editar"
                 incomeValue = it
             }
@@ -54,7 +54,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
         })
         viewModel.outCome.observe(viewLifecycleOwner, {
-            binding.tvOutcome.text = it.toString()
+            binding.tvOutcome.text = "gastos totais: ${it.toString()}"
+            binding.tvRest.text = (incomeValue!!.income.toDouble() - it!!.toDouble()).toString()
         })
     }
     fun loadComponents(){

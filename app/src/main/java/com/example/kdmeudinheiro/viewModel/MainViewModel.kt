@@ -24,8 +24,8 @@ class MainViewModel() : ViewModel() {
     private var _mError = MutableLiveData<String?>()
     val mError: LiveData<String?> = _mError
 
-    private var _outCome = MutableLiveData<Long?>()
-    val outCome: LiveData<Long?> = _outCome
+    private var _outCome = MutableLiveData<Double?>()
+    val outCome: LiveData<Double?> = _outCome
 
     private val mUserRepository = UserRepository()
     private val mIncomeRepository = IncomeRepository()
@@ -66,10 +66,10 @@ class MainViewModel() : ViewModel() {
         }
     }
     fun getOutcome(userId: String){
-        var outCome = 0L
+        var outCome = 0.0
         mBillsRepository.getBills(userId){ listBills,errorMesage ->
             listBills?.forEach {
-                outCome += it.price.toLong()
+                outCome += it.price.toDouble()
             }
             _outCome.value = outCome
             if (errorMesage != null) _mError.value = errorMesage
