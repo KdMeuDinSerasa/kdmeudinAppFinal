@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
@@ -23,8 +24,12 @@ class MainViewModel() : ViewModel() {
     private var _mError = MutableLiveData<String?>()
     val mError: LiveData<String?> = _mError
 
+    private var _outCome = MutableLiveData<Double?>()
+    val outCome: LiveData<Double?> = _outCome
+
     private val mUserRepository = UserRepository()
     private val mIncomeRepository = IncomeRepository()
+    private val mBillsRepository = BillsRepository()
 
     fun logoutUser(){
         mUserRepository.logOut()
@@ -59,6 +64,17 @@ class MainViewModel() : ViewModel() {
             if (!it) _mError.value = "Erro ao adicionar"
 
         }
+    }
+    fun getOutcome(userId: String){
+        var outCome = 0.0
+        mBillsRepository.getBills(userId){ listBills,errorMesage ->
+            listBills?.forEach {
+                outCome += it.price.toDouble()
+            }
+            _outCome.value = outCome
+            if (errorMesage != null) _mError.value = errorMesage
+        }
+
     }
 
 

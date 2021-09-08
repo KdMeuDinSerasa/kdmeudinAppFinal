@@ -65,8 +65,8 @@ class BillsRepository {
                         it.data["key_name"] as String,
                         it.data["key_expiredate"] as String
                     ))
-                    callback(accountList, null)
                 }
+                callback(accountList, null)
             }
             .addOnFailureListener {
                 callback(null, it.message)
