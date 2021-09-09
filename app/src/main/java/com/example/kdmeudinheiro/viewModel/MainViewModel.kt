@@ -3,12 +3,15 @@ package com.example.kdmeudinheiro.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.launch
 
 class MainViewModel() : ViewModel() {
 
@@ -27,6 +30,9 @@ class MainViewModel() : ViewModel() {
     private var _outCome = MutableLiveData<Double?>()
     val outCome: LiveData<Double?> = _outCome
 
+    private var _totalBills = MutableLiveData<Int>()
+    var totalBills: LiveData<Int> = _totalBills
+
     private val mUserRepository = UserRepository()
     private val mIncomeRepository = IncomeRepository()
     private val mBillsRepository = BillsRepository()
@@ -42,39 +48,52 @@ class MainViewModel() : ViewModel() {
     }
 
     fun getUserById(id: String){
-        mUserRepository.getUserById(id){
-            _mUserModel.value = it
+        viewModelScope.launch {
+            _mUserModel.value = mUserRepository.getUserById(id)
         }
+
     }
 
     fun getIncome(userId: String){
-        mIncomeRepository.getIncome(userId){incomeModel,error ->
-            if (incomeModel != null) _mIncomeModel.value = incomeModel
-            if (error != null) _mError.value = error
+        viewModelScope.launch {
+            _mIncomeModel.value = mIncomeRepository.getIncome(userId)
         }
+
     }
     fun editIncome(mIncomeModel: IncomeModel){
-        mIncomeRepository.editIncome(mIncomeModel){
-            if (!it) _mError.value = "Erro ao editar"
+        viewModelScope.launch {
+            if (!mIncomeRepository.editIncome(mIncomeModel))
+                _mError.value = "Erro ao editar"
+            userLoged()
         }
     }
 
     fun addIncome(mIncomeModel: IncomeModel){
-        mIncomeRepository.addIncome(mIncomeModel){
-            if (!it) _mError.value = "Erro ao adicionar"
+        viewModelScope.launch {
+            if (!mIncomeRepository.addIncome(mIncomeModel))
+                _mError.value = "Erro ao adicionar"
+            userLoged()
 
         }
+
     }
+
     fun getOutcome(userId: String){
         var outCome = 0.0
         mBillsRepository.getBills(userId){ listBills,errorMesage ->
             listBills?.forEach {
                 outCome += it.price.toDouble()
+
             }
+            getTotalOfBills(listBills)
             _outCome.value = outCome
             if (errorMesage != null) _mError.value = errorMesage
         }
-
+    }
+    fun getTotalOfBills(bills: List<BillsModel>?){
+        bills?.size.let { billsSize ->
+            _totalBills.value = billsSize
+        }
     }
 
 

@@ -5,13 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_default"
     tools:context=".view.MainFragment">
 
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_thin"
         android:text="Bem vindo"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,53 +21,59 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/incomeValue"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Valor"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center"
+        android:text="Valor"
         android:textSize="24sp"
-        android:id="@+id/incomeValue"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/addButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/message" />
 
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addIncome"
-        android:hint="Valor"
-        android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/incomeValue"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="adicionar"
-        android:id="@+id/btnAddIncome"
-        app:layout_constraintTop_toBottomOf="@id/addIncome"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <TextView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/incomeValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/incomeValue" />
+
+    <TextView
         android:id="@+id/tvOutcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium_italic"
         android:text="OutCome"
-        app:layout_constraintTop_toBottomOf="@id/btnAddIncome"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/incomeValue"
+        app:layout_constraintStart_toStartOf="@+id/incomeValue"
+        app:layout_constraintTop_toBottomOf="@+id/incomeValue" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvRest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium_italic"
         android:text="Rest"
-        app:layout_constraintTop_toBottomOf="@id/tvOutcome"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:textSize="16sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvOutcome"
+        app:layout_constraintStart_toStartOf="@+id/tvOutcome"
+        app:layout_constraintTop_toBottomOf="@id/tvOutcome" />
+
+    <include
+        android:id="@+id/billChartFromInclude"
+        layout="@layout/bills_at_dashboard_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

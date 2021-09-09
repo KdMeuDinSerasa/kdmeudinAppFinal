@@ -4,18 +4,20 @@ import android.app.DatePickerDialog
 import android.view.View
 import android.widget.ArrayAdapter
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.databinding.IncomeLayoutBinding
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.model.IncomeModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
 class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
-    ) {
+) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
@@ -117,7 +119,7 @@ class BottomSheet(
                         )
                     callback(billObject, 1)
                     bottomSheetDialog.dismiss()
-                } else{
+                } else {
                     callback(bill, 3)
                     bottomSheetDialog.dismiss()
                 }
@@ -135,7 +137,7 @@ class BottomSheet(
     }
 }
 
-class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
+class BottomSheetTips(val parentView: View, val typeTip: TipType) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -154,21 +156,39 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
         } else if (typeTip == TipType.TIP_INCOME) { /* TODO */
         } else if (typeTip == TipType.TIP_CHART) {/* TODO */
         }
-           if (typeTip == TipType.TIP_BILL_CATEGORY){
-               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-               bottomSheetDialog = BottomSheetDialog(parentView.context)
-               bottomSheetDialog.setContentView(bottomSheetView)
-               bottomSheetDialog.show()
-               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
-               bottomSheetBinding.backButton.setOnClickListener {
-                   bottomSheetDialog.dismiss()
-               }
-           }
-            else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
-            else if(typeTip == TipType.TIP_CHART){/* TODO */}
     }
-//    else if (typeTip == TipType.TIP_INCOME)
-//    { /* TODO */ }
-//    else if(typeTip == TipType.TIP_CHART)
-//    {/* TODO */ }
 }
+
+class bottomSheetIncome(val parentView: View) {
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetBinding: IncomeLayoutBinding
+
+    fun loadIncome(callback: (Double?) -> Unit) {
+        bottomSheetView = View.inflate(parentView.context, R.layout.income_layout, null)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetBinding = IncomeLayoutBinding.bind(bottomSheetView)
+
+        bottomSheetBinding.buttonAddIncome.setOnClickListener {
+            if (!bottomSheetBinding.editTextIncome.text.toString().isNullOrBlank()) {
+                val income = bottomSheetBinding.editTextIncome.text.toString().toDouble()
+                callback(income)
+                 bottomSheetDialog.dismiss()
+            } else {
+                 bottomSheetDialog.dismiss()
+            }
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+

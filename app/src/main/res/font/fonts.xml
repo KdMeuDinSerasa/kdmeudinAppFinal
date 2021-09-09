@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:font="@font/roboto_black">roboto_black</font>
+    <font android:font="@font/roboto_blacki_talic">roboto_black_italic</font>
+    <font android:font="@font/roboto_medium">roboto_medium</font>
+    <font android:font="@font/roboto_medium_italic">roboto_medium_italic</font>
+    <font android:font="@font/roboto_thin">roboto_thin</font>
+    <font android:font="@font/roboto_thin_italic">roboto_thin_italic</font>
+    <font android:font="@font/roboto_regular">roboto_regular</font>
+    <font android:font="@font/roboto_light_italic">roboto_light_italic</font>
+    <font android:font="@font/roboto_bold">roboto_bold</font>
+    <font android:font="@font/roboto_bold_italic">roboto_bold_italic</font>
+</font-family>

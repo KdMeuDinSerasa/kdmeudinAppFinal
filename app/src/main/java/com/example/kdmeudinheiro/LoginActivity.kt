@@ -9,13 +9,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.edit
-import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
-import com.example.kdmeudinheiro.databinding.ActivityRegisterBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -64,7 +66,10 @@ class LoginActivity : AppCompatActivity() {
                 .isNullOrBlank()
         ) {
 
-            mUserRepository.loginWithEmailPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString()) { user, error ->
+            mUserRepository.loginWithEmailPassword(
+                binding.etEmail.text.toString(),
+                binding.etPassword.text.toString()
+            ) { user, error ->
                 if (user != null) {
                     if (binding.cbRememberMe.isChecked) {
                         val mSharedPreferences =
@@ -83,7 +88,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
         } else Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-
 
 
     }
@@ -114,35 +118,56 @@ class LoginActivity : AppCompatActivity() {
         val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordRegister)
         val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameRegister)
 
-        if (emailAux.text.toString().isNullOrBlank() || passwordAux.text.toString().isNullOrBlank() || nameAux.text.toString().isNullOrBlank())
+        if (emailAux.text.toString().isNullOrBlank() || passwordAux.text.toString()
+                .isNullOrBlank() || nameAux.text.toString().isNullOrBlank()
+        )
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
         else {
             if (emailAux.text.toString()
                     .contains("@")
             ) {
 
-                mUserRepository.createUserWithEmailPassword(emailAux.text.toString(), passwordAux.text.toString()) { user, error ->
+                mUserRepository.createUserWithEmailPassword(
+                    emailAux.text.toString(),
+                    passwordAux.text.toString()
+                ) { user, error ->
                     if (user != null) {
-                        val mUser = UserModel(user.uid ,emailAux.text.toString(), passwordAux.text.toString(),nameAux.text.toString())
-                        mUserRepository.addUser(mUser){
-                            if (it){
-                                Toast.makeText(this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show()
-                                bottomSheetDialog.dismiss()
-                            } else
-                                Toast.makeText(this, "Erro tente novamente", Toast.LENGTH_SHORT).show()
+                        val mUser = UserModel(
+                            user.uid,
+                            emailAux.text.toString(),
+                            passwordAux.text.toString(),
+                            nameAux.text.toString()
+                        )
+                        var result = true
+                        CoroutineScope(Dispatchers.Default).launch {
+                            result = mUserRepository.addUser(mUser)
                         }
+                        if (result) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Cadastrado com Sucesso",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            bottomSheetDialog.dismiss()
+                        } else
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Erro tente novamente",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+
 
                     }
                     if (error != null) {
-                        Toast.makeText(this, "Usuario Não Encontrado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Erro ao criar usuario", Toast.LENGTH_SHORT).show()
                     }
                 }
 
             } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
 
 }

@@ -35,6 +35,8 @@
     <string name="edit_info_label">Editar Informações</string>
     <string name="voltar">Voltar</string>
     <string name="about_label_desc">Botao Sobre</string>
+    <string name="insert_income_label">Insira sua renda mensal</string>
+    <string name="add_label">Adicionar</string>
 
 
 </resources>

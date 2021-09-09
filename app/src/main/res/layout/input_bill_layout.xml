@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_test_bill_fragment">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutBillName"
@@ -89,6 +88,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBillButtom"
         android:layout_width="@dimen/default_0dp"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:text="@string/save_label"
         android:layout_margin="@dimen/default_10dp_margin"
@@ -97,24 +97,29 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
 
     <com.google.android.material.button.MaterialButton
-        android:visibility="gone"
         android:id="@+id/editBillButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_10dp_margin"
+        android:layout_marginTop="8dp"
         android:text="@string/edit_label"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/deleteBillButton"
+        app:layout_constraintHorizontal_bias="0.649"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteBillButton"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_10dp_margin"
         android:layout_marginTop="8dp"
         android:text="@string/delete_label"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.807"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerBillType" />
 
     <com.google.android.material.button.MaterialButton
