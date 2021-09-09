@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.BillsFragment"
-    android:background="@drawable/bg_test_bill_fragment">
+    android:background="@drawable/bg_default">
 
     <ImageView
         android:id="@+id/About"

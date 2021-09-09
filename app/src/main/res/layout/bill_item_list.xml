@@ -9,9 +9,10 @@
         android:id="@+id/cardViewBillList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="5dp"
         app:cardElevation="20dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,14 +20,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textViewBillNameList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Nome da conta" />
 
@@ -36,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textSize="16sp"
+                android:fontFamily="@font/roboto_light_italic"
                 app:layout_constraintEnd_toEndOf="@+id/textViewBillNameList"
                 app:layout_constraintStart_toEndOf="@+id/imageViewIconDate"
                 app:layout_constraintTop_toBottomOf="@+id/textViewBillNameList"
@@ -45,9 +57,18 @@
                 android:id="@+id/imageViewIconDate"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:layout_constraintStart_toStartOf="@+id/textViewBillNameList"
-                app:layout_constraintTop_toBottomOf="@+id/textViewBillNameList"
-                tools:src="@drawable/ic_launcher_foreground" />
+
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewIconDate" />
 
             <TextView
                 android:id="@+id/textViewBillPriceList"
@@ -55,10 +76,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textViewBillExpireDate"
-                app:layout_constraintStart_toStartOf="@+id/imageViewIconDate"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/textViewBillExpireDate"
                 tools:text="Valor da conta" />
 
