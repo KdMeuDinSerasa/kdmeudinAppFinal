@@ -3,6 +3,8 @@ package com.example.kdmeudinheiro.bottomSheet
 
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.kdmeudinheiro.R
@@ -15,7 +17,7 @@ import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class BottomSheet(
-    val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
+    val parentView: View,
     val bill: BillsModel?,
 
     ) {
@@ -107,7 +109,7 @@ class BottomSheet(
     }
 }
 
-class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
+class BottomSheetTips(val parentView: View, val typeTip: TipType, @LayoutRes val layout: Int) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -115,19 +117,30 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
 
     fun loadTip() {
 
-           if (typeTip == TipType.TIP_BILL_CATEGORY){
-               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-               bottomSheetDialog = BottomSheetDialog(parentView.context)
-               bottomSheetDialog.setContentView(bottomSheetView)
-               bottomSheetDialog.show()
-               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
-               bottomSheetBinding.backButton.setOnClickListener {
-                   bottomSheetDialog.dismiss()
-               }
+        bottomSheetView = View.inflate(parentView.context, layout, null)
+        val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
 
-           }
-            else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
-            else if(typeTip == TipType.TIP_CHART){/* TODO */}
+        if (typeTip == TipType.TIP_BILL_CATEGORY) {
+//               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
+//               bottomSheetDialog = BottomSheetDialog(parentView.context)
+//               bottomSheetDialog.setContentView(bottomSheetView)
+//               bottomSheetDialog.show()
+//               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
+//               bottomSheetBinding.backButton.setOnClickListener {
+//                   bottomSheetDialog.dismiss()
+//               }
+
+        } else if (typeTip == TipType.TIP_INCOME) { /* TODO */
+        } else if (typeTip == TipType.TIP_CHART) {/* TODO */
+        }
+
+        bottomSheetBinding.backButton.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
 
 
     }
