@@ -1,11 +1,10 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -13,14 +12,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.example.kdmeudinheiro.LoginActivity
+import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
-import com.example.kdmeudinheiro.databinding.MainFragmentBinding
-import com.example.kdmeudinheiro.model.UserModel
-import com.example.kdmeudinheiro.repository.UserRepository
-import com.example.kdmeudinheiro.view.MainFragment
 import com.example.kdmeudinheiro.viewModel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -71,6 +68,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 binding2 = HeaderDrawerBinding.bind(this)
                 binding2.userEmailLoged.text = it.email
                 binding2.userNameLoged.text = it.name
+
+                binding2.userAvatarDrawer.let {
+                    Glide.with(it)
+                        .load(R.drawable.man_png)
+                        .into(it)
+                }
             }
         })
 

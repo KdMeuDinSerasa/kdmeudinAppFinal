@@ -40,7 +40,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             if (it != null) {
                 userId = it.uid
                 viewModel.getIncome(userId)
-                viewModel.getOutcome(userId)
             }
         })
 
@@ -48,6 +47,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             if (it != null) {
                 binding.incomeValue.text = "Renda Mensal: ${it.income}"
                 incomeValue = it
+                viewModel.getOutcome(userId)
+
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
