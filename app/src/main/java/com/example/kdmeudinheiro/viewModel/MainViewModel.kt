@@ -76,6 +76,7 @@ class MainViewModel() : ViewModel() {
         }
 
     }
+
     fun getOutcome(userId: String){
         var outCome = 0.0
         mBillsRepository.getBills(userId){ listBills,errorMesage ->
