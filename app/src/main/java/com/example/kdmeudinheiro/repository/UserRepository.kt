@@ -36,7 +36,7 @@ class UserRepository {
             }
     }
 
-    fun getUserById(idUser: String, callback: (UserModel?) -> Unit){
+     fun getUserById(idUser: String, callback: (UserModel?) -> Unit){
         db.collection("table_user").whereEqualTo(KeysDatabaseUser.USERID.key, idUser).get()
             .addOnFailureListener {
 
