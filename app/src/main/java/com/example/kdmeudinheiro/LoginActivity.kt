@@ -138,19 +138,30 @@ class LoginActivity : AppCompatActivity() {
                             passwordAux.text.toString(),
                             nameAux.text.toString()
                         )
+                        var result = true
                         CoroutineScope(Dispatchers.Default).launch {
-                            if (mUserRepository.addUser(mUser)) {
-                                Toast.makeText(this@LoginActivity, "Cadastrado com Sucesso", Toast.LENGTH_SHORT)
-                                    .show()
-                                bottomSheetDialog.dismiss()
-                            } else
-                                Toast.makeText(this@LoginActivity, "Erro tente novamente", Toast.LENGTH_SHORT)
-                                    .show()
+                            result = mUserRepository.addUser(mUser)
                         }
+                        if (result) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Cadastrado com Sucesso",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            bottomSheetDialog.dismiss()
+                        } else
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Erro tente novamente",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+
 
                     }
                     if (error != null) {
-                        Toast.makeText(this, "Usuario Não Encontrado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Erro ao criar usuario", Toast.LENGTH_SHORT).show()
                     }
                 }
 

@@ -55,7 +55,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
         })
         viewModel.outCome.observe(viewLifecycleOwner, {
-            binding.tvRest.text = "Sobras" + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
+            if (incomeValue == null)
+                binding.tvRest.text = "Sobras 0"
+            else
+                binding.tvRest.text =
+                    "Sobras " + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
             binding.tvOutcome.text = "gastos totais: $it"
         })
         viewModel.totalBills.observe(viewLifecycleOwner, {
