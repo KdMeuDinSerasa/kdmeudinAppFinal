@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.bottomSheet.BottomSheet
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
+import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -36,9 +38,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 viewModel.deleteBill(billFromCb)
                 viewModel.getAllBills(userId)
 
-            } else if (type == 3){
+            } else if (type == 3) {
                 observerEdit.onChanged(false)
-                
+
             } else viewModel.getAllBills(userId)
         }
     }
@@ -111,6 +113,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 viewModel.addBill(bill)
                 viewModel.getAllBills(userId)
             }
+        }
+        binding.About.setOnClickListener {
+            BottomSheetTips(requireView(), TipType.TIP_BILL_CATEGORY).loadTip()
         }
     }
 
