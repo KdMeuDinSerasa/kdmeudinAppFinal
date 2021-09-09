@@ -46,7 +46,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.incomeValue.text = "Renda Mensal: ${it.income}"
-                binding.btnAddIncome.text = "Editar"
                 incomeValue = it
             }
         })
@@ -62,25 +61,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             binding.billChartFromInclude.textViewBillToPay.text = "Total há pagar: ${it.toString()}"
         })
     }
-    fun loadComponents(){
-        binding.btnAddIncome.setOnClickListener {
-        if (!binding.addIncome.text.toString().isNullOrBlank()){
-            if (incomeValue == null){
-                viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
-                binding.btnAddIncome.isClickable = false
-                viewModel.getIncome(userId)
-            } else {
-                incomeValue!!.income = binding.addIncome.text.toString()
-                viewModel.editIncome(incomeValue!!)
-                viewModel.getIncome(userId)
-            }
+    fun loadComponents() {
+        binding.floatingActionButton.setOnClickListener {
 
-        }  else Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-            
         }
 
-
     }
-
-
 }

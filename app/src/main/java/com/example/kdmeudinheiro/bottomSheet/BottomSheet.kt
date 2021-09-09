@@ -9,6 +9,7 @@ import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.model.IncomeModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
@@ -156,3 +157,29 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
         }
     }
 }
+
+class bottomSheetIncome(val parentView: View){
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+
+    fun loadTip(){
+        bottomSheetView = View.inflate(parentView.context, R.layout.income_layout, null)
+    }
+}
+
+if (!binding.addIncome.text.toString().isNullOrBlank()){
+    if (incomeValue == null){
+        viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
+        binding.btnAddIncome.isClickable = false
+        viewModel.getIncome(userId)
+    } else {
+        incomeValue!!.income = binding.addIncome.text.toString()
+        viewModel.editIncome(incomeValue!!)
+        viewModel.getIncome(userId)
+    }
+
+}  else Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+
+}
+
+

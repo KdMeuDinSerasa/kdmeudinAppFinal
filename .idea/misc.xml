@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_default.xml" value="0.13385416666666666" />
         <entry key="app/src/main/res/drawable/bg_test_bill_fragment.xml" value="0.1328125" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
