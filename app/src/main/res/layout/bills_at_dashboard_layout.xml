@@ -62,6 +62,7 @@
                     android:text="Aqui vai ir as contas há pagar."
                     android:textAlignment="center"
                     android:textSize="16dp"
+                    android:fontFamily="@font/roboto_black"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

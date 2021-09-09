@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bg_test_bill_fragment.xml" value="0.1328125" />
+        <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
+        <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1503623188405797" />
