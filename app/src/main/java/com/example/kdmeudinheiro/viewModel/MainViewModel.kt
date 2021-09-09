@@ -53,7 +53,7 @@ class MainViewModel() : ViewModel() {
 
     fun getIncome(userId: String){
         mIncomeRepository.getIncome(userId){incomeModel,error ->
-            if (incomeModel != null) _mIncomeModel.value = incomeModel
+            if (incomeModel != null && incomeModel.income.toInt() != 0){ _mIncomeModel.value = incomeModel} else { _mIncomeModel.value = IncomeModel("", "0", userId) }
             if (error != null) _mError.value = error
         }
     }
@@ -74,14 +74,15 @@ class MainViewModel() : ViewModel() {
         mBillsRepository.getBills(userId){ listBills,errorMesage ->
             listBills?.forEach {
                 outCome += it.price.toDouble()
-                getTotalOfBills(listBills)
+
             }
+            getTotalOfBills(listBills)
             _outCome.value = outCome
             if (errorMesage != null) _mError.value = errorMesage
         }
     }
-    fun getTotalOfBills(bills: List<BillsModel>){
-        bills.size.let { billsSize ->
+    fun getTotalOfBills(bills: List<BillsModel>?){
+        bills?.size.let { billsSize ->
             _totalBills.value = billsSize
         }
     }
