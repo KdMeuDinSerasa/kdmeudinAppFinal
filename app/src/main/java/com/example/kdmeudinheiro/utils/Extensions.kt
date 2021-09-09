@@ -1,5 +1,7 @@
 package com.example.kdmeudinheiro.utils
 
+import android.text.TextUtils
+import android.util.Patterns
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.cancellation.CancellationException
@@ -30,3 +32,6 @@ suspend fun <T> Task<T>.await(): T? {
         }
     }
 }
+
+fun String.isValidEmail() =
+    !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
