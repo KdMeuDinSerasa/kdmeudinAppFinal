@@ -61,18 +61,20 @@ class MainViewModel() : ViewModel() {
     }
     fun editIncome(mIncomeModel: IncomeModel){
         viewModelScope.launch {
-            if (!mIncomeRepository.editIncome2(mIncomeModel)) {
+            if (!mIncomeRepository.editIncome(mIncomeModel))
                 _mError.value = "Erro ao editar"
-            }
             userLoged()
         }
     }
 
     fun addIncome(mIncomeModel: IncomeModel){
-        mIncomeRepository.addIncome(mIncomeModel){
-            if (!it) _mError.value = "Erro ao adicionar"
+        viewModelScope.launch {
+            if (!mIncomeRepository.addIncome(mIncomeModel))
+                _mError.value = "Erro ao adicionar"
+            userLoged()
 
         }
+
     }
     fun getOutcome(userId: String){
         var outCome = 0.0

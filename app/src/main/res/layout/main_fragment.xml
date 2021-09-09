@@ -34,7 +34,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addIncome"
+        android:id="@+id/etAddIncome"
         android:hint="Valor"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/incomeValue"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="adicionar"
         android:id="@+id/btnAddIncome"
-        app:layout_constraintTop_toBottomOf="@id/addIncome"
+        app:layout_constraintTop_toBottomOf="@id/etAddIncome"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
