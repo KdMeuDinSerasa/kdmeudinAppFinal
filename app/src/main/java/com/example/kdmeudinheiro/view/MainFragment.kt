@@ -57,6 +57,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             binding.tvOutcome.text = "gastos totais: ${it.toString()}"
             binding.tvRest.text = (incomeValue!!.income.toDouble() - it!!.toDouble()).toString()
         })
+        viewModel.totalBills.observe(viewLifecycleOwner, {
+
+        })
     }
     fun loadComponents(){
         binding.btnAddIncome.setOnClickListener {
