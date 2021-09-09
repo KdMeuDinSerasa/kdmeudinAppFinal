@@ -48,9 +48,10 @@ class MainViewModel() : ViewModel() {
     }
 
     fun getUserById(id: String){
-        mUserRepository.getUserById(id){
-            _mUserModel.value = it
+        viewModelScope.launch {
+            _mUserModel.value = mUserRepository.getUserById(id)
         }
+
     }
 
     fun getIncome(userId: String){
