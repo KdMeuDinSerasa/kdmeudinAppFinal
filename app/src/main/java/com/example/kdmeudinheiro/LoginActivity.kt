@@ -9,12 +9,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.edit
-import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
-import com.example.kdmeudinheiro.databinding.ActivityRegisterBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
