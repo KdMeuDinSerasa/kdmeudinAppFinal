@@ -6,16 +6,19 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_default.xml" value="0.13385416666666666" />
         <entry key="app/src/main/res/drawable/bg_test_bill_fragment.xml" value="0.1328125" />
+        <entry key="app/src/main/res/drawable/bg_tips.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/retagle.xml" value="0.1" />
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1503623188405797" />
-        <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/bills_at_dashboard_layout.xml" value="0.39014373716632444" />
         <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.1246684350132626" />
         <entry key="app/src/main/res/layout/crud_bill_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/date_picker.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/header_drawer.xml" value="0.11820652173913043" />
         <entry key="app/src/main/res/layout/income_layout.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/input_bill_layout.xml" value="0.3980392156862745" />

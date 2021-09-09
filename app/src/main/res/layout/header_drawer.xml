@@ -7,16 +7,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         app:cardCornerRadius="20dp">
 
         <ImageView
+            android:id="@+id/userAvatarDrawer"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:contentDescription="@string/user_avatar_desc"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:src="@color/purple_700"
-            />
+            android:src="@color/purple_700" />
 
     </androidx.cardview.widget.CardView>
 
