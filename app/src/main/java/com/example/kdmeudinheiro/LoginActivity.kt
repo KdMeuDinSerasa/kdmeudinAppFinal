@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
      * cadastrado com as credenciais informadas
      */
     fun checkLogin() {
-        if (!binding.etEmail.text.toString().isValidEmail() && !binding.etPassword.text.toString()
+        if (binding.etEmail.text.toString().isValidEmail() && !binding.etPassword.text.toString()
                 .isNullOrBlank()
         ) {
 
