@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.view.View
 import android.widget.ArrayAdapter
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.databinding.IncomeLayoutBinding
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
 import com.example.kdmeudinheiro.enums.TipType
@@ -16,7 +17,7 @@ import java.util.*
 class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
-    ) {
+) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
@@ -118,7 +119,7 @@ class BottomSheet(
                         )
                     callback(billObject, 1)
                     bottomSheetDialog.dismiss()
-                } else{
+                } else {
                     callback(bill, 3)
                     bottomSheetDialog.dismiss()
                 }
@@ -136,7 +137,7 @@ class BottomSheet(
     }
 }
 
-class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
+class BottomSheetTips(val parentView: View, val typeTip: TipType) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -158,28 +159,36 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
     }
 }
 
-class bottomSheetIncome(val parentView: View){
+class bottomSheetIncome(val parentView: View) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetBinding: IncomeLayoutBinding
 
-    fun loadTip(){
+    fun loadIncome(callback: (Double?) -> Unit) {
         bottomSheetView = View.inflate(parentView.context, R.layout.income_layout, null)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetBinding = IncomeLayoutBinding.bind(bottomSheetView)
+
+        bottomSheetBinding.buttonAddIncome.setOnClickListener {
+            if (!bottomSheetBinding.editTextIncome.text.toString().isNullOrBlank()) {
+                val income = bottomSheetBinding.editTextIncome.text.toString().toDouble()
+                callback(income)
+                 bottomSheetDialog.dismiss()
+            } else {
+                 bottomSheetDialog.dismiss()
+            }
+        }
     }
+
 }
 
-if (!binding.addIncome.text.toString().isNullOrBlank()){
-    if (incomeValue == null){
-        viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
-        binding.btnAddIncome.isClickable = false
-        viewModel.getIncome(userId)
-    } else {
-        incomeValue!!.income = binding.addIncome.text.toString()
-        viewModel.editIncome(incomeValue!!)
-        viewModel.getIncome(userId)
-    }
 
-}  else Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
 
-}
+
+
+
+
 
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
@@ -34,7 +35,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     }
 
-    fun loadViewModels(){
+    fun loadViewModels() {
         viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
             if (it != null) {
                 userId = it.uid
@@ -53,17 +54,23 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
         })
         viewModel.outCome.observe(viewLifecycleOwner, {
-//            binding.tvRest.text = (incomeValue!!.income.toDouble() - it!!.toDouble()).toString()
-  //          binding.tvOutcome.text = "gastos totais: $it"
+            binding.tvRest.text = "Sobras" + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
+            binding.tvOutcome.text = "gastos totais: $it"
         })
         viewModel.totalBills.observe(viewLifecycleOwner, {
-            binding.billChartFromInclude.textViewTotalOfBills.text = "Total de contas: ${it.toString()}"
+            binding.billChartFromInclude.textViewTotalOfBills.text =
+                "Total de contas: ${it.toString()}"
             binding.billChartFromInclude.textViewBillToPay.text = "Total há pagar: ${it.toString()}"
         })
     }
-    fun loadComponents() {
-        binding.floatingActionButton.setOnClickListener {
 
+    fun loadComponents() {
+        binding.addButton.setOnClickListener {
+            bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
+                var mIncome = IncomeModel(null, incomeFound.toString(), userId)
+                viewModel.addIncome(mIncome)
+                viewModel.getIncome(userId)
+            }
         }
 
     }
