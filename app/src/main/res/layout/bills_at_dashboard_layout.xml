@@ -12,6 +12,7 @@
         android:layout_margin="20dp"
         android:elevation="@dimen/default_10dp_margin"
         app:cardCornerRadius="20dp"
+        android:backgroundTint="@color/BlueForBg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

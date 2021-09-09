@@ -154,21 +154,5 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType,) {
         } else if (typeTip == TipType.TIP_INCOME) { /* TODO */
         } else if (typeTip == TipType.TIP_CHART) {/* TODO */
         }
-           if (typeTip == TipType.TIP_BILL_CATEGORY){
-               bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-               bottomSheetDialog = BottomSheetDialog(parentView.context)
-               bottomSheetDialog.setContentView(bottomSheetView)
-               bottomSheetDialog.show()
-               val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
-               bottomSheetBinding.backButton.setOnClickListener {
-                   bottomSheetDialog.dismiss()
-               }
-           }
-            else if (typeTip == TipType.TIP_INCOME){ /* TODO */}
-            else if(typeTip == TipType.TIP_CHART){/* TODO */}
     }
-//    else if (typeTip == TipType.TIP_INCOME)
-//    { /* TODO */ }
-//    else if(typeTip == TipType.TIP_CHART)
-//    {/* TODO */ }
 }
