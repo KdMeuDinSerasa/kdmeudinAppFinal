@@ -13,6 +13,7 @@ import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.utils.isValidEmail
 import com.example.kdmeudinheiro.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -43,8 +44,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             checkLogin()
         }
-
-
     }
 
     /**
@@ -62,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
      * cadastrado com as credenciais informadas
      */
     fun checkLogin() {
-        if (!binding.etEmail.text.toString().isNullOrBlank() && !binding.etPassword.text.toString()
+        if (!binding.etEmail.text.toString().isValidEmail() && !binding.etPassword.text.toString()
                 .isNullOrBlank()
         ) {
 
@@ -123,9 +122,7 @@ class LoginActivity : AppCompatActivity() {
         )
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
         else {
-            if (emailAux.text.toString()
-                    .contains("@")
-            ) {
+            if (emailAux.text.toString().isValidEmail()) {
 
                 mUserRepository.createUserWithEmailPassword(
                     emailAux.text.toString(),
@@ -157,17 +154,12 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
-
-
                     }
                     if (error != null) {
                         Toast.makeText(this, "Erro ao criar usuario", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }
