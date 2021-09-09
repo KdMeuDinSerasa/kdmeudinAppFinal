@@ -3,6 +3,7 @@ package com.example.kdmeudinheiro.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.BillsRepository
@@ -26,6 +27,9 @@ class MainViewModel() : ViewModel() {
 
     private var _outCome = MutableLiveData<Double?>()
     val outCome: LiveData<Double?> = _outCome
+
+    private var _totalBills = MutableLiveData<Int>()
+    var totalBills: LiveData<Int> = _totalBills
 
     private val mUserRepository = UserRepository()
     private val mIncomeRepository = IncomeRepository()
@@ -70,11 +74,16 @@ class MainViewModel() : ViewModel() {
         mBillsRepository.getBills(userId){ listBills,errorMesage ->
             listBills?.forEach {
                 outCome += it.price.toDouble()
+                getTotalOfBills(listBills)
             }
             _outCome.value = outCome
             if (errorMesage != null) _mError.value = errorMesage
         }
-
+    }
+    fun getTotalOfBills(bills: List<BillsModel>){
+        bills.size.let { billsSize ->
+            _totalBills.value = billsSize
+        }
     }
 
 
