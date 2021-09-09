@@ -64,13 +64,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
     fun loadComponents(){
         binding.btnAddIncome.setOnClickListener {
-        if (!binding.addIncome.text.toString().isNullOrBlank()){
+        if (!binding.etAddIncome.text.toString().isNullOrBlank()){
             if (incomeValue == null){
-                viewModel.addIncome(IncomeModel(null, binding.addIncome.text.toString(), userId))
+                viewModel.addIncome(IncomeModel(null, binding.etAddIncome.text.toString(), userId))
                 binding.btnAddIncome.isClickable = false
                 viewModel.getIncome(userId)
             } else {
-                incomeValue!!.income = binding.addIncome.text.toString()
+                incomeValue!!.income = binding.etAddIncome.text.toString()
                 viewModel.editIncome(incomeValue!!)
                 viewModel.getIncome(userId)
             }
