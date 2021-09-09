@@ -76,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
                         mSharedPreferences.edit {
                             this.putBoolean(KeysShared.REMEMBERME.key, true)
                         }
-
                     }
                     startActivity(Intent(this, MainActivity::class.java))
 
@@ -87,8 +86,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
         } else Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-
-
     }
 
     fun loadBottomSheet() {
