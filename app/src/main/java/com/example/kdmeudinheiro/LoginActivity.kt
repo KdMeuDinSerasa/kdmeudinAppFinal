@@ -2,12 +2,12 @@ package com.example.kdmeudinheiro
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadComponents() {
 
-        binding.btnCreateRegister.setOnClickListener {
+        binding.createRegister.setOnClickListener {
             loadBottomSheet()
         }
         binding.btnLogin.setOnClickListener {
@@ -61,13 +61,14 @@ class LoginActivity : AppCompatActivity() {
      * cadastrado com as credenciais informadas
      */
     fun checkLogin() {
-        if (binding.etEmail.text.toString().isValidEmail() && !binding.etPassword.text.toString()
+        if (binding.etEmail.editText?.text.toString()
+                .isValidEmail() && !binding.etPassword.editText?.text.toString()
                 .isNullOrBlank()
         ) {
 
             mUserRepository.loginWithEmailPassword(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString()
+                binding.etEmail.editText?.text.toString(),
+                binding.etPassword.editText?.text.toString()
             ) { user, error ->
                 if (user != null) {
                     if (binding.cbRememberMe.isChecked) {
