@@ -79,6 +79,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                         Toast.makeText(requireContext(), "Editado com sucesso", Toast.LENGTH_SHORT).show()
                         viewModel.editUser(mUserModel)
                         viewModel.userLoged()
+                        (requireActivity() as? MainActivity?)?.updateUser()
 
 
                     })

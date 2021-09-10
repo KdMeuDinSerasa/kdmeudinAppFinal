@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.userLoged()
     }
 
+    fun updateUser(){
+        viewModel.userLoged()
+    }
+
     fun loadComponents() {
         /**
          * Nav controler que vai controlar a transição entre os fragments
