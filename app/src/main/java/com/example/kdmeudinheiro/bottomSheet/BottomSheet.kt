@@ -15,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-@AndroidEntryPoint
+
 class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
     val bill: BillsModel?,
