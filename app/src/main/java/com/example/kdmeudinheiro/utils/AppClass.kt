@@ -1,4 +1,4 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.utils
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
