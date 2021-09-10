@@ -10,6 +10,8 @@ import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.pieChart.PieChartClass
+
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     companion object {
@@ -28,8 +30,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         loadViewModels()
         loadComponents()
         viewModel.userLoged()
-
-
     }
 
     fun loadViewModels() {
@@ -74,9 +74,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 viewModel.getIncome(userId)
             }
         }
-       loadChart()
+        loadChart()
     }
 
     private fun loadChart() {
+        PieChartClass(requireView()).loadChart()
     }
 }

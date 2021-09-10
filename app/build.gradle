@@ -51,7 +51,7 @@ dependencies {
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
     implementation "com.google.android.material:material:1.1.0"
     //Mp Android Charts
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
