@@ -12,8 +12,8 @@
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.34155844155844156" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/bills_at_dashboard_layout.xml" value="0.39014373716632444" />
         <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.1246684350132626" />
@@ -22,16 +22,18 @@
         <entry key="app/src/main/res/layout/header_drawer.xml" value="0.11820652173913043" />
         <entry key="app/src/main/res/layout/income_layout.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/input_bill_layout.xml" value="0.3980392156862745" />
-        <entry key="app/src/main/res/layout/main_activity.xml" value="0.5554102953669645" />
-        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.32814710042432815" />
+        <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
         <entry key="app/src/main/res/layout/user_preferences_fragment.xml" value="0.375" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.11822916666666666" />
+        <entry key="app/src/main/res/menu/pie.xml" value="0.2375" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

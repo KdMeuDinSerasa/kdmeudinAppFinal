@@ -3,16 +3,13 @@ package com.example.kdmeudinheiro.view
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
-
+import com.example.kdmeudinheiro.R
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     companion object {
@@ -77,6 +74,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 viewModel.getIncome(userId)
             }
         }
+       loadChart()
+    }
 
+    private fun loadChart() {
     }
 }
