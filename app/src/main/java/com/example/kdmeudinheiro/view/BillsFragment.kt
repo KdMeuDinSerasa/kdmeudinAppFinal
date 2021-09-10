@@ -31,48 +31,11 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { billFromCb, type ->
-            if (type == 1) {
-                viewModel.editBill(billFromCb)
-                viewModel.getAllBills(userId)
-                observerEdit.onChanged(true)
-
-            } else if (type == 2) {
-                viewModel.deleteBill(billFromCb)
-                viewModel.getAllBills(userId)
-
-            } else if (type == 3) {
-                observerEdit.onChanged(false)
-
-            } else viewModel.getAllBills(userId)
+            handlerForDialogResponse(billFromCb, type)
         }
     }
 
     /* Observers goes here */
-    private var observerGetBills = Observer<List<BillsModel>> {
-        adapter.refresh(it.toMutableList())
-    }
-    private var observerError = Observer<String> {
-        if (it != null) {
-            Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    private var observerAddResponse = Observer<Boolean> {
-        if (it == true) {
-            Snackbar.make(requireView(), "Conta Adicionada Com Sucesso", Snackbar.LENGTH_LONG)
-                .show()
-        } else {
-            Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    private var observerUser = Observer<FirebaseUser> { user ->
-        viewModel.getAllBills(user.uid)
-        userId = user.uid
-    }
-
     private var observerEdit = Observer<Boolean> {
         if (it == true) {
             Snackbar.make(requireView(), "Conta Editada Com Sucesso", Snackbar.LENGTH_LONG)
@@ -81,20 +44,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
                 .show()
         }
-    }
-    private var observerDelete = Observer<Boolean> {
-        if (it == true) {
-            Snackbar.make(requireView(), "Conta Deletada Com Sucesso", Snackbar.LENGTH_LONG)
-                .show()
-        } else {
-            Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    /* Lifecycle functions goes here */
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -122,11 +71,44 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
 
     private fun LoadViewModelAndsObservers() {
-        viewModel.billList.observe(viewLifecycleOwner, observerGetBills)
-        viewModel.error.observe(viewLifecycleOwner, observerError)
-        viewModel.addResponse.observe(viewLifecycleOwner, observerAddResponse)
-        viewModel.user.observe(viewLifecycleOwner, observerUser)
+        viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.error.observe(viewLifecycleOwner, {
+            if (it != null) {
+                Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        })
+        viewModel.addResponse.observe(viewLifecycleOwner, {
+            if (it == true) {
+                Snackbar.make(requireView(), "Conta Adicionada Com Sucesso", Snackbar.LENGTH_LONG)
+                    .show()
+            } else {
+                Snackbar.make(requireView(), "Erro ao adicionar a conta", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        })
+        viewModel.user.observe(viewLifecycleOwner, {
+            viewModel.getAllBills(it.uid)
+            userId = it.uid
+        })
         viewModel.getUserId()
+    }
+
+    private fun handlerForDialogResponse(billFromCb: BillsModel, type: Int?) {
+
+        if (type == 1) {
+            viewModel.editBill(billFromCb)
+            viewModel.getAllBills(userId)
+            observerEdit.onChanged(true)
+
+        } else if (type == 2) {
+            viewModel.deleteBill(billFromCb)
+            viewModel.getAllBills(userId)
+
+        } else if (type == 3) {
+            observerEdit.onChanged(false)
+
+        } else viewModel.getAllBills(userId)
     }
 
     companion object {
