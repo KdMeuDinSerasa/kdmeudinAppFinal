@@ -86,9 +86,6 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                         viewModel.editUser(mUserModel)
                         viewModel.userLoged()
                         (requireActivity() as? MainActivity?)?.updateUser()
-
-
-
                     })
                 setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
@@ -101,7 +98,4 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         alertDialog.window?.setLayout(100 , 100)
         alertDialog.show()
     }
-
-
-
 }
