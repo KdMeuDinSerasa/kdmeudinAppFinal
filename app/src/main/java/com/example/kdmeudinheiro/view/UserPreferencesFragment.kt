@@ -13,7 +13,9 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.UserPreferencesFragmentBinding
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.viewModel.UserPreferencesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
 
     companion object {

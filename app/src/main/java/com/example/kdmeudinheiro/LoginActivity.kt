@@ -9,31 +9,73 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.edit
+import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.example.kdmeudinheiro.utils.isValidEmail
 import com.example.kdmeudinheiro.view.MainActivity
+import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val mUserRepository = UserRepository()
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var viewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContentView(binding.root)
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        loadViewModels()
         if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false))
-            checkSession()
-
+            viewModel.checkSession()
         loadComponents()
+    }
+
+    fun loadViewModels() {
+        /**
+         * Checa se a sessão esta ativa ou expirou somente se o checkbox remember-me tiver
+         * sido marcado em uma sessão anterior
+         */
+
+        viewModel.mFirebaseUser.observe(this, {
+            if (it != null) {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        })
+
+        viewModel.mFirebaseUserLoged.observe(this, {
+            if (it != null) {
+                if (binding.cbRememberMe.isChecked) {
+                    val mSharedPreferences =
+                        getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+                    mSharedPreferences.edit {
+                        this.putBoolean(KeysShared.REMEMBERME.key, true)
+                    }
+                }
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        })
+
+        viewModel.error.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+        viewModel.result.observe(this, {
+            if (it) Toast.makeText(this, "Usuario cadastrado com sucesso", Toast.LENGTH_SHORT)
+                .show()
+            else Toast.makeText(this, "Erro ao cadastrar", Toast.LENGTH_SHORT).show()
+        })
     }
 
     fun loadComponents() {
@@ -46,15 +88,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Checa se a sessão esta ativa ou expirou somente se o checkbox remember-me tiver
-     * sido marcado em uma sessão anterior
-     */
-    fun checkSession() {
-        if (mUserRepository.getSession() != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-    }
 
     /**
      * Checa as credenciais do usuario, se preencheu todos os campos e se existe um usuario
@@ -64,27 +97,10 @@ class LoginActivity : AppCompatActivity() {
         if (binding.etEmail.text.toString().isValidEmail() && !binding.etPassword.text.toString()
                 .isNullOrBlank()
         ) {
-
-            mUserRepository.loginWithEmailPassword(
+            viewModel.loginWithEmailEPassword(
                 binding.etEmail.text.toString(),
                 binding.etPassword.text.toString()
-            ) { user, error ->
-                if (user != null) {
-                    if (binding.cbRememberMe.isChecked) {
-                        val mSharedPreferences =
-                            getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
-                        mSharedPreferences.edit {
-                            this.putBoolean(KeysShared.REMEMBERME.key, true)
-                        }
-                    }
-                    startActivity(Intent(this, MainActivity::class.java))
-
-                }
-                if (error != null) {
-                    Toast.makeText(this, "Usuario Não Encontrado", Toast.LENGTH_SHORT).show()
-                }
-            }
-
+            )
         } else Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
     }
 
@@ -120,43 +136,14 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
         else {
             if (emailAux.text.toString().isValidEmail()) {
-
-                mUserRepository.createUserWithEmailPassword(
+                viewModel.createUserWithEmailEPassword(
                     emailAux.text.toString(),
-                    passwordAux.text.toString()
-                ) { user, error ->
-                    if (user != null) {
-                        val mUser = UserModel(
-                            user.uid,
-                            emailAux.text.toString(),
-                            passwordAux.text.toString(),
-                            nameAux.text.toString()
-                        )
-                        var result = true
-                        CoroutineScope(Dispatchers.Default).launch {
-                            result = mUserRepository.addUser(mUser)
-                        }
-                        if (result) {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Cadastrado com Sucesso",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                            bottomSheetDialog.dismiss()
-                        } else
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Erro tente novamente",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                    }
-                    if (error != null) {
-                        Toast.makeText(this, "Erro ao criar usuario", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                    passwordAux.text.toString(),
+                    nameAux.text.toString()
+                )
+                bottomSheetDialog.dismiss()
             } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
         }
     }
 }
+

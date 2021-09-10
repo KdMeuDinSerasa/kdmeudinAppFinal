@@ -8,11 +8,15 @@ import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+@HiltViewModel
+class BillsViewModel @Inject constructor(
+    private val billRepo: BillsRepository,
+    private val userRepo: UserRepository
+): ViewModel() {
 
-class BillsViewModel : ViewModel() {
-    val billRepo = BillsRepository()
-    val userRepo = UserRepository()
 
     private val _user = MutableLiveData<FirebaseUser>()
     var user: LiveData<FirebaseUser> = _user
