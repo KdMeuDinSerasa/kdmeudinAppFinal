@@ -10,9 +10,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class IncomeRepository {
-    private val db = FirebaseFirestore.getInstance()
+class IncomeRepository @Inject constructor(
+    private val db: FirebaseFirestore
+) {
+
 
 
 

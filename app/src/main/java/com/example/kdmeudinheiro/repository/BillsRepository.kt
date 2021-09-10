@@ -4,9 +4,12 @@ import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.await
 import com.google.firebase.firestore.FirebaseFirestore
+import javax.inject.Inject
 
-class BillsRepository {
-    private val db = FirebaseFirestore.getInstance()
+class BillsRepository @Inject constructor(
+    private val db: FirebaseFirestore
+) {
+
 
 
 

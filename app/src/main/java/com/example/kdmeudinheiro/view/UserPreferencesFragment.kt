@@ -14,7 +14,9 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.UserPreferencesFragmentBinding
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.viewModel.UserPreferencesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
 
     companion object {
@@ -83,6 +85,10 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                         Toast.makeText(requireContext(), "Editado com sucesso", Toast.LENGTH_SHORT).show()
                         viewModel.editUser(mUserModel)
                         viewModel.userLoged()
+                        (requireActivity() as? MainActivity?)?.updateUser()
+
+
+
                     })
                 setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->

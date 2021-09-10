@@ -11,9 +11,16 @@ import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel() : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val mUserRepository: UserRepository,
+    private val mIncomeRepository: IncomeRepository,
+    private val mBillsRepository: BillsRepository
+) : ViewModel() {
 
     private var _mUserModel = MutableLiveData<UserModel>()
     val mUserModel: LiveData<UserModel> = _mUserModel
@@ -33,34 +40,32 @@ class MainViewModel() : ViewModel() {
     private var _totalBills = MutableLiveData<Int>()
     var totalBills: LiveData<Int> = _totalBills
 
-    private val mUserRepository = UserRepository()
-    private val mIncomeRepository = IncomeRepository()
-    private val mBillsRepository = BillsRepository()
 
-    fun logoutUser(){
+    fun logoutUser() {
         mUserRepository.logOut()
     }
 
-    fun userLoged(){
+    fun userLoged() {
         mUserRepository.getSession().apply {
             _mFirebaseUser.value = this
         }
     }
 
-    fun getUserById(id: String){
+    fun getUserById(id: String) {
         viewModelScope.launch {
             _mUserModel.value = mUserRepository.getUserById(id)
         }
 
     }
 
-    fun getIncome(userId: String){
+    fun getIncome(userId: String) {
         viewModelScope.launch {
             _mIncomeModel.value = mIncomeRepository.getIncome(userId)
         }
 
     }
-    fun editIncome(mIncomeModel: IncomeModel){
+
+    fun editIncome(mIncomeModel: IncomeModel) {
         viewModelScope.launch {
             if (!mIncomeRepository.editIncome(mIncomeModel))
                 _mError.value = "Erro ao editar"
@@ -68,7 +73,7 @@ class MainViewModel() : ViewModel() {
         }
     }
 
-    fun addIncome(mIncomeModel: IncomeModel){
+    fun addIncome(mIncomeModel: IncomeModel) {
         viewModelScope.launch {
             if (!mIncomeRepository.addIncome(mIncomeModel))
                 _mError.value = "Erro ao adicionar"
@@ -78,9 +83,9 @@ class MainViewModel() : ViewModel() {
 
     }
 
-    fun getOutcome(userId: String){
+    fun getOutcome(userId: String) {
         var outCome = 0.0
-        mBillsRepository.getBills(userId){ listBills,errorMesage ->
+        mBillsRepository.getBills(userId) { listBills, errorMesage ->
             listBills?.forEach {
                 outCome += it.price.toDouble()
 
@@ -90,13 +95,12 @@ class MainViewModel() : ViewModel() {
             if (errorMesage != null) _mError.value = errorMesage
         }
     }
-    fun getTotalOfBills(bills: List<BillsModel>?){
+
+    fun getTotalOfBills(bills: List<BillsModel>?) {
         bills?.size.let { billsSize ->
             _totalBills.value = billsSize
         }
     }
-
-
 
 
 }

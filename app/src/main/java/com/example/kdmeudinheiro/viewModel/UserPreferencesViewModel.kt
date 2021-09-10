@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserPreferencesViewModel : ViewModel() {
+@HiltViewModel
+class UserPreferencesViewModel @Inject constructor(private val mUserRepository: UserRepository) : ViewModel() {
 
     private var _mUserModel = MutableLiveData<UserModel>()
     val mUserModel: LiveData<UserModel> = _mUserModel
@@ -17,7 +20,7 @@ class UserPreferencesViewModel : ViewModel() {
     private var _mFirebaseUser = MutableLiveData<FirebaseUser?>()
     val mFirebaseUser: LiveData<FirebaseUser?> = _mFirebaseUser
 
-    private val mUserRepository = UserRepository()
+
 
 
     fun userLoged(){
