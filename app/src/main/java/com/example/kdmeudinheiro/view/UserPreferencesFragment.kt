@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.UserPreferencesFragmentBinding
 import com.example.kdmeudinheiro.model.UserModel
@@ -53,6 +54,11 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         binding.btnEdit.setOnClickListener {
             editDialog()
         }
+        binding.userAvatarUserPrefs.let {
+            Glide.with(it)
+                .load(R.drawable.man_png)
+                .into(it)
+        }
     }
 
 
@@ -77,8 +83,6 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                         Toast.makeText(requireContext(), "Editado com sucesso", Toast.LENGTH_SHORT).show()
                         viewModel.editUser(mUserModel)
                         viewModel.userLoged()
-
-
                     })
                 setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
