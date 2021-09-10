@@ -19,7 +19,9 @@ import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BillsFragment : Fragment(R.layout.bills_fragment) {
     //var goes here
     private lateinit var viewModel: BillsViewModel

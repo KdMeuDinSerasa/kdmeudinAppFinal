@@ -19,7 +19,9 @@ import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var mAppBarConfiguration: AppBarConfiguration
     lateinit var mNavController: NavController
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
+        viewModel.userLoged()
+    }
+
+    fun updateUser(){
         viewModel.userLoged()
     }
 

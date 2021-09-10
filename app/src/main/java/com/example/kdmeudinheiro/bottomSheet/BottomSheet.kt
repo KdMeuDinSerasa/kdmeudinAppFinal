@@ -12,7 +12,9 @@ import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+
 
 class BottomSheet(
     val parentView: View,/* TODO mudar quando tiver injecao de dependencias */

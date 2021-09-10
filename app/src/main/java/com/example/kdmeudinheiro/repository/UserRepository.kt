@@ -6,10 +6,13 @@ import com.example.kdmeudinheiro.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import javax.inject.Inject
 
-class UserRepository {
-    private val UserControler = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
+
+class UserRepository @Inject constructor(
+    private val db: FirebaseFirestore,
+    private val UserControler: FirebaseAuth
+) {
 
 
     fun createUserWithEmailPassword(email: String, password: String, callback: (FirebaseUser?, String?) -> Unit) {
