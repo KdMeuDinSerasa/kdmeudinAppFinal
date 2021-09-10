@@ -2,8 +2,10 @@ package com.example.kdmeudinheiro.pieChart
 
 import android.view.View
 import android.widget.SeekBar
+import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TypesOfBills
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -38,10 +40,8 @@ class PieChartClass(val parentView: View) : SeekBar.OnSeekBarChangeListener,
 
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>) {
 
-        val mpieDataset = PieDataSet(pieEntries, "Consumir dados")
+        val mpieDataset = PieDataSet(pieEntries, null)
         var dataSet = PieData(cat, mpieDataset)
-        binding.chartIncluded.pieChart.data = dataSet
-
         val colors: ArrayList<Int> = ArrayList()
         for (c: Int in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
         for (c: Int in ColorTemplate.JOYFUL_COLORS) colors.add(c)
@@ -50,6 +50,21 @@ class PieChartClass(val parentView: View) : SeekBar.OnSeekBarChangeListener,
         for (c: Int in ColorTemplate.PASTEL_COLORS) colors.add(c)
         colors.add(ColorTemplate.getHoloBlue())
         mpieDataset.colors = colors
+        //layout shities
+        mpieDataset.valueTextSize = 16f
+
+        //bindings
+        binding.chartIncluded.pieChart.data = dataSet
+        binding.chartIncluded.pieChart.holeRadius = 2f
+        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
+        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
+        binding.chartIncluded.pieChart.setDescription(null)
+
+
+        val legend: Legend = binding.chartIncluded.pieChart.getLegend()
+        legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
+        legend.textSize = 16f
+
 
     }
 
