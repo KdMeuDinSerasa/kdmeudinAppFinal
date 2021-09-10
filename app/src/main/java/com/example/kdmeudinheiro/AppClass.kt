@@ -1,8 +1,8 @@
-package com.example.kdmeudinheiro.utils
+package com.example.kdmeudinheiro
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class AppResume: Application() {
+class AppClass: Application() {
 }
