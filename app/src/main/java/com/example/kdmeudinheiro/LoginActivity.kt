@@ -2,17 +2,18 @@ package com.example.kdmeudinheiro
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.utils.isValidEmail
 import com.example.kdmeudinheiro.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -37,14 +38,12 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadComponents() {
 
-        binding.btnCreateRegister.setOnClickListener {
+        binding.createRegister.setOnClickListener {
             loadBottomSheet()
         }
         binding.btnLogin.setOnClickListener {
             checkLogin()
         }
-
-
     }
 
     /**
@@ -62,13 +61,14 @@ class LoginActivity : AppCompatActivity() {
      * cadastrado com as credenciais informadas
      */
     fun checkLogin() {
-        if (!binding.etEmail.text.toString().isNullOrBlank() && !binding.etPassword.text.toString()
+        if (binding.etEmail.editText?.text.toString()
+                .isValidEmail() && !binding.etPassword.editText?.text.toString()
                 .isNullOrBlank()
         ) {
 
             mUserRepository.loginWithEmailPassword(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString()
+                binding.etEmail.editText?.text.toString(),
+                binding.etPassword.editText?.text.toString()
             ) { user, error ->
                 if (user != null) {
                     if (binding.cbRememberMe.isChecked) {
@@ -77,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                         mSharedPreferences.edit {
                             this.putBoolean(KeysShared.REMEMBERME.key, true)
                         }
-
                     }
                     startActivity(Intent(this, MainActivity::class.java))
 
@@ -88,8 +87,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
         } else Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-
-
     }
 
     fun loadBottomSheet() {
@@ -123,9 +120,7 @@ class LoginActivity : AppCompatActivity() {
         )
             Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
         else {
-            if (emailAux.text.toString()
-                    .contains("@")
-            ) {
+            if (emailAux.text.toString().isValidEmail()) {
 
                 mUserRepository.createUserWithEmailPassword(
                     emailAux.text.toString(),
@@ -157,17 +152,12 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
-
-
                     }
                     if (error != null) {
                         Toast.makeText(this, "Erro ao criar usuario", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }
