@@ -3,15 +3,14 @@ package com.example.kdmeudinheiro.view
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
+import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.pieChart.PieChartClass
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,8 +32,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         loadViewModels()
         loadComponents()
         viewModel.userLoged()
-
-
     }
 
     fun loadViewModels() {
@@ -64,11 +61,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     "Sobras " + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
             binding.tvOutcome.text = "gastos totais: $it"
         })
-        viewModel.totalBills.observe(viewLifecycleOwner, {
-            binding.billChartFromInclude.textViewTotalOfBills.text =
-                "Total de contas: ${it.toString()}"
-            binding.billChartFromInclude.textViewBillToPay.text = "Total há pagar: ${it.toString()}"
-        })
+
     }
 
     fun loadComponents() {
@@ -79,6 +72,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 viewModel.getIncome(userId)
             }
         }
+        loadChart()
+    }
 
+    private fun loadChart() {
+        PieChartClass(requireView()).loadChart()
     }
 }
