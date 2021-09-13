@@ -89,6 +89,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewBillExpireDate"
                 tools:text="Valor da conta" />
 
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:text="PG"
+                android:visibility="invisible"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

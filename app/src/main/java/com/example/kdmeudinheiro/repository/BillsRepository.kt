@@ -68,7 +68,7 @@ class BillsRepository @Inject constructor(
                     it.data["key_type"] as String,
                     it.data["key_name"] as String,
                     it.data["key_expiredate"] as String,
-                    it.data["key_status_paid"] as? Int?
+                    (it.data["key_status_paid"] as? String?)?.toInt()
                 )
             )
         }
