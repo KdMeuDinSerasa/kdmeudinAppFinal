@@ -85,14 +85,13 @@ class MainViewModel @Inject constructor(
 
     fun getOutcome(userId: String) {
         var outCome = 0.0
-        mBillsRepository.getBills(userId) { listBills, errorMesage ->
+        viewModelScope.launch {
+            val listBills = mBillsRepository.getBills(userId)
             listBills?.forEach {
                 outCome += it.price.toDouble()
-
+                getTotalOfBills(listBills)
+                _outCome.value = outCome
             }
-            getTotalOfBills(listBills)
-            _outCome.value = outCome
-            if (errorMesage != null) _mError.value = errorMesage
         }
     }
 

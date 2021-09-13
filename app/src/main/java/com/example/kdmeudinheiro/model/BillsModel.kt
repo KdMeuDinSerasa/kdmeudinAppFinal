@@ -6,5 +6,6 @@ data class BillsModel(
     val price: String,
     val type_bill: String,
     val name_bill: String,
-    val expire_date: String
+    val expire_date: String,
+    var status: Int?
 )
