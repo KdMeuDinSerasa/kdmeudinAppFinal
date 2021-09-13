@@ -10,17 +10,15 @@ import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
-class PieChartClass(
-    val parentView: View,
-    var listBills: List<BillsModel>,
-    val income: IncomeModel
-) :
+class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val incomes: IncomeModel, val restValue: Float, val outComes: Float) :
     SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
@@ -30,13 +28,15 @@ class PieChartClass(
     fun loadChart() {
 
         binding = MainFragmentBinding.bind(parentView)
-        /* values x */
+
         val category = ArrayList<String>()
-        category.add("teste1")
-        category.add("teste2")
-        category.add("teste3")
-        category.add("teste4")
+        category.add("Emergenciais")
+        category.add("Lazer")
+        category.add("Fixas")
+        category.add("Lazer")
+        category.add("sobras")
         /* Aways create the same quantity */
+
 
 
         /* values colors*/
@@ -45,26 +45,60 @@ class PieChartClass(
         colors.add(Color.RED)
         colors.add(Color.GRAY)
         colors.add(Color.CYAN)
+        colors.add(Color.BLUE)
+
+        val pieChartEntry = ArrayList<Entry>()
+        val arrayDoubles = arrayListOf<Float>(0f, 0f, 0f, 0f)
+
+        listBills.forEach {
+            if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName){
+                val price = it.price.toFloat()* 100
+                val income = incomes.income.toFloat()* 100
+                val subtraction = income / price * 100
+                val multiply = subtraction / 10
+                arrayDoubles[0] =+ multiply * 0.1F
+            }
+            if (it.type_bill == TypesOfBills.LEISURE_BILLS.catName){
+                val price = it.price.toFloat()* 100
+                val income = incomes.income.toFloat() * 100
+                val subtraction = income / price * 100
+                val multiply = subtraction / 10
+                arrayDoubles[1] =+ multiply * 0.1F
+            }
+            if (it.type_bill == TypesOfBills.FIX_BILLS.catName){
+                val price = it.price.toFloat()* 100
+                val income = incomes.income.toFloat() * 100
+                val subtraction = income / price * 100
+                val multiply = subtraction / 10
+                arrayDoubles[2] =+ multiply * 0.1F
+            }
+            if (it.type_bill == TypesOfBills.MONTHLY_BILLS.catName){
+                val price = it.price.toFloat()* 100
+                val income = incomes.income.toFloat() * 100
+                val subtraction = income / price * 100
+                val multiply = subtraction / 10
+                arrayDoubles[3] =+ multiply * 0.1F
+            }
+        }
+        for (categories in arrayDoubles.withIndex()) {
+            pieChartEntry.add(Entry(categories.value, categories.index))
+        }
+
+        val income = incomes.income.toFloat()
+        val rest = restValue * 100 / income
+        pieChartEntry.add(Entry(rest, 5))
 
 
-        /*Load Chart*/
-        setData(category, listaTeste, colors)
-    }
-
-    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
-
-
-        /* mPie dataSet related */
-        val mpieDataset = PieDataSet(pieEntries, "dados")
+        val mpieDataset = PieDataSet(pieChartEntry, "dados")
         mpieDataset.colors = colors
-
 
         //  mpieDataset.setColors(colors);
         mpieDataset.valueTextSize = 16f
-
-        val dataSet = PieData(cat, mpieDataset)
+        mpieDataset.setValueFormatter(PercentFormatter())
+        val dataSet = PieData(category, mpieDataset)
 
         //bindings
+
         binding.chartIncluded.pieChart.data = dataSet
         binding.chartIncluded.pieChart.holeRadius = 2f
         binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
@@ -78,20 +112,31 @@ class PieChartClass(
         legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
         legend.textSize = 16f
 
+    }
+
+    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
+
 
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-        TODO("Not yet implemented")
+
+
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
-        TODO("Not yet implemented")
+        //  TODO("Not yet implemented")
     }
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
+    override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
+        // TODO("Not yet implemented")
+    }
 
+    override fun onNothingSelected() {
+        //   TODO("Not yet implemented")
+    }
 }

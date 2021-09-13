@@ -32,6 +32,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private lateinit var binding: MainFragmentBinding
     private var userId = ""
     private var incomeValue: IncomeModel? = null
+    private var restValue: Double? = null
+    private var outCome: Double? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,14 +70,23 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 binding.tvRest.text =
                     "Sobras " + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
             binding.tvOutcome.text = "gastos totais: $it"
+            outCome = it
+            restValue = (incomeValue?.income?.toDouble()?.minus(it!!.toDouble()))
+
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            loadChart(it)
+            PieChartClass(
+                requireView(),
+                it,
+                incomeValue!!,
+                restValue!!.toFloat(),
+                outCome!!.toFloat()
+            ).loadChart()
         })
 
     }
 
-    fun loadChart(listBills: List<BillsModel>){
+    fun loadChart(listBills: List<BillsModel>) {
 
         val category = ArrayList<String>()
         category.add("Emergenciais")
@@ -83,7 +94,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         category.add("Fixas")
         category.add("Lazer")
         /* Aways create the same quantity */
-
 
 
         /* values colors*/
@@ -94,19 +104,18 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         colors.add(Color.CYAN)
 
 
-
         val pieChartEntry = ArrayList<Entry>()
         val arrayDoubles = arrayListOf<Float>(0f, 0f, 0f, 0f)
 
         listBills.forEach {
             if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName)
-                arrayDoubles[0] =+ it.price.toFloat()
+                arrayDoubles[0] = +it.price.toFloat()
             if (it.type_bill == TypesOfBills.LEISURE_BILLS.catName)
-                arrayDoubles[1] =+ it.price.toFloat()
+                arrayDoubles[1] = +it.price.toFloat()
             if (it.type_bill == TypesOfBills.FIX_BILLS.catName)
-                arrayDoubles[2] =+ it.price.toFloat()
+                arrayDoubles[2] = +it.price.toFloat()
             if (it.type_bill == TypesOfBills.MONTHLY_BILLS.catName)
-                arrayDoubles[3] =+ it.price.toFloat()
+                arrayDoubles[3] = +it.price.toFloat()
         }
 
         for (categories in arrayDoubles.withIndex()) {
@@ -116,7 +125,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         val mpieDataset = PieDataSet(pieChartEntry, "dados")
         mpieDataset.colors = colors
-
 
 
         //  mpieDataset.setColors(colors);

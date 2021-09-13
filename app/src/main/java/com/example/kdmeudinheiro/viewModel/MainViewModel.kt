@@ -51,7 +51,6 @@ class MainViewModel @Inject constructor(
     fun userLoged() {
         mUserRepository.getSession().apply {
             _mFirebaseUser.value = this
-            getIncomeAndBills(this!!.uid)
         }
     }
 
@@ -95,6 +94,7 @@ class MainViewModel @Inject constructor(
                 outCome += it.price.toDouble()
             }
             _outCome.value = outCome
+            getIncomeAndBills(userId)
         }
     }
 
