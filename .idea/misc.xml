@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/bills_at_dashboard_layout.xml" value="0.39014373716632444" />
         <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.1246684350132626" />
