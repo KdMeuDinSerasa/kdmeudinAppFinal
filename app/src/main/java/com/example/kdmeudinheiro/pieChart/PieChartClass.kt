@@ -28,59 +28,71 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         binding = MainFragmentBinding.bind(parentView)
         /* values x */
         val category = ArrayList<String>()
-        category.add(TypesOfBills.FIX_BILLS.catName)
-        category.add(TypesOfBills.LEISURE_BILLS.catName)
-        category.add(TypesOfBills.MONTHLY_BILLS.catName)
-        category.add(TypesOfBills.EMERGENCY_BILL.catName)
+        category.add("teste1")
+        category.add("teste2")
+        category.add("teste3")
+        category.add("teste4")
         /* Aways create the same quantity */
+
+        val listaTeste = arrayListOf<Entry>()
+        listaTeste.add(Entry(22f, 0))
+        listaTeste.add(Entry(22f, 1))
+        listaTeste.add(Entry(22f, 2))
+        listaTeste.add(Entry(22f, 3))
 
         /* values colors*/
         val colors = java.util.ArrayList<Int>()
         colors.add(Color.GREEN)
         colors.add(Color.RED)
         colors.add(Color.GRAY)
-        colors.add(Color.BLUE)
+        colors.add(Color.CYAN)
 
 
-        val pieChartEntry = ArrayList<Entry>()
-        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
-        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
-        listBills?.map { bills ->
-            when (bills.type_bill) {
-                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                else -> null
-            }
-        }
-        for (categories in arrayDoubles.withIndex()) {
-            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
-        }
+//        val pieChartEntry = ArrayList<Entry>()
+//        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
+//        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
+//        listBills?.map { bills ->
+//            when (bills.type_bill) {
+//                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                else -> null
+//            }
+//        }
+//        for (categories in arrayDoubles.withIndex()) {
+//            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
+//        }
         print("yuhu")
 
         /*Load Chart*/
-        setData(category, pieChartEntry, colors)
+        setData(category, listaTeste, colors)
     }
 
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
 
+
+
+
         /* mPie dataSet related */
-        val mpieDataset = PieDataSet(pieEntries, null)
-        var dataSet = PieData(cat, mpieDataset)
-        mpieDataset.setColors(colors)
+        val mpieDataset = PieDataSet(pieEntries, "dados")
+        mpieDataset.colors = colors
+
+
 
         //  mpieDataset.setColors(colors);
         mpieDataset.valueTextSize = 16f
 
+        val dataSet = PieData(cat, mpieDataset)
+
         //bindings
         binding.chartIncluded.pieChart.data = dataSet
         binding.chartIncluded.pieChart.holeRadius = 2f
-        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
-        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
+//        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
+//        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
         binding.chartIncluded.pieChart.setDescription(null)
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
-        binding.chartIncluded.pieChart.elevation = 50f
+//        binding.chartIncluded.pieChart.elevation = 50f
 
 
         val legend: Legend = binding.chartIncluded.pieChart.getLegend()
