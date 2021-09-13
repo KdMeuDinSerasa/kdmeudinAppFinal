@@ -41,5 +41,8 @@ class BillsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         if (bill.status == 1){
             binding.tvStatus.visibility = View.VISIBLE
         }
+        if (bill.status == 0){
+            binding.tvStatus.visibility = View.GONE
+        }
     }
 }
