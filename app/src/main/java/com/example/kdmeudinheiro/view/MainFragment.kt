@@ -61,6 +61,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     "Sobras " + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
             binding.tvOutcome.text = "gastos totais: $it"
         })
+        viewModel.billsPercentage.observe(viewLifecycleOwner, {
+            PieChartClass(requireView(), it).loadChart()
+        })
 
     }
 
@@ -72,10 +75,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 viewModel.getIncome(userId)
             }
         }
-        loadChart()
-    }
 
-    private fun loadChart() {
-        PieChartClass(requireView()).loadChart()
     }
 }

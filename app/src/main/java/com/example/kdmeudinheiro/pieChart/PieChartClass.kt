@@ -2,9 +2,12 @@ package com.example.kdmeudinheiro.pieChart
 
 import android.view.View
 import android.widget.SeekBar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TypesOfBills
+import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
@@ -13,12 +16,15 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
 
-class PieChartClass(val parentView: View) : SeekBar.OnSeekBarChangeListener,
+class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
+    SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
     private lateinit var binding: MainFragmentBinding
 
+
     fun loadChart() {
+
         binding = MainFragmentBinding.bind(parentView)
         /* values x */
         val category = ArrayList<String>()
@@ -26,19 +32,15 @@ class PieChartClass(val parentView: View) : SeekBar.OnSeekBarChangeListener,
         category.add(TypesOfBills.MONTHLY_BILLS.catName)
         category.add(TypesOfBills.LEISURE_BILLS.catName)
         category.add(TypesOfBills.EMERGENCY_BILL.catName)
-
         /* Aways create the same quantity */
-        val pieChartEntry = ArrayList<Entry>()
-        pieChartEntry.add(Entry(23f, 0))
-        pieChartEntry.add(Entry(23f, 1))
-        pieChartEntry.add(Entry(23f, 2))
-        pieChartEntry.add(Entry(23f, 4))
+
+
         /*Load Chart*/
 
         setData(category, pieChartEntry)
     }
 
-    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>) {
+    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?) {
 
         val mpieDataset = PieDataSet(pieEntries, null)
         var dataSet = PieData(cat, mpieDataset)
@@ -76,18 +78,18 @@ class PieChartClass(val parentView: View) : SeekBar.OnSeekBarChangeListener,
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
-      //  TODO("Not yet implemented")
+        //  TODO("Not yet implemented")
     }
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
-       // TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
-       // TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
     override fun onNothingSelected() {
-     //   TODO("Not yet implemented")
+        //   TODO("Not yet implemented")
     }
 }

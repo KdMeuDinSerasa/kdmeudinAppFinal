@@ -4,16 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.github.mikephil.charting.data.Entry
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -37,8 +40,8 @@ class MainViewModel @Inject constructor(
     private var _outCome = MutableLiveData<Double?>()
     val outCome: LiveData<Double?> = _outCome
 
-    private var _totalBills = MutableLiveData<Int>()
-    var totalBills: LiveData<Int> = _totalBills
+    private var _billsPercentage = MutableLiveData<ArrayList<Entry>>()
+    val billsPercentage: LiveData<ArrayList<Entry>> = _billsPercentage
 
 
     fun logoutUser() {
@@ -48,6 +51,7 @@ class MainViewModel @Inject constructor(
     fun userLoged() {
         mUserRepository.getSession().apply {
             _mFirebaseUser.value = this
+            getIncomeAndBills(this!!.uid)
         }
     }
 
@@ -88,18 +92,51 @@ class MainViewModel @Inject constructor(
         mBillsRepository.getBills(userId) { listBills, errorMesage ->
             listBills?.forEach {
                 outCome += it.price.toDouble()
-
             }
-            getTotalOfBills(listBills)
             _outCome.value = outCome
-            if (errorMesage != null) _mError.value = errorMesage
         }
     }
 
-    fun getTotalOfBills(bills: List<BillsModel>?) {
-        bills?.size.let { billsSize ->
-            _totalBills.value = billsSize
+    fun getIncomeAndBills(userId: String) {
+        viewModelScope.launch {
+            var income = mIncomeRepository.getIncome(userId)
+            var bills = mBillsRepository.getBills(userId)
+            getBills(bills, income)
         }
+    }
+
+    fun getBills(bills: List<BillsModel>?, income: IncomeModel?) {
+        val pieChartEntry = ArrayList<Entry>()
+        bills?.forEach { bills ->
+            val mIncome = income?.let { income -> income.income.toDouble() / 100 }
+            when (bills.type_bill) {
+                TypesOfBills.FIX_BILLS.catName -> pieChartEntry.add(
+                    Entry(
+                        (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat(),
+                        0
+                    )
+                )
+                TypesOfBills.LEISURE_BILLS.catName -> pieChartEntry.add(
+                    Entry(
+                        (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat(),
+                        1
+                    )
+                )
+                TypesOfBills.MONTHLY_BILLS.catName -> pieChartEntry.add(
+                    Entry(
+                        (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat(),
+                        2
+                    )
+                )
+                TypesOfBills.EMERGENCY_BILL.catName -> pieChartEntry.add(
+                    Entry(
+                        (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat(),
+                        3
+                    )
+                )
+            }
+        }
+        _billsPercentage.value = pieChartEntry
     }
 
 
