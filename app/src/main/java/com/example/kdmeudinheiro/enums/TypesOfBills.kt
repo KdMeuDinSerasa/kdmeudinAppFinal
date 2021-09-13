@@ -13,3 +13,8 @@ enum class TypesOfBills(val catName: String, val catId: Int) {
 
 
 }
+
+enum class StatusBills(val status: Int){
+    NOTPAID(0),
+    PAID(1)
+}
