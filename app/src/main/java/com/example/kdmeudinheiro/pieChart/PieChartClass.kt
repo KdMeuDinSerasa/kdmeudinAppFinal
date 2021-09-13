@@ -1,9 +1,7 @@
 package com.example.kdmeudinheiro.pieChart
 
 
-import android.R.attr
 import android.graphics.Color
-import android.os.Build
 import android.view.View
 import android.widget.SeekBar
 import com.example.kdmeudinheiro.R
@@ -15,124 +13,87 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.interfaces.datasets.IPieDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import android.R.attr.entries
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.formatter.PercentFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
-
-class PieChartClass(
-    val parentView: View,
-    var listBills: List<BillsModel>,
-    val income: IncomeModel
-) :
+class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val income: IncomeModel) :
     SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
     private lateinit var binding: MainFragmentBinding
-    private val chart: PieChart? = null
+
 
     fun loadChart() {
 
         binding = MainFragmentBinding.bind(parentView)
         /* values x */
         val category = ArrayList<String>()
-        category.add(TypesOfBills.FIX_BILLS.catName)
-        category.add(TypesOfBills.LEISURE_BILLS.catName)
-        category.add(TypesOfBills.MONTHLY_BILLS.catName)
-        category.add(TypesOfBills.EMERGENCY_BILL.catName)
+        category.add("teste1")
+        category.add("teste2")
+        category.add("teste3")
+        category.add("teste4")
         /* Aways create the same quantity */
 
+        val listaTeste = arrayListOf<Entry>()
+        listaTeste.add(Entry(22f, 0))
+        listaTeste.add(Entry(22f, 1))
+        listaTeste.add(Entry(22f, 2))
+        listaTeste.add(Entry(22f, 3))
+
         /* values colors*/
-//        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            binding.chartIncluded.pieChart.setHardwareAccelerationEnabled(false); }
-        val colors: ArrayList<Int> = ArrayList()
-
-        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-
-        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-
-        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-
-        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-
-        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-
-        colors.add(ColorTemplate.getHoloBlue())
+        val colors = java.util.ArrayList<Int>()
+        colors.add(Color.GREEN)
+        colors.add(Color.RED)
+        colors.add(Color.GRAY)
+        colors.add(Color.CYAN)
 
 
-        var pieChartEntry = mutableListOf<PieEntry>()
-        val arrayDoubles = arrayOf<Float>(0f, 0f, 0f, 0f)
-        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
-        listBills?.map { bills ->
-            when (bills.type_bill) {
-                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat()
-                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat()
-                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat()
-                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100).toFloat()
-                else -> null
-            }
-        }
-        for (categories in arrayDoubles.withIndex()) {
-            if (categories.index == 0) {
-                val value = categories.value.toFloat()
-                pieChartEntry.add(PieEntry(value, 0))
-            } else if (categories.index == 1) {
-                val value = categories.value.toFloat()
-                pieChartEntry.add(PieEntry(value, 1))
-            } else if (categories.index == 2) {
-                val value = categories.value.toFloat()
-                pieChartEntry.add(PieEntry(value, 2))
-            } else if (categories.index == 3) {
-                val value = categories.value.toFloat()
-                pieChartEntry.add(PieEntry(value, 3))
-            }
-        }
-        var pieChartEntry1 = mutableListOf<PieEntry>()
-        pieChartEntry1.add(PieEntry(20f, 1))
-        pieChartEntry1.add(PieEntry(30f, 2))
-        pieChartEntry1.add(PieEntry(20f, 3))
-        pieChartEntry1.add(PieEntry(20f, 4))
-        pieChartEntry1.add(PieEntry(20f, 5))
-
-
-
+//        val pieChartEntry = ArrayList<Entry>()
+//        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
+//        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
+//        listBills?.map { bills ->
+//            when (bills.type_bill) {
+//                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+//                else -> null
+//            }
+//        }
+//        for (categories in arrayDoubles.withIndex()) {
+//            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
+//        }
         print("yuhu")
 
         /*Load Chart*/
-        setData(category, pieChartEntry, colors)
+        setData(category, listaTeste, colors)
     }
 
-    private fun setData(
-        cat: ArrayList<String>,
-        pieEntries: List<PieEntry>?,
-        colors: List<Int>
-    ) {
+    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
+
+
+
 
         /* mPie dataSet related */
-        val mpieDataset = PieDataSet(pieEntries, null)
+        val mpieDataset = PieDataSet(pieEntries, "dados")
+        mpieDataset.colors = colors
 
-        val data = PieData(mpieDataset)
-        data.setValueFormatter(PercentFormatter())
-        mpieDataset.setColors(colors)
 
-        //mpieDataset.setColors(colors);
+
+        //  mpieDataset.setColors(colors);
         mpieDataset.valueTextSize = 16f
-        mpieDataset.setColors(colors)
+
+        val dataSet = PieData(cat, mpieDataset)
+
         //bindings
-        binding.chartIncluded.pieChart.data = data
+        binding.chartIncluded.pieChart.data = dataSet
         binding.chartIncluded.pieChart.holeRadius = 2f
-        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
-        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
+//        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
+//        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
         binding.chartIncluded.pieChart.setDescription(null)
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
-        binding.chartIncluded.pieChart.elevation = 50f
+//        binding.chartIncluded.pieChart.elevation = 50f
+
 
         val legend: Legend = binding.chartIncluded.pieChart.getLegend()
         legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
@@ -141,25 +102,24 @@ class PieChartClass(
 
     }
 
-
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-        TODO("Not yet implemented")
+
+
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
-        TODO("Not yet implemented")
+        //  TODO("Not yet implemented")
     }
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        TODO("Not yet implemented")
+    override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
+        // TODO("Not yet implemented")
     }
 
     override fun onNothingSelected() {
-        TODO("Not yet implemented")
+        //   TODO("Not yet implemented")
     }
-
 }

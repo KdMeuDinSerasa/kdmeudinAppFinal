@@ -98,6 +98,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
     fun getIncomeAndBills(userId: String) {
         viewModelScope.launch {
             var income = mIncomeRepository.getIncome(userId)
@@ -108,7 +109,8 @@ class MainViewModel @Inject constructor(
 
     fun getBills(bills: List<BillsModel>?, income: IncomeModel?) {
 
-       _billsPercentage.value = bills!!
+        _billsPercentage.value = bills!!
+
     }
 
 
