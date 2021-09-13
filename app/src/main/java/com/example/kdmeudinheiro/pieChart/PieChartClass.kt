@@ -16,7 +16,11 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
-class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val income: IncomeModel) :
+class PieChartClass(
+    val parentView: View,
+    var listBills: List<BillsModel>,
+    val income: IncomeModel
+) :
     SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
@@ -34,11 +38,6 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         category.add("teste4")
         /* Aways create the same quantity */
 
-        val listaTeste = arrayListOf<Entry>()
-        listaTeste.add(Entry(22f, 0))
-        listaTeste.add(Entry(22f, 1))
-        listaTeste.add(Entry(22f, 2))
-        listaTeste.add(Entry(22f, 3))
 
         /* values colors*/
         val colors = java.util.ArrayList<Int>()
@@ -48,23 +47,6 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         colors.add(Color.CYAN)
 
 
-//        val pieChartEntry = ArrayList<Entry>()
-//        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
-//        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
-//        listBills?.map { bills ->
-//            when (bills.type_bill) {
-//                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-//                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-//                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-//                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-//                else -> null
-//            }
-//        }
-//        for (categories in arrayDoubles.withIndex()) {
-//            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
-//        }
-        print("yuhu")
-
         /*Load Chart*/
         setData(category, listaTeste, colors)
     }
@@ -72,12 +54,9 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
 
 
-
-
         /* mPie dataSet related */
         val mpieDataset = PieDataSet(pieEntries, "dados")
         mpieDataset.colors = colors
-
 
 
         //  mpieDataset.setColors(colors);
@@ -88,11 +67,11 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         //bindings
         binding.chartIncluded.pieChart.data = dataSet
         binding.chartIncluded.pieChart.holeRadius = 2f
-//        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
-//        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
+        binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
+        binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
         binding.chartIncluded.pieChart.setDescription(null)
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
-//        binding.chartIncluded.pieChart.elevation = 50f
+        binding.chartIncluded.pieChart.elevation = 50f
 
 
         val legend: Legend = binding.chartIncluded.pieChart.getLegend()
@@ -103,23 +82,16 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
-
+        TODO("Not yet implemented")
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
-        //  TODO("Not yet implemented")
+        TODO("Not yet implemented")
     }
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
-        // TODO("Not yet implemented")
+        TODO("Not yet implemented")
     }
 
-    override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
-        // TODO("Not yet implemented")
-    }
 
-    override fun onNothingSelected() {
-        //   TODO("Not yet implemented")
-    }
 }
