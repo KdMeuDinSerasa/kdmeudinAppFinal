@@ -40,8 +40,8 @@ class MainViewModel @Inject constructor(
     private var _outCome = MutableLiveData<Double?>()
     val outCome: LiveData<Double?> = _outCome
 
-    private var _billsPercentage = MutableLiveData<ArrayList<Entry>>()
-    val billsPercentage: LiveData<ArrayList<Entry>> = _billsPercentage
+    private var _billsPercentage = MutableLiveData<List<BillsModel>>()
+    val billsPercentage: LiveData<List<BillsModel>> = _billsPercentage
 
 
     fun logoutUser() {
@@ -89,13 +89,15 @@ class MainViewModel @Inject constructor(
 
     fun getOutcome(userId: String) {
         var outCome = 0.0
-        mBillsRepository.getBills(userId) { listBills, errorMesage ->
+        viewModelScope.launch {
+            val listBills = mBillsRepository.getBills(userId)
             listBills?.forEach {
                 outCome += it.price.toDouble()
             }
             _outCome.value = outCome
         }
     }
+
 
     fun getIncomeAndBills(userId: String) {
         viewModelScope.launch {
@@ -106,22 +108,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun getBills(bills: List<BillsModel>?, income: IncomeModel?) {
-        val pieChartEntry = ArrayList<Entry>()
-        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
-        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
-        bills?.map { bills ->
-            when (bills.type_bill) {
-                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
-                else -> null
-            }
-        }
-        for (categories in arrayDoubles.withIndex()){
-            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
-        }
-       _billsPercentage.value = pieChartEntry
+
+        _billsPercentage.value = bills!!
+
     }
 
 

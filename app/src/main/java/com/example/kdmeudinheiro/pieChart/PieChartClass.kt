@@ -7,6 +7,8 @@ import android.widget.SeekBar
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TypesOfBills
+import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.model.IncomeModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
@@ -14,7 +16,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
-class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
+class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val income: IncomeModel) :
     SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
@@ -32,26 +34,43 @@ class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
         category.add(TypesOfBills.EMERGENCY_BILL.catName)
         /* Aways create the same quantity */
 
-
-        /*Load Chart*/
-
-        setData(category, pieChartEntry)
-    }
-
-    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?) {
-
-        /* mPie DATA SET related */
-        val mpieDataset = PieDataSet(pieEntries, null)
-        var dataSet = PieData(cat, mpieDataset)
+        /* values colors*/
         val colors = java.util.ArrayList<Int>()
         colors.add(Color.GREEN)
         colors.add(Color.RED)
         colors.add(Color.GRAY)
         colors.add(Color.BLUE)
-        mpieDataset.colors = colors
 
 
-        //  mpieDataset.setColors( IntArray(colors));
+        val pieChartEntry = ArrayList<Entry>()
+        val arrayDoubles = arrayOf<Double>(0.0, 0.0, 0.0, 0.0)
+        val mIncome = income?.let { income -> income.income.toDouble() / 100 }
+        listBills?.map { bills ->
+            when (bills.type_bill) {
+                TypesOfBills.FIX_BILLS.catName -> arrayDoubles[0] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+                TypesOfBills.LEISURE_BILLS.catName -> arrayDoubles[1] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+                TypesOfBills.MONTHLY_BILLS.catName -> arrayDoubles[2] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+                TypesOfBills.EMERGENCY_BILL.catName -> arrayDoubles[3] += (((bills.price.toDouble() / 100) - mIncome!!) * 100)
+                else -> null
+            }
+        }
+        for (categories in arrayDoubles.withIndex()) {
+            pieChartEntry.add(Entry(categories.value.toFloat(), categories.index))
+        }
+        print("yuhu")
+
+        /*Load Chart*/
+        setData(category, pieChartEntry, colors)
+    }
+
+    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
+
+        /* mPie dataSet related */
+        val mpieDataset = PieDataSet(pieEntries, null)
+        var dataSet = PieData(cat, mpieDataset)
+        mpieDataset.setColors(colors)
+
+        //  mpieDataset.setColors(colors);
         mpieDataset.valueTextSize = 16f
 
         //bindings
@@ -70,7 +89,6 @@ class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
 
 
     }
-
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
 

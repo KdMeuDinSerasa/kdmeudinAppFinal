@@ -62,7 +62,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             binding.tvOutcome.text = "gastos totais: $it"
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass(requireView(), it).loadChart()
+            PieChartClass(requireView(), it, incomeValue!!).loadChart()
         })
 
     }
