@@ -108,7 +108,13 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         } else if (type == 3) {
             observerEdit.onChanged(false)
 
-        } else viewModel.getAllBills(userId)
+        } else if (type == 4) {
+            viewModel.editBill(billFromCb)
+            viewModel.getAllBills(userId)
+            Snackbar.make(requireView(), "Conta Paga Com Sucesso", Snackbar.LENGTH_LONG)
+                .show()
+        }
+        else viewModel.getAllBills(userId)
     }
 
     companion object {

@@ -21,6 +21,7 @@ class BillsRepository @Inject constructor(
         map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
         map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
         map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
+        map.put(KeysDatabaseBills.STATUS.key, mBillsModel.status.toString())
 
         val taks = db.collection("table_account").add(map)
         taks.await()
@@ -35,6 +36,7 @@ class BillsRepository @Inject constructor(
         map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
         map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
         map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
+        map.put(KeysDatabaseBills.STATUS.key, mBillsModel.status.toString())
         val task = mBillsModel.id_bill?.let { db.collection("table_account").document(it).update(map) }
         if (task != null) {
             task.await()
@@ -52,28 +54,7 @@ class BillsRepository @Inject constructor(
     }
 
 
-    fun getBills(idUser: String, callback: (List<BillsModel>?, String?) -> Unit) {
-        db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
-            .addOnSuccessListener {
-                val accountList = mutableListOf<BillsModel>()
-                it.forEach {
-                    accountList.add(
-                        BillsModel(
-                            it.id,
-                            it.data["key_user"] as String,
-                            it.data["key_price"] as String,
-                            it.data["key_type"] as String,
-                            it.data["key_name"] as String,
-                            it.data["key_expiredate"] as String
-                        )
-                    )
-                }
-                callback(accountList, null)
-            }
-            .addOnFailureListener {
-                callback(null, it.message)
-            }
-    }
+
     suspend fun getBills(idUser: String): List<BillsModel>?{
         val task = db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
         val result = task.await()
@@ -86,7 +67,8 @@ class BillsRepository @Inject constructor(
                     it.data["key_price"] as String,
                     it.data["key_type"] as String,
                     it.data["key_name"] as String,
-                    it.data["key_expiredate"] as String
+                    it.data["key_expiredate"] as String,
+                    it.data["key_status_paid"] as? Int?
                 )
             )
         }

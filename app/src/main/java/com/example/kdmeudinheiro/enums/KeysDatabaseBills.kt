@@ -6,5 +6,6 @@ enum class KeysDatabaseBills(val key: String ) {
     PRICE("key_price"),
     TYPEBILL("key_type"),
     NAMEBILL("key_name"),
-    EXPIREDATE("key_expiredate")
+    EXPIREDATE("key_expiredate"),
+    STATUS("key_status_paid")
 }

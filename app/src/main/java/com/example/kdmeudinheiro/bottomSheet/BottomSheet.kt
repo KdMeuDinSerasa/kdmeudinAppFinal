@@ -7,6 +7,8 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.IncomeLayoutBinding
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
+import com.example.kdmeudinheiro.enums.KeysDatabaseBills
+import com.example.kdmeudinheiro.enums.StatusBills
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
@@ -80,7 +82,7 @@ class BottomSheet(
                         bottomSheetBinding.editTextInputBillExpireDate.text.toString()
 
                     val billObject =
-                        BillsModel(null, null, billPrice, selectedType, billName, billExpireDate)
+                        BillsModel(null, null, billPrice, selectedType, billName, billExpireDate, StatusBills.NOTPAID.status)
                     callback(billObject, 0)
                     bottomSheetDialog.dismiss()
 
@@ -117,7 +119,8 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            billDate
+                            billDate,
+                            StatusBills.NOTPAID.status
                         )
                     callback(billObject, 1)
                     bottomSheetDialog.dismiss()
@@ -132,7 +135,8 @@ class BottomSheet(
                 bottomSheetDialog.dismiss()
             }
             bottomSheetBinding.payBillButton.setOnClickListener {
-                //TODO
+                bill.status = StatusBills.PAID.status
+                callback(bill, 4)
                 bottomSheetDialog.dismiss()
             }
         }
