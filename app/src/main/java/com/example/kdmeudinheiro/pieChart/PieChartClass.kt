@@ -1,20 +1,18 @@
 package com.example.kdmeudinheiro.pieChart
 
+
+import android.graphics.Color
 import android.view.View
 import android.widget.SeekBar
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TypesOfBills
-import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.ColorTemplate
 
 class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
     SeekBar.OnSeekBarChangeListener,
@@ -29,8 +27,8 @@ class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
         /* values x */
         val category = ArrayList<String>()
         category.add(TypesOfBills.FIX_BILLS.catName)
-        category.add(TypesOfBills.MONTHLY_BILLS.catName)
         category.add(TypesOfBills.LEISURE_BILLS.catName)
+        category.add(TypesOfBills.MONTHLY_BILLS.catName)
         category.add(TypesOfBills.EMERGENCY_BILL.catName)
         /* Aways create the same quantity */
 
@@ -42,16 +40,18 @@ class PieChartClass(val parentView: View, var pieChartEntry: ArrayList<Entry>) :
 
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?) {
 
+        /* mPie DATA SET related */
         val mpieDataset = PieDataSet(pieEntries, null)
         var dataSet = PieData(cat, mpieDataset)
-        val colors: ArrayList<Int> = ArrayList()
-        for (c: Int in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-        for (c: Int in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-        for (c: Int in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-        for (c: Int in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-        for (c: Int in ColorTemplate.PASTEL_COLORS) colors.add(c)
-        colors.add(ColorTemplate.getHoloBlue())
+        val colors = java.util.ArrayList<Int>()
+        colors.add(Color.GREEN)
+        colors.add(Color.RED)
+        colors.add(Color.GRAY)
+        colors.add(Color.BLUE)
         mpieDataset.colors = colors
+
+
+        //  mpieDataset.setColors( IntArray(colors));
         mpieDataset.valueTextSize = 16f
 
         //bindings
