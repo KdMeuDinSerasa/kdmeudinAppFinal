@@ -1,9 +1,8 @@
 package com.example.kdmeudinheiro.pieChart
 
-
 import android.graphics.Color
 import android.view.View
-import android.widget.SeekBar
+
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TipType
@@ -26,7 +25,6 @@ class PieChartClass(
     val outComes: Float,
     val clickInterceptor: ChartClickInterceptor
 ) :
-    SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
     private lateinit var binding: MainFragmentBinding
@@ -107,31 +105,15 @@ class PieChartClass(
         binding.chartIncluded.pieChart.setDescription(null)
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
         binding.chartIncluded.pieChart.elevation = 50f
-        binding.chartIncluded.pieChart.legend.formToTextSpace = 15f
-
+        binding.chartIncluded.pieChart.legend.formToTextSpace = 20f
 
         val legend: Legend = binding.chartIncluded.pieChart.getLegend()
         legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
         legend.textSize = 16f
 
-
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
 
     }
-
-    override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
-
-    }
-
-    override fun onStartTrackingTouch(p0: SeekBar?) {
-        //  TODO("Not yet implemented")
-    }
-
-    override fun onStopTrackingTouch(p0: SeekBar?) {
-        // TODO("Not yet implemented")
-    }
-
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
         when (e?.xIndex) {
             0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)
