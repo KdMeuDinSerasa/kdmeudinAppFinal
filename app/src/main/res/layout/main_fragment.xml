@@ -5,16 +5,66 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_default"
     tools:context=".view.MainFragment">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MainFragment"
+    <include
+        android:id="@+id/chartIncluded"
+        layout="@layout/pie_chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="455dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRest" />
+
+
+    <TextView
+        android:id="@+id/incomeValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Valor"
+        android:textSize="24sp"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="@+id/addButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/incomeValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/incomeValue" />
+
+    <TextView
+        android:id="@+id/tvOutcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium_italic"
+        android:text="OutCome"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/incomeValue"
+        app:layout_constraintStart_toStartOf="@+id/incomeValue"
+        app:layout_constraintTop_toBottomOf="@+id/incomeValue" />
+
+    <TextView
+        android:id="@+id/tvRest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium_italic"
+        android:text="Rest"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvOutcome"
+        app:layout_constraintStart_toStartOf="@+id/tvOutcome"
+        app:layout_constraintTop_toBottomOf="@id/tvOutcome" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,27 +1,27 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.example.kdmeudinheiro.LoginActivity
+import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
-import com.example.kdmeudinheiro.databinding.MainFragmentBinding
-import com.example.kdmeudinheiro.model.UserModel
-import com.example.kdmeudinheiro.repository.UserRepository
-import com.example.kdmeudinheiro.view.MainFragment
 import com.example.kdmeudinheiro.viewModel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var mAppBarConfiguration: AppBarConfiguration
     lateinit var mNavController: NavController
@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
+        viewModel.userLoged()
+    }
+
+    fun updateUser(){
         viewModel.userLoged()
     }
 
@@ -70,6 +74,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 binding2 = HeaderDrawerBinding.bind(this)
                 binding2.userEmailLoged.text = it.email
                 binding2.userNameLoged.text = it.name
+
+                binding2.userAvatarDrawer.let {
+                    Glide.with(it)
+                        .load(R.drawable.man_png)
+                        .into(it)
+                }
             }
         })
 
@@ -90,12 +100,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.btnLogout) {
-            viewModel.logoutUser()
-            val initi = Intent(this, LoginActivity::class.java)
-            startActivity(initi)
+        //close menu when clicked
+        binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+        when(item.itemId){
+            R.id.btnLogout -> {
+                viewModel.logoutUser()
+                val initi = Intent(this, LoginActivity::class.java)
+                startActivity(initi)
+            }
+            R.id.btnUserPreferences -> {
+                mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
+            }
         }
-
         return true
     }
 }

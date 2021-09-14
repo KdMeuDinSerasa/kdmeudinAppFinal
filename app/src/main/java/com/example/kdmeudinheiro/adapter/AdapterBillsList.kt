@@ -38,6 +38,11 @@ class BillsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         binding.textViewBillNameList.text = "${itemView.context.getString(R.string.Bill_Name_label_list_card)} ${bill.name_bill}"
         binding.textViewBillExpireDate.text = "${itemView.context.getString(R.string.Bill_ExpireDate_label_list_card)} ${bill.expire_date}"
         binding.textViewBillPriceList.text = "${itemView.context.getString(R.string.Bill_Price_label_list_card)} ${bill.price.toString()}"
-
+        if (bill.status == 1){
+            binding.tvStatus.visibility = View.VISIBLE
+        }
+        if (bill.status == 0){
+            binding.tvStatus.visibility = View.GONE
+        }
     }
 }
