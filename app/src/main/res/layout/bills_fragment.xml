@@ -12,6 +12,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:contentDescription="@string/about_label_desc"
+        android:layout_marginBottom="@dimen/default_10dp_margin"
         android:src="@drawable/ic_baseline_help_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,6 +21,7 @@
         android:id="@+id/recyclerViewIdNoXML"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_10dp_margin"
         app:layout_constraintBottom_toTopOf="@+id/floatButtonAddBill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/About" />
