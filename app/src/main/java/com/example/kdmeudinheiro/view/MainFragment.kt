@@ -79,7 +79,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 requireView(),
                 it,
                 incomeValue!!,
-                restValue!!.toFloat(),
                 outCome!!.toFloat()
             ).loadChart()
         })

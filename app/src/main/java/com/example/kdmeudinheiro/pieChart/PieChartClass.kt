@@ -18,7 +18,12 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
-class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val incomes: IncomeModel, val restValue: Float, val outComes: Float) :
+class PieChartClass(
+    val parentView: View,
+    var listBills: List<BillsModel>,
+    val incomes: IncomeModel,
+    val outComes: Float
+) :
     SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
@@ -30,72 +35,66 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         binding = MainFragmentBinding.bind(parentView)
 
         val category = ArrayList<String>()
-        category.add("Emergenciais")
+        category.add("Emergencial")
         category.add("Lazer")
         category.add("Fixas")
-        category.add("Lazer")
+        category.add("Mensais")
         category.add("sobras")
         /* Aways create the same quantity */
 
 
-
         /* values colors*/
         val colors = java.util.ArrayList<Int>()
-        colors.add(Color.GREEN)
         colors.add(Color.RED)
-        colors.add(Color.GRAY)
+        colors.add(Color.GREEN)
+        colors.add(Color.YELLOW)
         colors.add(Color.CYAN)
-        colors.add(Color.BLUE)
+        colors.add(Color.GRAY)
 
         val pieChartEntry = ArrayList<Entry>()
         val arrayDoubles = arrayListOf<Float>(0f, 0f, 0f, 0f)
-
+        val priceArray = arrayListOf<Float>(0f, 0f, 0f, 0f)
         listBills.forEach {
-            if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName){
-                val price = it.price.toFloat()* 100
-                val income = incomes.income.toFloat()* 100
-                val subtraction = income / price * 100
-                val multiply = subtraction / 10
-                arrayDoubles[0] =+ multiply * 0.1F
+            if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName) {
+                priceArray[0] += it.price.toFloat()
             }
-            if (it.type_bill == TypesOfBills.LEISURE_BILLS.catName){
-                val price = it.price.toFloat()* 100
-                val income = incomes.income.toFloat() * 100
-                val subtraction = income / price * 100
-                val multiply = subtraction / 10
-                arrayDoubles[1] =+ multiply * 0.1F
+            if (it.type_bill == TypesOfBills.LEISURE_BILLS.catName) {
+                priceArray[1] += it.price.toFloat()
             }
-            if (it.type_bill == TypesOfBills.FIX_BILLS.catName){
-                val price = it.price.toFloat()* 100
-                val income = incomes.income.toFloat() * 100
-                val subtraction = income / price * 100
-                val multiply = subtraction / 10
-                arrayDoubles[2] =+ multiply * 0.1F
+            if (it.type_bill == TypesOfBills.FIX_BILLS.catName) {
+                priceArray[2] += it.price.toFloat()
             }
-            if (it.type_bill == TypesOfBills.MONTHLY_BILLS.catName){
-                val price = it.price.toFloat()* 100
-                val income = incomes.income.toFloat() * 100
-                val subtraction = income / price * 100
-                val multiply = subtraction / 10
-                arrayDoubles[3] =+ multiply * 0.1F
+            if (it.type_bill == TypesOfBills.MONTHLY_BILLS.catName) {
+                priceArray[3] += it.price.toFloat()
             }
         }
+
+        for (price in priceArray.withIndex()) {
+            val income = incomes.income.toFloat()
+            val final = 100 - (((income - price.value) / income) * 100)
+            arrayDoubles[price.index] = +final
+
+        }
+
         for (categories in arrayDoubles.withIndex()) {
             pieChartEntry.add(Entry(categories.value, categories.index))
         }
 
         val income = incomes.income.toFloat()
-        val rest = restValue * 100 / income
-        pieChartEntry.add(Entry(rest, 5))
+        val final = (((income - outComes) / income) * 100)
+        pieChartEntry.add(Entry(final, 5))
 
+        setData(category, pieChartEntry, colors)
+    }
 
-        val mpieDataset = PieDataSet(pieChartEntry, "dados")
+    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
+
+        //mpie data set related.
+        val mpieDataset = PieDataSet(pieEntries, null)
         mpieDataset.colors = colors
-
-        //  mpieDataset.setColors(colors);
         mpieDataset.valueTextSize = 16f
         mpieDataset.setValueFormatter(PercentFormatter())
-        val dataSet = PieData(category, mpieDataset)
+        val dataSet = PieData(cat, mpieDataset)
 
         //bindings
 
@@ -111,11 +110,6 @@ class PieChartClass(val parentView: View, var listBills: List<BillsModel>, val i
         val legend: Legend = binding.chartIncluded.pieChart.getLegend()
         legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
         legend.textSize = 16f
-
-    }
-
-    private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
-
 
     }
 
