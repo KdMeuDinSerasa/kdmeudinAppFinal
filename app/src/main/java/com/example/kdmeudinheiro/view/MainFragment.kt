@@ -85,12 +85,17 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     }
 
-
-    fun loadComponents() {
+ private fun loadComponents() {
         binding.addButton.setOnClickListener {
             bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
-                var mIncome = IncomeModel(null, incomeFound.toString(), userId)
-                viewModel.addIncome(mIncome)
+                val mIncome = IncomeModel(null, incomeFound.toString(), userId)
+                if (incomeValue == null)
+                    viewModel.addIncome(mIncome)
+                else{
+                    incomeValue!!.income = incomeFound.toString()
+                    viewModel.editIncome(incomeValue!!)
+                }
+
                 viewModel.getIncome(userId)
             }
         }
