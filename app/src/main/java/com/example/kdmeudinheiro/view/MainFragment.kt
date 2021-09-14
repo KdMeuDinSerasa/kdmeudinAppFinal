@@ -1,6 +1,5 @@
 package com.example.kdmeudinheiro.view
 
-import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,18 +10,14 @@ import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.example.kdmeudinheiro.R
-import com.example.kdmeudinheiro.enums.TypesOfBills
-import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
+import com.example.kdmeudinheiro.enums.TipType
+import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.pieChart.PieChartClass
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.formatter.PercentFormatter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.main_fragment) {
+class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -75,23 +70,18 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass(
-                requireView(),
-                it,
-                incomeValue!!,
-                outCome!!.toFloat()
-            ).loadChart()
+            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
         })
 
     }
 
-    fun loadComponents() {
+    private fun loadComponents() {
         binding.addButton.setOnClickListener {
             bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
-                var mIncome = IncomeModel(null, incomeFound.toString(), userId)
+                val mIncome = IncomeModel(null, incomeFound.toString(), userId)
                 if (incomeValue == null)
                     viewModel.addIncome(mIncome)
-                else{
+                else {
                     incomeValue!!.income = incomeFound.toString()
                     viewModel.editIncome(incomeValue!!)
                 }
@@ -100,5 +90,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
         }
 
+    }
+
+    override fun interceptClick(index: Int) {
+        BottomSheetTips(requireView(), TipType.TIP_BILL_CATEGORY).loadTip()
+        /* */
     }
 }
