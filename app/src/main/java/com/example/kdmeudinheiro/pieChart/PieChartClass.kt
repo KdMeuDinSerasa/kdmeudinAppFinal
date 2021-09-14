@@ -22,7 +22,6 @@ class PieChartClass(
     val parentView: View,
     var listBills: List<BillsModel>,
     val incomes: IncomeModel,
-    val restValue: Float,
     val outComes: Float
 ) :
     SeekBar.OnSeekBarChangeListener,
@@ -81,12 +80,9 @@ class PieChartClass(
             pieChartEntry.add(Entry(categories.value, categories.index))
         }
 
-
         val income = incomes.income.toFloat()
         val final = (((income - outComes) / income) * 100)
         pieChartEntry.add(Entry(final, 5))
-
-
 
         setData(category, pieChartEntry, colors)
     }
@@ -138,4 +134,3 @@ class PieChartClass(
         //   TODO("Not yet implemented")
     }
 }
-
