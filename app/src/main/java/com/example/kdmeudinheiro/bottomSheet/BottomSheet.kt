@@ -7,14 +7,11 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.IncomeLayoutBinding
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
-import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.enums.StatusBills
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.BillsModel
-import com.example.kdmeudinheiro.model.IncomeModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 
@@ -46,14 +43,14 @@ class BottomSheet(
         )
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
-            val c = Calendar.getInstance()
+            val c = Calendar.getInstance(Locale.US)
             val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH + 1)
+            val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
 
             val dpd = DatePickerDialog(
                 parentView.context,
-                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                { _, year, month, dayOfMonth ->
                     var mes = month + 1
                     bottomSheetBinding.editTextInputBillExpireDate.setText(" $dayOfMonth/$mes/$year")
                 },
