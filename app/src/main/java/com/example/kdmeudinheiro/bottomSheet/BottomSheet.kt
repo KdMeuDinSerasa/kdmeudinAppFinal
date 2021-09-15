@@ -199,17 +199,17 @@ class bottomSheetIncome(val parentView: View) {
 
 }
 
-class BottomSheetIncome(val parentView: View,  val typeClicked: Int){
+class BottomSheetChart(val parentView: View, val typeClicked: Int) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var bottomSheetBinding: TipChartBinding
 
     private lateinit var recyclerView: RecyclerView
-    private var adapter = AdapterChartTips(){
+    private var adapter = AdapterChartTips() {
 
     }
 
-    fun loadBottomSheet(){
+    fun loadBottomSheet() {
         /* setup bottom sheet */
         bottomSheetView = View.inflate(parentView.context, R.layout.tip_chart, null)
         bottomSheetDialog = BottomSheetDialog(parentView.context)
@@ -223,29 +223,76 @@ class BottomSheetIncome(val parentView: View,  val typeClicked: Int){
         recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
         recyclerView.adapter = adapter
 
-        val listOfFixBills = mutableListOf<Articles>()
-        listOfFixBills.add(Articles("poupa din", "https://clubedovalor.com.br/wp-content/uploads/2015/11/Como-Economizar-Dinheiro.jpg", "https://clubedovalor.com.br/economizar-dinheiro/"))
-        listOfFixBills.add(Articles("Creditas", "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90", "https://www.creditas.com/exponencial/como-economizar-dinheiro/"))
-        val listOfLeisure = mutableListOf<Articles>()
+        var listOfFixBills = mutableListOf<Articles>()
+        listOfFixBills.add(
+            Articles(
+                "poupa din",
+                "https://clubedovalor.com.br/wp-content/uploads/2015/11/Como-Economizar-Dinheiro.jpg",
+                "https://clubedovalor.com.br/economizar-dinheiro/"
+            )
+        )
+        listOfFixBills.add(
+            Articles(
+                "Creditas",
+                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
+                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
+            )
+        )
+        var listOfLeisure = mutableListOf<Articles>()
+        listOfLeisure.add(
+            Articles(
+                "Suno",
+                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
+                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
+            )
+        )
+        listOfLeisure.add(
+            Articles(
+                "Ricconet",
+                "https://riconnect.rico.com.vc/wp-content/uploads/sites/4/2021/05/como-economizar-dinheiro.jpg, ",
+                "https://riconnect.rico.com.vc/blog/como-economizar-dinheiro"
+            )
+        )
+        var listOfEmergency = mutableListOf<Articles>()
+        listOfEmergency.add(
+            Articles(
+                "Guia Bolso",
+                "https://blog.guiabolso.com.br/wp-content/uploads/2021/03/GB_ImgGen_Investimento_SacodeDinheiro-1140x855.jpg",
+                "https://blog.guiabolso.com.br/50-dicas-para-aprender-como-economizar-dinheiro/"
+            )
+        )
+        listOfEmergency.add(
+            Articles(
+                "Mag",
+                "https://magportalmagprdstg.blob.core.windows.net/public/2019/06/Como-guardar-dinheiro-todo-mês.jpg",
+                "https://mag.com.br/blog/educacao-financeira/artigo/como-guardar-dinheiro-todo-mes-6-dicas-essenciais"
+            )
+        )
+        var listOfMonthlys = mutableListOf<Articles>()
+        listOfMonthlys.add(
+            Articles(
+                "Quero Fica Rico",
+                "https://queroficarrico.com/blog/wp-content/uploads/2016/03/foto-rafael-seabra-quero-ficar-rico.png",
+                "https://queroficarrico.com/blog/investir-dinheiro/"
+            )
+        )
 
 
         /* filter to show based at parameter */
-        if(typeClicked ==  4 /* fix */){
-            bottomSheetBinding.textViewTipChart.text = TODO()
+        if (typeClicked == 4 /* fix */) {
+            bottomSheetBinding.textViewTipChart.text = "Fixas"
             adapter.update(listOfFixBills)
+        } else if (typeClicked == 5 /* leisure */) {
+            bottomSheetBinding.textViewTipChart.text = "Lazer"
+            adapter.update(listOfLeisure)
+        } else if (typeClicked == 6 /* emergency */) {
+            bottomSheetBinding.textViewTipChart.text = "Emergenciais"
+            adapter.update(listOfEmergency)
+        } else if (typeClicked == 7 /* monthly */) {
+            bottomSheetBinding.textViewTipChart.text = "Mensais"
+            adapter.update(listOfMonthlys)
+        } else {
         }
-        else if (typeClicked == 5 /* leisure */){
-            bottomSheetBinding.textViewTipChart.text = TODO()
-            adapter.update(listOfFixBills)
-        }
-        else if (typeClicked == 6 /* emergency */){
-            bottomSheetBinding.textViewTipChart.text = TODO()
-        }
-        else if (typeClicked == 7 /* monthly */){
-            bottomSheetBinding.textViewTipChart.text = TODO()
-            adapter.update(listOfFixBills)
-        }
-        else {}
     }
 }
 
