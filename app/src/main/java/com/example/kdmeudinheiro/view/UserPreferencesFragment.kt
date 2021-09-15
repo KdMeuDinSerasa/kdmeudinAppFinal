@@ -50,13 +50,30 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                 viewModel.getUserById(it.uid)
             }
         })
-        viewModel.mUserModel.observe(viewLifecycleOwner, {
-            mUserModel = it
+        viewModel.mUserModel.observe(viewLifecycleOwner, { userDetails ->
+            mUserModel = userDetails
             binding.tvUserEmail.text = mUserModel.email
             binding.tvUserName.text = mUserModel.name
+            if (userDetails.img == null) {
+                binding.userAvatarUserPrefs.let {
+                    Glide.with(it)
+                        .load(R.drawable.man_png)
+                        .into(it)
+                }
+            }
+            else{
+                binding.userAvatarUserPrefs.let {
+                    Glide.with(it)
+                        .load(mUserModel.img)
+                        .into(it)
+                }
+            }
         })
         viewModel.imgUser.observe(viewLifecycleOwner, {
-            Glide.with(requireContext()).load(it).into(binding.userAvatarUserPrefs)
+            mUserModel.img = it.toString()
+            viewModel.editUser(mUserModel)
+            viewModel.userLoged()
+            (requireActivity() as? MainActivity?)?.updateUser()
         })
 
     }

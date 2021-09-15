@@ -78,7 +78,8 @@ class UserRepository @Inject constructor(
                 it.id,
                 it.data["user_email"] as String,
                 "",
-                it.data["user_name"] as String
+                it.data["user_name"] as String,
+                it.data["user_avatar"] as? String?
             )
         }
         return mUserModel
@@ -108,6 +109,7 @@ class UserRepository @Inject constructor(
         val map = mutableMapOf<String , Any>()
         map.put(KeysDatabaseUser.EMAIL.key, mUserModel.email)
         map.put(KeysDatabaseUser.NAME.key, mUserModel.name)
+        mUserModel.img?.let { map.put(KeysDatabaseUser.IMGUSER.key, it) }
         val task = db.collection("table_user").document(mUserModel.id).update(map)
         task.await()
         return true
