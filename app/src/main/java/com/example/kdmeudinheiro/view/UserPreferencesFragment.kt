@@ -68,6 +68,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                         .into(it)
                 }
             }
+            binding.progressBar.visibility = View.INVISIBLE
         })
         viewModel.imgUser.observe(viewLifecycleOwner, {
             mUserModel.img = it.toString()
@@ -99,6 +100,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         if (requestCode == 2 && data!= null && resultCode == RESULT_OK){
             imgUri = data.data!!
             viewModel.uploadImgToFirebase(getFileExtension(imgUri), imgUri)
+            binding.progressBar.visibility = View.VISIBLE
 
         }
     }
