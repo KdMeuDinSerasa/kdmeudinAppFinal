@@ -10,6 +10,7 @@ import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
@@ -93,7 +94,6 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     }
 
     override fun interceptClick(index: Int) {
-        BottomSheetTips(requireView(), TipType.TIP_BILL_CATEGORY).loadTip()
-        /* */
+        BottomSheetChart(requireView(), index).loadBottomSheet()
     }
 }
