@@ -238,7 +238,49 @@ class BottomSheetChart(val parentView: View, val typeClicked: Int) {
                 "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
             )
         )
+        listOfFixBills.add(
+            Articles(
+                "Creditas",
+                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
+                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
+            )
+        )
+        listOfFixBills.add(
+            Articles(
+                "Creditas",
+                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
+                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
+            )
+        )
+        listOfFixBills.add(
+            Articles(
+                "Creditas",
+                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
+                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
+            )
+        )
         var listOfLeisure = mutableListOf<Articles>()
+        listOfLeisure.add(
+            Articles(
+                "Suno",
+                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
+                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
+            )
+        )
+        listOfLeisure.add(
+            Articles(
+                "Suno",
+                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
+                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
+            )
+        )
+        listOfLeisure.add(
+            Articles(
+                "Suno",
+                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
+                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
+            )
+        )
         listOfLeisure.add(
             Articles(
                 "Suno",
