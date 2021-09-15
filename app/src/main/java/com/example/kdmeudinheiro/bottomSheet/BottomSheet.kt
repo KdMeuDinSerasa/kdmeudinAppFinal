@@ -7,6 +7,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.IncomeLayoutBinding
 import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
+import com.example.kdmeudinheiro.databinding.TipChartBinding
 import com.example.kdmeudinheiro.enums.StatusBills
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
@@ -79,7 +80,15 @@ class BottomSheet(
                         bottomSheetBinding.editTextInputBillExpireDate.text.toString()
 
                     val billObject =
-                        BillsModel(null, null, billPrice, selectedType, billName, billExpireDate, StatusBills.NOTPAID.status)
+                        BillsModel(
+                            null,
+                            null,
+                            billPrice,
+                            selectedType,
+                            billName,
+                            billExpireDate,
+                            StatusBills.NOTPAID.status
+                        )
                     callback(billObject, 0)
                     bottomSheetDialog.dismiss()
 
@@ -156,8 +165,6 @@ class BottomSheetTips(val parentView: View, val typeTip: TipType) {
             bottomSheetBinding.backButton.setOnClickListener {
                 bottomSheetDialog.dismiss()
             }
-        } else if (typeTip == TipType.TIP_INCOME) { /* TODO */
-        } else if (typeTip == TipType.TIP_CHART) {/* TODO */
         }
     }
 }
@@ -178,14 +185,40 @@ class bottomSheetIncome(val parentView: View) {
             if (!bottomSheetBinding.editTextIncome.text.toString().isNullOrBlank()) {
                 val income = bottomSheetBinding.editTextIncome.text.toString().toDouble()
                 callback(income)
-                 bottomSheetDialog.dismiss()
+                bottomSheetDialog.dismiss()
             } else {
-                 bottomSheetDialog.dismiss()
+                bottomSheetDialog.dismiss()
             }
         }
     }
 
 }
+
+class BottomSheetIncome(val parentView: View,  val typeClicked: Int){
+    private lateinit var bottomSheetView: View
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetBinding: TipChartBinding
+
+    fun loadBottomSheet(){
+        bottomSheetView = View.inflate(parentView.context, R.layout.tip_chart, null)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        bottomSheetBinding = TipChartBinding.bind(bottomSheetView)
+
+        //filter to show based at parameter
+        if(typeClicked ==  4 /* fix */){}
+        else if (typeClicked == 5 /* leisure */){}
+        else if (typeClicked == 6 /* emergency */){}
+        else if (typeClicked == 7 /* monthly */){}
+        else {}
+    }
+}
+
+// CHART_FIX(4),
+//    CHART_LEISURE(5),
+//    CHART_EMERGENCY(6),
+//    CHART_MONTHLY(7),
 
 
 
