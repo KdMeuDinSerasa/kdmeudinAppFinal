@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.text.DecimalFormat
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resumeWithException
 
@@ -35,3 +36,8 @@ suspend fun <T> Task<T>.await(): T? {
 
 fun String.isValidEmail() =
     !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+fun Double.formatCurrency():String {
+    val dec = DecimalFormat("#,###.00")
+    return "R$ ${dec.format(this)}"
+}
