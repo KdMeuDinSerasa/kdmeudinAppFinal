@@ -1,10 +1,13 @@
 package com.example.kdmeudinheiro.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
@@ -14,6 +17,7 @@ import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
+import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.pieChart.PieChartClass
 import com.example.kdmeudinheiro.utils.formatCurrency
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +78,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
         })
 
     }
@@ -97,6 +101,11 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     }
 
     override fun interceptClick(index: Int) {
-        BottomSheetChart(requireView(), index).loadBottomSheet()
+        BottomSheetChart(requireView(), index, this).loadBottomSheet()
+    }
+
+    override fun interceptSelectedArticle(article: Articles) {
+        val browser = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+        startActivity(browser)
     }
 }

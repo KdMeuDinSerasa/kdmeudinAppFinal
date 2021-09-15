@@ -19,6 +19,12 @@ import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
+import androidx.core.content.ContextCompat.startActivity
+
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat
+import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 
 
 class BottomSheet(
@@ -199,15 +205,17 @@ class bottomSheetIncome(val parentView: View) {
 
 }
 
-class BottomSheetChart(val parentView: View, val typeClicked: Int) {
+class BottomSheetChart(val parentView: View, val typeClicked: Int, val clickInterceptor: ChartClickInterceptor) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var bottomSheetBinding: TipChartBinding
 
     private lateinit var recyclerView: RecyclerView
     private var adapter = AdapterChartTips() {
-
+        clickInterceptor.interceptSelectedArticle(it)
     }
+
+
 
     fun loadBottomSheet() {
         /* setup bottom sheet */
@@ -219,10 +227,13 @@ class BottomSheetChart(val parentView: View, val typeClicked: Int) {
         /* setup recyclerview */
 
 
+
         recyclerView = bottomSheetBinding.recyclerViewIdTipChart
         recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
         recyclerView.adapter = adapter
 
+
+        /* mock lists */
         var listOfFixBills = mutableListOf<Articles>()
         listOfFixBills.add(
             Articles(
