@@ -1,18 +1,50 @@
 package com.example.kdmeudinheiro.repository
 
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
 import com.example.kdmeudinheiro.enums.KeysDatabaseUser
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.utils.await
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
 class UserRepository @Inject constructor(
     private val db: FirebaseFirestore,
-    private val UserControler: FirebaseAuth
+    private val UserControler: FirebaseAuth,
+    private val mFirestorage: FirebaseStorage
 ) {
+
+    private val root = mFirestorage.getReference("Image")
+    private val reference = mFirestorage.reference
+
+
+    fun uploadImgToFirebase(img: String, imgUri: Uri, callback: (Uri?, String?) -> Unit){
+        val fileRef = reference.child("${System.currentTimeMillis()}  .  $img")
+        fileRef.putFile(imgUri)
+            .addOnSuccessListener(object : OnSuccessListener<UploadTask.TaskSnapshot>{
+                override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
+                    fileRef.downloadUrl.addOnSuccessListener {
+                        callback(it, null)
+                    }
+                }
+            })
+
+            .addOnFailureListener{
+                callback(null, it.message)
+            }
+
+
+    }
+
 
 
     fun createUserWithEmailPassword(email: String, password: String, callback: (FirebaseUser?, String?) -> Unit) {
