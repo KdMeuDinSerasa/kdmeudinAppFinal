@@ -15,6 +15,7 @@ import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.pieChart.PieChartClass
+import com.example.kdmeudinheiro.utils.formatCurrency
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,10 +63,12 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         viewModel.outCome.observe(viewLifecycleOwner, {
             if (incomeValue == null)
                 binding.tvRest.text = "Sobras 0"
-            else
-                binding.tvRest.text =
-                    "Sobras " + (incomeValue?.income?.toDouble()?.minus(it!!.toDouble())).toString()
-            binding.tvOutcome.text = "gastos totais: $it"
+            else{
+                val sum = incomeValue?.income?.toDouble()?.minus(it!!.toDouble())
+                binding.tvRest.text = "Sobras: ${sum?.formatCurrency()}"
+            }
+
+            binding.tvOutcome.text = "Gastos totais: ${it?.formatCurrency()}"
             outCome = it
             restValue = (incomeValue?.income?.toDouble()?.minus(it!!.toDouble()))
 
