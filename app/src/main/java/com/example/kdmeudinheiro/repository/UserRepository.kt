@@ -28,15 +28,16 @@ class UserRepository @Inject constructor(
 
 
     fun uploadImgToFirebase(img: String, imgUri: Uri, callback: (Uri?, String?) -> Unit){
-        val fileRef = reference.child("${System.currentTimeMillis()}  .  $img")
+        val fileRef = reference.child("${System.currentTimeMillis()}.$img")
         fileRef.putFile(imgUri)
-            .addOnSuccessListener(object : OnSuccessListener<UploadTask.TaskSnapshot>{
-                override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
-                    fileRef.downloadUrl.addOnSuccessListener {
-                        callback(it, null)
-                    }
+            .addOnSuccessListener {
+                fileRef.downloadUrl.addOnSuccessListener {
+                    callback(it, null)
                 }
-            })
+                    .addOnFailureListener {
+                        callback(null, it.message)
+                    }
+            }
 
             .addOnFailureListener{
                 callback(null, it.message)
