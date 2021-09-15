@@ -82,11 +82,6 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         binding.btnEdit.setOnClickListener {
             editDialog()
         }
-//        binding.userAvatarUserPrefs.let {
-//            Glide.with(it)
-//                .load(R.drawable.man_png)
-//                .into(it)
-//        }
         binding.userAvatarUserPrefs.setOnClickListener {
             userLoadImg()
         }
