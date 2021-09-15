@@ -10,7 +10,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ItemListChartBinding
 import com.example.kdmeudinheiro.model.Articles
 
-class AdapterChartTips(val onClickItem: (Articles) -> Unit) :
+class AdapterChartTips( val onClickItem: (Articles) -> Unit) :
     RecyclerView.Adapter<ChartTipsViewHolder>() {
 
     private val listOfArticles = mutableListOf<Articles>()
@@ -24,7 +24,9 @@ class AdapterChartTips(val onClickItem: (Articles) -> Unit) :
     override fun onBindViewHolder(holder: ChartTipsViewHolder, position: Int) {
         listOfArticles[position].apply {
             holder.bind(this)
+            holder.itemView.setOnClickListener { onClickItem(this) }
         }
+
     }
 
     override fun getItemCount(): Int = listOfArticles.size
