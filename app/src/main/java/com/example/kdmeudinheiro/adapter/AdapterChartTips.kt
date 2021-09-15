@@ -29,6 +29,11 @@ class AdapterChartTips(val onClickItem: (Articles) -> Unit) :
 
     override fun getItemCount(): Int = listOfArticles.size
 
+    fun update(newList: List<Articles>) {
+        listOfArticles.clear()
+        listOfArticles.addAll(newList)
+        notifyDataSetChanged()
+    }
 }
 
 class ChartTipsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
