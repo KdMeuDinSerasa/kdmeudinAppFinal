@@ -40,7 +40,8 @@ class LoginViewModel @Inject constructor(
                     firebaseUser.uid,
                     email,
                     password,
-                    name
+                    name,
+                    null
                 )
                 viewModelScope.launch {
                     var result = mUserRepository.addUser(mUser)

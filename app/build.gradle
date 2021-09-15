@@ -41,6 +41,8 @@ android {
 dependencies {
     //hilt
     implementation "com.google.dagger:hilt-android:2.37"
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
     kapt "com.google.dagger:hilt-compiler:2.37"
 
     //Coroutines

@@ -69,16 +69,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun loadViewModels(){
-        viewModel.mUserModel.observe(this, {
+        viewModel.mUserModel.observe(this, { userDetails ->
             binding.drawerMenuMain.getHeaderView(0).apply {
                 binding2 = HeaderDrawerBinding.bind(this)
-                binding2.userEmailLoged.text = it.email
-                binding2.userNameLoged.text = it.name
-
-                binding2.userAvatarDrawer.let {
-                    Glide.with(it)
-                        .load(R.drawable.man_png)
-                        .into(it)
+                binding2.userEmailLoged.text = userDetails.email
+                binding2.userNameLoged.text = userDetails.name
+                if (userDetails.img == null) {
+                    binding2.userAvatarDrawer.let {
+                        Glide.with(it)
+                            .load(R.drawable.man_png)
+                            .into(it)
+                    }
+                }
+                else{
+                    binding2.userAvatarDrawer.let {
+                        Glide.with(it)
+                            .load(userDetails.img)
+                            .into(it)
+                    }
                 }
             }
         })
