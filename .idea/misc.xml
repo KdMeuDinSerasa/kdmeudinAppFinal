@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/item_list_chart.xml" value="0.17604166666666668" />
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_bill_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_chart.xml" value="0.2758152173913043" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_default.xml" value="0.13385416666666666" />
