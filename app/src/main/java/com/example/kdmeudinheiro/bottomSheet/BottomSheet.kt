@@ -200,17 +200,27 @@ class BottomSheetIncome(val parentView: View,  val typeClicked: Int){
     private lateinit var bottomSheetBinding: TipChartBinding
 
     fun loadBottomSheet(){
+        /* setup bottom sheet */
         bottomSheetView = View.inflate(parentView.context, R.layout.tip_chart, null)
         bottomSheetDialog = BottomSheetDialog(parentView.context)
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
         bottomSheetBinding = TipChartBinding.bind(bottomSheetView)
+        /* setup recyclerview */
 
-        //filter to show based at parameter
-        if(typeClicked ==  4 /* fix */){}
-        else if (typeClicked == 5 /* leisure */){}
-        else if (typeClicked == 6 /* emergency */){}
-        else if (typeClicked == 7 /* monthly */){}
+        /* filter to show based at parameter */
+        if(typeClicked ==  4 /* fix */){
+            bottomSheetBinding.textViewTipChart.text = TODO()
+        }
+        else if (typeClicked == 5 /* leisure */){
+            bottomSheetBinding.textViewTipChart.text = TODO()
+        }
+        else if (typeClicked == 6 /* emergency */){
+            bottomSheetBinding.textViewTipChart.text = TODO()
+        }
+        else if (typeClicked == 7 /* monthly */){
+            bottomSheetBinding.textViewTipChart.text = TODO()
+        }
         else {}
     }
 }
