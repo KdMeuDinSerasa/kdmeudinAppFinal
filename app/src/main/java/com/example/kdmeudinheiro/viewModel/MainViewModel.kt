@@ -66,7 +66,7 @@ class MainViewModel @Inject constructor(
     fun getIncome(userId: String) {
         viewModelScope.launch {
             _mIncomeModel.value = mIncomeRepository.getIncome(userId)
-            delay(2000)
+
         }
 
     }

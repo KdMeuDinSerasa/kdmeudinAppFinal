@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
@@ -33,7 +34,10 @@ class SplashActivity : AppCompatActivity() {
         if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false) == true){
             viewModelLogin.checkSession()
         } else
-            startActivity(Intent(this, LoginActivity::class.java))
+            Handler().postDelayed({
+                startActivity(Intent(this, LoginActivity::class.java))
+            }, 3000)
+
 
     }
     fun loadViewModels(){
@@ -44,7 +48,9 @@ class SplashActivity : AppCompatActivity() {
                     this.putString(KeysShared.USERID.key, it.uid)
                 }
                 viewModelMain.getUserById(it.uid)
-                viewModelMain.getIncome(it.uid)
+                Handler().postDelayed({
+                    viewModelMain.getIncome(it.uid)
+                }, 3000)
             } else startActivity(Intent(this, LoginActivity::class.java))
 
         })

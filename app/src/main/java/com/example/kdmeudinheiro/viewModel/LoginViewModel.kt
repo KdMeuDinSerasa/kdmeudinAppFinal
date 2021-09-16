@@ -8,6 +8,7 @@ import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,6 +47,7 @@ class LoginViewModel @Inject constructor(
                 viewModelScope.launch {
                     var result = mUserRepository.addUser(mUser)
                     _result.value = result
+
                 }
 
             }
