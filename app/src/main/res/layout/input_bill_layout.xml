@@ -77,13 +77,43 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
+    <!--    <Spinner-->
+    <!--        android:id="@+id/spinnerBillType"-->
+    <!--        android:layout_width="@dimen/default_0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBillExpireDate"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/textInputLayoutBillExpireDate"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillExpireDate" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerBillType"
         android:layout_width="@dimen/default_0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBillExpireDate"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayoutBillExpireDate"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillExpireDate" />
+        android:layout_margin="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:boxCornerRadiusBottomEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusBottomStart="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopEnd="@dimen/default_10dp_margin"
+        app:boxCornerRadiusTopStart="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillExpireDate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/spinnerExposed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:padding="16dp"
+            android:textSize="16sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBillButtom"
