@@ -52,7 +52,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
      */
     fun createNotification(title: String, message: String): Notification {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(message)
             .setContentIntent(createPendingIntent())
