@@ -14,6 +14,7 @@ import com.example.kdmeudinheiro.repository.UserRepository
 import com.github.mikephil.charting.data.Entry
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,6 +58,7 @@ class MainViewModel @Inject constructor(
     fun getUserById(id: String) {
         viewModelScope.launch {
             _mUserModel.value = mUserRepository.getUserById(id)
+            delay(3000)
         }
 
     }
@@ -64,6 +66,7 @@ class MainViewModel @Inject constructor(
     fun getIncome(userId: String) {
         viewModelScope.launch {
             _mIncomeModel.value = mIncomeRepository.getIncome(userId)
+
         }
 
     }
