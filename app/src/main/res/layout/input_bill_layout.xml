@@ -77,14 +77,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--    <Spinner-->
-    <!--        android:id="@+id/spinnerBillType"-->
-    <!--        android:layout_width="@dimen/default_0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBillExpireDate"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/textInputLayoutBillExpireDate"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBillExpireDate" />-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/spinnerBillType"
         android:layout_width="@dimen/default_0dp"
