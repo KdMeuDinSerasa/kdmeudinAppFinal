@@ -5,21 +5,26 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.databinding.ActivitySplashBinding
 import com.example.kdmeudinheiro.enums.KeysShared
+import com.example.kdmeudinheiro.services.NotificationHandler
 import com.example.kdmeudinheiro.view.MainActivity
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModelLogin: LoginViewModel
     private lateinit var viewModelMain: MainViewModel
+    @Inject
+    lateinit var mNotificationHandler: NotificationHandler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +35,9 @@ class SplashActivity : AppCompatActivity() {
         viewModelMain = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
 
+
         loadViewModels()
+
         if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false)){
             viewModelLogin.checkSession()
         } else

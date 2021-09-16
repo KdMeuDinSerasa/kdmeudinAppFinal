@@ -1,9 +1,11 @@
 package com.example.kdmeudinheiro.di
 
 import android.content.ContentResolver
+import android.content.Context
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.services.NotificationHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -34,6 +36,10 @@ object HiltModule {
 
     @Provides
     fun getFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
+
+
+    @Provides
+    fun getNotificationHandler(@ApplicationContext context: Context): NotificationHandler = NotificationHandler(context)
 
 
 
