@@ -37,9 +37,9 @@ class PieChartClass(
         val category = ArrayList<String>()
         category.add("Emergencial")
         category.add("Lazer")
-        category.add("Fixas")
-        category.add("Mensais")
-        category.add("sobras")
+        category.add("Fixa")
+        category.add("Mensal")
+        category.add("Sobras")
         /* Aways create the same quantity */
 
 
@@ -105,11 +105,7 @@ class PieChartClass(
         binding.chartIncluded.pieChart.setDescription(null)
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
         binding.chartIncluded.pieChart.elevation = 50f
-        binding.chartIncluded.pieChart.legend.formToTextSpace = 20f
-
-        val legend: Legend = binding.chartIncluded.pieChart.getLegend()
-        legend.position = Legend.LegendPosition.ABOVE_CHART_CENTER
-        legend.textSize = 16f
+        binding.chartIncluded.pieChart.legend.isEnabled = false
 
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
 
@@ -120,9 +116,7 @@ class PieChartClass(
             1 -> clickInterceptor.interceptClick(TipType.CHART_LEISURE.type)
             2 -> clickInterceptor.interceptClick(TipType.CHART_FIX.type)
             3 -> clickInterceptor.interceptClick(TipType.CHART_MONTHLY.type)
-
         }
-
     }
 
     override fun onNothingSelected() {

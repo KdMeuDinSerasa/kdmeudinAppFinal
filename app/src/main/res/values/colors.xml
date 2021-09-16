@@ -11,4 +11,12 @@
     <color name="BlueForBg">#669CF5</color>
     <color name="YeallowForbg">#FAD65D</color>
     <color name="PinkForbg">#DEA2DD</color>
+
+    //Colors for graph legend
+    <color name="yellow_graph">#FFEB3B</color>
+    <color name="green_graph">#8BC34A</color>
+    <color name="cian_graph">#00BCD4</color>
+    <color name="red_graph">#F44336</color>
+    <color name="gray_graph">#494747</color>
+
 </resources>

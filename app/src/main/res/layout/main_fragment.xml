@@ -8,16 +8,29 @@
     android:background="@drawable/bg_default"
     tools:context=".view.MainFragment">
 
+    <View
+        android:id="@+id/view"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chartIncluded" />
+
     <include
         android:id="@+id/chartIncluded"
         layout="@layout/pie_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="455dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRest" />
 
+    <include
+        layout="@layout/graphic_legend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
         android:id="@+id/incomeValue"

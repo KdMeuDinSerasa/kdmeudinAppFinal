@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,53 +8,56 @@
     tools:context=".view.UserPreferencesFragment"
     android:background="@drawable/bg_default">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userAvatarUserPrefs"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="20dp">
+        android:gravity="center"
+        android:text="@string/username_label_prefs"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/userAvatarUserPrefs"
+        tools:layout_editor_absoluteX="7dp" />
 
-        <ImageView
-            android:id="@+id/userAvatarUserPrefs"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:contentDescription="@string/user_avatar_desc"
-            android:src="@color/purple_700" />
+    <TextView
+        android:id="@+id/tvUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="@string/useremail_label_prefs"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
-    </androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:text="@string/edit_info_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserEmail" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:elevation="10dp"
         android:visibility="invisible"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/username_label_prefs"
-        android:id="@+id/tvUserName"
-        android:gravity="center"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/useremail_label_prefs"
-        android:id="@+id/tvUserEmail"
-        android:gravity="center"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/edit_info_label"
-        android:id="@+id/btnEdit"/>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
