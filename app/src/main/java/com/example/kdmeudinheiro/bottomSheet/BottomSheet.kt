@@ -49,10 +49,10 @@ class BottomSheet(
             TypesOfBills.MONTHLY_BILLS.catName,
         )
 
-        bottomSheetBinding.spinnerBillType.adapter = ArrayAdapter(
+        bottomSheetBinding.spinnerExposed.setAdapter(ArrayAdapter(
             parentView.context, android.R.layout.simple_spinner_item,
-            listType
-        )
+            listType))
+        bottomSheetBinding.spinnerExposed.setText(listType[0])
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
             val c = Calendar.getInstance(Locale.US)
@@ -81,10 +81,11 @@ class BottomSheet(
             bottomSheetBinding.saveBillButtom.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
                     !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()
+                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()&&
+                    !bottomSheetBinding.spinnerExposed.text.isNullOrEmpty()
                 ) {
 
-                    val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
+                    val selectedType = bottomSheetBinding.spinnerExposed.text.toString()
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                     val billExpireDate =
@@ -122,9 +123,10 @@ class BottomSheet(
             bottomSheetBinding.editBillButton.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
                     !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()
+                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()&&
+                    !bottomSheetBinding.spinnerExposed.text.isNullOrEmpty()
                 ) {
-                    val selectedType = bottomSheetBinding.spinnerBillType.selectedItem.toString()
+                    val selectedType = bottomSheetBinding.spinnerExposed.text.toString()
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                     val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()

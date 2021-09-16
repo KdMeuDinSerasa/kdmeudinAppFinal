@@ -38,6 +38,7 @@ fun String.isValidEmail() =
     !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 fun Double.formatCurrency():String {
-    val dec = DecimalFormat("#,###.00")
+    ("##/##/####")
+    val dec = DecimalFormat("#,##0.00")
     return "R$ ${dec.format(this)}"
 }
