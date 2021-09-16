@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadViewModels()
-        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false) == true){
+        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false)){
             viewModelLogin.checkSession()
         } else
             Handler().postDelayed({

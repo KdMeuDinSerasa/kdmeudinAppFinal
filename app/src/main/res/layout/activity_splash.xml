@@ -7,4 +7,11 @@
     android:background="@drawable/bg_default"
     tools:context=".SplashActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_SyUX5x.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
