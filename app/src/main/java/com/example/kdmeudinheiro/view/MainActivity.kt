@@ -1,10 +1,12 @@
 package com.example.kdmeudinheiro.view
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -17,6 +19,7 @@ import com.example.kdmeudinheiro.LoginActivity
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
+import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +39,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
-        viewModel.userLoged()
+        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
     fun updateUser(){
@@ -110,9 +114,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         when(item.itemId){
             R.id.btnLogout -> {
                 viewModel.logoutUser()
+                mSharedPreferences.edit {
+                    this.putString(KeysShared.USERID.key, "")
+                    this.putBoolean(KeysShared.REMEMBERME.key, false)
+                }
                 val initi = Intent(this, LoginActivity::class.java)
                 startActivity(initi)
             }

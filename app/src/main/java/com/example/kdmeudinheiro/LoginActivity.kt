@@ -36,10 +36,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContentView(binding.root)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         loadViewModels()
-        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false))
-            viewModel.checkSession()
+
         loadComponents()
     }
 
@@ -57,12 +56,15 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.mFirebaseUserLoged.observe(this, {
             if (it != null) {
+                val mSharedPreferences =
+                    getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
                 if (binding.cbRememberMe.isChecked) {
-                    val mSharedPreferences =
-                        getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
                     mSharedPreferences.edit {
                         this.putBoolean(KeysShared.REMEMBERME.key, true)
                     }
+                }
+                mSharedPreferences.edit {
+                    this.putString(KeysShared.USERID.key, it.uid)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
             }

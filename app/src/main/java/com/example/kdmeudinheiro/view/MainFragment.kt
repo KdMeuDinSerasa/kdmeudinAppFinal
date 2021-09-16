@@ -1,10 +1,13 @@
 package com.example.kdmeudinheiro.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import com.example.kdmeudinheiro.LoginActivity
 import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.model.IncomeModel
@@ -12,6 +15,7 @@ import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
+import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.pieChart.PieChartClass
@@ -27,10 +31,11 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
-    private var userId = ""
+    private var userId: String = ""
     private var incomeValue: IncomeModel? = null
     private var restValue: Double? = null
     private var outCome: Double? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +43,13 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         binding = MainFragmentBinding.bind(view)
         loadViewModels()
         loadComponents()
-        viewModel.userLoged()
+        val mSharedPreferences =
+            requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
+        if (userId.isNullOrBlank()) {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        }
+        viewModel.getIncome(userId)
     }
 
     fun loadViewModels() {
@@ -50,11 +61,11 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         })
 
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
+
             if (it != null) {
                 binding.incomeValue.text = "Renda Mensal: ${it.income}"
                 incomeValue = it
                 viewModel.getOutcome(userId)
-
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
@@ -63,7 +74,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         viewModel.outCome.observe(viewLifecycleOwner, {
             if (incomeValue == null)
                 binding.tvRest.text = "Sobras 0"
-            else{
+            else {
                 val sum = incomeValue?.income?.toDouble()?.minus(it!!.toDouble())
                 binding.tvRest.text = "Sobras: ${sum?.formatCurrency()}"
             }
@@ -74,7 +85,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
         })
 
     }
