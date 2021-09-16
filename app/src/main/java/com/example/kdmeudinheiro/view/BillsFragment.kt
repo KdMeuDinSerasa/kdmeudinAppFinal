@@ -1,6 +1,7 @@
 package com.example.kdmeudinheiro.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,11 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kdmeudinheiro.LoginActivity
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.bottomSheet.BottomSheet
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
+import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
@@ -55,7 +58,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         loadBinding()
+        checkUser()
     }
+
 
     private fun loadBinding() {
         binding.floatButtonAddBill.setOnClickListener {
@@ -87,11 +92,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                     .show()
             }
         })
-        viewModel.user.observe(viewLifecycleOwner, {
-            viewModel.getAllBills(it.uid)
-            userId = it.uid
-        })
-        viewModel.getUserId()
+
     }
 
     private fun handlerForDialogResponse(billFromCb: BillsModel, type: Int?) {
@@ -119,5 +120,14 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     companion object {
         fun newInstance() = BillsFragment()
+    }
+    fun checkUser(){
+        val mSharedPreferences =
+            requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
+        if (userId.isNullOrBlank()) {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        }
+        viewModel.getAllBills(userId)
     }
 }

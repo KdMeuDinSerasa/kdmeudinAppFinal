@@ -43,22 +43,11 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         binding = MainFragmentBinding.bind(view)
         loadViewModels()
         loadComponents()
-        val mSharedPreferences =
-            requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
-        userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
-        if (userId.isNullOrBlank()) {
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-        }
-        viewModel.getIncome(userId)
+        checkUser()
     }
 
     fun loadViewModels() {
-        viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
-            if (it != null) {
-                userId = it.uid
-                viewModel.getIncome(userId)
-            }
-        })
+
 
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
 
@@ -109,5 +98,14 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
     override fun interceptClick(index: Int) {
         BottomSheetChart(requireView(), index).loadBottomSheet()
+    }
+    fun checkUser(){
+        val mSharedPreferences =
+            requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
+        if (userId.isNullOrBlank()) {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        }
+        viewModel.getIncome(userId)
     }
 }
