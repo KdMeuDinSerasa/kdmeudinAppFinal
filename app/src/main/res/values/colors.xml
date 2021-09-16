@@ -19,4 +19,8 @@
     <color name="red_graph">#F44336</color>
     <color name="gray_graph">#494747</color>
 
+    //Buttons colors
+    <color name="button_pay">#8BC34A</color>
+    <color name="button_delete">#F44336</color>
+
 </resources>
