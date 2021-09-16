@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.BillItemListBinding
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.utils.formatCurrency
 
 class AdapterBillsList(val onItemClick: (BillsModel) -> Unit): RecyclerView.Adapter<BillsViewHolder>() {
         private var listOfBills = mutableListOf<BillsModel>()
@@ -37,7 +38,8 @@ class BillsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(bill: BillsModel){
         binding.textViewBillNameList.text = "${itemView.context.getString(R.string.Bill_Name_label_list_card)} ${bill.name_bill}"
         binding.textViewBillExpireDate.text = "${itemView.context.getString(R.string.Bill_ExpireDate_label_list_card)} ${bill.expire_date}"
-        binding.textViewBillPriceList.text = "${itemView.context.getString(R.string.Bill_Price_label_list_card)} ${bill.price.toString()}"
+        var teste = bill.price.toDouble()
+        binding.textViewBillPriceList.text = "${itemView.context.getString(R.string.Bill_Price_label_list_card)} ${teste.formatCurrency()}"
         if (bill.status == 1){
             binding.tvStatus.visibility = View.VISIBLE
         }
