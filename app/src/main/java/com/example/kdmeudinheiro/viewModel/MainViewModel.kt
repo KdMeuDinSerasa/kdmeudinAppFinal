@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
@@ -13,7 +12,6 @@ import com.example.kdmeudinheiro.repository.ArticlesRepository
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
-import com.github.mikephil.charting.data.Entry
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -111,15 +109,20 @@ class MainViewModel @Inject constructor(
     fun getIncomeAndBills(userId: String) {
         viewModelScope.launch {
             var bills = mBillsRepository.getBills(userId)
-            var articles = mArticlesRepository.getArticles()
-            getBills(bills, articles)
+
+            getBills(bills)
         }
     }
 
-    fun getBills(bills: List<BillsModel>?, articles: List<Articles>) {
-        _articlesList.value = articles
+    fun getBills(bills: List<BillsModel>?) {
         _billsPercentage.value = bills!!
 
+    }
+
+    fun getArticles() {
+        viewModelScope.launch {
+            _articlesList.value = mArticlesRepository.getArticles()
+        }
     }
 
 

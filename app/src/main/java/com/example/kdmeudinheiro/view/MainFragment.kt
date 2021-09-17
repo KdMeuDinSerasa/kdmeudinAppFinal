@@ -2,25 +2,23 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.LoginActivity
-import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
-import com.example.kdmeudinheiro.databinding.MainFragmentBinding
-import com.example.kdmeudinheiro.model.IncomeModel
-import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
-import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
+import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
+import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
+import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.pieChart.PieChartClass
 import com.example.kdmeudinheiro.utils.formatCurrency
+import com.example.kdmeudinheiro.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,12 +66,13 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
         })
         viewModel.articlesList.observe(viewLifecycleOwner, {
+            articlesList.clear()
             articlesList.addAll(it)
         })
         viewModel.outCome.observe(viewLifecycleOwner, {
             if (incomeValue == null)
                 binding.tvRest.text = "Sobras 0"
-            else{
+            else {
                 val sum = incomeValue?.income?.toDouble()?.minus(it!!.toDouble())
                 binding.tvRest.text = "Sobras: ${sum?.formatCurrency()}"
             }
@@ -84,12 +83,13 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
         })
 
     }
 
     private fun loadComponents() {
+        viewModel.getArticles()
         binding.addButton.setOnClickListener {
             bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
                 val mIncome = IncomeModel(null, incomeFound.toString(), userId)
@@ -113,7 +113,8 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     override fun interceptSelectedArticle(article: Articles) {
         TODO("Not yet implemented")
     }
-    fun checkUser(){
+
+    fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()

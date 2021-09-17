@@ -252,35 +252,19 @@ class BottomSheetChart(
         } else if (typeClicked == 5 /* leisure */) {
             bottomSheetBinding.textViewTipChart.text = "Lazer"
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-//            adapter.update(listOfLeisure)
+            var list = articleList.filter { it.typeArticle.toInt() == 1 }
+            adapter.update(list)
         } else if (typeClicked == 6 /* emergency */) {
             bottomSheetBinding.textViewTipChart.text = "Emergenciais"
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-//            adapter.update(listOfEmergency)
+            var list = articleList.filter { it.typeArticle.toInt() == 2 }
+            adapter.update(list)
         } else if (typeClicked == 7 /* monthly */) {
             bottomSheetBinding.textViewTipChart.text =
                 bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
             bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
-
-
-            /* filter to show based at parameter */
-            if (typeClicked == 4 /* fix */) {
-                bottomSheetBinding.textViewTipChart.text = "Fixas"
-//            adapter.update(listOfFixBills)
-            } else if (typeClicked == 5 /* leisure */) {
-                bottomSheetBinding.textViewTipChart.text = "Lazer"
-//            adapter.update(listOfLeisure)
-            } else if (typeClicked == 6 /* emergency */) {
-                bottomSheetBinding.textViewTipChart.text = "Emergenciais"
-//            adapter.update(listOfEmergency)
-            } else if (typeClicked == 7 /* monthly */) {
-                bottomSheetBinding.textViewTipChart.text = "Mensais"
-//            adapter.update(listOfMonthlys)
-
-            } else {
-            }
         }
     }
 }
