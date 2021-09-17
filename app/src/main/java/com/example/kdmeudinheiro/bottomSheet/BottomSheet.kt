@@ -46,13 +46,14 @@ class BottomSheet(
             TypesOfBills.MONTHLY_BILLS.catName,
         )
 
+        bottomSheetBinding.spinnerExposed.setText(listType[0])
+
         bottomSheetBinding.spinnerExposed.setAdapter(
             ArrayAdapter(
                 parentView.context, android.R.layout.simple_spinner_item,
                 listType
             )
         )
-        bottomSheetBinding.spinnerExposed.setText(listType[0])
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
             val c = Calendar.getInstance(Locale.US)
