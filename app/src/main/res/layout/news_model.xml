@@ -22,6 +22,7 @@
                 android:layout_width="@dimen/default_0dp"
                 android:layout_height="wrap_content"
                 android:text="Nome da noticia"
+                android:layout_marginLeft="4dp"
                 android:maxLines="2"
                 app:layout_constraintBottom_toBottomOf="@+id/ivImageNews"
                 app:layout_constraintEnd_toStartOf="@+id/ivImageNews"
