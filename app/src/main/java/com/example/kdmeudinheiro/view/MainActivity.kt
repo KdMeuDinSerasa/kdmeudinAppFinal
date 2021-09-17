@@ -99,9 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 viewModel.getUserById(it.uid)
             }
         })
-
     }
-
 
     /**
      * Para onde voltar quando o botao de voltar for clicado
