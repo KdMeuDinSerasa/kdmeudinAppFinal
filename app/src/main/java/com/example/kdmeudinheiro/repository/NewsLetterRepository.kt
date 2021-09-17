@@ -1,6 +1,7 @@
 package com.example.kdmeudinheiro.repository
 
 import com.example.kdmeudinheiro.model.NewsLetter
+import com.example.kdmeudinheiro.model.ReciviedArticles
 import com.example.kdmeudinheiro.services.NewsLetterService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -9,9 +10,9 @@ import javax.inject.Inject
 
 class NewsLetterRepository @Inject constructor(private val services: NewsLetterService) {
 
-    suspend fun getNews(page: Int): NewsLetter? {
+    suspend fun getNews(page: Int): ReciviedArticles? {
         return withContext(Dispatchers.Default) {
-            val resp = services.callAPINewsLetter()
+            val resp = services.callAPINewsLetter(page = page)
             treatResponse(resp)
         }
     }
