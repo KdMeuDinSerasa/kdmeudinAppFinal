@@ -36,6 +36,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     private var incomeValue: IncomeModel? = null
     private var restValue: Double? = null
     private var outCome: Double? = null
+    private var articlesList = mutableListOf<Articles>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +66,9 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         viewModel.mError.observe(viewLifecycleOwner, {
             Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
         })
+        viewModel.articlesList.observe(viewLifecycleOwner, {
+            articlesList.addAll(it)
+        })
         viewModel.outCome.observe(viewLifecycleOwner, {
             if (incomeValue == null)
                 binding.tvRest.text = "Sobras 0"
@@ -79,7 +83,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this, articlesList).loadChart()
         })
 
     }

@@ -24,7 +24,7 @@ class ArticlesRepository @Inject constructor(
                     it.data[KeysDatabaseArticles.NAMEARTICLE.key] as String,
                     it.data[KeysDatabaseArticles.IMAGEARTICLE.key] as String,
                     it.data[KeysDatabaseArticles.URLARTICLE.key] as String,
-                    it.data[KeysDatabaseArticles.TYPEARTILE.key] as Int
+                    it.data[KeysDatabaseArticles.TYPEARTILE.key] as Long
                 )
             )
         }

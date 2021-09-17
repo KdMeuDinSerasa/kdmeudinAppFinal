@@ -47,6 +47,9 @@ class MainViewModel @Inject constructor(
     private var _billsPercentage = MutableLiveData<List<BillsModel>>()
     val billsPercentage: LiveData<List<BillsModel>> = _billsPercentage
 
+    private var _articlesList = MutableLiveData<List<Articles>>()
+    val articlesList: LiveData<List<Articles>> = _articlesList
+
 
     fun logoutUser() {
         mUserRepository.logOut()
@@ -107,15 +110,14 @@ class MainViewModel @Inject constructor(
 
     fun getIncomeAndBills(userId: String) {
         viewModelScope.launch {
-            var income = mIncomeRepository.getIncome(userId)
             var bills = mBillsRepository.getBills(userId)
             var articles = mArticlesRepository.getArticles()
-            getBills(bills, income)
+            getBills(bills, articles)
         }
     }
 
-    fun getBills(bills: List<BillsModel>?, income: IncomeModel?) {
-
+    fun getBills(bills: List<BillsModel>?, articles: List<Articles>) {
+        _articlesList.value = articles
         _billsPercentage.value = bills!!
 
     }

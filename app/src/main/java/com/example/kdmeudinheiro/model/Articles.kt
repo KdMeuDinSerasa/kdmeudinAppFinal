@@ -5,5 +5,5 @@ data class Articles(
     val name: String,
     val image: String?,
     val url: String,
-    val typeArticle: Int
+    val typeArticle: Long
 )
