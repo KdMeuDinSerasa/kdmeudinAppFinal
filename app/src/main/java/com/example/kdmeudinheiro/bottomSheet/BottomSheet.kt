@@ -28,7 +28,7 @@ import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 
 
 class BottomSheet(
-    val parentView: View,/* TODO mudar quando tiver injecao de dependencias */
+    val parentView: View,
     val bill: BillsModel?,
 ) {
     private lateinit var bottomSheetView: View
@@ -49,9 +49,12 @@ class BottomSheet(
             TypesOfBills.MONTHLY_BILLS.catName,
         )
 
-        bottomSheetBinding.spinnerExposed.setAdapter(ArrayAdapter(
-            parentView.context, android.R.layout.simple_spinner_item,
-            listType))
+        bottomSheetBinding.spinnerExposed.setAdapter(
+            ArrayAdapter(
+                parentView.context, android.R.layout.simple_spinner_item,
+                listType
+            )
+        )
         bottomSheetBinding.spinnerExposed.setText(listType[0])
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
@@ -81,7 +84,7 @@ class BottomSheet(
             bottomSheetBinding.saveBillButtom.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
                     !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()&&
+                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty() &&
                     !bottomSheetBinding.spinnerExposed.text.isNullOrEmpty()
                 ) {
 
@@ -123,7 +126,7 @@ class BottomSheet(
             bottomSheetBinding.editBillButton.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
                     !bottomSheetBinding.editTextInputBillPrice.text.isNullOrEmpty() &&
-                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty()&&
+                    !bottomSheetBinding.editTextInputBillExpireDate.text.isNullOrEmpty() &&
                     !bottomSheetBinding.spinnerExposed.text.isNullOrEmpty()
                 ) {
                     val selectedType = bottomSheetBinding.spinnerExposed.text.toString()
@@ -207,7 +210,11 @@ class bottomSheetIncome(val parentView: View) {
 
 }
 
-class BottomSheetChart(val parentView: View, val typeClicked: Int, val clickInterceptor: ChartClickInterceptor) {
+class BottomSheetChart(
+    val parentView: View,
+    val typeClicked: Int,
+    val clickInterceptor: ChartClickInterceptor
+) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var bottomSheetBinding: TipChartBinding
@@ -216,7 +223,6 @@ class BottomSheetChart(val parentView: View, val typeClicked: Int, val clickInte
     private var adapter = AdapterChartTips() {
         clickInterceptor.interceptSelectedArticle(it)
     }
-
 
 
     fun loadBottomSheet() {
@@ -323,29 +329,26 @@ class BottomSheetChart(val parentView: View, val typeClicked: Int, val clickInte
                 "https://mag.com.br/blog/educacao-financeira/artigo/como-guardar-dinheiro-todo-mes-6-dicas-essenciais"
             )
         )
-        var listOfMonthlys = mutableListOf<Articles>()
-        listOfMonthlys.add(
-            Articles(
-                "Quero Fica Rico",
-                "https://queroficarrico.com/blog/wp-content/uploads/2016/03/foto-rafael-seabra-quero-ficar-rico.png",
-                "https://queroficarrico.com/blog/investir-dinheiro/"
-            )
-        )
-
 
         /* filter to show based at parameter */
         if (typeClicked == 4 /* fix */) {
             bottomSheetBinding.textViewTipChart.text = "Fixas"
+            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             adapter.update(listOfFixBills)
         } else if (typeClicked == 5 /* leisure */) {
             bottomSheetBinding.textViewTipChart.text = "Lazer"
+            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             adapter.update(listOfLeisure)
         } else if (typeClicked == 6 /* emergency */) {
             bottomSheetBinding.textViewTipChart.text = "Emergenciais"
+            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             adapter.update(listOfEmergency)
         } else if (typeClicked == 7 /* monthly */) {
-            bottomSheetBinding.textViewTipChart.text = "Mensais"
-            adapter.update(listOfMonthlys)
+            val string = R.string.Tip_bills_Monthly_text
+            bottomSheetBinding.textViewTipChart.text = R.string.text_tip_chart_monthly.toString()
+            bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
+            bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
+            bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
         } else {
         }
     }
