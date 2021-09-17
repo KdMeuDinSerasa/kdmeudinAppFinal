@@ -7,27 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kdmeudinheiro.R
+import com.example.kdmeudinheiro.databinding.NewsLetterFragmentBinding
 import com.example.kdmeudinheiro.viewModel.NewsLetterViewModel
 
-class NewsLetterFragment : Fragment() {
+class NewsLetterFragment : Fragment(R.layout.news_letter_fragment) {
 
     companion object {
         fun newInstance() = NewsLetterFragment()
     }
 
     private lateinit var viewModel: NewsLetterViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.news_letter_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private lateinit var binding: NewsLetterFragmentBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = NewsLetterFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(NewsLetterViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
+
+
 
 }
