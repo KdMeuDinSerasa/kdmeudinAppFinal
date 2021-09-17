@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat.startActivity
 
 import android.content.Intent
 import android.net.Uri
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 
@@ -224,7 +225,6 @@ class BottomSheetChart(
         clickInterceptor.interceptSelectedArticle(it)
     }
 
-
     fun loadBottomSheet() {
         /* setup bottom sheet */
         bottomSheetView = View.inflate(parentView.context, R.layout.tip_chart, null)
@@ -234,12 +234,9 @@ class BottomSheetChart(
         bottomSheetBinding = TipChartBinding.bind(bottomSheetView)
         /* setup recyclerview */
 
-
-
         recyclerView = bottomSheetBinding.recyclerViewIdTipChart
         recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
         recyclerView.adapter = adapter
-
 
         /* mock lists */
         var listOfFixBills = mutableListOf<Articles>()
@@ -333,7 +330,9 @@ class BottomSheetChart(
         /* filter to show based at parameter */
         if (typeClicked == 4 /* fix */) {
             bottomSheetBinding.textViewTipChart.text = "Fixas"
-            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
+            bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
+            bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
+            bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/como-ganhar-dinheiro/")
             adapter.update(listOfFixBills)
         } else if (typeClicked == 5 /* leisure */) {
             bottomSheetBinding.textViewTipChart.text = "Lazer"
@@ -344,8 +343,7 @@ class BottomSheetChart(
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             adapter.update(listOfEmergency)
         } else if (typeClicked == 7 /* monthly */) {
-            val string = R.string.Tip_bills_Monthly_text
-            bottomSheetBinding.textViewTipChart.text = R.string.text_tip_chart_monthly.toString()
+            bottomSheetBinding.textViewTipChart.text = bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
             bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
