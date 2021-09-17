@@ -1,5 +1,6 @@
 package com.example.kdmeudinheiro.viewModel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,6 +70,26 @@ class BillsViewModel @Inject constructor(
         viewModelScope.launch {
             _deleteResponse.value = billRepo.deleteBill(bill)
         }
+    }
 
+    fun filterPay(filter: Int, userId: String){
+        viewModelScope.launch {
+            val aux = billRepo.getBills(userId)
+            val filtred = aux!!.filter {
+                it.status == filter
+            }
+            _billList.value = filtred
+        }
+    }
+
+    fun filterBill(filter: String, userId: String){
+        viewModelScope.launch {
+            val aux = billRepo.getBills(userId)
+            val filtred = aux!!.filter {
+                it.name_bill.contains(filter)
+            }
+            _billList.value = filtred
+
+        }
     }
 }

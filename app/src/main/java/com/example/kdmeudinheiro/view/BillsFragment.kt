@@ -3,6 +3,8 @@ package com.example.kdmeudinheiro.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -56,6 +58,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.adapter = adapter
         loadBinding()
         checkUser()
+        searchBill()
     }
 
 
@@ -118,7 +121,8 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     companion object {
         fun newInstance() = BillsFragment()
     }
-    fun checkUser(){
+
+    fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
@@ -126,5 +130,25 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
         viewModel.getAllBills(userId)
+    }
+
+    fun searchBill() {
+        binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                p0.let {
+                    if (it?.length!! >= 2)
+                       viewModel.filterBill(it.toString(), userId)
+                    if (it.isEmpty())
+                        viewModel.getAllBills(userId)
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
     }
 }
