@@ -1,6 +1,7 @@
 package com.example.kdmeudinheiro.view
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -11,11 +12,13 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.UserPreferencesFragmentBinding
+import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.viewModel.UserPreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +43,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         loadViewModels()
         loadComponents()
 
-
+        checkSavedValues()
     }
 
     fun loadViewModels(){
@@ -143,5 +146,23 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         }
         alertDialog.window?.setLayout(100 , 100)
         alertDialog.show()
+    }
+
+    private fun checkSavedValues() {
+        val preferences = requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        binding.emailSwitch.isChecked = preferences.getBoolean(KeysShared.RECEIVE_EMAIL.key, false)
+        binding.pushSwitch.isChecked = preferences.getBoolean(KeysShared.ACTIVE_PUSH.key, false)
+
+        binding.emailSwitch.setOnCheckedChangeListener  { _, value ->
+            preferences.edit {
+                this.putBoolean(KeysShared.RECEIVE_EMAIL.key, value)
+            }
+        }
+
+        binding.pushSwitch.setOnCheckedChangeListener  { _, value ->
+            preferences.edit {
+                this.putBoolean(KeysShared.ACTIVE_PUSH.key, value)
+            }
+        }
     }
 }
