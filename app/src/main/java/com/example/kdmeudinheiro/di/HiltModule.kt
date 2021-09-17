@@ -6,6 +6,7 @@ import com.example.kdmeudinheiro.repository.ArticlesRepository
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.services.NewsLetter
 import com.example.kdmeudinheiro.services.NotificationHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +16,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -46,7 +49,17 @@ object HiltModule {
     @Provides
     fun getNotificationHandler(@ApplicationContext context: Context): NotificationHandler = NotificationHandler(context)
 
+    @Provides
+    fun providesRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://newsapi.org/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
+    @Provides
+    fun providesApi(retrofit: Retrofit): NewsLetter =
+        retrofit.create(NewsLetter::class.java)
 
 
 }
