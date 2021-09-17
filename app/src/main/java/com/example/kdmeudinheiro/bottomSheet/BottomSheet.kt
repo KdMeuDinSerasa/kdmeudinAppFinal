@@ -239,42 +239,6 @@ class BottomSheetChart(
         recyclerView.adapter = adapter
 
         /* mock lists */
-        var listOfFixBills = mutableListOf<Articles>()
-        listOfFixBills.add(
-            Articles(
-                "poupa din",
-                "https://clubedovalor.com.br/wp-content/uploads/2015/11/Como-Economizar-Dinheiro.jpg",
-                "https://clubedovalor.com.br/economizar-dinheiro/"
-            )
-        )
-        listOfFixBills.add(
-            Articles(
-                "Creditas",
-                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
-                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
-            )
-        )
-        listOfFixBills.add(
-            Articles(
-                "Creditas",
-                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
-                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
-            )
-        )
-        listOfFixBills.add(
-            Articles(
-                "Creditas",
-                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
-                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
-            )
-        )
-        listOfFixBills.add(
-            Articles(
-                "Creditas",
-                "https://api.creditas.io/exponencial/_next/image/?url=https%3A%2F%2Fexponencial-assets.creditas.com%2Fexponencial%2Fwp-content%2Fuploads%2F2018%2F04%2FComo-economizar-dinheiro-1.jpg&w=1200&q=90",
-                "https://www.creditas.com/exponencial/como-economizar-dinheiro/"
-            )
-        )
         var listOfLeisure = mutableListOf<Articles>()
         listOfLeisure.add(
             Articles(
@@ -329,11 +293,11 @@ class BottomSheetChart(
 
         /* filter to show based at parameter */
         if (typeClicked == 4 /* fix */) {
-            bottomSheetBinding.textViewTipChart.text = "Fixas"
+            bottomSheetBinding.textViewTipChart.text =
+                bottomSheetView.context.getString(R.string.text_tip_chart_fix)
             bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/como-ganhar-dinheiro/")
-            adapter.update(listOfFixBills)
         } else if (typeClicked == 5 /* leisure */) {
             bottomSheetBinding.textViewTipChart.text = "Lazer"
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
@@ -343,7 +307,8 @@ class BottomSheetChart(
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             adapter.update(listOfEmergency)
         } else if (typeClicked == 7 /* monthly */) {
-            bottomSheetBinding.textViewTipChart.text = bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
+            bottomSheetBinding.textViewTipChart.text =
+                bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
             bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
