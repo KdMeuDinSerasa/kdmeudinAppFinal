@@ -24,4 +24,9 @@
         android:name="com.example.kdmeudinheiro.view.UserPreferencesFragment"
         android:label="Preferências do usuário"
         tools:layout="@layout/user_preferences_fragment" />
+    <fragment
+        android:id="@+id/newsLetterFragment"
+        android:name="com.example.kdmeudinheiro.view.NewsLetterFragment"
+        android:label="Notícias"
+        tools:layout="@layout/news_letter_fragment" />
 </navigation>
