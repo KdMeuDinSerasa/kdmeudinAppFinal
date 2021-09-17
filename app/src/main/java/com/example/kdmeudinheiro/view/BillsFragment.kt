@@ -27,7 +27,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
     private lateinit var recyclerView: RecyclerView
-
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { billFromCb, type ->
@@ -111,14 +110,14 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             viewModel.getAllBills(userId)
             Snackbar.make(requireView(), "Conta Paga Com Sucesso", Snackbar.LENGTH_LONG)
                 .show()
-        }
-        else viewModel.getAllBills(userId)
+        } else viewModel.getAllBills(userId)
     }
 
     companion object {
         fun newInstance() = BillsFragment()
     }
-    fun checkUser(){
+
+    fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()

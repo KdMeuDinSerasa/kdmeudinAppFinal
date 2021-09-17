@@ -13,8 +13,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,7 +38,6 @@ object HiltModule {
         firebaseStorage: FirebaseStorage
     ): UserRepository = UserRepository(db, auth, firebaseStorage)
 
-
     @Provides
     fun getDatabase(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -50,16 +47,12 @@ object HiltModule {
     @Provides
     fun getFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
-
     @Provides
     fun getNotificationHandler(@ApplicationContext context: Context): NotificationHandler =
         NotificationHandler(context)
 
-
-
     @Provides
     fun providesApi(): NewsLetterService =
         RetrofitBuilder.buildRetrofit().create(NewsLetterService::class.java)
-
 
 }

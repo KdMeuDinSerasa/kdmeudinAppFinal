@@ -20,7 +20,6 @@ class NotificationHandler @Inject constructor(private val context: Context) {
         createNotificationChannel()
     }
 
-
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Expired docs"

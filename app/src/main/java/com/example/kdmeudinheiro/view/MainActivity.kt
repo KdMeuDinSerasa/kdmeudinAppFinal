@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
-
     fun updateUser() {
         viewModel.userLoged()
     }
