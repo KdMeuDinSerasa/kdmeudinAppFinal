@@ -29,7 +29,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_baseline_calendar_today_24"
+                android:src="@drawable/ic_baseline_account_balance_wallet_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +41,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:textSize="16sp"
 
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
@@ -53,17 +54,17 @@
                 android:layout_margin="5dp"
                 android:fontFamily="@font/roboto_light_italic"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewIconDate"
                 app:layout_constraintEnd_toEndOf="@+id/textViewBillNameList"
                 app:layout_constraintStart_toEndOf="@+id/imageViewIconDate"
-                app:layout_constraintTop_toBottomOf="@+id/textViewBillNameList"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="data de vencimento" />
 
             <ImageView
                 android:id="@+id/imageViewIconDate"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-
-                android:src="@drawable/ic_baseline_calendar_today_24"
+                android:src="@drawable/ic_baseline_attach_money_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -80,13 +81,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="@+id/textViewBillExpireDate"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/textViewBillExpireDate"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewIconDate"
                 tools:text="Valor da conta" />
 
             <TextView
@@ -96,6 +96,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="16sp"
                 android:text="PG"
+                android:textColor="@color/green_graph"
                 android:visibility="invisible"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
