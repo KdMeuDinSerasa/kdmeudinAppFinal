@@ -51,6 +51,6 @@ class ViewHolderNews(itemView: View): RecyclerView.ViewHolder(itemView){
             Glide.with(binding.root).load(mNewsLetter.imageUrl).into(binding.ivImageNews)
             binding.tvSourceNews.text = mNewsLetter.source.siteName
             binding.tvDateNews.text = mNewsLetter.date.substring(0 , 10).replace("-" , "/")
-            binding.tvDescNews.text = mNewsLetter.desc
+
         }
 }

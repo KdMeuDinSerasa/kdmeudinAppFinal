@@ -3,29 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
+        android:layout_height="35dp"
         android:layout_margin="5dp"
-        android:padding="2dp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/retagle">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLegendFixed"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_marginLeft="4dp"
                 android:src="@color/yellow_graph"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
@@ -34,18 +35,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
+                android:textColor="@color/white"
                 android:text="Fixa"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLegendFixed"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLegendMonthly"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="@dimen/default_10dp_margin"
-                android:background="@color/cian_graph"
+                android:src="@color/cian_graph"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
                 app:layout_constraintStart_toEndOf="@+id/textViewLegendFixed"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
@@ -56,17 +58,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:text="Mensal"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendMonthly"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLegendMonthly"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendMonthly" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLegendEmergency"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="@dimen/default_10dp_margin"
-                android:background="@color/red_graph"
+                android:src="@color/red_graph"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
                 app:layout_constraintStart_toEndOf="@+id/textViewLegendMonthly"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
@@ -78,16 +81,17 @@
                 android:layout_marginStart="3dp"
                 android:text="Emergencial"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendEmergency"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLegendEmergency"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendEmergency" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLegendLazy"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="@dimen/default_10dp_margin"
-                android:background="@color/green_graph"
+                android:src="@color/green_graph"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
                 app:layout_constraintStart_toEndOf="@+id/textViewLegendLazy"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
@@ -99,16 +103,17 @@
                 android:layout_marginStart="3dp"
                 android:text="Lazer"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendLazy"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLegendLazy"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendLazy" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLegendRest"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="@dimen/default_10dp_margin"
-                android:background="@color/gray_graph"
+                android:src="@color/gray_graph"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
                 app:layout_constraintStart_toEndOf="@+id/textViewLegendEmergency"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
@@ -120,11 +125,12 @@
                 android:layout_marginStart="3dp"
                 android:text="Sobras"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendRest"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLegendRest"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLegendRest" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
