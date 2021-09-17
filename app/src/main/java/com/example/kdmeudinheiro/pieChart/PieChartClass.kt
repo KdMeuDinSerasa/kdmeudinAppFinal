@@ -8,6 +8,7 @@ import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
+import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.github.mikephil.charting.components.Legend
@@ -23,7 +24,8 @@ class PieChartClass(
     var listBills: List<BillsModel>,
     val incomes: IncomeModel,
     val outComes: Float,
-    val clickInterceptor: ChartClickInterceptor
+    val clickInterceptor: ChartClickInterceptor,
+    val articleList: List<Articles>
 ) :
     OnChartValueSelectedListener {
 
@@ -94,6 +96,7 @@ class PieChartClass(
         mpieDataset.colors = colors
         mpieDataset.valueTextSize = 16f
         mpieDataset.setValueFormatter(PercentFormatter())
+
         val dataSet = PieData(cat, mpieDataset)
 
         //bindings

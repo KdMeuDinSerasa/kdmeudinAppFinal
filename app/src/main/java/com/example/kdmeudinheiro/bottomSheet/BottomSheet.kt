@@ -2,8 +2,8 @@ package com.example.kdmeudinheiro.bottomSheet
 
 import android.app.DatePickerDialog
 import android.view.View
-import android.widget.Adapter
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kdmeudinheiro.R
@@ -15,17 +15,10 @@ import com.example.kdmeudinheiro.databinding.TipChartBinding
 import com.example.kdmeudinheiro.enums.StatusBills
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
-import com.example.kdmeudinheiro.model.Articles
+import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
-import androidx.core.content.ContextCompat.startActivity
-
-import android.content.Intent
-import android.net.Uri
-import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 
 
 class BottomSheet(
@@ -35,6 +28,8 @@ class BottomSheet(
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
+    private lateinit var date: DatePicker
+
 
     fun loadBottomBill(callback: (BillsModel, Int?) -> Unit) {
 
@@ -60,19 +55,14 @@ class BottomSheet(
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
             val c = Calendar.getInstance(Locale.US)
-            val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-
             val dpd = DatePickerDialog(
                 parentView.context,
-                { _, year, month, dayOfMonth ->
-                    var mes = month + 1
-                    bottomSheetBinding.editTextInputBillExpireDate.setText(" $dayOfMonth/$mes/$year")
-                },
-                year,
-                month,
-                day
+                DatePickerDialog.OnDateSetListener { datePicker, year, month, dayOfMonth ->
+                    date = datePicker
+                    bottomSheetBinding.editTextInputBillExpireDate.setText("$dayOfMonth/0${month + 1}/$year")
+                }, c.get(Calendar.YEAR), month, day
             )
             dpd.show()
         }
@@ -92,8 +82,16 @@ class BottomSheet(
                     val selectedType = bottomSheetBinding.spinnerExposed.text.toString()
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-                    val billExpireDate =
-                        bottomSheetBinding.editTextInputBillExpireDate.text.toString()
+
+                    /**
+                     * Create a variable time of the type
+                     * Calendar that receive the tipe that the
+                     * user selected. using time.time to save
+                     * a type Date
+                     */
+                    val time = Calendar.getInstance().apply {
+                        set(date.year, date.month, date.dayOfMonth)
+                    }
 
                     val billObject =
                         BillsModel(
@@ -102,7 +100,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            billExpireDate,
+                            time.time,
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 0)
@@ -116,7 +114,7 @@ class BottomSheet(
         } else {
             bottomSheetBinding.editTextInputBillName.setText(bill.name_bill)
             bottomSheetBinding.editTextInputBillPrice.setText(bill.price)
-            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date)
+//            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date)
 
             bottomSheetBinding.saveBillButtom.visibility = View.GONE
             bottomSheetBinding.editTextInputBillExpireDate.visibility = View.VISIBLE
@@ -135,6 +133,9 @@ class BottomSheet(
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                     val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
 
+                    val time = Calendar.getInstance().apply {
+                        set(date.year, date.month, date.dayOfMonth)
+                    }
                     val billObject =
                         BillsModel(
                             bill.id_bill,
@@ -142,7 +143,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            billDate,
+                            time.time,
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 1)
@@ -238,58 +239,6 @@ class BottomSheetChart(
         recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
         recyclerView.adapter = adapter
 
-        /* mock lists */
-        var listOfLeisure = mutableListOf<Articles>()
-        listOfLeisure.add(
-            Articles(
-                "Suno",
-                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
-                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
-            )
-        )
-        listOfLeisure.add(
-            Articles(
-                "Suno",
-                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
-                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
-            )
-        )
-        listOfLeisure.add(
-            Articles(
-                "Suno",
-                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
-                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
-            )
-        )
-        listOfLeisure.add(
-            Articles(
-                "Suno",
-                "https://www.suno.com.br/wp-content/uploads/2019/09/como-economizar-dinheiro.jpg",
-                "https://www.suno.com.br/artigos/como-economizar-dinheiro/"
-            )
-        )
-        listOfLeisure.add(
-            Articles(
-                "Ricconet",
-                "https://riconnect.rico.com.vc/wp-content/uploads/sites/4/2021/05/como-economizar-dinheiro.jpg, ",
-                "https://riconnect.rico.com.vc/blog/como-economizar-dinheiro"
-            )
-        )
-        var listOfEmergency = mutableListOf<Articles>()
-        listOfEmergency.add(
-            Articles(
-                "Guia Bolso",
-                "https://blog.guiabolso.com.br/wp-content/uploads/2021/03/GB_ImgGen_Investimento_SacodeDinheiro-1140x855.jpg",
-                "https://blog.guiabolso.com.br/50-dicas-para-aprender-como-economizar-dinheiro/"
-            )
-        )
-        listOfEmergency.add(
-            Articles(
-                "Mag",
-                "https://magportalmagprdstg.blob.core.windows.net/public/2019/06/Como-guardar-dinheiro-todo-mês.jpg",
-                "https://mag.com.br/blog/educacao-financeira/artigo/como-guardar-dinheiro-todo-mes-6-dicas-essenciais"
-            )
-        )
 
         /* filter to show based at parameter */
         if (typeClicked == 4 /* fix */) {
@@ -301,21 +250,39 @@ class BottomSheetChart(
         } else if (typeClicked == 5 /* leisure */) {
             bottomSheetBinding.textViewTipChart.text = "Lazer"
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-            adapter.update(listOfLeisure)
+//            adapter.update(listOfLeisure)
         } else if (typeClicked == 6 /* emergency */) {
             bottomSheetBinding.textViewTipChart.text = "Emergenciais"
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-            adapter.update(listOfEmergency)
+//            adapter.update(listOfEmergency)
         } else if (typeClicked == 7 /* monthly */) {
             bottomSheetBinding.textViewTipChart.text =
                 bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
             bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
-        } else {
+
+
+            /* filter to show based at parameter */
+            if (typeClicked == 4 /* fix */) {
+                bottomSheetBinding.textViewTipChart.text = "Fixas"
+//            adapter.update(listOfFixBills)
+            } else if (typeClicked == 5 /* leisure */) {
+                bottomSheetBinding.textViewTipChart.text = "Lazer"
+//            adapter.update(listOfLeisure)
+            } else if (typeClicked == 6 /* emergency */) {
+                bottomSheetBinding.textViewTipChart.text = "Emergenciais"
+//            adapter.update(listOfEmergency)
+            } else if (typeClicked == 7 /* monthly */) {
+                bottomSheetBinding.textViewTipChart.text = "Mensais"
+//            adapter.update(listOfMonthlys)
+
+            } else {
+            }
         }
     }
 }
+
 
 
 
