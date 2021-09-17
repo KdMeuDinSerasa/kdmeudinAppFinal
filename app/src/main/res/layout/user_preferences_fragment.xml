@@ -12,7 +12,7 @@
         android:id="@+id/userAvatarUserPrefs"
         android:layout_width="148dp"
         android:layout_height="148dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +25,7 @@
         android:text="@string/username_label_prefs"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/userAvatarUserPrefs"
         tools:layout_editor_absoluteX="7dp" />
 
@@ -38,7 +39,35 @@
         android:text="@string/useremail_label_prefs"
         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
-    <Button
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserEmail" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/emailSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Receber notificaçōes por e-mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/pushSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Receber notificaçōes via push"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailSwitch" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -46,7 +75,7 @@
         android:text="@string/edit_info_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/pushSwitch" />
 
     <ProgressBar
         android:id="@+id/progressBar"
