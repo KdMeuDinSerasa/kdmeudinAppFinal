@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kdmeudinheiro.LoginActivity
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
 import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome

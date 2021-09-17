@@ -8,9 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.example.kdmeudinheiro.R
-import com.example.kdmeudinheiro.SplashActivity
+import com.example.kdmeudinheiro.view.SplashActivity
 import javax.inject.Inject
 
 
