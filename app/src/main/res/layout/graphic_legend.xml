@@ -1,113 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageViewLegendFixed"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:background="@color/yellow_graph"
-        android:layout_marginTop="@dimen/default_10dp_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textViewLegendFixed"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Fixa"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLegendFixed"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="5dp"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageViewLegendMonthly"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="@dimen/default_10dp_margin"
-        android:background="@color/cian_graph"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
-        app:layout_constraintStart_toEndOf="@+id/textViewLegendFixed"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewLegendMonthly"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Mensal"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendMonthly"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLegendMonthly"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendMonthly" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewLegendFixed"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@color/yellow_graph"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageViewLegendEmergency"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="@dimen/default_10dp_margin"
-        android:background="@color/red_graph"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
-        app:layout_constraintStart_toEndOf="@+id/textViewLegendMonthly"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+            <TextView
+                android:id="@+id/textViewLegendFixed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Fixa"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLegendFixed"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
 
-    <TextView
-        android:id="@+id/textViewLegendLazy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Emergencial"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendEmergency"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLegendEmergency"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendEmergency" />
+            <ImageView
+                android:id="@+id/imageViewLegendMonthly"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="@dimen/default_10dp_margin"
+                android:background="@color/cian_graph"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
+                app:layout_constraintStart_toEndOf="@+id/textViewLegendFixed"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
 
-    <ImageView
-        android:id="@+id/imageViewLegendLazy"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="@dimen/default_10dp_margin"
-        android:background="@color/green_graph"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
-        app:layout_constraintStart_toEndOf="@+id/textViewLegendLazy"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+            <TextView
+                android:id="@+id/textViewLegendMonthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Mensal"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendMonthly"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLegendMonthly"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendMonthly" />
 
-    <TextView
-        android:id="@+id/textViewLegendEmergency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Lazer"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendLazy"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLegendLazy"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendLazy" />
+            <ImageView
+                android:id="@+id/imageViewLegendEmergency"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="@dimen/default_10dp_margin"
+                android:background="@color/red_graph"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
+                app:layout_constraintStart_toEndOf="@+id/textViewLegendMonthly"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
 
-    <ImageView
-        android:id="@+id/imageViewLegendRest"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="@dimen/default_10dp_margin"
-        android:background="@color/gray_graph"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
-        app:layout_constraintStart_toEndOf="@+id/textViewLegendEmergency"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+            <TextView
+                android:id="@+id/textViewLegendLazy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Emergencial"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendEmergency"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLegendEmergency"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendEmergency" />
 
-    <TextView
-        android:id="@+id/textViewLegendRest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sobras"
-        android:layout_marginStart="3dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendRest"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLegendRest"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLegendRest" />
+            <ImageView
+                android:id="@+id/imageViewLegendLazy"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="@dimen/default_10dp_margin"
+                android:background="@color/green_graph"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
+                app:layout_constraintStart_toEndOf="@+id/textViewLegendLazy"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+
+            <TextView
+                android:id="@+id/textViewLegendEmergency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Lazer"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendLazy"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLegendLazy"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendLazy" />
+
+            <ImageView
+                android:id="@+id/imageViewLegendRest"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="@dimen/default_10dp_margin"
+                android:background="@color/gray_graph"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendFixed"
+                app:layout_constraintStart_toEndOf="@+id/textViewLegendEmergency"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendFixed" />
+
+            <TextView
+                android:id="@+id/textViewLegendRest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Sobras"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLegendRest"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLegendRest"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLegendRest" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
