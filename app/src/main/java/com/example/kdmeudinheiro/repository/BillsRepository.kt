@@ -7,6 +7,7 @@ import com.example.kdmeudinheiro.utils.await
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.type.Date
+import java.util.*
 import javax.inject.Inject
 
 class BillsRepository @Inject constructor(
@@ -64,7 +65,6 @@ class BillsRepository @Inject constructor(
         val accountList = mutableListOf<BillsModel>()
         result?.forEach {
             val dateFromFB = it.data["key_expiredate"] as Timestamp
-            val date = dateFromFB.toDate()
             accountList.add(
                 BillsModel(
                     it.id,
@@ -72,7 +72,7 @@ class BillsRepository @Inject constructor(
                     it.data["key_price"] as String,
                     it.data["key_type"] as String,
                     it.data["key_name"] as String,
-                    date,
+                    dateFromFB.toDate(),
                     (it.data["key_status_paid"] as? String?)?.toInt()
                 )
             )

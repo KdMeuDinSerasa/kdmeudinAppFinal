@@ -87,6 +87,10 @@ class BottomSheet(
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
 
+                   val time =  Calendar.getInstance().apply {
+                        set(date.year, date.month, date.dayOfMonth)
+                    }
+
                     val billObject =
                         BillsModel(
                             null,
@@ -94,7 +98,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            Date(date.year, date.month, date.dayOfMonth),
+                            time.time,
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 0)
@@ -126,6 +130,9 @@ class BottomSheet(
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                     val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
 
+                    val time =  Calendar.getInstance().apply {
+                        set(date.year, date.month, date.dayOfMonth)
+                    }
                     val billObject =
                         BillsModel(
                             bill.id_bill,
@@ -133,7 +140,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            Date(date.year, date.month, date.dayOfMonth),
+                            time.time,
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 1)
