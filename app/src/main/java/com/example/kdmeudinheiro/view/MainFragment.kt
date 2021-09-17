@@ -56,7 +56,8 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
             if (it != null) {
-                binding.incomeValue.text = "Renda Mensal: ${it.income}"
+                val auxFormat = it.income.toDouble()
+                binding.incomeValue.text = "Renda Mensal: ${auxFormat.formatCurrency()}"
                 incomeValue = it
                 viewModel.getOutcome(userId)
 
