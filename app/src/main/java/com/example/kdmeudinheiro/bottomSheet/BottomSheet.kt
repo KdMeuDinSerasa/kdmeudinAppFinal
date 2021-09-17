@@ -2,7 +2,6 @@ package com.example.kdmeudinheiro.bottomSheet
 
 import android.app.DatePickerDialog
 import android.view.View
-import android.widget.Adapter
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,12 +18,10 @@ import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
-import androidx.core.content.ContextCompat.startActivity
 
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat
+import android.widget.DatePicker
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
+import com.google.type.Date
 
 
 class BottomSheet(
@@ -34,6 +31,7 @@ class BottomSheet(
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
     private lateinit var bottomSheetBinding: InputBillLayoutBinding
+    private lateinit var date: DatePicker
 
     fun loadBottomBill(callback: (BillsModel, Int?) -> Unit) {
 
@@ -49,26 +47,20 @@ class BottomSheet(
             TypesOfBills.MONTHLY_BILLS.catName,
         )
 
+
         bottomSheetBinding.spinnerBillType.adapter = ArrayAdapter(
             parentView.context, android.R.layout.simple_spinner_item,
             listType
         )
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
-            val c = Calendar.getInstance(Locale.US)
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-
+            val calendar = Calendar.getInstance()
             val dpd = DatePickerDialog(
                 parentView.context,
-                { _, year, month, dayOfMonth ->
-                    var mes = month + 1
-                    bottomSheetBinding.editTextInputBillExpireDate.setText(" $dayOfMonth/$mes/$year")
-                },
-                year,
-                month,
-                day
+                DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+                    date = datePicker
+                    bottomSheetBinding.editTextInputBillExpireDate.setText("${datePicker.dayOfMonth}/${datePicker.month}/${datePicker.year}")
+                }, calendar.get(Calendar.YEAR),(Calendar.MONTH), (Calendar.DAY_OF_MONTH)
             )
             dpd.show()
         }
@@ -89,7 +81,6 @@ class BottomSheet(
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
                     val billExpireDate =
                         bottomSheetBinding.editTextInputBillExpireDate.text.toString()
-
                     val billObject =
                         BillsModel(
                             null,
@@ -97,7 +88,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            billExpireDate,
+                            java.util.Date(date.year, date.month, date.dayOfMonth),
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 0)
@@ -111,7 +102,7 @@ class BottomSheet(
         } else {
             bottomSheetBinding.editTextInputBillName.setText(bill.name_bill)
             bottomSheetBinding.editTextInputBillPrice.setText(bill.price)
-            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date)
+            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date.toString())
 
             bottomSheetBinding.saveBillButtom.visibility = View.GONE
             bottomSheetBinding.editTextInputBillExpireDate.visibility = View.VISIBLE
@@ -136,7 +127,7 @@ class BottomSheet(
                             billPrice,
                             selectedType,
                             billName,
-                            billDate,
+                            java.util.Date(date.year, date.month, date.dayOfMonth),
                             StatusBills.NOTPAID.status
                         )
                     callback(billObject, 1)

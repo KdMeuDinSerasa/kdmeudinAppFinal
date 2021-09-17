@@ -94,6 +94,7 @@ class PieChartClass(
         mpieDataset.colors = colors
         mpieDataset.valueTextSize = 16f
         mpieDataset.setValueFormatter(PercentFormatter())
+
         val dataSet = PieData(cat, mpieDataset)
 
         //bindings
