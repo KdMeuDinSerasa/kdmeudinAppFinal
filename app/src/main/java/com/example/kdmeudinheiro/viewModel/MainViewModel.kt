@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.enums.TypesOfBills
+import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.repository.ArticlesRepository
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.IncomeRepository
 import com.example.kdmeudinheiro.repository.UserRepository
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val mUserRepository: UserRepository,
     private val mIncomeRepository: IncomeRepository,
-    private val mBillsRepository: BillsRepository
+    private val mBillsRepository: BillsRepository,
+    private val mArticlesRepository: ArticlesRepository
 ) : ViewModel() {
 
     private var _mUserModel = MutableLiveData<UserModel>()
@@ -106,6 +109,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             var income = mIncomeRepository.getIncome(userId)
             var bills = mBillsRepository.getBills(userId)
+            var articles = mArticlesRepository.getArticles()
             getBills(bills, income)
         }
     }

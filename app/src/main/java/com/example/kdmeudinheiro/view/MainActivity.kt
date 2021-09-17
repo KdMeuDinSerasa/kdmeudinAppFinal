@@ -19,6 +19,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
+import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
-    fun updateUser(){
+
+
+
+    fun updateUser() {
         viewModel.userLoged()
     }
 
@@ -71,7 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun loadViewModels(){
+    fun loadViewModels() {
         viewModel.mUserModel.observe(this, { userDetails ->
             binding.drawerMenuMain.getHeaderView(0).apply {
                 binding2 = HeaderDrawerBinding.bind(this)
@@ -83,8 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             .load(R.drawable.man_png)
                             .into(it)
                     }
-                }
-                else{
+                } else {
                     binding2.userAvatarDrawer.let {
                         Glide.with(it)
                             .load(userDetails.img)
@@ -114,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
-        when(item.itemId){
+        when (item.itemId) {
             R.id.btnLogout -> {
                 viewModel.logoutUser()
                 mSharedPreferences.edit {
