@@ -1,18 +1,15 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
-import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.databinding.ActivitySplashBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.services.NotificationHandler
-import com.example.kdmeudinheiro.view.MainActivity
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
