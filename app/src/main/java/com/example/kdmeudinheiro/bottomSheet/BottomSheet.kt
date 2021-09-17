@@ -87,6 +87,12 @@ class BottomSheet(
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
 
+                    /**
+                     * Create a variable time of the type
+                     * Calendar that receive the tipe that the
+                     * user selected. using time.time to save
+                     * a type Date
+                     */
                    val time =  Calendar.getInstance().apply {
                         set(date.year, date.month, date.dayOfMonth)
                     }
