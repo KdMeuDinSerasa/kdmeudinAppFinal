@@ -5,6 +5,7 @@ import android.util.Patterns
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.text.DecimalFormat
+import java.util.*
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resumeWithException
 
@@ -40,4 +41,9 @@ fun String.isValidEmail() =
 fun Double.formatCurrency():String {
     val dec = DecimalFormat("#,###.00")
     return "R$ ${dec.format(this)}"
+}
+
+
+fun Date.adjustYear(): String{
+    return this.toString().substring(this.toString().length - 4)
 }
