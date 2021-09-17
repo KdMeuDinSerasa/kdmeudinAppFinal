@@ -63,8 +63,8 @@ class BillsRepository @Inject constructor(
         val result = task.await()
         val accountList = mutableListOf<BillsModel>()
         result?.forEach {
-            val aux = it.data["key_expiredate"] as Timestamp
-            val aux2 = aux.toDate()
+            val dateFromFB = it.data["key_expiredate"] as Timestamp
+            val date = dateFromFB.toDate()
             accountList.add(
                 BillsModel(
                     it.id,
@@ -72,7 +72,7 @@ class BillsRepository @Inject constructor(
                     it.data["key_price"] as String,
                     it.data["key_type"] as String,
                     it.data["key_name"] as String,
-                    aux2,
+                    date,
                     (it.data["key_status_paid"] as? String?)?.toInt()
                 )
             )
