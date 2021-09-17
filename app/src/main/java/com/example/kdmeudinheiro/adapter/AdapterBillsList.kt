@@ -10,6 +10,7 @@ import com.example.kdmeudinheiro.databinding.BillItemListBinding
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.adjustYear
 import com.example.kdmeudinheiro.utils.formatCurrency
+import java.util.*
 
 
 class AdapterBillsList(val onItemClick: (BillsModel) -> Unit): RecyclerView.Adapter<BillsViewHolder>() {
@@ -41,7 +42,7 @@ class BillsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SetTextI18n")
     fun bind(bill: BillsModel){
         binding.textViewBillNameList.text = "${itemView.context.getString(R.string.Bill_Name_label_list_card)} ${bill.name_bill}"
-        binding.textViewBillExpireDate.text = "${itemView.context.getString(R.string.Bill_ExpireDate_label_list_card)} 0${bill.expire_date.day}/0${bill.expire_date.month}/${bill.expire_date.adjustYear()}"
+        binding.textViewBillExpireDate.text = "${itemView.context.getString(R.string.Bill_ExpireDate_label_list_card)} ${bill.expire_date.toString().substring(8,10)}/0${bill.expire_date.month + 1}/${bill.expire_date.adjustYear()}"
         var teste = bill.price.toDouble()
         binding.textViewBillPriceList.text = "${itemView.context.getString(R.string.Bill_Price_label_list_card)} ${teste.formatCurrency()}"
         if (bill.status == 1){
