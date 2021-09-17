@@ -16,6 +16,7 @@ import com.example.kdmeudinheiro.enums.StatusBills
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
+import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
@@ -215,7 +216,8 @@ class bottomSheetIncome(val parentView: View) {
 class BottomSheetChart(
     val parentView: View,
     val typeClicked: Int,
-    val clickInterceptor: ChartClickInterceptor
+    val clickInterceptor: ChartClickInterceptor,
+    val articleList: List<Articles>
 ) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog

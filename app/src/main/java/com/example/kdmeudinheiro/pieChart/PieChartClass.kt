@@ -25,7 +25,6 @@ class PieChartClass(
     val incomes: IncomeModel,
     val outComes: Float,
     val clickInterceptor: ChartClickInterceptor,
-    val articleList: List<Articles>
 ) :
     OnChartValueSelectedListener {
 

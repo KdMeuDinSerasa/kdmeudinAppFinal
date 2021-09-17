@@ -84,7 +84,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         })
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this, articlesList).loadChart()
+            PieChartClass( requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
         })
 
     }
@@ -107,7 +107,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     }
 
     override fun interceptClick(index: Int) {
-        BottomSheetChart(requireView(), index, this).loadBottomSheet()
+        BottomSheetChart(requireView(), index, this, articlesList).loadBottomSheet()
     }
 
     override fun interceptSelectedArticle(article: Articles) {
