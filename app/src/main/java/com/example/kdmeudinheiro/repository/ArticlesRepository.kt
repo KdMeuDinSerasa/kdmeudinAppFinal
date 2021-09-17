@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import javax.inject.Inject
 
-class AticlesRepository @Inject constructor(
+class ArticlesRepository @Inject constructor(
     private val db: FirebaseFirestore
 ) {
 
