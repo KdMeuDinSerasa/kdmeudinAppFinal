@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/btnIncome"
+        android:id="@+id/userPreferencesFragment"
         android:title="Income"
         />
 
@@ -10,9 +10,5 @@
         android:id="@+id/BillsFragment"
         android:title="Accounts"
         />
-
-
-
-
 
 </menu>
