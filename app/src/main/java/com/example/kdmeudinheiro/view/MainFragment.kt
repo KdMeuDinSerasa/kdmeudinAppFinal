@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -110,7 +111,8 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     }
 
     override fun interceptSelectedArticle(article: Articles) {
-        TODO("Not yet implemented")
+        val browser = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+        startActivity(browser)
     }
 
     fun checkUser() {

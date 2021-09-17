@@ -36,11 +36,11 @@ class PieChartClass(
         binding = MainFragmentBinding.bind(parentView)
 
         val category = ArrayList<String>()
-        category.add("Emergencial")
-        category.add("Lazer")
-        category.add("Fixa")
-        category.add("Mensal")
-        category.add("Sobras")
+        category.add("")
+        category.add("")
+        category.add("")
+        category.add("")
+        category.add("")
         /* Aways create the same quantity */
 
 
