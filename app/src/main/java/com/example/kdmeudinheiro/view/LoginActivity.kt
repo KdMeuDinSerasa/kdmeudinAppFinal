@@ -1,4 +1,4 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
@@ -10,19 +10,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
+import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.model.UserModel
-import com.example.kdmeudinheiro.repository.UserRepository
 import com.example.kdmeudinheiro.utils.isValidEmail
-import com.example.kdmeudinheiro.view.MainActivity
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -36,10 +30,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContentView(binding.root)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         loadViewModels()
-        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false))
-            viewModel.checkSession()
+
         loadComponents()
     }
 
@@ -57,12 +50,15 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.mFirebaseUserLoged.observe(this, {
             if (it != null) {
+                val mSharedPreferences =
+                    getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
                 if (binding.cbRememberMe.isChecked) {
-                    val mSharedPreferences =
-                        getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
                     mSharedPreferences.edit {
                         this.putBoolean(KeysShared.REMEMBERME.key, true)
                     }
+                }
+                mSharedPreferences.edit {
+                    this.putString(KeysShared.USERID.key, it.uid)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
             }

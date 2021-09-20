@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context=".view.LoginActivity"
     android:padding="20dp"
     android:background="@drawable/bg_default">
 
@@ -17,6 +17,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/bem_vindo_login"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_regular"
         android:textSize="44sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/mantenha_me_conectado"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_light_italic"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
         tools:layout_editor_absoluteX="20dp" />
 
@@ -79,9 +83,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
         android:text="Cadastre-se"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

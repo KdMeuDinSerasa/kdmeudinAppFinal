@@ -1,9 +1,13 @@
 package com.example.kdmeudinheiro.repository
 
+import android.widget.DatePicker
 import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.await
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.type.Date
+import java.util.*
 import javax.inject.Inject
 
 class BillsRepository @Inject constructor(
@@ -14,7 +18,7 @@ class BillsRepository @Inject constructor(
 
 
     suspend fun addBills(mBillsModel: BillsModel): Boolean {
-        val map = mutableMapOf<String, String>()
+        val map = mutableMapOf<String, Any>()
         map.put(KeysDatabaseBills.IDBILL.key, mBillsModel.id_bill.toString())
         mBillsModel.id_user?.let { map.put(KeysDatabaseBills.IDUSER.key, it) }
         map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price)
@@ -60,6 +64,7 @@ class BillsRepository @Inject constructor(
         val result = task.await()
         val accountList = mutableListOf<BillsModel>()
         result?.forEach {
+            val dateFromFB = it.data["key_expiredate"] as Timestamp
             accountList.add(
                 BillsModel(
                     it.id,
@@ -67,7 +72,7 @@ class BillsRepository @Inject constructor(
                     it.data["key_price"] as String,
                     it.data["key_type"] as String,
                     it.data["key_name"] as String,
-                    it.data["key_expiredate"] as String,
+                    dateFromFB.toDate(),
                     (it.data["key_status_paid"] as? String?)?.toInt()
                 )
             )

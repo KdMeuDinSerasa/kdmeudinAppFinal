@@ -2,17 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/btnIncome"
-        android:title="Income"
+        android:id="@+id/newsLetterFragment"
+        android:title="Notícias"
+        android:icon="@drawable/ic_news"
         />
 
     <item
         android:id="@+id/BillsFragment"
-        android:title="Accounts"
+        android:title="Contas"
+        android:icon="@drawable/ic_bills"
         />
-
-
-
-
 
 </menu>

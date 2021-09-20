@@ -1,9 +1,9 @@
 package com.example.kdmeudinheiro.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,11 +14,11 @@ import com.example.kdmeudinheiro.adapter.AdapterBillsList
 import com.example.kdmeudinheiro.bottomSheet.BottomSheet
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
+import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +27,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
     private lateinit var recyclerView: RecyclerView
-
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { billFromCb, type ->
@@ -55,7 +54,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         loadBinding()
+        checkUser()
     }
+
 
     private fun loadBinding() {
         binding.floatButtonAddBill.setOnClickListener {
@@ -87,11 +88,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                     .show()
             }
         })
-        viewModel.user.observe(viewLifecycleOwner, {
-            viewModel.getAllBills(it.uid)
-            userId = it.uid
-        })
-        viewModel.getUserId()
+
     }
 
     private fun handlerForDialogResponse(billFromCb: BillsModel, type: Int?) {
@@ -113,11 +110,20 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             viewModel.getAllBills(userId)
             Snackbar.make(requireView(), "Conta Paga Com Sucesso", Snackbar.LENGTH_LONG)
                 .show()
-        }
-        else viewModel.getAllBills(userId)
+        } else viewModel.getAllBills(userId)
     }
 
     companion object {
         fun newInstance() = BillsFragment()
+    }
+
+    fun checkUser() {
+        val mSharedPreferences =
+            requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
+        if (userId.isNullOrBlank()) {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        }
+        viewModel.getAllBills(userId)
     }
 }

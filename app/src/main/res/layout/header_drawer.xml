@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="20dp">
-
-        <ImageView
-            android:id="@+id/userAvatarDrawer"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:contentDescription="@string/user_avatar_desc"
-            android:src="@color/purple_700" />
-
-    </androidx.cardview.widget.CardView>
-
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userAvatarDrawer"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/username_label_prefs"
         android:id="@+id/userNameLoged"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"/>
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/useremail_label_prefs"
+        android:layout_marginTop="@dimen/default_10dp_margin"
         android:gravity="center"
-        android:id="@+id/userEmailLoged"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"/>
+        android:text="@string/username_label_prefs"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAvatarDrawer" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/userEmailLoged"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:gravity="center"
+        android:text="@string/useremail_label_prefs"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLoged" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

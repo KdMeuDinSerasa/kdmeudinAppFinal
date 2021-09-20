@@ -10,10 +10,10 @@
     <string name="Leisure_Bill_Label">Lazer</string>
     <string name="Monthly_Bill_Label">Mensal</string>
     <string name="Emergency_Bill_Label">Emergencial</string>
-    <string name="Tip_bills_fix_text">Contas Fixas são gastos quais o valores não mudam constantemente, por exemplo: Aluguel, Faculdade e afins.</string>
-    <string name="Tip_bills_Monthly_text"> Contas Mensais: são gastos que você tem todos os meses porém o valor pode variar, por exemplo: Luz, Agua, Gás, Academia. </string>
-    <string name="Tip_bills_Leisure_text"> Lazer: são gastos que sobre coisas que voce gasta com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
-    <string name="Tip_bills_Emergency_text">Emergencial: são os gastos inesperados, por exemplo: Remedios, Reparos em casa e etc..</string>
+    <string name="Tip_bills_fix_text">Conta Fixa: Gastos quais os valores mudam com pouca constancia, por exemplo: Aluguel, faculdade e afins.</string>
+    <string name="Tip_bills_Monthly_text"> Conta Mensal: Gastos recorrente, que o valor pode variar de maneira rapida, por exemplo: Luz, àgua, gás, academia. </string>
+    <string name="Tip_bills_Leisure_text"> Lazer: Gastos com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
+    <string name="Tip_bills_Emergency_text">Emergencial: Gastos inesperados que podem ocorrer no decorrer do mês, por exemplo: Remédios, reparos e etc..</string>
     <string name="Bill_Name_label_list_card">Nome do gasto: </string>
     <string name="Bill_Price_label_list_card">Valor do gasto: </string>
     <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
@@ -31,12 +31,14 @@
     <string name="user_prefs_label">Preferências do usuário</string>
     <string name="user_avatar_desc">User Avatar</string>
     <string name="username_label_prefs">UserName</string>
-    <string name="useremail_label_prefs">UserEmail</string>
+    <string name="useremail_label_prefs">UserEmail@mailuser.com.ca</string>
     <string name="edit_info_label">Editar Informações</string>
     <string name="voltar">Voltar</string>
     <string name="about_label_desc">Botao Sobre</string>
     <string name="insert_income_label">Insira sua renda mensal</string>
     <string name="add_label">Adicionar</string>
+    <string name ="text_tip_chart_monthly">Nas contas mensais, é dito por varias empresas como por exemplo: Nubank, que o ideal é que até 50% junto das suas contas fixas, abaixo voce vai encontar artigos e materias que podem te ajudar. </string>
+    <string name ="text_tip_chart_fix">Nas contas Fixas, é dito por varias empresas como por exemplo: Nubank, que o ideal é que até 50% junto das suas contas mensais, mas sabemos que nao é tao simples nao é mesmo? entao separamos algumas dicas para voce!!. </string>
 
-
+    <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
 </resources>
