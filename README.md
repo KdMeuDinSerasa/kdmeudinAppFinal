@@ -53,7 +53,12 @@ financial life</p>
  <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
  <p>5.2º clicking on the right one, will lead you to bills crud. </p>
  <p>6º so, ate the crud bills, you may notice two button, a plus where you can add your bills, and an "?" where is a about, to gide you at your journey here. </p>
+			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
+
+
 <p>7º if you have bills listed, you can click on it and will apper a details where you can edit or delete, and change a status thats tags the bill to payed.  </p>
+	<img width="328" alt="Screen Shot 2021-09-20 at 10 27 38" src="https://user-images.githubusercontent.com/80124800/134010437-5d4e3f89-1724-4d9b-b3b2-a578f67e8bb2.png">
+
 <p>8º now back to dashboard you will find an menu icon up left, on click will open an drawer menu, listing some info abaout yor user and contains a logout button and a user preferences button.</p>
 <p>9º clicking at user prefs you will be redirected to user preferences pagem where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
 </div>
