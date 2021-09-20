@@ -1,6 +1,7 @@
 package com.example.kdmeudinheiro.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import com.example.kdmeudinheiro.repository.*
 import com.example.kdmeudinheiro.services.NewsLetterService
 import com.example.kdmeudinheiro.services.NotificationHandler

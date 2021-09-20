@@ -72,7 +72,23 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
 
     private fun LoadViewModelAndsObservers() {
-        viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.billList.observe(viewLifecycleOwner, {
+            if (it.size == 0){
+                binding.ivArrowDown.visibility = View.VISIBLE
+                binding.tvNoBills.visibility = View.VISIBLE
+                binding.tvAddBillHint.visibility = View.VISIBLE
+                binding.progressAnimation.visibility = View.GONE
+                binding.recyclerViewIdNoXML.visibility = View.GONE
+            } else{
+                adapter.refresh(it.toMutableList())
+                binding.recyclerViewIdNoXML.visibility = View.VISIBLE
+                binding.progressAnimation.visibility = View.GONE
+                binding.ivArrowDown.visibility = View.GONE
+                binding.tvAddBillHint.visibility = View.GONE
+                binding.tvNoBills.visibility = View.GONE
+            }
+            })
+
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
                 Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
@@ -116,7 +132,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     companion object {
         fun newInstance() = BillsFragment()
     }
-
     fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)

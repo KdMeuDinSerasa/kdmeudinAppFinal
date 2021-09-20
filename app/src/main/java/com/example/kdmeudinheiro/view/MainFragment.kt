@@ -45,6 +45,12 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         checkUser()
     }
 
+    override fun onResume() {
+        binding.chartIncluded.pieChart.visibility = View.INVISIBLE
+        super.onResume()
+
+    }
+
     fun loadViewModels() {
         viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -82,8 +88,21 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
             restValue = (incomeValue?.income?.toDouble()?.minus(it!!.toDouble()))
 
         })
+
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            if (it.size >= 1 && incomeValue != null){
+                binding.chartIncluded.pieChart.visibility = View.VISIBLE
+                binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
+                binding.ivNoGraph.visibility = View.GONE
+                binding.tvNoGraph.visibility = View.GONE
+                PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            } else{
+                binding.chartIncluded.pieChart.visibility = View.GONE
+                binding.ivGraphLegend.cardLegend.visibility = View.GONE
+                binding.ivNoGraph.visibility = View.VISIBLE
+                binding.tvNoGraph.visibility = View.VISIBLE
+            }
+
         })
 
     }
