@@ -79,8 +79,10 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 binding.tvNoBills.visibility = View.VISIBLE
                 binding.tvAddBillHint.visibility = View.VISIBLE
                 binding.progressAnimation.visibility = View.GONE
+                binding.recyclerViewIdNoXML.visibility = View.GONE
             } else{
                 adapter.refresh(it.toMutableList())
+                binding.recyclerViewIdNoXML.visibility = View.VISIBLE
                 binding.progressAnimation.visibility = View.GONE
                 binding.ivArrowDown.visibility = View.GONE
                 binding.tvAddBillHint.visibility = View.GONE
