@@ -14,8 +14,9 @@
 
 
 <h4 align="center"> 
-	🚧   Projeto em desenvolvimento - Conferir a branch develop para ver o progresso de nivas funcionalidades  🚧
-    qualquer "bug" ou problema pode ser reportado por meio de uma issue ou diretamente aos devs.</h4>
+	🚧   Projeto em desenvolvimento - Conferir a branch develop para ver o progresso de novas funcionalidades  🚧
+   </h4>
+   <h5 align="center" >  qualquer "bug" ou problema pode ser reportado por meio de uma issue ou diretamente aos devs.</h5>
 
 
 ### Funcionalidades
