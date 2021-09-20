@@ -87,7 +87,7 @@ financial life</p>
 - [Glide](https://github.com/bumptech/glide)
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView)
 
-### Autors
+### Authors
 - Name: Edson Neto
 - email: edsonneto2533@gmail.com
 - [Linkedin](https://www.linkedin.com/in/edson-neto-55779b167/)
