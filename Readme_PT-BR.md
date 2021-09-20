@@ -14,7 +14,7 @@
 
 
 <h4 align="center"> 
-	🚧   Novas Funções sendo criadas  🚧
+	🚧   Novas Funções sendo criadas - Conferir a branch develop para as ultimas atualizações  🚧
 </h4>
 
 
