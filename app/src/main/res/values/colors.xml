@@ -7,10 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purpleForBg">#B36CFA</color>
-    <color name="BlueForBg">#669CF5</color>
-    <color name="YeallowForbg">#FAD65D</color>
-    <color name="PinkForbg">#DEA2DD</color>
+
 
     //Colors for graph legend
     <color name="yellow_graph">#FFEB3B</color>
@@ -22,5 +19,17 @@
     //Buttons colors
     <color name="button_pay">#8BC34A</color>
     <color name="button_delete">#F44336</color>
+
+    //menus colors
+    <color name="menu_color">#669CF5</color>
+
+    //bgColors
+    <color name="purpleForBg">#C289FB</color>
+    <color name="BlueForBg">#669CF5</color>
+    <color name="YeallowForbg">#FAD65D</color>
+    <color name="PinkForbg">#DEA2DD</color>
+    <color name="HeartPinkForbg">#C92F86</color>
+    <color name="OrangePinkForbg">#F39923 </color>
+
 
 </resources>

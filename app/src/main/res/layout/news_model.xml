@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp"
+        android:layout_margin="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitleNews"
+                android:layout_width="@dimen/default_0dp"
+                android:layout_height="wrap_content"
+                android:text="Nome da noticia"
+                android:layout_marginLeft="10dp"
+                android:maxLines="2"
+                app:layout_constraintBottom_toBottomOf="@+id/ivImageNews"
+                app:layout_constraintEnd_toStartOf="@+id/ivImageNews"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivImageNews"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toTopOf="@id/tvSourceNews"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.111" />
+
+            <TextView
+                android:id="@+id/tvSourceNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Fonte da noticia"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvDateNews"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleNews" />
+
+            <TextView
+                android:id="@+id/tvDateNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Data da noticia"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSourceNews"
+                app:layout_constraintLeft_toRightOf="@id/tvSourceNews"
+                app:layout_constraintRight_toRightOf="@id/tvTitleNews"
+                app:layout_constraintTop_toTopOf="@+id/tvSourceNews" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

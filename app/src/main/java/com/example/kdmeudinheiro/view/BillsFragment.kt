@@ -132,23 +132,19 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         viewModel.getAllBills(userId)
     }
 
-    fun searchBill() {
+    private fun searchBill() {
         binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0.let {
                     if (it?.length!! >= 2)
-                       viewModel.filterBill(it.toString(), userId)
+                        viewModel.filterBill(it.toString(), userId)
                     if (it.isEmpty())
                         viewModel.getAllBills(userId)
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-            }
+            override fun afterTextChanged(p0: Editable?) {}
         })
     }
 }

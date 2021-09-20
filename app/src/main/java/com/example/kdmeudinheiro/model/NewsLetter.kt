@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ReciviedArticles(
 
     @SerializedName("articles")
-    val news: NewsLetter
+    val news: List<NewsLetter>
 )
 
 data class NewsLetter(
