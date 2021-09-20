@@ -1,9 +1,9 @@
 
 <h1 align="center">WIsMyMoney</h1>
 
-##Languages
-- [English](https://kotlinlang.org)
-- [Potuguês](https://kotlinlang.org)
+## Languages
+- [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
+- [Português](https://kotlinlang.org)
 
 
 ## Project Description
