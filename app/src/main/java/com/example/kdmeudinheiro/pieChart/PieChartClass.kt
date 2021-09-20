@@ -2,16 +2,13 @@ package com.example.kdmeudinheiro.pieChart
 
 import android.graphics.Color
 import android.view.View
-
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
-import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -30,7 +27,6 @@ class PieChartClass(
 
     private lateinit var binding: MainFragmentBinding
 
-
     fun loadChart() {
 
         binding = MainFragmentBinding.bind(parentView)
@@ -42,7 +38,6 @@ class PieChartClass(
         category.add("")
         category.add("")
         /* Aways create the same quantity */
-
 
         /* values colors*/
         val colors = java.util.ArrayList<Int>()
@@ -99,7 +94,6 @@ class PieChartClass(
         val dataSet = PieData(cat, mpieDataset)
 
         //bindings
-
         binding.chartIncluded.pieChart.data = dataSet
         binding.chartIncluded.pieChart.holeRadius = 2f
         binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
@@ -108,10 +102,10 @@ class PieChartClass(
         binding.chartIncluded.pieChart.animateXY(3000, 3000)
         binding.chartIncluded.pieChart.elevation = 50f
         binding.chartIncluded.pieChart.legend.isEnabled = false
-
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
 
     }
+
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
         when (e?.xIndex) {
             0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)

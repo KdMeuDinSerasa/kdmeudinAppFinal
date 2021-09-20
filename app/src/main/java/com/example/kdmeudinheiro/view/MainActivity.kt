@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         workManager.enqueueUniquePeriodicWork("Check_expired_bills", ExistingPeriodicWorkPolicy.KEEP, mWorkRequest)
     }
 
-
-
     fun updateUser() {
         viewModel.userLoged()
     }

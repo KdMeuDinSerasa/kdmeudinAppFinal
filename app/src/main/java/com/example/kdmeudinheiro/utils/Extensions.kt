@@ -15,7 +15,8 @@ suspend fun <T> Task<T>.await(): T? {
         return if (e == null) {
             if (isCanceled) {
                 throw CancellationException(
-                    "Task $this was cancelled normally.")
+                    "Task $this was cancelled normally."
+                )
             } else {
                 result
             }
@@ -38,12 +39,12 @@ suspend fun <T> Task<T>.await(): T? {
 fun String.isValidEmail() =
     !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-fun Double.formatCurrency():String {
+fun Double.formatCurrency(): String {
     val dec = DecimalFormat("#,##0.00")
     return "R$ ${dec.format(this)}"
 }
 
 
-fun Date.adjustYear(): String{
+fun Date.adjustYear(): String {
     return this.toString().substring(this.toString().length - 4)
 }

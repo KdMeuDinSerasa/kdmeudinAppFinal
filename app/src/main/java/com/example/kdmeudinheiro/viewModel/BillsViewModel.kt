@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
@@ -22,7 +23,6 @@ class BillsViewModel @Inject constructor(
     var billList: LiveData<List<BillsModel>> = _billList
     private val _error = MutableLiveData<String>()
     var error: LiveData<String> = _error
-
 
     fun getAllBills(idUser: String) {
         viewModelScope.launch {

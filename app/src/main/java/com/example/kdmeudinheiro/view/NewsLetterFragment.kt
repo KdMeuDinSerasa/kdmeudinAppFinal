@@ -2,12 +2,10 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kdmeudinheiro.R
@@ -35,20 +33,21 @@ class NewsLetterFragment : Fragment(R.layout.news_letter_fragment), ClickNews {
 
     }
 
-    fun loadViewModels(){
-        viewModel.mNewsList.observe(viewLifecycleOwner,{
+    fun loadViewModels() {
+        viewModel.mNewsList.observe(viewLifecycleOwner, {
             adapter.update(it.news)
             binding.progressAnimation.visibility = View.GONE
         })
     }
 
-    fun loadComponents(){
-        binding.recyclerNews.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    fun loadComponents() {
+        binding.recyclerNews.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerNews.adapter = adapter
 
         binding.recyclerNews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING){
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
 
                 }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && !recyclerView.canScrollVertically(
