@@ -32,8 +32,9 @@
 
 - Android Studio 
 - Java JDK
-- AVD
- ou Android SmartPhone, versoes de API 23 ou superior/ android 6.0 Marshmalow
+- AVD  
+
+ ou Android SmartPhone, versoes de API 23/ android 6.0 Marshmalow ou superior
 
 ## Como usar o App
 <h4 align="center"> 
