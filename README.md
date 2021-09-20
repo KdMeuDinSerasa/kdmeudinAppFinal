@@ -34,7 +34,7 @@ financial life</p>
 
 - Android Studio
 - Java JDK
-- AVD or Android SmartPhone later than API level 21/ Android 5.0 Lollipop
+- AVD or Android SmartPhone later than API level 23/ Android 6.0 Marshmallow
 
 ### Dependencies 
     
