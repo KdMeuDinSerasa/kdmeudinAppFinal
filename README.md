@@ -52,7 +52,12 @@ financial life</p>
  <p>email: janeDoe@gmail.com </p>
  <p>password: DoeJane21 </p>
  <p>3.1º on Sign-up screen you have an checkbox to save your user and stay logged </p>
+	<img width="216" alt="Screen Shot 2021-09-20 at 11 45 58" src="https://user-images.githubusercontent.com/80124800/134022685-5f7fe637-a85c-4232-967a-d1bedef22eea.png">
+
  <p>4º so now you are at the app, at right side upwords you will find a plus sign, click to add you Monthly Income.  </p>
+	<img width="315" alt="Screen Shot 2021-09-20 at 11 51 00" src="https://user-images.githubusercontent.com/80124800/134023632-5c64473d-31dd-4ea1-aa12-bd8c15adadb0.png">
+<img width="323" alt="Screen Shot 2021-09-20 at 11 52 44" src="https://user-images.githubusercontent.com/80124800/134023723-bfd9a825-d0e4-4eea-bde3-46c43a56f2a2.png">
+
  <p>5º at the bottom menu bar, you will find tow buttons, one leads you to the news letter and the other to bills crud. </p>
  <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
  <p>5.2º clicking on the right one, will lead you to bills crud. </p>
