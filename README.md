@@ -66,7 +66,11 @@ financial life</p>
 
 
  <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
+	<img width="310" alt="Screen Shot 2021-09-20 at 13 42 54" src="https://user-images.githubusercontent.com/80124800/134041042-34d2d7d7-7074-4af7-babc-ef5e93e009cd.png">
+
  <p>5.2º clicking on the right one, will lead you to bills crud. </p>
+	<img width="323" alt="Screen Shot 2021-09-20 at 13 44 06" src="https://user-images.githubusercontent.com/80124800/134041164-6838ab65-6521-41c2-a9c0-78b103e75f58.png">
+
  <p>6º so, at the crud bills, you may notice two buttons, a plus where you can add your bills, and an "?" where is a about, to gide you at your journey here. </p>
 			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
 	<img width="357" alt="Screen Shot 2021-09-20 at 13 14 54" src="https://user-images.githubusercontent.com/80124800/134037129-3c0625c3-cb6b-4ca0-8be9-dfc60ba6ad77.png">
@@ -80,6 +84,11 @@ financial life</p>
 
 
 <p>9º clicking at user prefs you will be redirected to user preferences page where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
+	<img width="325" alt="Screen Shot 2021-09-20 at 13 41 02" src="https://user-images.githubusercontent.com/80124800/134040801-b28e7569-a968-49f5-aa2b-0f271e2120c8.png">
+<img width="311" alt="Screen Shot 2021-09-20 at 13 40 56" src="https://user-images.githubusercontent.com/80124800/134041418-11ddd44c-5b70-47fb-85f6-cd8da9996028.png">
+<img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
+
+
 </div>
 
 
