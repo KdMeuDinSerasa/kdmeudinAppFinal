@@ -118,7 +118,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     companion object {
         fun newInstance() = BillsFragment()
     }
-    fun checkUser(){
+    fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
