@@ -100,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
                 binding.etUserPassword.text.toString()
             )
 
-        } else Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
     }
 
     fun loadBottomSheet() {

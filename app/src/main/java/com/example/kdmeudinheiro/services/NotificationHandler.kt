@@ -21,6 +21,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
     }
 
 
+
     /**
      * here we are creating the channel, we have to create a channel
      * for each type of notifications, so if the user
