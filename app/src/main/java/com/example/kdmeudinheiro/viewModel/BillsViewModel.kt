@@ -18,11 +18,6 @@ class BillsViewModel @Inject constructor(
 ): ViewModel() {
 
 
-    private val _user = MutableLiveData<FirebaseUser>()
-    var user: LiveData<FirebaseUser> = _user
-
-
-
     private val _billList = MutableLiveData<List<BillsModel>>()
     var billList: LiveData<List<BillsModel>> = _billList
     private val _error = MutableLiveData<String>()

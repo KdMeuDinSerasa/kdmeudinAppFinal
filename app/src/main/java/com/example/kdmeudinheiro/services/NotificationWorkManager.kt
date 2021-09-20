@@ -21,9 +21,15 @@ import javax.inject.Inject
 class NotificationWorkManager(val context: Context, param: WorkerParameters) :
     Worker(context, param) {
 
-    private val mBillsRepository = BillsRepository(FirebaseFirestore.getInstance())
+    private val mBillsRepository  = BillsRepository(FirebaseFirestore.getInstance())
 
     override fun doWork(): Result {
+
+        checkBills()
+        return Result.success()
+    }
+
+    fun checkBills(){
         val mSharedPreferences =
             context.getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         val userId = mSharedPreferences.getString(KeysShared.USERID.key, "")
@@ -48,7 +54,6 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
 
             }
         }
-        return Result.success()
     }
 
 }
