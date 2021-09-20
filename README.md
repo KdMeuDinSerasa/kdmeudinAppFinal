@@ -31,10 +31,30 @@ financial life</p>
 
 ### Requirements 
 
-
 - Android Studio
 - Java JDK
 - AVD or Android SmartPhone later than API level 23/ Android 6.0 Marshmallow
+
+## How to use the APP
+
+<div>
+<p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
+ <p>2º run the downloaded apk to install </p>
+ <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
+ <p>just for test finality we have an fake user that you guys can use.  </p>
+ <p>email: userTest@gmail.com </p>
+ <p>password: DoeJane21 </p>
+ <p>4º so now you are at the app, at right side upwords you will find a plus sign, click to add you Monthly Income.  </p>
+ <p>5º at the bottom menu bar, you will find tow buttons, one leads you to the news letter and the other to bills crud. </p>
+ <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
+ <p>5.2º clicking on the right one, will lead you to bills crud. </p>
+ <p>6º so, ate the crud bills, you may notice two button, a plus where you can add your bills, and an "?" where is a about, to gide you at your journey here. </p>
+<p>7º if you have bills listed, you can click on it and will apper a details where you can edit or delete, and change a status thats tags the bill to payed.  </p>
+<p>8º now back to dashboard you will find an menu icon up left, on click will open an drawer menu, listing some info abaout yor user and contains a logout button and a user preferences button.</p>
+<p>9º clicking at user prefs you will be redirected to user preferences pagem where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
+</div>
+
+
 
 ### Dependencies 
     
