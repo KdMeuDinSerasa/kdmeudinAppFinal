@@ -3,7 +3,7 @@
 
 ## Languages
 - [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
-- [Português](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/Readme_PT-BR)
+- [Português](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/Readme_PT-BR.md)
 
 ## APK Beta
 [Link](https://drive.google.com/file/d/15w7MBMkJKgamNX24or0cSU86bQ8D2abK/view?usp=sharing)
