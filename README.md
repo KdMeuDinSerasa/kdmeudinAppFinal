@@ -3,7 +3,7 @@
 
 ## Languages
 - [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
-- [Português](https://kotlinlang.org)
+- [Português](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/Readme_PT-BR)
 
 
 ## Project Description
