@@ -1,6 +1,10 @@
 
 <h1 align="center">WIsMyMoney</h1>
 
+##Languages
+- [English](https://kotlinlang.org)
+- [Potuguês](https://kotlinlang.org)
+
 
 ## Project Description
 <p align="center">An application to show how the user spends his incomes and with hints of how to improve his
