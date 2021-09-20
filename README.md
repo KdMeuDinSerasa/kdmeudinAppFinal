@@ -42,6 +42,7 @@ financial life</p>
 
 <div>
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
+<img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" > 
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
 	<img width="225" alt="Screen Shot 2021-09-20 at 11 39 03" src="https://user-images.githubusercontent.com/80124800/134022391-4df4bd77-7b50-4135-9225-e96de09c76af.png">
@@ -50,7 +51,9 @@ financial life</p>
 
  <p>just for test finality we have an fake user that you guys can use.  </p>
  <p>email: janeDoe@gmail.com </p>
+ <img width="314" alt="Screen Shot 2021-09-20 at 13 19 37" src="https://user-images.githubusercontent.com/80124800/134037641-3d491307-3255-4190-b106-c697aa29e280.png">
  <p>password: DoeJane21 </p>
+  //todo inplement photo
  <p>3.1º on Sign-up screen you have an checkbox to save your user and stay logged </p>
 	<img width="216" alt="Screen Shot 2021-09-20 at 11 45 58" src="https://user-images.githubusercontent.com/80124800/134022685-5f7fe637-a85c-4232-967a-d1bedef22eea.png">
 
