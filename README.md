@@ -53,8 +53,8 @@ financial life</p>
  <p>email: janeDoe@gmail.com </p>
  <img width="314" alt="Screen Shot 2021-09-20 at 13 19 37" src="https://user-images.githubusercontent.com/80124800/134037641-3d491307-3255-4190-b106-c697aa29e280.png">
  <p>password: DoeJane21 </p>
- <p>3.1º on Sign-up sc<img width="306" alt="Screen Shot 2021-09-20 at 13 20 05" src="https://user-images.githubusercontent.com/80124800/134039823-b6215a80-3318-46fe-bb8f-8ea9628cd956.png">
-reen you have an checkbox to save your user and stay logged </p>
+	<img width="306" alt="Screen Shot 2021-09-20 at 13 20 05" src="https://user-images.githubusercontent.com/80124800/134039823-b6215a80-3318-46fe-bb8f-8ea9628cd956.png">
+ <p>3.1º on Sign-up screen you have an checkbox to save your user and stay logged </p>
 	<img width="216" alt="Screen Shot 2021-09-20 at 11 45 58" src="https://user-images.githubusercontent.com/80124800/134022685-5f7fe637-a85c-4232-967a-d1bedef22eea.png">
 
  <p>4º so now you are at the app, at right side upwords you will find a plus sign, click to add you Monthly Income.  </p>
