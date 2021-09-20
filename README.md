@@ -92,11 +92,12 @@ financial life</p>
 - email: edsonneto2533@gmail.com
 - [Linkedin](https://www.linkedin.com/in/edson-neto-55779b167/)
 
-
+----------------------------
 - Name: Giovanni Raposo
 - email: g.raposo@outlook.com.br
 - [Linkedin](https://www.linkedin.com/in/giovanni-raposo-pinheiro/)
 
+----------------------------
 
 - Name: Andrei Campigotto
 - email: andreicampigotto@icloud.com
