@@ -33,17 +33,16 @@
 
 - Android Studio 
 - Java JDK
-- AVD  
-
- ou Android SmartPhone, versoes de API 23/ android 6.0 Marshmalow ou superior
+- AVD
+ ou Android SmartPhone, versoes de API 23 ou superior/ android 6.0 Marshmalow
 
 ## Como usar o App
 <h4 align="center"> 
-	🚧 🚨  Atencao - o aplicativo usa internet para funcionar. 🚨 🚧 
+	🚧 🚨  Atenção - o aplicativo usa internet para funcionar. 🚨 🚧 
 </h4>
 
 <div>
-<p> 1º Baixe p app beta apk no drive. (Link APK beta acima) </p>
+<p> 1º Baixe o app beta apk no drive. (Link APK beta acima) </p>
 <img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" > 
  <p>2º Rode o apk baixado para instalar </p>
  <p>3º Agora voce tem duas opcoes, login ou cadastro, voce pode criar uma conta para testar.  </p>
@@ -56,36 +55,36 @@
  <img width="314" alt="Screen Shot 2021-09-20 at 13 19 37" src="https://user-images.githubusercontent.com/80124800/134037641-3d491307-3255-4190-b106-c697aa29e280.png">
  <p>senha: DoeJane21 </p>
 	<img width="306" alt="Screen Shot 2021-09-20 at 13 20 05" src="https://user-images.githubusercontent.com/80124800/134039823-b6215a80-3318-46fe-bb8f-8ea9628cd956.png">
- <p>3.1º Na tela de login voce tem uma opcao de marcar salvar usuario para ficar logado. </p>
+ <p>3.1º Na tela de login você tem uma opção de marcar salvar usuario para ficar logado. </p>
 	<img width="216" alt="Screen Shot 2021-09-20 at 11 45 58" src="https://user-images.githubusercontent.com/80124800/134022685-5f7fe637-a85c-4232-967a-d1bedef22eea.png">
 
- <p>4º Agora voce esta na home, acima na direita voce vai encontrar um icone de +, click nele para adicionar sua renda mensal. </p>
+ <p>4º Agora você esta na home, acima na direita você vai encontrar um icone de +, click nele para adicionar sua renda mensal. </p>
 	<img width="315" alt="Screen Shot 2021-09-20 at 11 51 00" src="https://user-images.githubusercontent.com/80124800/134023632-5c64473d-31dd-4ea1-aa12-bd8c15adadb0.png">
 <img width="323" alt="Screen Shot 2021-09-20 at 11 52 44" src="https://user-images.githubusercontent.com/80124800/134023723-bfd9a825-d0e4-4eea-bde3-46c43a56f2a2.png">
 
- <p>5º No menu inferior, existem dois botoes, um te leva ate as noticias o outro te leva a tela das contas </p>
+ <p>5º No menu inferior, existem dois botões, um te leva ate as noticias o outro te leva a tela das contas </p>
 	<img width="320" alt="Screen Shot 2021-09-20 at 13 10 46" src="https://user-images.githubusercontent.com/80124800/134036481-0c91378d-0ef6-4aad-a5ff-fb3484b60240.png">
 
 
- <p>5.1º Clickando no da esquerda,te leva a tela das noticias onde voce encontra as ultimas noticias sobre financas e economia. </p>
+ <p>5.1º Clickando no da esquerda,te leva a tela das noticias onde você encontra as ultimas notícias sobre financas e economia. </p>
 	<img width="310" alt="Screen Shot 2021-09-20 at 13 42 54" src="https://user-images.githubusercontent.com/80124800/134041042-34d2d7d7-7074-4af7-babc-ef5e93e009cd.png">
 
- <p>5.2º clickando no da direita voce é levado a tela de contas. </p>
+ <p>5.2º clickando no da direita você é levado a tela de contas. </p>
 	<img width="323" alt="Screen Shot 2021-09-20 at 13 44 06" src="https://user-images.githubusercontent.com/80124800/134041164-6838ab65-6521-41c2-a9c0-78b103e75f58.png">
 
- <p>6º Bom,na tela de contas, voce deve notar dois icones, um + onde voce adiciona novas contas , e uma interrogacao onde tem um sobre que ira lhe ajudar no cadastro das contas.</p>
+ <p>6º Bom,na tela de contas, você deve notar dois icones, um + onde você adiciona novas contas , e uma interrogação onde tem um sobre que ira lhe ajudar no cadastro das contas.</p>
 			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
 	<img width="357" alt="Screen Shot 2021-09-20 at 13 14 54" src="https://user-images.githubusercontent.com/80124800/134037129-3c0625c3-cb6b-4ca0-8be9-dfc60ba6ad77.png">
 	<img width="320" alt="Screen Shot 2021-09-20 at 13 16 34" src="https://user-images.githubusercontent.com/80124800/134037173-a1737493-59b6-4700-bb6d-37262059e9c9.png">
 
-<p>7º Se voce tiver contas cadastradas,voce pode clicar sobre uma entao os detalhes vao aperecer lhe dando as opcoes de edicao e exclusao, tambem tem a opcao de marcar com paga. futuramente falaremos mais sobre esta opcao. </p>
+<p>7º Se você tiver contas cadastradas,você pode clicar sobre uma entao os detalhes vão aperecer lhe dando as opcoes de edição e exclusão, tambem tem a opção de marcar com paga. futuramente falaremos mais sobre esta opção. </p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 10 27 38" src="https://user-images.githubusercontent.com/80124800/134010437-5d4e3f89-1724-4d9b-b3b2-a578f67e8bb2.png">
 
-<p>8ºDe volta a home voce ira encontrar um icone de menu acima na direita, ao clickar o menu se abre, listando informacoes do usuario e com dois botoes, sair e preferencias.</p>
+<p>8ºDe volta a home você ira encontrar um icone de menu acima na esquerda, ao clickar o menu se abre, listando informações do usuário e com dois botões, sair e preferências.</p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 11 06 02" src="https://user-images.githubusercontent.com/80124800/134016448-d20f2490-c794-44aa-87e9-76e18807e5ee.png"><img width="322" alt="Screen Shot 2021-09-20 at 11 07 34" src="https://user-images.githubusercontent.com/80124800/134016725-cf94ec45-c44b-40a0-9b5f-46fb0f936ad1.png">
 
 
-<p>9º clickando em preferencias de usuario voce é redirecionado a uma pagaina onde tem informacoes de usuario, onde pode configurar notificacoes, mudar o nome e ao clickar sobre o avatar pode tambem escolher sua foto de perfil. </p>
+<p>9º clickando em preferências de usuário você é redirecionado a uma pagina onde tem informações de usuário, onde pode configurar notificações, mudar o nome e ao clickar sobre o avatar pode tambem escolher sua foto de perfil. </p>
 	<img width="325" alt="Screen Shot 2021-09-20 at 13 41 02" src="https://user-images.githubusercontent.com/80124800/134040801-b28e7569-a968-49f5-aa2b-0f271e2120c8.png">
 <img width="311" alt="Screen Shot 2021-09-20 at 13 40 56" src="https://user-images.githubusercontent.com/80124800/134041418-11ddd44c-5b70-47fb-85f6-cd8da9996028.png">
 <img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
