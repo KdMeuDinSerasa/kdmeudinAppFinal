@@ -15,7 +15,7 @@ financial life</p>
 
 
 <h4 align="center"> 
-	🚧   work in progress  🚧
+	🚧   work in progress - Check develop Branch for the latest updates  🚧
 </h4>
 
 
