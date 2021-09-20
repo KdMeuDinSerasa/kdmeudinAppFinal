@@ -10,10 +10,10 @@
     <string name="Leisure_Bill_Label">Lazer</string>
     <string name="Monthly_Bill_Label">Mensal</string>
     <string name="Emergency_Bill_Label">Emergencial</string>
-    <string name="Tip_bills_fix_text">Conta Fixa: São gastos quais os valores não mudam constantemente, por exemplo: Aluguel, faculdade e afins.</string>
-    <string name="Tip_bills_Monthly_text"> Conta Mensal: São gastos que você tem todos os meses porém o valor pode variar, por exemplo: Luz, àgua, gás, academia. </string>
-    <string name="Tip_bills_Leisure_text"> Lazer: São gastos sobre coisas que você gasta com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
-    <string name="Tip_bills_Emergency_text">Emergencial: São os gastos inesperados que podem ocorrer no decorrer do mês, por exemplo: Remédios, reparos em casa e etc..</string>
+    <string name="Tip_bills_fix_text">Conta Fixa: Gastos quais os valores mudam com pouca constancia, por exemplo: Aluguel, faculdade e afins.</string>
+    <string name="Tip_bills_Monthly_text"> Conta Mensal: Gastos recorrente, que o valor pode variar de maneira rapida, por exemplo: Luz, àgua, gás, academia. </string>
+    <string name="Tip_bills_Leisure_text"> Lazer: Gastos com sigo, por exemplo: Aquela blusinha ou o Netflix e etc. </string>
+    <string name="Tip_bills_Emergency_text">Emergencial: Gastos inesperados que podem ocorrer no decorrer do mês, por exemplo: Remédios, reparos e etc..</string>
     <string name="Bill_Name_label_list_card">Nome do gasto: </string>
     <string name="Bill_Price_label_list_card">Valor do gasto: </string>
     <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
@@ -43,5 +43,5 @@
     <string name="no_bills_hint"><![CDATA[Adicione uma conta aqui ->]]></string>
     <string name="no_graph">Ainda não há informações suficientes para a composição do gráfico</string>
 
-
+    <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
 </resources>

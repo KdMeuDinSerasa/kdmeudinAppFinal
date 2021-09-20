@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kdmeudinheiro.model.NewsLetter
 import com.example.kdmeudinheiro.model.ReciviedArticles
 import com.example.kdmeudinheiro.repository.NewsLetterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -3,12 +3,14 @@
 
     <item
         android:id="@+id/newsLetterFragment"
-        android:title="Income"
+        android:title="Notícias"
+        android:icon="@drawable/ic_news"
         />
 
     <item
         android:id="@+id/BillsFragment"
-        android:title="Accounts"
+        android:title="Contas"
+        android:icon="@drawable/ic_bills"
         />
 
 </menu>

@@ -105,7 +105,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
     fun getIncomeAndBills(userId: String) {
         viewModelScope.launch {
             var bills = mBillsRepository.getBills(userId)
@@ -124,6 +123,4 @@ class MainViewModel @Inject constructor(
             _articlesList.value = mArticlesRepository.getArticles()
         }
     }
-
-
 }

@@ -28,8 +28,6 @@ class UserPreferencesViewModel @Inject constructor(private val mUserRepository: 
     val imgUser: LiveData<Uri> = _imgUser
 
 
-
-
     fun uploadImgToFirebase(img: String, imgUri: Uri){
         mUserRepository.uploadImgToFirebase(img, imgUri){ img, error ->
             if (img != null) _imgUser.value = img
@@ -49,7 +47,6 @@ class UserPreferencesViewModel @Inject constructor(private val mUserRepository: 
         }
 
     }
-
 
     fun getUserById(id: String){
         viewModelScope.launch {
