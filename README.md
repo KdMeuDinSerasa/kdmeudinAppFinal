@@ -42,8 +42,9 @@ financial life</p>
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
  <p>just for test finality we have an fake user that you guys can use.  </p>
- <p>email: userTest@gmail.com </p>
+ <p>email: janeDoe@gmail.com </p>
  <p>password: DoeJane21 </p>
+ <p>3.1º on Sign-up screen you have an checkbox to save your user and stay logged </p>
  <p>4º so now you are at the app, at right side upwords you will find a plus sign, click to add you Monthly Income.  </p>
  <p>5º at the bottom menu bar, you will find tow buttons, one leads you to the news letter and the other to bills crud. </p>
  <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
