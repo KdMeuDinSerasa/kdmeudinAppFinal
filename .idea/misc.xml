@@ -38,7 +38,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/bills_at_dashboard_layout.xml" value="0.39014373716632444" />
-        <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.336734693877551" />
         <entry key="app/src/main/res/layout/crud_bill_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/date_picker.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/graphic_legend.xml" value="0.2015625" />
@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/item_list_chart.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.32814710042432815" />
+        <entry key="app/src/main/res/layout/news_letter_fragment.xml" value="0.12208713272543059" />
         <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
         <entry key="app/src/main/res/layout/user_preferences_fragment.xml" value="0.375" />

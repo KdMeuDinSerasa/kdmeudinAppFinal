@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //create the workRequest with the details of the routine
         val mWorkRequest =
-            PeriodicWorkRequestBuilder<NotificationWorkManager>(15, TimeUnit.MINUTES).setConstraints(
+            PeriodicWorkRequestBuilder<NotificationWorkManager>(60, TimeUnit.MINUTES).setConstraints(
                 consts
             ).build()
 

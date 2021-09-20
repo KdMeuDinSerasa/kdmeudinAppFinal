@@ -73,7 +73,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
 
     private fun LoadViewModelAndsObservers() {
-        viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.billList.observe(viewLifecycleOwner, {
+            adapter.refresh(it.toMutableList())
+            binding.progressAnimation.visibility = View.GONE})
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
                 Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
