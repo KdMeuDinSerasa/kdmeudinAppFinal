@@ -74,8 +74,20 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun LoadViewModelAndsObservers() {
         viewModel.billList.observe(viewLifecycleOwner, {
-            adapter.refresh(it.toMutableList())
-            binding.progressAnimation.visibility = View.GONE})
+            if (it.size == 0){
+                binding.ivArrowDown.visibility = View.VISIBLE
+                binding.tvNoBills.visibility = View.VISIBLE
+                binding.tvAddBillHint.visibility = View.VISIBLE
+                binding.progressAnimation.visibility = View.GONE
+            } else{
+                adapter.refresh(it.toMutableList())
+                binding.progressAnimation.visibility = View.GONE
+                binding.ivArrowDown.visibility = View.GONE
+                binding.tvAddBillHint.visibility = View.GONE
+                binding.tvNoBills.visibility = View.GONE
+            }
+            })
+
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
                 Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
