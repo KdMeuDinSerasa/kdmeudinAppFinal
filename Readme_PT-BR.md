@@ -10,7 +10,7 @@
 
 
 ## Descrição do Projeto
-<p align="center">Uma aplicação para demonstrar como o usuario usa sua renda com dicas de como organizar sua vida financeira</p>
+<p align="center">Uma aplicação para demonstrar como o usuario usa sua renda e como melhorar sua organização financeira com dicas e artigos.</p>
 
 
 <h4 align="center"> 
@@ -20,11 +20,12 @@
 
 ### Funcionalidades
 
-- [x] Cadastro do usuario via Firebase
+- [x] Cadastro do usuario/autenticação via Firebase
 - [x] Gráfico pizza demonstrando os gastos
 - [x] CRUD de contas
 - [x] API para notícias sobre a economia
-- [x] Perfil do úsuario
+- [x] Perfil do úsuario e preferências.
+- [x] Notificações de vencimento das contas.
 
 
 ### Pré-Requisitos 
@@ -32,7 +33,7 @@
 
 - Android Studio
 - Java JDK
-- AVD ou Android SmartPhone
+- AVD ou Android SmartPhone, versoes de API 23 ou superior/ android 6.0 Marshmalow
 
 ### Dependências 
     
