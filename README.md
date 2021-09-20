@@ -1,5 +1,5 @@
 
-<h1 align="center">WIsMyMoney</h1>
+<h1 align="center">WhereIsMyMoney</h1>
 
 ## Languages
 - [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
@@ -21,11 +21,12 @@ financial life</p>
 
 ### Functionalities
 
-- [x] User Registration in firebase
+- [x] User Registration/Auth in firebase
 - [x] Chart showing a quick demonstration of expends
 - [x] CRUD in Bills
-- [x] API for news about economy
-- [x] User profile 
+- [x] API for news about economy and business.
+- [x] User profile and preferences.
+- [x] Push Notifications.
 
 
 ### Requirements 
@@ -33,7 +34,7 @@ financial life</p>
 
 - Android Studio
 - Java JDK
-- AVD or Android SmartPhone
+- AVD or Android SmartPhone later than API level 21/ Android 5.0 Lollipop
 
 ### Dependencies 
     
