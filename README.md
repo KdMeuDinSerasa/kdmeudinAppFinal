@@ -59,6 +59,9 @@ financial life</p>
 <img width="323" alt="Screen Shot 2021-09-20 at 11 52 44" src="https://user-images.githubusercontent.com/80124800/134023723-bfd9a825-d0e4-4eea-bde3-46c43a56f2a2.png">
 
  <p>5º at the bottom menu bar, you will find tow buttons, one leads you to the news letter and the other to bills crud. </p>
+	<img width="320" alt="Screen Shot 2021-09-20 at 13 10 46" src="https://user-images.githubusercontent.com/80124800/134036481-0c91378d-0ef6-4aad-a5ff-fb3484b60240.png">
+
+
  <p>5.1º clicking on the left one, will lead you to a news letter with the latest business and finacial articles. </p>
  <p>5.2º clicking on the right one, will lead you to bills crud. </p>
  <p>6º so, at the crud bills, you may notice two buttons, a plus where you can add your bills, and an "?" where is a about, to gide you at your journey here. </p>
