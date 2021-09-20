@@ -5,6 +5,9 @@
 - [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
 - [Português](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/Readme_PT-BR)
 
+## APK Beta
+[Link](https://drive.google.com/file/d/15w7MBMkJKgamNX24or0cSU86bQ8D2abK/view?usp=sharing)
+
 
 ## Project Description
 <p align="center">An application to show how the user spends his incomes and with hints of how to improve his
