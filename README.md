@@ -44,6 +44,10 @@ financial life</p>
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
+	<img width="225" alt="Screen Shot 2021-09-20 at 11 39 03" src="https://user-images.githubusercontent.com/80124800/134022391-4df4bd77-7b50-4135-9225-e96de09c76af.png">
+<img width="229" alt="Screen Shot 2021-09-20 at 11 42 16" src="https://user-images.githubusercontent.com/80124800/134022406-bbe33111-3052-4baa-b4da-430220a6a570.png">
+
+
  <p>just for test finality we have an fake user that you guys can use.  </p>
  <p>email: janeDoe@gmail.com </p>
  <p>password: DoeJane21 </p>
