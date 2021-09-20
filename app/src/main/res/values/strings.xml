@@ -41,6 +41,7 @@
     <string name ="text_tip_chart_fix">Nas contas Fixas, é dito por varias empresas como por exemplo: Nubank, que o ideal é que até 50% junto das suas contas mensais, mas sabemos que nao é tao simples nao é mesmo? entao separamos algumas dicas para voce!!. </string>
     <string name="no_bills_msg">Ainda não possui contas? Adicione agora!</string>
     <string name="no_bills_hint"><![CDATA[Adicione uma conta aqui ->]]></string>
+    <string name="no_graph">Ainda não há informações suficientes para a composição do gráfico</string>
 
 
 </resources>

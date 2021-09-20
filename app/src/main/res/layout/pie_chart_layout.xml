@@ -3,6 +3,7 @@
     android:layout_height="wrap_content">
 
     <com.github.mikephil.charting.charts.PieChart
+        android:visibility="invisible"
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
