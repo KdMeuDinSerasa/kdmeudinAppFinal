@@ -36,6 +36,9 @@ financial life</p>
 - AVD or Android SmartPhone later than API level 23/ Android 6.0 Marshmallow
 
 ## How to use the APP
+<h4 align="center"> 
+	🚧 🚨  Atention - the application uses internet 🚨 🚧 
+</h4>
 
 <div>
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
