@@ -3,6 +3,7 @@ package com.example.kdmeudinheiro
 import android.app.Activity
 import com.example.kdmeudinheiro.interfaces.addObjectListener
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
@@ -39,6 +40,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     private lateinit var mCreateUser: CreateUser
     private lateinit var mCreateBill: CreateBill
+    private lateinit var mCreateIncome: CreateIncome
 
     private var result = DEFAULT
 
@@ -195,6 +197,7 @@ class UserRepositoryFirestore: addObjectListener {
         }
         mCreateUser = CreateUser(this, db)
         mCreateBill = CreateBill(this, db)
+        mCreateIncome = CreateIncome(this, db)
     }
 
     @Test
@@ -233,6 +236,24 @@ class UserRepositoryFirestore: addObjectListener {
         assertThat(result).isEqualTo(FAILURE)
     }
 
+    @Test
+    fun addIncomeSuccess_test(){
+        val mIncome = IncomeModel("", "", "")
+        Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
+        Mockito.`when`(collectionReference.add(mIncome)).thenReturn(successTask)
+        mCreateIncome.addIncome(mIncome)
+        assertThat(result).isEqualTo(SUCCESS)
+    }
+
+    @Test
+    fun addIncomeFailure_test(){
+        val mIncome = IncomeModel("", "", "")
+        Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
+        Mockito.`when`(collectionReference.add(mIncome)).thenReturn(failureTask)
+        mCreateIncome.addIncome(mIncome)
+        assertThat(result).isEqualTo(FAILURE)
+    }
+
 
     override fun addSucess(mObject: Any) {
         result = SUCCESS
@@ -261,5 +282,15 @@ class CreateBill(val observer: addObjectListener, val db: FirebaseFirestore){
             else observer.addFailure(mBillsModel)
         }
     }
+}
+
+class CreateIncome(val observer: addObjectListener, val db: FirebaseFirestore){
+    fun addIncome(mIncome: IncomeModel) {
+        db.collection("table_income").add(mIncome).apply {
+            if (this.isSuccessful) observer.addSucess(mIncome)
+            else observer.addFailure(mIncome)
+        }
+    }
+
 }
 
