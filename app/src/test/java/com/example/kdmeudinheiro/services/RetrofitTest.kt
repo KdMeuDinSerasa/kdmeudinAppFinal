@@ -1,12 +1,9 @@
-import com.example.kdmeudinheiro.LogInLIstener
 import com.example.kdmeudinheiro.model.NewsLetter
 import com.example.kdmeudinheiro.model.ReciviedArticles
 import com.example.kdmeudinheiro.model.Source
-import com.example.kdmeudinheiro.repository.NewsLetterRepository
 import com.example.kdmeudinheiro.services.NewsLetterService
-import com.example.kdmeudinheiro.viewModel.RetrofitListener
+import com.example.kdmeudinheiro.interfaces.RetrofitListener
 import com.google.common.truth.Truth.assertThat
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import org.junit.Before

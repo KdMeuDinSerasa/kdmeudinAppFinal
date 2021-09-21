@@ -1,6 +1,7 @@
 package com.example.kdmeudinheiro
 
 import android.app.Activity
+import com.example.kdmeudinheiro.interfaces.LogInLIstener
 import com.example.kdmeudinheiro.model.UserModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener

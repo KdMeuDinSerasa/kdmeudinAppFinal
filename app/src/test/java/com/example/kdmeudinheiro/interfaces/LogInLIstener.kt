@@ -1,4 +1,4 @@
-package com.example.kdmeudinheiro
+package com.example.kdmeudinheiro.interfaces
 
 interface LogInLIstener {
     fun logInSuccess(email: String?, password: String?)

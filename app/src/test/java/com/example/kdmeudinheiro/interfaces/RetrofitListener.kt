@@ -1,4 +1,4 @@
-package com.example.kdmeudinheiro.viewModel
+package com.example.kdmeudinheiro.interfaces
 
 import com.example.kdmeudinheiro.model.ReciviedArticles
 
