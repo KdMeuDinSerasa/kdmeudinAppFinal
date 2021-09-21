@@ -1,14 +1,15 @@
+package com.example.kdmeudinheiro
+
 import android.app.Activity
-import com.example.kdmeudinheiro.repository.UserRepository
+import com.example.kdmeudinheiro.model.UserModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
-
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.google.common.truth.Truth.assertThat
+import com.google.firebase.firestore.auth.User
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,25 +19,25 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import java.lang.Exception
 import java.util.concurrent.Executor
-import javax.inject.Inject
+
+data class LogInModel(val observer: LogInLIstener, val mAuth: FirebaseAuth) {
+
+    fun logIn(email: String, password: String) {
+        mAuth.signInWithEmailAndPassword(email, password).apply {
+            if (this.isSuccessful) observer.logInSuccess(email, password)
+            else observer.logInFailure(email, password)
+        }
+    }
+}
 
 @RunWith(JUnit4::class)
-class UserRepositoryTest {
-
-
+class FirebaseTest : LogInLIstener {
     private lateinit var successTask: Task<AuthResult>
     private lateinit var failureTask: Task<AuthResult>
 
     @Mock
     private lateinit var mAuth: FirebaseAuth
-    @Mock
-    private lateinit var mFireStore: FirebaseFirestore
-    @Mock
-    private lateinit var mFireStorage: FirebaseStorage
-//    @Mock
-//    private lateinit var logInModel: UserRepository
-    val email = "janeDoe@gmail.com"
-    val password = "DoeJane21"
+    private lateinit var logInModel: LogInModel
 
     private var logInResult = UNDEF
 
@@ -46,22 +47,78 @@ class UserRepositoryTest {
         private const val UNDEF = 0
     }
 
+
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
+        MockitoAnnotations.initMocks(this)
         successTask = object : Task<AuthResult>() {
             override fun isComplete(): Boolean = true
 
             override fun isSuccessful(): Boolean = true
+
             // ...
-            override fun addOnCompleteListener(executor: Executor,
-                                               onCompleteListener: OnCompleteListener<AuthResult>): Task<AuthResult> {
+            override fun addOnCompleteListener(
+                executor: Executor,
+                onCompleteListener: OnCompleteListener<AuthResult>
+            ): Task<AuthResult> {
                 onCompleteListener.onComplete(successTask)
                 return successTask
             }
+
+            override fun isCanceled(): Boolean {
+                return false
+            }
+
+            override fun getResult(): AuthResult? {
+                return result
+            }
+
+            override fun <X : Throwable?> getResult(p0: Class<X>): AuthResult? {
+                return result
+            }
+
+            override fun getException(): Exception? {
+                return exception
+            }
+
+            override fun addOnSuccessListener(p0: OnSuccessListener<in AuthResult>): Task<AuthResult> {
+                return this
+
+            }
+
+            override fun addOnSuccessListener(
+                p0: Executor,
+                p1: OnSuccessListener<in AuthResult>
+            ): Task<AuthResult> {
+                return this
+
+            }
+
+            override fun addOnSuccessListener(
+                p0: Activity,
+                p1: OnSuccessListener<in AuthResult>
+            ): Task<AuthResult> {
+                return this
+            }
+
+            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {
+                return this
+            }
+
+            override fun addOnFailureListener(
+                p0: Executor,
+                p1: OnFailureListener
+            ): Task<AuthResult> {
+                return this
+            }
+
+            override fun addOnFailureListener(
+                p0: Activity,
+                p1: OnFailureListener
+            ): Task<AuthResult> {
+                return this
+            }
         }
-
-
         failureTask = object : Task<AuthResult>() {
             override fun isComplete(): Boolean = true
 
@@ -77,101 +134,111 @@ class UserRepositoryTest {
             }
 
             override fun isCanceled(): Boolean {
-                TODO("Not yet implemented")
+                return false
             }
 
             override fun getResult(): AuthResult? {
-                TODO("Not yet implemented")
+                return result
             }
 
             override fun <X : Throwable?> getResult(p0: Class<X>): AuthResult? {
-                TODO("Not yet implemented")
+                return result
             }
 
             override fun getException(): Exception? {
-                TODO("Not yet implemented")
+                return exception
             }
 
             override fun addOnSuccessListener(p0: OnSuccessListener<in AuthResult>): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
 
             override fun addOnSuccessListener(
                 p0: Executor,
                 p1: OnSuccessListener<in AuthResult>
             ): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
 
             override fun addOnSuccessListener(
                 p0: Activity,
                 p1: OnSuccessListener<in AuthResult>
             ): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
 
             override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
 
             override fun addOnFailureListener(
                 p0: Executor,
                 p1: OnFailureListener
             ): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
 
             override fun addOnFailureListener(
                 p0: Activity,
                 p1: OnFailureListener
             ): Task<AuthResult> {
-                TODO("Not yet implemented")
+                return this
             }
         }
-//        logInModel = UserRepository(mFireStore, mAuth, mFireStorage)
+        logInModel = LogInModel(this, mAuth)
     }
+
 
     @Test
     fun logInSuccess_test() {
+        val email = "janeDoe@gmail.com"
+        val password = "DoeJane21"
         Mockito.`when`(mAuth!!.signInWithEmailAndPassword(email, password))
             .thenReturn(successTask)
-//        logInModel!!.loginWithEmailPassword(email, password) { response, e ->
-//            if (response != null) {
-//                logInResult == SUCCESS
-//            } else {
-//                logInResult == FAILURE
-//                println(e)
-//            }
-//        }
-        assert(logInResult == SUCCESS)
+        logInModel!!.logIn(email, password)
+        assertThat(logInResult).isEqualTo(SUCCESS)
     }
 
+    @Test
+    fun logInFailure_test() {
+        val email = "janeGmail.com"
+        val password = "123_456"
+        Mockito.`when`(mAuth!!.signInWithEmailAndPassword(email, password))
+            .thenReturn(failureTask)
+        logInModel.logIn(email, password)
+        assertThat(logInResult).isEqualTo(FAILURE)
+    }
 
-//    @Test
-//    fun logInFailure_test() {
-//        val email = "cool@cool.com"
-//        val password = "123_456"
-//        Mockito.`when`(mAuth!!.signInWithEmailAndPassword(email, password))
-//            .thenReturn(failureTask)
-//        accountModel!!.logIn(email, password)
-//        assert(logInResult == FAILURE)
-//    }
-//    @Test
-//    fun someTest() {
-//          val mockFirestore: FirebaseFirestore = Mockito.mock(FirebaseFirestore::class.java)
-//                Mockito.when(mockFirestore.collection("table_user")){ a, b, c ->
-//
-//                }
-//
-//      val  interactor: UserRepository = UserRepository(mockFirestore, mAuth, mFireStorage)
-//
-//    interactor.loginWithEmailPassword(email, password){ resp
-//
-//    }
-//
-//        // some assertion or verification
-//    }
+    override fun logInSuccess(email: String?, password: String?) {
+        val existingUsers = listOf<UserModel>(
+            UserModel("", "janeDoe@gmail.com", "DoeJane21", "Jane Doe", ""),
+            UserModel("", "admin@gmail.com", "ADM123", "Admin Kaze Gi", ""),
+            UserModel("", "janeGmail.com", "123_456", "", "")
+        )
 
+
+        val thisUserModel = UserModel("", email = email!!, password = password!!, "", "")
+        if (existingUsers.contains(thisUserModel)) {
+            logInResult = SUCCESS
+        } else {
+            logInResult = FAILURE
+        }
+    }
+
+    override fun logInFailure(email: String?, password: String?) {
+        val existingUsers = listOf<UserModel>(
+            UserModel("", "janeDoe@gmail.com", "DoeJane21", "Jane Doe", ""),
+            UserModel("", "admin@gmail.com", "ADM123", "Admin Kaze Gi", ""),
+            UserModel("", "janeGmail.com", "ADM123", "", "")
+        )
+
+        val thisUserModel = UserModel("", email = email!!, password = password!!, "", "")
+        if (existingUsers.contains(thisUserModel)) {
+            logInResult = SUCCESS
+        } else {
+            logInResult = FAILURE
+        }
+    }
 
 
 }
