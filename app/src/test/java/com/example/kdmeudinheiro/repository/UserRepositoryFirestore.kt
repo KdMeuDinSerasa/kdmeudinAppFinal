@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro
 
 import android.app.Activity
 import com.example.kdmeudinheiro.interfaces.addObjectListener
+import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.UserModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
@@ -19,6 +20,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import java.lang.Exception
+import java.util.*
 import java.util.concurrent.Executor
 
 @RunWith(JUnit4::class)
@@ -36,11 +38,12 @@ class UserRepositoryFirestore: addObjectListener {
 
 
     private lateinit var mCreateUser: CreateUser
+    private lateinit var mCreateBill: CreateBill
 
     private var result = DEFAULT
 
     companion object {
-        private const val SUCESS = 1
+        private const val SUCCESS = 1
         private const val FAILURE = 2
         private const val DEFAULT = 0
     }
@@ -191,6 +194,7 @@ class UserRepositoryFirestore: addObjectListener {
 
         }
         mCreateUser = CreateUser(this, db)
+        mCreateBill = CreateBill(this, db)
     }
 
     @Test
@@ -199,7 +203,7 @@ class UserRepositoryFirestore: addObjectListener {
         Mockito.`when`(db.collection("table_user")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mUserModel)).thenReturn(successTask)
         mCreateUser.addUser(mUserModel)
-        assertThat(result).isEqualTo(SUCESS)
+        assertThat(result).isEqualTo(SUCCESS)
     }
 
     @Test
@@ -211,9 +215,27 @@ class UserRepositoryFirestore: addObjectListener {
         assertThat(result).isEqualTo(FAILURE)
     }
 
+    @Test
+    fun addBillSuccess_test(){
+        val mBillsModel = BillsModel("", "", "", "", "", Calendar.getInstance().time, 0, )
+        Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
+        Mockito.`when`(collectionReference.add(mBillsModel)).thenReturn(successTask)
+        mCreateBill.addBill(mBillsModel)
+        assertThat(result).isEqualTo(SUCCESS)
+    }
+
+    @Test
+    fun addBillFailure_test(){
+        val mBillsModel = BillsModel("", "", "", "", "", Calendar.getInstance().time, 0, )
+        Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
+        Mockito.`when`(collectionReference.add(mBillsModel)).thenReturn(failureTask)
+        mCreateBill.addBill(mBillsModel)
+        assertThat(result).isEqualTo(FAILURE)
+    }
+
 
     override fun addSucess(mObject: Any) {
-        result = SUCESS
+        result = SUCCESS
     }
 
     override fun addFailure(mObject: Any) {
@@ -230,5 +252,14 @@ class CreateUser(val observer: addObjectListener, val db: FirebaseFirestore) {
 
     }
 
+}
+
+class CreateBill(val observer: addObjectListener, val db: FirebaseFirestore){
+    fun addBill(mBillsModel: BillsModel){
+        db.collection("table_account").add(mBillsModel).apply {
+            if (this.isSuccessful) observer.addSucess(mBillsModel)
+            else observer.addFailure(mBillsModel)
+        }
+    }
 }
 
