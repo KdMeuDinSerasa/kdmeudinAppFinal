@@ -22,6 +22,6 @@ class LoginActivityTest : TestCase(){
     @Test
     fun checkFields(){
        view.checkLogin(emailTyped, passwordTyped)
-        assert
+
     }
 }
