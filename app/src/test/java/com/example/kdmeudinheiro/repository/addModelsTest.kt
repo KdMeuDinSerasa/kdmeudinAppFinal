@@ -254,7 +254,6 @@ class UserRepositoryFirestore: addObjectListener {
         assertThat(result).isEqualTo(FAILURE)
     }
 
-
     override fun addSucess(mObject: Any) {
         result = SUCCESS
     }
