@@ -19,6 +19,7 @@ import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.pieChart.PieChartClass
 import com.example.kdmeudinheiro.utils.formatCurrency
 import com.example.kdmeudinheiro.viewModel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,7 +70,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "Erro $it", Snackbar.LENGTH_SHORT).show()
         })
         viewModel.articlesList.observe(viewLifecycleOwner, {
             articlesList.clear()
@@ -90,13 +91,19 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         })
 
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            if (it.size >= 1 && incomeValue != null){
+            if (it.size >= 1 && incomeValue != null) {
                 binding.chartIncluded.pieChart.visibility = View.VISIBLE
                 binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
                 binding.ivNoGraph.visibility = View.GONE
                 binding.tvNoGraph.visibility = View.GONE
-                PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
-            } else{
+                PieChartClass(
+                    requireView(),
+                    it,
+                    incomeValue!!,
+                    outCome!!.toFloat(),
+                    this
+                ).loadChart()
+            } else {
                 binding.chartIncluded.pieChart.visibility = View.GONE
                 binding.ivGraphLegend.cardLegend.visibility = View.GONE
                 binding.ivNoGraph.visibility = View.VISIBLE

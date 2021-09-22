@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +16,8 @@ import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,17 +31,6 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private var adapter = AdapterBillsList() { bill ->
         BottomSheet(requireView(), bill).loadBottomBill() { billFromCb, type ->
             handlerForDialogResponse(billFromCb, type)
-        }
-    }
-
-    /* Observers goes here */
-    private var observerEdit = Observer<Boolean> {
-        if (it == true) {
-            Snackbar.make(requireView(), "Conta Editada Com Sucesso", Snackbar.LENGTH_LONG)
-                .show()
-        } else {
-            Snackbar.make(requireView(), "Deu erro nessa merda.", Snackbar.LENGTH_LONG)
-                .show()
         }
     }
 
@@ -74,13 +62,13 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun LoadViewModelAndsObservers() {
         viewModel.billList.observe(viewLifecycleOwner, {
-            if (it.size == 0){
+            if (it.size == 0) {
                 binding.ivArrowDown.visibility = View.VISIBLE
                 binding.tvNoBills.visibility = View.VISIBLE
                 binding.tvAddBillHint.visibility = View.VISIBLE
                 binding.progressAnimation.visibility = View.GONE
                 binding.recyclerViewIdNoXML.visibility = View.GONE
-            } else{
+            } else {
                 adapter.refresh(it.toMutableList())
                 binding.recyclerViewIdNoXML.visibility = View.VISIBLE
                 binding.progressAnimation.visibility = View.GONE
@@ -88,21 +76,32 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 binding.tvAddBillHint.visibility = View.GONE
                 binding.tvNoBills.visibility = View.GONE
             }
-            })
+        })
 
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
-                Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
-                    .show()
+                feedback(requireView(), R.string.error_to_call_bills, R.color.failure)
             }
         })
         viewModel.addResponse.observe(viewLifecycleOwner, {
             if (it == true) {
-                Snackbar.make(requireView(), "Conta Adicionada Com Sucesso", Snackbar.LENGTH_LONG)
-                    .show()
+                feedback(requireView(), R.string.bill_add_success, R.color.success)
             } else {
-                Snackbar.make(requireView(), "Erro ao adicionar a conta", Snackbar.LENGTH_LONG)
-                    .show()
+                feedback(requireView(), R.string.bill_add_failure, R.color.failure)
+            }
+        })
+        viewModel.editResponse.observe(viewLifecycleOwner, {
+            if (it == true) {
+                feedback(requireView(), R.string.bill_edit_success, R.color.success)
+            } else {
+                feedback(requireView(), R.string.bill_edit_success, R.color.success)
+            }
+        })
+        viewModel.deleteResponse.observe(viewLifecycleOwner, {
+            if (it == true) {
+                feedback(requireView(), R.string.bill_delete_success, R.color.success)
+            } else {
+                feedback(requireView(), R.string.bill_delete_failure, R.color.failure)
             }
         })
 
@@ -113,27 +112,26 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         if (type == 1) {
             viewModel.editBill(billFromCb)
             viewModel.getAllBills(userId)
-            observerEdit.onChanged(true)
 
         } else if (type == 2) {
             viewModel.deleteBill(billFromCb)
             viewModel.getAllBills(userId)
 
         } else if (type == 3) {
-            observerEdit.onChanged(false)
+
 
         } else if (type == 4) {
             viewModel.editBill(billFromCb)
             viewModel.getAllBills(userId)
-            Snackbar.make(requireView(), "Conta Paga Com Sucesso", Snackbar.LENGTH_LONG)
-                .show()
-        }
-        else viewModel.getAllBills(userId)
+            feedback(requireView(), R.string.bill_paid_success, R.color.success)
+
+        } else viewModel.getAllBills(userId)
     }
 
     companion object {
         fun newInstance() = BillsFragment()
     }
+
     fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)

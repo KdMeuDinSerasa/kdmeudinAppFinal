@@ -42,6 +42,14 @@
     <string name="no_bills_msg">Ainda não possui contas? Adicione agora!</string>
     <string name="no_bills_hint"><![CDATA[Adicione uma conta aqui ->]]></string>
     <string name="no_graph">Ainda não há informações suficientes para a composição do gráfico</string>
+    <string name="error_to_call_bills">Erro ao solicitar contas</string>
+    <string name= "bill_add_success">Conta Adicionada Com Sucesso</string>
+    <string name= "bill_add_failure">Erro ao adicionar a conta</string>
+    <string name= "bill_edit_success">Conta Editada com Sucesso</string>
+    <string name= "bill_edit_failure">Falha ao editar a conta</string>
+    <string name= "bill_delete_success">Conta Deletada com Sucesso</string>
+    <string name= "bill_delete_failure">Falha ao deletar a conta</string>
+    <string name= "bill_paid_success">Conta Paga Com Sucesso</string>
 
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
 </resources>

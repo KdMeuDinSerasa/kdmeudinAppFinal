@@ -108,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
         loadBottomSheetComponents()
     }
 
-
     fun loadBottomSheetComponents() {
         bottomSheetView.findViewById<Button>(R.id.btnRegister).setOnClickListener {
             checkLoginRegister()

@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
+
     private fun createScheduler() {
         //create the instance of workManager
         val workManager = WorkManager.getInstance(this)
@@ -57,12 +58,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //create the workRequest with the details of the routine
         val mWorkRequest =
-            PeriodicWorkRequestBuilder<NotificationWorkManager>(60, TimeUnit.MINUTES).setConstraints(
+            PeriodicWorkRequestBuilder<NotificationWorkManager>(
+                60,
+                TimeUnit.MINUTES
+            ).setConstraints(
                 consts
             ).build()
 
         //start the routine
-        workManager.enqueueUniquePeriodicWork("Check_expired_bills", ExistingPeriodicWorkPolicy.KEEP, mWorkRequest)
+        workManager.enqueueUniquePeriodicWork(
+            "Check_expired_bills",
+            ExistingPeriodicWorkPolicy.KEEP,
+            mWorkRequest
+        )
     }
 
     fun updateUser() {

@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="failure">#B60C0C</color>
+    <color name="success">#4CAF50</color>
 
 
     //Colors for graph legend
