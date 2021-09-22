@@ -210,28 +210,28 @@ class getModelsTest: getObjectListener {
     fun getListOfBillsSuccess(){
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(successTask)
-        mDbFirestore.getUsers()
+        mDbFirestore.getBills()
         assertThat(result).isEqualTo(SUCCESS)
     }
     @Test
     fun getListOfBillsFailure(){
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(failureTask)
-        mDbFirestore.getUsers()
+        mDbFirestore.getBills()
         assertThat(result).isEqualTo(FAILURE)
     }
     @Test
     fun getListOfIncomeSuccess(){
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(successTask)
-        mDbFirestore.getUsers()
+        mDbFirestore.getIncome()
         assertThat(result).isEqualTo(SUCCESS)
     }
     @Test
     fun getListOfIncomeFailure(){
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(failureTask)
-        mDbFirestore.getUsers()
+        mDbFirestore.getIncome()
         assertThat(result).isEqualTo(FAILURE)
     }
 
