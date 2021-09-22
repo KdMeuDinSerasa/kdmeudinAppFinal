@@ -130,6 +130,7 @@ class LoginActivity : AppCompatActivity() {
         if (mUser.checkInsertData()) {
             viewModel.createUserWithEmailEPassword(mUser)
         } else {
+            bottomSheetDialog.dismiss()
             feedback(binding.root, R.string.validation_registration_failure, R.color.failure)
         }
     }
