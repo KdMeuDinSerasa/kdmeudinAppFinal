@@ -80,7 +80,9 @@ class LoginActivity : AppCompatActivity() {
             loadBottomSheet()
         }
         binding.btnLogin.setOnClickListener {
-            checkLogin()
+            var email = binding.etEmail.editText?.text.toString()
+            var password = binding.etPassword.editText?.text.toString()
+            checkLogin(email, password)
         }
     }
 
@@ -89,10 +91,9 @@ class LoginActivity : AppCompatActivity() {
      * Checa as credenciais do usuario, se preencheu todos os campos e se existe um usuario
      * cadastrado com as credenciais informadas
      */
-    fun checkLogin() {
-        if (binding.etEmail.editText?.text.toString()
-                .isValidEmail() && !binding.etPassword.editText?.text.toString()
-                .isNullOrBlank()
+
+    fun checkLogin(email: String, password: String) {
+        if (email.isValidEmail() && !password.isNullOrBlank()
         ) {
             viewModel.loginWithEmailEPassword(
                 binding.etUserEmail.text.toString(),

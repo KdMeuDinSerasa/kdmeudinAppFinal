@@ -30,16 +30,4 @@ class ArticlesRepository @Inject constructor(
         }
         return articlesList
     }
-
-    suspend fun addArticle(mArticles: Articles): Boolean {
-        val map = mutableMapOf<String, Any>()
-        map.put(KeysDatabaseArticles.NAMEARTICLE.key, mArticles.name)
-        map.put(KeysDatabaseArticles.URLARTICLE.key, mArticles.url)
-        mArticles.image?.let { map.put(KeysDatabaseArticles.IMAGEARTICLE.key, it) }
-        map.put(KeysDatabaseArticles.TYPEARTILE.key, mArticles.typeArticle)
-
-        val taks = db.collection("table_articles").add(map)
-        taks.await()
-        return true
-    }
 }
