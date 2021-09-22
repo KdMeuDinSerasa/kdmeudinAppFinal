@@ -14,7 +14,6 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
-import com.example.kdmeudinheiro.utils.isValidEmail
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -82,28 +81,21 @@ class LoginActivity : AppCompatActivity() {
             loadBottomSheet()
         }
         binding.btnLogin.setOnClickListener {
-            var email = binding.etEmail.editText?.text.toString()
-            var password = binding.etPassword.editText?.text.toString()
-            checkLogin(email, password)
+            val mUser = UserModel(
+                id = "",
+                email = binding.etEmail.editText?.text.toString(),
+                password = binding.etPassword.editText?.text.toString(),
+                name = "",
+                null
+            )
+            if (mUser.checkLogin()) {
+                viewModel.loginWithEmailEPassword(mUser)
+            } else {
+                Snackbar.make(binding.root, "Email ou senha invalidos", Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
-
-    /**
-     * Checa as credenciais do usuario, se preencheu todos os campos e se existe um usuario
-     * cadastrado com as credenciais informadas
-     */
-
-    fun checkLogin(email: String, password: String) {
-        if (email.isValidEmail() && !password.isNullOrBlank()
-        ) {
-            viewModel.loginWithEmailEPassword(
-                binding.etUserEmail.text.toString(),
-                binding.etUserPassword.text.toString()
-            )
-
-        } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
-    }
 
     fun loadBottomSheet() {
 
@@ -127,20 +119,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun checkLoginRegister() {
-        val emailAux = bottomSheetView.findViewById<EditText>(R.id.etEmailUserRegister)
-        val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister)
-        val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameUserRegister)
-
         val mUser = UserModel(
-            email = emailAux.text.toString(),
-            password = passwordAux.text.toString(),
-            name = nameAux.text.toString()
+            email = bottomSheetView.findViewById<EditText>(R.id.etEmailUserRegister).text.toString(),
+            password = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister).text.toString(),
+            name = bottomSheetView.findViewById<EditText>(R.id.etNameUserRegister).text.toString()
         )
         if (mUser.checkInsertData()) {
-
-            viewModel.createUserWithEmailEPassword(mUser
-            )
-
+            viewModel.createUserWithEmailEPassword(mUser)
         } else {
             Snackbar.make(
                 binding.root,

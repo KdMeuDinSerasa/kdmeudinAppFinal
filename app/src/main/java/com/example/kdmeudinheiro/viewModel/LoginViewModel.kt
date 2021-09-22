@@ -8,7 +8,6 @@ import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,7 +33,10 @@ class LoginViewModel @Inject constructor(
     }
 
     fun createUserWithEmailEPassword(userModel: UserModel) {
-        mUserRepository.createUserWithEmailPassword(userModel.email, userModel.password) { firebaseUser, erro ->
+        mUserRepository.createUserWithEmailPassword(
+            userModel.email,
+            userModel.password
+        ) { firebaseUser, erro ->
             if (firebaseUser != null) {
                 val mUser = UserModel(
                     firebaseUser.uid,
@@ -48,18 +50,14 @@ class LoginViewModel @Inject constructor(
                     _result.value = result
 
                 }
-
             }
-
         }
     }
 
-    fun loginWithEmailEPassword(email: String, password: String) {
-        mUserRepository.loginWithEmailPassword(email, password) { user, erro ->
+    fun loginWithEmailEPassword(userModel: UserModel) {
+        mUserRepository.loginWithEmailPassword(userModel.email, userModel.password) { user, erro ->
             if (user != null) _mFirebaseUserLoged.value = user
             if (erro != null) _error.value = erro
         }
     }
-
-
 }
