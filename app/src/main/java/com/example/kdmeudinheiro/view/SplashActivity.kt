@@ -39,6 +39,7 @@ class SplashActivity : AppCompatActivity() {
         } else
             Handler().postDelayed({
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }, 3000)
 
 
@@ -55,7 +56,10 @@ class SplashActivity : AppCompatActivity() {
                 Handler().postDelayed({
                     viewModelMain.getIncome(it.uid)
                 }, 3000)
-            } else startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
 
         })
         viewModelMain.mIncomeModel.observe(this, {
