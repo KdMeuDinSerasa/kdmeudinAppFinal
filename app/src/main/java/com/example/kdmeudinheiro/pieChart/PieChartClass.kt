@@ -48,8 +48,8 @@ class PieChartClass(
         colors.add(Color.GRAY)
 
         val pieChartEntry = ArrayList<Entry>()
-        val arrayDoubles = arrayListOf<Float>(0f, 0f, 0f, 0f)
-        val priceArray = arrayListOf<Float>(0f, 0f, 0f, 0f)
+        val arrayDoubles = arrayListOf(0f, 0f, 0f, 0f)
+        val priceArray = arrayListOf(0f, 0f, 0f, 0f)
         listBills.forEach {
             if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName) {
                 priceArray[0] += it.price.toFloat()
@@ -71,16 +71,24 @@ class PieChartClass(
             arrayDoubles[price.index] = +final
 
         }
-
+        val colorsFix = java.util.ArrayList<Int>()
         for (categories in arrayDoubles.withIndex()) {
-            pieChartEntry.add(Entry(categories.value, categories.index))
+            if (categories.value != 0F){
+                pieChartEntry.add(Entry(categories.value, categories.index))
+                colorsFix.add(colors[categories.index])
+            }
+//            colors.removeAt(categories.index)
         }
+
+
+
 
         val income = incomes.income.toFloat()
         val final = (((income - outComes) / income) * 100)
-        pieChartEntry.add(Entry(final, 5))
+        pieChartEntry.add(Entry(final, pieChartEntry.size))
+        colorsFix.add(colors[4])
 
-        setData(category, pieChartEntry, colors)
+        setData(category, pieChartEntry, colorsFix)
     }
 
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
@@ -90,6 +98,7 @@ class PieChartClass(
         mpieDataset.colors = colors
         mpieDataset.valueTextSize = 16f
         mpieDataset.setValueFormatter(PercentFormatter())
+
 
         val dataSet = PieData(cat, mpieDataset)
 
@@ -103,6 +112,16 @@ class PieChartClass(
         binding.chartIncluded.pieChart.elevation = 50f
         binding.chartIncluded.pieChart.legend.isEnabled = false
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
+//        mpieDataset.yVals.forEach {
+//            if (it.`val` == 0F){
+//                mpieDataset.isVisible
+//            }
+//        }
+        binding.chartIncluded.pieChart.getEntriesAtIndex(0)
+        binding.chartIncluded.pieChart.getEntriesAtIndex(1)
+        binding.chartIncluded.pieChart.getEntriesAtIndex(2)
+
+
 
     }
 
@@ -116,6 +135,5 @@ class PieChartClass(
     }
 
     override fun onNothingSelected() {
-        //   TODO("Not yet implemented")
     }
 }
