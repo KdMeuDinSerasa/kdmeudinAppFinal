@@ -20,6 +20,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.UserPreferencesFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.UserPreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,6 +78,9 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
             viewModel.editUser(mUserModel)
             viewModel.userLoged()
             (requireActivity() as? MainActivity?)?.updateUser()
+        })
+        viewModel.error.observe(viewLifecycleOwner ,{
+            feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
         })
 
     }

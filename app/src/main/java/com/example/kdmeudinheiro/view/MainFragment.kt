@@ -17,6 +17,7 @@ import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.pieChart.PieChartClass
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.formatCurrency
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -70,7 +71,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
-            Snackbar.make(requireView(), "Erro $it", Snackbar.LENGTH_SHORT).show()
+           feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
         })
         viewModel.articlesList.observe(viewLifecycleOwner, {
             articlesList.clear()

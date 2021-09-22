@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.UserRepository
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
     private val userRepo: UserRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _billList = MutableLiveData<List<BillsModel>>()
     var billList: LiveData<List<BillsModel>> = _billList
@@ -28,9 +27,9 @@ class BillsViewModel @Inject constructor(
         viewModelScope.launch {
             val listBills = billRepo.getBills(idUser)
             if (listBills != null)
-            _billList.value = listBills!!
+                _billList.value = listBills!!
             else
-                _error.value = "Adicione Suas Constas"
+                _error.value = "Adicione Suas Contas"
         }
 
     }

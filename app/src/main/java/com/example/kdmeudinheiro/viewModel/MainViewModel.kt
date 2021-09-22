@@ -36,8 +36,8 @@ class MainViewModel @Inject constructor(
     private var _mIncomeModel = MutableLiveData<IncomeModel?>()
     val mIncomeModel: LiveData<IncomeModel?> = _mIncomeModel
 
-    private var _mError = MutableLiveData<String?>()
-    val mError: LiveData<String?> = _mError
+    private var _mError = MutableLiveData<Boolean>()
+    val mError: LiveData<Boolean> = _mError
 
     private var _outCome = MutableLiveData<Double?>()
     val outCome: LiveData<Double?> = _outCome
@@ -78,7 +78,7 @@ class MainViewModel @Inject constructor(
     fun editIncome(mIncomeModel: IncomeModel) {
         viewModelScope.launch {
             if (!mIncomeRepository.editIncome(mIncomeModel))
-                _mError.value = "Erro ao editar"
+                _mError.value = true
             userLoged()
         }
     }
@@ -86,7 +86,7 @@ class MainViewModel @Inject constructor(
     fun addIncome(mIncomeModel: IncomeModel) {
         viewModelScope.launch {
             if (!mIncomeRepository.addIncome(mIncomeModel))
-                _mError.value = "Erro ao adicionar"
+                _mError.value = true
             userLoged()
 
         }

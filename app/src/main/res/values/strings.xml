@@ -54,6 +54,7 @@
     <string name= "validation_login_failure">Email ou senha invalidos</string>
     <string name= "registration_on_firebase_success">Usuario cadastrado com sucesso</string>
     <string name= "registration_on_firebase_failure">Erro ao cadastrar usuario</string>
+    <string name="error_to_excute_action">Erro ao executar a acao </string>
 
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
 </resources>
