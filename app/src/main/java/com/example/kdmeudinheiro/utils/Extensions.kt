@@ -2,7 +2,17 @@ package com.example.kdmeudinheiro.utils
 
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.Gravity
+import android.view.View
+import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.example.kdmeudinheiro.R
 import com.google.android.gms.tasks.Task
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.text.DecimalFormat
 import java.util.*
@@ -48,3 +58,30 @@ fun Double.formatCurrency(): String {
 fun Date.adjustYear(): String {
     return this.toString().substring(this.toString().length - 4)
 }
+
+//fun feedback(parentView: View, @StringRes string: Int){
+//    Snackbar.make(parentView, string.toString(), Snackbar.LENGTH_LONG).show()
+//}
+
+fun feedback(parentView: View, @StringRes resId: Int, @ColorRes colorRes: Int) {
+
+    setupSnackBar(parentView, resId, colorRes).apply {
+        this.show()
+    }
+}
+
+private fun setupSnackBar(
+    v: View,
+    @StringRes resId: Int,
+    @ColorRes color: Int
+): Snackbar {
+    return Snackbar.make(v, resId, Snackbar.LENGTH_LONG).apply {
+        view.setBackgroundColor(ContextCompat.getColor(context, color))
+        view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
+            gravity = Gravity.CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+        }
+    }
+}
+
+

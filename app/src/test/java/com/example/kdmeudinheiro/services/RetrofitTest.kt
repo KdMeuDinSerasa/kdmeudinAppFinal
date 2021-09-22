@@ -1,8 +1,8 @@
+import com.example.kdmeudinheiro.interfaces.RetrofitListener
 import com.example.kdmeudinheiro.model.NewsLetter
 import com.example.kdmeudinheiro.model.ReciviedArticles
 import com.example.kdmeudinheiro.model.Source
 import com.example.kdmeudinheiro.services.NewsLetterService
-import com.example.kdmeudinheiro.interfaces.RetrofitListener
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
