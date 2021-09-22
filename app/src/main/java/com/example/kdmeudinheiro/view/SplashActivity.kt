@@ -2,9 +2,9 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.databinding.ActivitySplashBinding
@@ -20,9 +20,9 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModelLogin: LoginViewModel
     private lateinit var viewModelMain: MainViewModel
+
     @Inject
     lateinit var mNotificationHandler: NotificationHandler
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +32,9 @@ class SplashActivity : AppCompatActivity() {
         viewModelMain = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
 
-
         loadViewModels()
 
-        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false)){
+        if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false)) {
             viewModelLogin.checkSession()
         } else
             Handler().postDelayed({
@@ -44,7 +43,8 @@ class SplashActivity : AppCompatActivity() {
 
 
     }
-    fun loadViewModels(){
+
+    fun loadViewModels() {
         viewModelLogin.mFirebaseUser.observe(this, {
             val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
             if (it != null) {
@@ -58,7 +58,7 @@ class SplashActivity : AppCompatActivity() {
             } else startActivity(Intent(this, LoginActivity::class.java))
 
         })
-        viewModelMain.mIncomeModel.observe(this,{
+        viewModelMain.mIncomeModel.observe(this, {
             startActivity(Intent(this, MainActivity::class.java))
         })
     }

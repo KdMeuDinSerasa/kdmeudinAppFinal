@@ -21,7 +21,6 @@ data class NewsLetter(
     val date: String,
     @SerializedName("source")
     val source: Source
-
 )
 
 data class Source(

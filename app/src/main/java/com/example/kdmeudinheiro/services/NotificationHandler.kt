@@ -21,6 +21,12 @@ class NotificationHandler @Inject constructor(private val context: Context) {
     }
 
 
+
+    /**
+     * here we are creating the channel, we have to create a channel
+     * for each type of notifications, so if the user
+     * wants to cancel only one type of notification he can
+     */
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Expired docs"

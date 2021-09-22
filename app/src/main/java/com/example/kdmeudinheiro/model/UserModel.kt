@@ -6,5 +6,4 @@ data class UserModel(
     val password: String,
     var name: String,
     var img: String?
-
 )

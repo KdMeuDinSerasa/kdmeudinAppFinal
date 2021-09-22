@@ -80,6 +80,23 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     }
 
     private fun LoadViewModelAndsObservers() {
+        viewModel.billList.observe(viewLifecycleOwner, {
+            if (it.size == 0){
+                binding.ivArrowDown.visibility = View.VISIBLE
+                binding.tvNoBills.visibility = View.VISIBLE
+                binding.tvAddBillHint.visibility = View.VISIBLE
+                binding.progressAnimation.visibility = View.GONE
+                binding.recyclerViewIdNoXML.visibility = View.GONE
+            } else{
+                adapter.refresh(it.toMutableList())
+                binding.recyclerViewIdNoXML.visibility = View.VISIBLE
+                binding.progressAnimation.visibility = View.GONE
+                binding.ivArrowDown.visibility = View.GONE
+                binding.tvAddBillHint.visibility = View.GONE
+                binding.tvNoBills.visibility = View.GONE
+            }
+            })
+
         viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
         viewModel.copyBillList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
         viewModel.error.observe(viewLifecycleOwner, {
@@ -119,14 +136,12 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             viewModel.getAllBills(userId)
             Snackbar.make(requireView(), "Conta Paga Com Sucesso", Snackbar.LENGTH_LONG)
                 .show()
-        }
-        else viewModel.getAllBills(userId)
+        } else viewModel.getAllBills(userId)
     }
 
     companion object {
         fun newInstance() = BillsFragment()
     }
-
     fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
