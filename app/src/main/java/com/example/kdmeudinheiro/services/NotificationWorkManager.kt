@@ -35,25 +35,29 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
         val userId = mSharedPreferences.getString(KeysShared.USERID.key, "")
         val calendar = Calendar.getInstance()
 
-        CoroutineScope(Dispatchers.Default).launch {
-            var count: Int = 0
-            userId?.let { mBillsRepository.getBills(it) }!!.forEach {
-                if (it.expire_date.before(calendar.time) && it.status == 0) {
-                    count++
-                }
-            }
-            if (count > 0) {
-                val mNotificationHandler = NotificationHandler(context)
-                mNotificationHandler.createNotification(
-                    "Você possui contas vencidas",
-                    "Total de contas vencidas: $count"
-                ).apply {
-                    val notificationManager = NotificationManagerCompat.from(context)
-                    notificationManager.notify(1, this)
-                }
 
+        if (mSharedPreferences.getBoolean(KeysShared.ACTIVE_PUSH.key, false)){
+            CoroutineScope(Dispatchers.Default).launch {
+                var count: Int = 0
+                userId?.let { mBillsRepository.getBills(it) }!!.forEach {
+                    if (it.expire_date.before(calendar.time) && it.status == 0) {
+                        count++
+                    }
+                }
+                if (count > 0) {
+                    val mNotificationHandler = NotificationHandler(context)
+                    mNotificationHandler.createNotification(
+                        "Você possui contas vencidas",
+                        "Total de contas vencidas: $count"
+                    ).apply {
+                        val notificationManager = NotificationManagerCompat.from(context)
+                        notificationManager.notify(1, this)
+                    }
+
+                }
             }
         }
+
     }
 
 }
