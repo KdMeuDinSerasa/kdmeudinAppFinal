@@ -9,6 +9,7 @@ import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +32,10 @@ class BillsViewModel @Inject constructor(
             else
                 _error.value = "Adicione Suas Contas"
         }
-
     }
+
+    private var _copyBillList = MutableLiveData<List<BillsModel>>()
+    var copyBillList: LiveData<List<BillsModel>> = _copyBillList
 
     private val _addResponse = MutableLiveData<Boolean>()
     var addResponse: LiveData<Boolean> = _addResponse
@@ -58,6 +61,41 @@ class BillsViewModel @Inject constructor(
     fun deleteBill(bill: BillsModel) {
         viewModelScope.launch {
             _deleteResponse.value = billRepo.deleteBill(bill)
+        }
+    }
+
+
+    fun filterPay(date: Date, getUserChoice: Int) {
+
+        var filtered = _billList.value
+
+        viewModelScope.launch {
+
+            if (getUserChoice == 0)
+                filtered = filtered?.filter {
+                    it.expire_date.after(date) && it.status == 0
+                }
+            else if (getUserChoice == 1)
+                filtered = filtered?.filter {
+                    it.expire_date.before(date) && it.status == 0
+                }
+            else if (getUserChoice == 2)
+                filtered = filtered?.filter {
+                    it.status == 1
+                }
+
+            _copyBillList.value = filtered!!
+        }
+    }
+
+    fun filterBill(filter: String) {
+        viewModelScope.launch {
+            if (filter.isNullOrEmpty())
+                _copyBillList.value = _billList.value
+            val filtered = _copyBillList.value?.filter {
+                it.name_bill.contains(filter)
+            }
+            _copyBillList.value = filtered!!
         }
 
     }
