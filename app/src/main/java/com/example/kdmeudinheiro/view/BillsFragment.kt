@@ -19,9 +19,11 @@ import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.utils.DialogToFilter
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class BillsFragment : Fragment(R.layout.bills_fragment) {
@@ -59,6 +61,8 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         loadBinding()
         checkUser()
         searchBill()
+        filterByValidate()
+
     }
 
 
@@ -77,6 +81,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun LoadViewModelAndsObservers() {
         viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.copyBillList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
                 Snackbar.make(requireView(), "Erro ao solicitar contas ${it}", Snackbar.LENGTH_LONG)
@@ -137,14 +142,32 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0.let {
-                    if (it?.length!! >= 2)
-                        viewModel.filterBill(it.toString(), userId)
+                    if (it?.length!! >= 1)
+                        viewModel.filterBill(it.toString())
                     if (it.isEmpty())
-                        viewModel.getAllBills(userId)
+                        viewModel.filterBill(it.toString())
                 }
             }
-
             override fun afterTextChanged(p0: Editable?) {}
         })
+    }
+
+    private fun filterByValidate(){
+        val date = Calendar.getInstance()
+
+        binding.buttonFilter.setOnClickListener {
+            DialogToFilter.dialogToFilter(requireContext()) { map ->
+
+                val hashToList = map?.map {
+                    it.key
+                }
+                val getListPosition = hashToList?.get(0)
+
+                if (getListPosition == 3)
+                    viewModel.filterBill("")
+
+                viewModel.filterPay(date.time, getListPosition!!)
+            }
+        }
     }
 }

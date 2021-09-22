@@ -19,7 +19,7 @@
         app:boxCornerRadiusBottomStart="@dimen/default_10dp_margin"
         app:boxCornerRadiusTopEnd="@dimen/default_10dp_margin"
         app:boxCornerRadiusBottomEnd="@dimen/default_10dp_margin"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/button_filter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_baseline_search_24">
@@ -40,11 +40,10 @@
         app:layout_constraintTop_toTopOf="@+id/textFieldSearch" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/button_filter"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="15dp"
-        android:contentDescription="button_filter"
         android:src="@drawable/ic_baseline_filter_alt_24"
         app:layout_constraintBottom_toBottomOf="@+id/textFieldSearch"
         app:layout_constraintEnd_toStartOf="@+id/About"

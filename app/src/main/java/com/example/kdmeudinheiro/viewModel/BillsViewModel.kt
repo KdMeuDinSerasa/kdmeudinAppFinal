@@ -1,6 +1,5 @@
 package com.example.kdmeudinheiro.viewModel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,9 @@ import com.example.kdmeudinheiro.repository.UserRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
+
 @HiltViewModel
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
@@ -30,6 +31,7 @@ class BillsViewModel @Inject constructor(
 
     private val _billList = MutableLiveData<List<BillsModel>>()
     var billList: LiveData<List<BillsModel>> = _billList
+
     private val _error = MutableLiveData<String>()
     var error: LiveData<String> = _error
 
@@ -38,12 +40,14 @@ class BillsViewModel @Inject constructor(
         viewModelScope.launch {
             val listBills = billRepo.getBills(idUser)
             if (listBills != null)
-            _billList.value = listBills!!
+                _billList.value = listBills!!
             else
                 _error.value = "Adicione Suas Constas"
         }
-
     }
+
+    private var _copyBillList = MutableLiveData<List<BillsModel>>()
+    var copyBillList: LiveData<List<BillsModel>> = _copyBillList
 
     private val _addResponse = MutableLiveData<Boolean>()
     var addResponse: LiveData<Boolean> = _addResponse
@@ -72,24 +76,39 @@ class BillsViewModel @Inject constructor(
         }
     }
 
-    fun filterPay(filter: Int, userId: String){
+
+    fun filterPay(date: Date, getUserChoice: Int) {
+
+        var filtered = _billList.value
+
         viewModelScope.launch {
-            val aux = billRepo.getBills(userId)
-            val filtred = aux!!.filter {
-                it.status == filter
-            }
-            _billList.value = filtred
+
+            if (getUserChoice == 0)
+                filtered = filtered?.filter {
+                    it.expire_date.after(date) && it.status == 0
+                }
+            else if (getUserChoice == 1)
+                filtered = filtered?.filter {
+                    it.expire_date.before(date) && it.status == 0
+                }
+            else if (getUserChoice == 2)
+                filtered = filtered?.filter {
+                    it.status == 1
+                }
+
+            _copyBillList.value = filtered!!
         }
     }
 
-    fun filterBill(filter: String, userId: String){
+    fun filterBill(filter: String) {
         viewModelScope.launch {
-            val aux = billRepo.getBills(userId)
-            val filtred = aux!!.filter {
+            if (filter.isNullOrEmpty())
+                _copyBillList.value = _billList.value
+            val filtered = _copyBillList.value?.filter {
                 it.name_bill.contains(filter)
             }
-            _billList.value = filtred
-
+            _copyBillList.value = filtered!!
         }
+
     }
 }
