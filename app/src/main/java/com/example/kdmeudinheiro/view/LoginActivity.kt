@@ -14,9 +14,9 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,9 +69,12 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.result.observe(this, {
-            if (it) Toast.makeText(this, "Usuario cadastrado com sucesso", Toast.LENGTH_SHORT)
-                .show()
-            else Toast.makeText(this, "Erro ao cadastrar", Toast.LENGTH_SHORT).show()
+            if (it) feedback(
+                binding.root,
+                R.string.registration_on_firebase_success,
+                R.color.success
+            )
+            else feedback(binding.root, R.string.registration_on_firebase_failure, R.color.failure)
         })
     }
 
@@ -91,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
             if (mUser.checkLogin()) {
                 viewModel.loginWithEmailEPassword(mUser)
             } else {
-                Snackbar.make(binding.root, "Email ou senha invalidos", Snackbar.LENGTH_LONG).show()
+                feedback(binding.root, R.string.validation_login_failure, R.color.failure)
             }
         }
     }
@@ -126,11 +129,7 @@ class LoginActivity : AppCompatActivity() {
         if (mUser.checkInsertData()) {
             viewModel.createUserWithEmailEPassword(mUser)
         } else {
-            Snackbar.make(
-                binding.root,
-                "Favor inserir email ou senha validos",
-                Snackbar.LENGTH_LONG
-            ).show()
+            feedback(binding.root, R.string.validation_registration_failure, R.color.failure)
         }
     }
 }

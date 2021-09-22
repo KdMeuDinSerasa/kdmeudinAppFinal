@@ -18,9 +18,9 @@ class BillsViewModel @Inject constructor(
     private val userRepo: UserRepository
 ): ViewModel() {
 
-
     private val _billList = MutableLiveData<List<BillsModel>>()
     var billList: LiveData<List<BillsModel>> = _billList
+
     private val _error = MutableLiveData<String>()
     var error: LiveData<String> = _error
 
