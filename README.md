@@ -99,6 +99,7 @@ financial life</p>
 <img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
 
 
+<h2> <strong> So you my notice, at user preference has a button where you can toogle recive or not push notifications, so the paid status is for that, if a bill expires the app will end you a notification telling you that you have expired bills, but if the toogle are off, we dont send notifications to you. </strong> </h2>
 </div>
 
 
