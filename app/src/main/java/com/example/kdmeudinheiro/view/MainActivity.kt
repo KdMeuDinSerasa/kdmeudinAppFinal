@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //create the constraints to verify in the user phone
         val consts = Constraints.Builder()
             .setRequiresCharging(false)
-            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+            .setRequiredNetworkType(NetworkType.METERED)
             .setRequiresBatteryNotLow(true)
             .build()
 
