@@ -46,11 +46,6 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         checkUser()
     }
 
-    override fun onResume() {
-        binding.chartIncluded.pieChart.visibility = View.INVISIBLE
-        super.onResume()
-
-    }
 
     fun loadViewModels() {
         viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
