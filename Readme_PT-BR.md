@@ -76,19 +76,27 @@
 			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
 	<img width="357" alt="Screen Shot 2021-09-20 at 13 14 54" src="https://user-images.githubusercontent.com/80124800/134037129-3c0625c3-cb6b-4ca0-8be9-dfc60ba6ad77.png">
 	<img width="320" alt="Screen Shot 2021-09-20 at 13 16 34" src="https://user-images.githubusercontent.com/80124800/134037173-a1737493-59b6-4700-bb6d-37262059e9c9.png">
+	<p> 6.1º A list de contas apartir da att 3.0 conta com um filtro e uma barra de busca, onde pode procurar a conta por nome ou filtrar por contas vencidas, pagas ou em aberto. </p>
+	<img width="229" alt="Screen Shot 2021-09-22 at 13 47 37" src="https://user-images.githubusercontent.com/80124800/134386822-f5e36721-7438-44b3-83e7-1231827b7cd1.png">
+	<img width="230" alt="Screen Shot 2021-09-22 at 13 48 38" src="https://user-images.githubusercontent.com/80124800/134386960-9543cda5-e77f-4b66-8e2a-261796897eda.png">
+	
+<img width="202" alt="Screen Shot 2021-09-22 at 13 52 23" src="https://user-images.githubusercontent.com/80124800/134387590-06fc260f-e4f1-4583-84ac-df206b47b677.png">
 
 <p>7º Se você tiver contas cadastradas,você pode clicar sobre uma entao os detalhes vão aperecer lhe dando as opcoes de edição e exclusão, tambem tem a opção de marcar com paga. futuramente falaremos mais sobre esta opção. </p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 10 27 38" src="https://user-images.githubusercontent.com/80124800/134010437-5d4e3f89-1724-4d9b-b3b2-a578f67e8bb2.png">
 
 <p>8ºDe volta a home você ira encontrar um icone de menu acima na esquerda, ao clickar o menu se abre, listando informações do usuário e com dois botões, sair e preferências.</p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 11 06 02" src="https://user-images.githubusercontent.com/80124800/134016448-d20f2490-c794-44aa-87e9-76e18807e5ee.png"><img width="322" alt="Screen Shot 2021-09-20 at 11 07 34" src="https://user-images.githubusercontent.com/80124800/134016725-cf94ec45-c44b-40a0-9b5f-46fb0f936ad1.png">
+<p> 9º Clickando sobre as partes coloridas do gráfico, uma janela se abre, contendo dicas e artigos sobre a categoria selecionada. </p>
+<img width="234" alt="Screen Shot 2021-09-22 at 13 42 56" src="https://user-images.githubusercontent.com/80124800/134386212-78cff2ee-11ed-4148-b551-5c57c5d6ac7f.png">
+<img width="244" alt="Screen Shot 2021-09-22 at 13 44 09" src="https://user-images.githubusercontent.com/80124800/134386368-142bd2be-221f-473c-b811-a8d380fb3930.png">
 
-
-<p>9º clickando em preferências de usuário você é redirecionado a uma pagina onde tem informações de usuário, onde pode configurar notificações, mudar o nome e ao clickar sobre o avatar pode tambem escolher sua foto de perfil. </p>
+<p>10º clickando em preferências de usuário você é redirecionado a uma pagina onde tem informações de usuário, onde pode configurar notificações, mudar o nome e ao clickar sobre o avatar pode tambem escolher sua foto de perfil. </p>
 	<img width="325" alt="Screen Shot 2021-09-20 at 13 41 02" src="https://user-images.githubusercontent.com/80124800/134040801-b28e7569-a968-49f5-aa2b-0f271e2120c8.png">
 <img width="311" alt="Screen Shot 2021-09-20 at 13 40 56" src="https://user-images.githubusercontent.com/80124800/134041418-11ddd44c-5b70-47fb-85f6-cd8da9996028.png">
 <img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
-
+	
+<h2> <strong> Bom voce deve ter notado que nas preferências do usuario existe um botão de receber notificações, então lembra daquele status de pago? aqui as duas coisas se unem, caso o botao esteja ativado, o aplicativo ira realizar uma verificação diaria, se exitir contas vencidas ele vai mandar uma notificação avisando, o mesmo é feito para contas em aberto prestes a vencer, por isso é importante lembrar de marcar elas como pagas ou não . </strong> </h2>
 
 </div>
 
