@@ -81,9 +81,12 @@ financial life</p>
 
 <p>8º now back to dashboard you will find an menu icon up left, on click will open an drawer menu, listing some info abaout yor user and contains a logout button and a user preferences button.</p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 11 06 02" src="https://user-images.githubusercontent.com/80124800/134016448-d20f2490-c794-44aa-87e9-76e18807e5ee.png"><img width="322" alt="Screen Shot 2021-09-20 at 11 07 34" src="https://user-images.githubusercontent.com/80124800/134016725-cf94ec45-c44b-40a0-9b5f-46fb0f936ad1.png">
+<p> 9º Clicking over any colored part of the chart, will apper a dialog with tips & tricks ans articles about the selected category </p>
+<img width="234" alt="Screen Shot 2021-09-22 at 13 42 56" src="https://user-images.githubusercontent.com/80124800/134386212-78cff2ee-11ed-4148-b551-5c57c5d6ac7f.png">
+<img width="244" alt="Screen Shot 2021-09-22 at 13 44 09" src="https://user-images.githubusercontent.com/80124800/134386368-142bd2be-221f-473c-b811-a8d380fb3930.png">
 
 
-<p>9º clicking at user prefs you will be redirected to user preferences page where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
+<p>10º clicking at user prefs you will be redirected to user preferences page where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
 	<img width="325" alt="Screen Shot 2021-09-20 at 13 41 02" src="https://user-images.githubusercontent.com/80124800/134040801-b28e7569-a968-49f5-aa2b-0f271e2120c8.png">
 <img width="311" alt="Screen Shot 2021-09-20 at 13 40 56" src="https://user-images.githubusercontent.com/80124800/134041418-11ddd44c-5b70-47fb-85f6-cd8da9996028.png">
 <img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
