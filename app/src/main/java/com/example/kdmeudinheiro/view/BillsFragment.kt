@@ -3,6 +3,8 @@ package com.example.kdmeudinheiro.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,9 +18,11 @@ import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.utils.DialogToFilter
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.BillsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class BillsFragment : Fragment(R.layout.bills_fragment) {
@@ -44,6 +48,9 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         recyclerView.adapter = adapter
         loadBinding()
         checkUser()
+        searchBill()
+        filterByValidate()
+
     }
 
 
@@ -78,6 +85,8 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             }
         })
 
+        viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.copyBillList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
                 feedback(requireView(), R.string.error_to_call_bills, R.color.failure)
@@ -140,5 +149,39 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
         viewModel.getAllBills(userId)
+    }
+
+    private fun searchBill() {
+        binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                p0.let {
+                    if (it?.length!! >= 1)
+                        viewModel.filterBill(it.toString())
+                    if (it.isEmpty())
+                        viewModel.filterBill(it.toString())
+                }
+            }
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+    }
+
+    private fun filterByValidate(){
+        val date = Calendar.getInstance()
+
+        binding.buttonFilter.setOnClickListener {
+            DialogToFilter.dialogToFilter(requireContext()) { map ->
+
+                val hashToList = map?.map {
+                    it.key
+                }
+                val getListPosition = hashToList?.get(0)
+
+                if (getListPosition == 3)
+                    viewModel.filterBill("")
+
+                viewModel.filterPay(date.time, getListPosition!!)
+            }
+        }
     }
 }
