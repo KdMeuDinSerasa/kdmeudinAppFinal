@@ -75,6 +75,13 @@ financial life</p>
 			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
 	<img width="357" alt="Screen Shot 2021-09-20 at 13 14 54" src="https://user-images.githubusercontent.com/80124800/134037129-3c0625c3-cb6b-4ca0-8be9-dfc60ba6ad77.png">
 	<img width="320" alt="Screen Shot 2021-09-20 at 13 16 34" src="https://user-images.githubusercontent.com/80124800/134037173-a1737493-59b6-4700-bb6d-37262059e9c9.png">
+<p> 6.1º the bill list from release 3.0 know have a filter and search bar, where you can search your bills by name, and filter by expired, paid and more. </p>
+	<img width="229" alt="Screen Shot 2021-09-22 at 13 47 37" src="https://user-images.githubusercontent.com/80124800/134386822-f5e36721-7438-44b3-83e7-1231827b7cd1.png">
+	<img width="230" alt="Screen Shot 2021-09-22 at 13 48 38" src="https://user-images.githubusercontent.com/80124800/134386960-9543cda5-e77f-4b66-8e2a-261796897eda.png">
+	
+<img width="202" alt="Screen Shot 2021-09-22 at 13 52 23" src="https://user-images.githubusercontent.com/80124800/134387590-06fc260f-e4f1-4583-84ac-df206b47b677.png">
+
+
 
 <p>7º if you have bills listed, you can click on it and will apper a details where you can edit or delete, and change a status thats tags the bill to payed.  </p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 10 27 38" src="https://user-images.githubusercontent.com/80124800/134010437-5d4e3f89-1724-4d9b-b3b2-a578f67e8bb2.png">
