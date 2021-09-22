@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.UserRepository
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -90,14 +89,17 @@ class BillsViewModel @Inject constructor(
     }
 
     fun filterBill(filter: String) {
+
+        _copyBillList.value = _billList.value
+
         viewModelScope.launch {
-            if (filter.isNullOrEmpty())
+            if (filter.isNullOrBlank())
                 _copyBillList.value = _billList.value
-            val filtered = _copyBillList.value?.filter {
+
+            var filtered = _copyBillList.value?.filter {
                 it.name_bill.contains(filter)
             }
             _copyBillList.value = filtered!!
         }
-
     }
 }
