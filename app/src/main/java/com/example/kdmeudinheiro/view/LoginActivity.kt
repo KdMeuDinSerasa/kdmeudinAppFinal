@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.mFirebaseUser.observe(this, {
             if (it != null) {
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         })
 
