@@ -158,7 +158,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 p0.let {
                     if (it?.length!! >= 1)
                         viewModel.filterBill(it.toString())
-                    if (it.isEmpty())
+                    else
                         viewModel.filterBill(it.toString())
                 }
             }
@@ -178,7 +178,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 val getListPosition = hashToList?.get(0)
 
                 if (getListPosition == 3)
-                    viewModel.filterBill("")
+                    viewModel.filterBill(it.toString())
 
                 viewModel.filterPay(date.time, getListPosition!!)
             }
