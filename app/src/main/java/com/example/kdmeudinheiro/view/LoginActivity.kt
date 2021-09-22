@@ -13,9 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
+import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.utils.isValidEmail
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -129,19 +131,22 @@ class LoginActivity : AppCompatActivity() {
         val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister)
         val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameUserRegister)
 
-        if (emailAux.text.toString().isNullOrBlank() || passwordAux.text.toString()
-                .isNullOrBlank() || nameAux.text.toString().isNullOrBlank()
+        val mUser = UserModel(
+            email = emailAux.text.toString(),
+            password = passwordAux.text.toString(),
+            name = nameAux.text.toString()
         )
-            Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
-        else {
-            if (emailAux.text.toString().isValidEmail()) {
-                viewModel.createUserWithEmailEPassword(
-                    emailAux.text.toString(),
-                    passwordAux.text.toString(),
-                    nameAux.text.toString()
-                )
-                bottomSheetDialog.dismiss()
-            } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
+        if (mUser.checkInsertData()) {
+
+            viewModel.createUserWithEmailEPassword(mUser
+            )
+
+        } else {
+            Snackbar.make(
+                binding.root,
+                "Favor inserir email ou senha validos",
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 }
