@@ -23,8 +23,8 @@ import java.util.*
 
 
 class BottomSheet(
-    val parentView: View,
-    val bill: BillsModel?,
+  private  val parentView: View,
+   private val bill: BillsModel?,
 ) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -115,8 +115,6 @@ class BottomSheet(
         } else {
             bottomSheetBinding.editTextInputBillName.setText(bill.name_bill)
             bottomSheetBinding.editTextInputBillPrice.setText(bill.price)
-//            bottomSheetBinding.editTextInputBillExpireDate.setText(bill.expire_date)
-
             bottomSheetBinding.saveBillButtom.visibility = View.GONE
             bottomSheetBinding.editTextInputBillExpireDate.visibility = View.VISIBLE
             bottomSheetBinding.editBillButton.visibility = View.VISIBLE

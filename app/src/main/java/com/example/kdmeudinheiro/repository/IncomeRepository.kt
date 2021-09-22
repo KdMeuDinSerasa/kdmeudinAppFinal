@@ -4,12 +4,6 @@ import com.example.kdmeudinheiro.enums.KeysDatabaseIncome
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.utils.await
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.squareup.okhttp.Dispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class IncomeRepository @Inject constructor(
@@ -17,9 +11,7 @@ class IncomeRepository @Inject constructor(
 ) {
 
 
-
-
-    suspend fun addIncome(mIncomeModel: IncomeModel): Boolean{
+    suspend fun addIncome(mIncomeModel: IncomeModel): Boolean {
         val map = mutableMapOf<String, String>()
         map.put(KeysDatabaseIncome.IDUSER.key, mIncomeModel.userId)
         map.put(KeysDatabaseIncome.INCOME.key, mIncomeModel.income)
@@ -29,11 +21,11 @@ class IncomeRepository @Inject constructor(
     }
 
 
-    suspend fun editIncome(mIncomeModel: IncomeModel): Boolean{
+    suspend fun editIncome(mIncomeModel: IncomeModel): Boolean {
         val map = mutableMapOf<String, Any>()
         map.put(KeysDatabaseIncome.INCOME.key, mIncomeModel.income)
         val task = db.collection("table_income")
-                .document(mIncomeModel.id!!).update(map)
+            .document(mIncomeModel.id!!).update(map)
 
         task.await()
 
@@ -41,16 +33,18 @@ class IncomeRepository @Inject constructor(
     }
 
     suspend fun getIncome(userID: String): IncomeModel? {
-        val task =  db.collection("table_income")
+        val task = db.collection("table_income")
             .whereEqualTo(KeysDatabaseIncome.IDUSER.key, userID)
             .get()
 
         val snapshot = task.await()
         var incomeModel: IncomeModel? = null
         snapshot?.forEach {
-            incomeModel = IncomeModel(it.id,
+            incomeModel = IncomeModel(
+                it.id,
                 it.data[KeysDatabaseIncome.INCOME.key] as String,
-                it.data[KeysDatabaseIncome.IDUSER.key] as String)
+                it.data[KeysDatabaseIncome.IDUSER.key] as String
+            )
         }
         return incomeModel
     }

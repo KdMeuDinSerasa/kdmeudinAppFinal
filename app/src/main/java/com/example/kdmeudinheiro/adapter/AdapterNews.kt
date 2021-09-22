@@ -12,7 +12,7 @@ import com.example.kdmeudinheiro.databinding.NewsModelBinding
 import com.example.kdmeudinheiro.interfaces.ClickNews
 import com.example.kdmeudinheiro.model.NewsLetter
 
-class AdapterNews(val mClick: ClickNews) :
+class AdapterNews(private val mClick: ClickNews) :
     ListAdapter<NewsLetter, ViewHolderNews>(DiffUtilsNews()) {
     private val mList = mutableListOf<NewsLetter>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNews {

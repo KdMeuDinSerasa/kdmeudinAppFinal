@@ -12,7 +12,7 @@ import com.example.kdmeudinheiro.utils.adjustYear
 import com.example.kdmeudinheiro.utils.formatCurrency
 
 
-class AdapterBillsList(val onItemClick: (BillsModel) -> Unit) :
+class AdapterBillsList(private val onItemClick: (BillsModel) -> Unit) :
     RecyclerView.Adapter<BillsViewHolder>() {
     private var listOfBills = mutableListOf<BillsModel>()
 

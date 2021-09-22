@@ -1,7 +1,6 @@
 package com.example.kdmeudinheiro.services
 
 import com.example.kdmeudinheiro.enums.APIKEY
-import com.example.kdmeudinheiro.model.NewsLetter
 import com.example.kdmeudinheiro.model.ReciviedArticles
 import retrofit2.Response
 import retrofit2.http.GET

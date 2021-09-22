@@ -21,7 +21,6 @@ class NotificationHandler @Inject constructor(private val context: Context) {
     }
 
 
-
     /**
      * here we are creating the channel, we have to create a channel
      * for each type of notifications, so if the user
@@ -65,10 +64,3 @@ class NotificationHandler @Inject constructor(private val context: Context) {
         return builder.build()
     }
 }
-/**
- * Example of how to use
- */
-//mNotificationHandler.createNotification("Teste", "Testando notificaçao na splash").apply {
-//    val notificationManager = NotificationManagerCompat.from(this@SplashActivity)
-//    notificationManager.notify(1, this)
-//}

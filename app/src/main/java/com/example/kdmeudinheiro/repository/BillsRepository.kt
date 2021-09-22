@@ -1,20 +1,15 @@
 package com.example.kdmeudinheiro.repository
 
-import android.widget.DatePicker
 import com.example.kdmeudinheiro.enums.KeysDatabaseBills
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.await
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.type.Date
-import java.util.*
 import javax.inject.Inject
 
 class BillsRepository @Inject constructor(
     private val db: FirebaseFirestore
 ) {
-
-
 
 
     suspend fun addBills(mBillsModel: BillsModel): Boolean {
@@ -33,15 +28,15 @@ class BillsRepository @Inject constructor(
     }
 
 
-
-    suspend fun editBill(mBillsModel: BillsModel): Boolean{
+    suspend fun editBill(mBillsModel: BillsModel): Boolean {
         val map = mutableMapOf<String, Any>()
         map.put(KeysDatabaseBills.PRICE.key, mBillsModel.price)
         map.put(KeysDatabaseBills.TYPEBILL.key, mBillsModel.type_bill)
         map.put(KeysDatabaseBills.NAMEBILL.key, mBillsModel.name_bill)
         map.put(KeysDatabaseBills.EXPIREDATE.key, mBillsModel.expire_date)
         map.put(KeysDatabaseBills.STATUS.key, mBillsModel.status.toString())
-        val task = mBillsModel.id_bill?.let { db.collection("table_account").document(it).update(map) }
+        val task =
+            mBillsModel.id_bill?.let { db.collection("table_account").document(it).update(map) }
         if (task != null) {
             task.await()
         }
@@ -49,7 +44,7 @@ class BillsRepository @Inject constructor(
     }
 
 
-    suspend fun deleteBill(mBillsModel: BillsModel): Boolean{
+    suspend fun deleteBill(mBillsModel: BillsModel): Boolean {
         val task = mBillsModel.id_bill?.let { db.collection("table_account").document(it).delete() }
         if (task != null) {
             task.await()
@@ -58,9 +53,9 @@ class BillsRepository @Inject constructor(
     }
 
 
-
-    suspend fun getBills(idUser: String): List<BillsModel>?{
-        val task = db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
+    suspend fun getBills(idUser: String): List<BillsModel>? {
+        val task =
+            db.collection("table_account").whereEqualTo(KeysDatabaseBills.IDUSER.key, idUser).get()
         val result = task.await()
         val accountList = mutableListOf<BillsModel>()
         result?.forEach {
