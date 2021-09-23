@@ -17,6 +17,7 @@
     <string name="Bill_Name_label_list_card">Nome do gasto: </string>
     <string name="Bill_Price_label_list_card">Valor do gasto: </string>
     <string name="Bill_ExpireDate_label_list_card">Data de vencimento: </string>
+    <string name="Bill_Added_with_sucess">Conta adicionada com sucesso </string>
     <string name="add_bill_label">Adicionar Conta</string>
     <string name="name_bill_label_inputs">Nome da conta ou gasto</string>
     <string name="label_bill_price_inputs">Valor da conta ou gasto</string>
@@ -27,6 +28,7 @@
     <string name="edit_label">Editar</string>
     <string name="delete_label">Deletar</string>
     <string name="pay_label">Pagar</string>
+    <string name="pay_bill">Conta Paga</string>
     <string name="logout_label">Logout</string>
     <string name="user_prefs_label">Preferências do usuário</string>
     <string name="user_avatar_desc">User Avatar</string>
