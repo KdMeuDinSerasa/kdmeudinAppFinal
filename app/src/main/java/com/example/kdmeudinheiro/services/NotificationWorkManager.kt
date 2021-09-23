@@ -37,10 +37,15 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
                 var toExpire: Int = 0
                 val mNotificationHandler = NotificationHandler(context)
                 val notificationManager = NotificationManagerCompat.from(context)
+
                 userId?.let { mBillsRepository.getBills(it) }!!.forEach {
                     if (it.expire_date.before(calendar.time) && it.status == 0) count++
                     else {
-                        if (it.expire_date.after(calendar.time) && it.status == 0) toExpire++
+                        var datePlus = Date();
+                        calendar.setTime(datePlus)
+                        calendar.add(Calendar.DATE, 1)
+                        datePlus = calendar.getTime()
+                        if (it.expire_date.before(datePlus) && it.status == 0) toExpire++
                     }
                 }
                 if (count > 0) {
@@ -62,6 +67,7 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
         }
 
     }
+
 
 }
 
