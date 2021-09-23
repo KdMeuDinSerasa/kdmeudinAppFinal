@@ -23,7 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
 
-class BottomSheet(
+class BottomSheetBills(
   private  val parentView: View,
    private val bill: BillsModel?,
 ) {
@@ -108,6 +108,7 @@ class BottomSheet(
                     callback(billObject, 0)
                     bottomSheetDialog.dismiss()
                 } else
+                    feedback(parentView, R.string.validation_registration_failure, R.color.failure)
                     bottomSheetDialog.dismiss()
             }
 
@@ -164,105 +165,9 @@ class BottomSheet(
     }
 }
 
-class BottomSheetTips(val parentView: View, val typeTip: TipType) {
 
-    private lateinit var bottomSheetView: View
-    private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
 
-    fun loadTip() {
 
-        if (typeTip == TipType.TIP_BILL_CATEGORY) {
-            bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-            bottomSheetDialog = BottomSheetDialog(parentView.context)
-            bottomSheetDialog.setContentView(bottomSheetView)
-            bottomSheetDialog.show()
-            val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
-            bottomSheetBinding.backButton.setOnClickListener {
-                bottomSheetDialog.dismiss()
-            }
-        }
-    }
-}
-
-class bottomSheetIncome(val parentView: View) {
-    private lateinit var bottomSheetView: View
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var bottomSheetBinding: IncomeLayoutBinding
-
-    fun loadIncome(callback: (Double?) -> Unit) {
-        bottomSheetView = View.inflate(parentView.context, R.layout.income_layout, null)
-        bottomSheetDialog = BottomSheetDialog(parentView.context)
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
-        bottomSheetBinding = IncomeLayoutBinding.bind(bottomSheetView)
-
-        bottomSheetBinding.buttonAddIncome.setOnClickListener {
-            if (!bottomSheetBinding.editTextIncome.text.toString().isNullOrBlank()) {
-                val income = bottomSheetBinding.editTextIncome.text.toString().toDouble()
-                callback(income)
-                bottomSheetDialog.dismiss()
-            } else {
-                bottomSheetDialog.dismiss()
-            }
-        }
-    }
-
-}
-
-class BottomSheetChart(
-    val parentView: View,
-    val typeClicked: Int,
-    val clickInterceptor: ChartClickInterceptor,
-    val articleList: List<Articles>
-) {
-    private lateinit var bottomSheetView: View
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var bottomSheetBinding: TipChartBinding
-
-    private lateinit var recyclerView: RecyclerView
-    private var adapter = AdapterChartTips() {
-        clickInterceptor.interceptSelectedArticle(it)
-    }
-
-    fun loadBottomSheet() {
-        /* setup bottom sheet */
-        bottomSheetView = View.inflate(parentView.context, R.layout.tip_chart, null)
-        bottomSheetDialog = BottomSheetDialog(parentView.context)
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
-        bottomSheetBinding = TipChartBinding.bind(bottomSheetView)
-        /* setup recyclerview */
-
-        recyclerView = bottomSheetBinding.recyclerViewIdTipChart
-        recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
-        recyclerView.adapter = adapter
-
-        /* filter to show based at parameter */
-        if (typeClicked == 4 /* fix */) {
-            bottomSheetBinding.textViewTipChart.text =
-                bottomSheetView.context.getString(R.string.text_tip_chart_fix)
-            bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
-            bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
-            bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/como-ganhar-dinheiro/")
-        } else if (typeClicked == 5 /* leisure */) {
-            bottomSheetBinding.textViewTipChart.text = "Lazer" //TODO string for this
-            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-            var list = articleList.filter { it.typeArticle.toInt() == 1 }
-            adapter.update(list)
-        } else if (typeClicked == 6 /* emergency */) {
-            bottomSheetBinding.textViewTipChart.text = "Emergenciais" //TODO string for this
-            bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
-            var list = articleList.filter { it.typeArticle.toInt() == 2 }
-            adapter.update(list)
-        } else if (typeClicked == 7 /* monthly */) {
-            bottomSheetBinding.textViewTipChart.text =
-                bottomSheetView.context.getString(R.string.text_tip_chart_monthly)
-            bottomSheetBinding.recyclerViewIdTipChart.visibility = View.GONE
-            bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
-            bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/suas-economias/")
-        }
-    }
-}
 
 
 
