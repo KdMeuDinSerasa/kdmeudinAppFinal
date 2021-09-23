@@ -56,17 +56,17 @@ class BottomSheetBills(
         )
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
-            val c = Calendar.getInstance(Locale.US)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-            val dpd = DatePickerDialog(
+            val calendar = Calendar.getInstance(Locale.US)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val datePicker = DatePickerDialog(
                 parentView.context,
                 DatePickerDialog.OnDateSetListener { datePicker, year, month, dayOfMonth ->
                     date = datePicker
                     bottomSheetBinding.editTextInputBillExpireDate.setText("$dayOfMonth/0${month + 1}/$year")
-                }, c.get(Calendar.YEAR), month, day
+                }, calendar.get(Calendar.YEAR), month, day
             )
-            dpd.show()
+            datePicker.show()
         }
 
         if (bill == null) {

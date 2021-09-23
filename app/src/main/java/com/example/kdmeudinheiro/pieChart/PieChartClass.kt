@@ -76,6 +76,7 @@ class PieChartClass(
 
         }
 
+        /* make the dynamic colors to no show empty percentages */
         val colorsFix = java.util.ArrayList<Int>()
         for (categories in arrayPercentages.withIndex()) {
             if (categories.value != 0F) {
@@ -89,6 +90,7 @@ class PieChartClass(
         val final = (((income - outComes) / income) * 100)
         pieChartEntry.add(Entry(final, pieChartEntry.size))
         colorsFix.add(colors[4])
+
 
         setData(category, pieChartEntry, colorsFix)
     }
@@ -121,6 +123,9 @@ class PieChartClass(
 
     }
 
+
+    /*intercept the click at the chart, call a interface to pass the selected index
+    to call the correct information at the bottom dialog*/
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
         when (e?.xIndex) {
             0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)
@@ -131,5 +136,6 @@ class PieChartClass(
     }
 
     override fun onNothingSelected() {
+
     }
 }
