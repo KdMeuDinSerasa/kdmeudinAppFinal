@@ -113,6 +113,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
     }
 
+    override fun onBackPressed() {
+         mNavController.popBackStack()
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
