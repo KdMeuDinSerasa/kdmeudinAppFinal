@@ -49,7 +49,7 @@ class PieChartClass(
 
         /* create the arrays */
         val pieChartEntry = ArrayList<Entry>()
-        val arrayDoubles = arrayListOf(0f, 0f, 0f, 0f)
+        val arrayPercentages = arrayListOf(0f, 0f, 0f, 0f)
         val priceArray = arrayListOf(0f, 0f, 0f, 0f)
 
         /* take the bill prices sum all and make a new array*/
@@ -72,11 +72,12 @@ class PieChartClass(
         for (price in priceArray.withIndex()) {
             val income = incomes.income.toFloat()
             val final = 100 - (((income - price.value) / income) * 100)
-            arrayDoubles[price.index] = +final
+            arrayPercentages[price.index] = +final
 
         }
+
         val colorsFix = java.util.ArrayList<Int>()
-        for (categories in arrayDoubles.withIndex()) {
+        for (categories in arrayPercentages.withIndex()) {
             if (categories.value != 0F) {
                 pieChartEntry.add(Entry(categories.value, categories.index))
                 colorsFix.add(colors[categories.index])
