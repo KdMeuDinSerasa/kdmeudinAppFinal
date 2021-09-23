@@ -7,20 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.repository.BillsRepository
 import com.example.kdmeudinheiro.repository.UserRepository
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
     private val userRepo: UserRepository
-): ViewModel() {
-
+) : ViewModel() {
 
     private val _billList = MutableLiveData<List<BillsModel>>()
     var billList: LiveData<List<BillsModel>> = _billList
+
     private val _error = MutableLiveData<String>()
     var error: LiveData<String> = _error
 
@@ -28,12 +28,14 @@ class BillsViewModel @Inject constructor(
         viewModelScope.launch {
             val listBills = billRepo.getBills(idUser)
             if (listBills != null)
-            _billList.value = listBills!!
+                _billList.value = listBills!!
             else
-                _error.value = "Adicione Suas Constas"
+                _error.value = "Adicione Suas Contas"
         }
-
     }
+
+    private var _copyBillList = MutableLiveData<List<BillsModel>>()
+    var copyBillList: LiveData<List<BillsModel>> = _copyBillList
 
     private val _addResponse = MutableLiveData<Boolean>()
     var addResponse: LiveData<Boolean> = _addResponse
@@ -60,6 +62,44 @@ class BillsViewModel @Inject constructor(
         viewModelScope.launch {
             _deleteResponse.value = billRepo.deleteBill(bill)
         }
+    }
 
+
+    fun filterPay(date: Date, getUserChoice: Int) {
+
+        var filtered = _billList.value
+
+        viewModelScope.launch {
+
+            if (getUserChoice == 0)
+                filtered = filtered?.filter {
+                    it.expire_date.after(date) && it.status == 0
+                }
+            else if (getUserChoice == 1)
+                filtered = filtered?.filter {
+                    it.expire_date.before(date) && it.status == 0
+                }
+            else if (getUserChoice == 2)
+                filtered = filtered?.filter {
+                    it.status == 1
+                }
+
+            _copyBillList.value = filtered!!
+        }
+    }
+
+    fun filterBill(filter: String) {
+
+        _copyBillList.value = _billList.value
+
+        viewModelScope.launch {
+            if (filter.isNullOrBlank())
+                _copyBillList.value = _billList.value
+
+            var filtered = _copyBillList.value?.filter {
+                it.name_bill.contains(filter)
+            }
+            _copyBillList.value = filtered!!
+        }
     }
 }

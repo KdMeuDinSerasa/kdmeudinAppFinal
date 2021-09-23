@@ -13,7 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.utils.isValidEmail
+import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,13 +39,13 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadViewModels() {
         /**
-         * Checa se a sessão esta ativa ou expirou somente se o checkbox remember-me tiver
-         * sido marcado em uma sessão anterior
+         * checks if user session still active or not, then start the correct activity.
          */
 
         viewModel.mFirebaseUser.observe(this, {
             if (it != null) {
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         })
 
@@ -68,9 +69,12 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.result.observe(this, {
-            if (it) Toast.makeText(this, "Usuario cadastrado com sucesso", Toast.LENGTH_SHORT)
-                .show()
-            else Toast.makeText(this, "Erro ao cadastrar", Toast.LENGTH_SHORT).show()
+            if (it) feedback(
+                binding.root,
+                R.string.registration_on_firebase_success,
+                R.color.success
+            )
+            else feedback(binding.root, R.string.registration_on_firebase_failure, R.color.failure)
         })
     }
 
@@ -80,27 +84,21 @@ class LoginActivity : AppCompatActivity() {
             loadBottomSheet()
         }
         binding.btnLogin.setOnClickListener {
-            checkLogin()
+            val mUser = UserModel(
+                id = "",
+                email = binding.etEmail.editText?.text.toString(),
+                password = binding.etPassword.editText?.text.toString(),
+                name = "",
+                null
+            )
+            if (mUser.checkLogin()) {
+                viewModel.loginWithEmailEPassword(mUser)
+            } else {
+                feedback(binding.root, R.string.validation_login_failure, R.color.failure)
+            }
         }
     }
 
-
-    /**
-     * Checa as credenciais do usuario, se preencheu todos os campos e se existe um usuario
-     * cadastrado com as credenciais informadas
-     */
-    fun checkLogin() {
-        if (binding.etEmail.editText?.text.toString()
-                .isValidEmail() && !binding.etPassword.editText?.text.toString()
-                .isNullOrBlank()
-        ) {
-            viewModel.loginWithEmailEPassword(
-                binding.etUserEmail.text.toString(),
-                binding.etUserPassword.text.toString()
-            )
-
-        } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
-    }
 
     fun loadBottomSheet() {
 
@@ -113,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
         loadBottomSheetComponents()
     }
 
-
     fun loadBottomSheetComponents() {
         bottomSheetView.findViewById<Button>(R.id.btnRegister).setOnClickListener {
             checkLoginRegister()
@@ -124,23 +121,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun checkLoginRegister() {
-        val emailAux = bottomSheetView.findViewById<EditText>(R.id.etEmailUserRegister)
-        val passwordAux = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister)
-        val nameAux = bottomSheetView.findViewById<EditText>(R.id.etNameUserRegister)
-
-        if (emailAux.text.toString().isNullOrBlank() || passwordAux.text.toString()
-                .isNullOrBlank() || nameAux.text.toString().isNullOrBlank()
+        val mUser = UserModel(
+            email = bottomSheetView.findViewById<EditText>(R.id.etEmailUserRegister).text.toString(),
+            password = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister).text.toString(),
+            name = bottomSheetView.findViewById<EditText>(R.id.etNameUserRegister).text.toString()
         )
-            Toast.makeText(this, "Preencha Todos os campos", Toast.LENGTH_SHORT).show()
-        else {
-            if (emailAux.text.toString().isValidEmail()) {
-                viewModel.createUserWithEmailEPassword(
-                    emailAux.text.toString(),
-                    passwordAux.text.toString(),
-                    nameAux.text.toString()
-                )
-                bottomSheetDialog.dismiss()
-            } else Toast.makeText(this, "Email Invalido", Toast.LENGTH_SHORT).show()
+        if (mUser.checkInsertData()) {
+            viewModel.createUserWithEmailEPassword(mUser)
+            bottomSheetDialog.dismiss()
+        } else {
+            bottomSheetDialog.dismiss()
+            feedback(binding.root, R.string.validation_registration_failure, R.color.failure)
         }
     }
 }

@@ -9,7 +9,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ItemListChartBinding
 import com.example.kdmeudinheiro.model.Articles
 
-class AdapterChartTips(val onClickItem: (Articles) -> Unit) :
+class AdapterChartTips(private val onClickItem: (Articles) -> Unit) :
     RecyclerView.Adapter<ChartTipsViewHolder>() {
 
     private val listOfArticles = mutableListOf<Articles>()

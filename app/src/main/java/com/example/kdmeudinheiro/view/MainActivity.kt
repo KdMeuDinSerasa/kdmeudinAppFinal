@@ -13,17 +13,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.*
 import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.services.NotificationWorkManager
+import com.example.kdmeudinheiro.services.WorkManagerBuilder
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -44,25 +42,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
+
+    /* invoke the work manager builder class to make a notification scheduler.*/
     private fun createScheduler() {
-        //create the instance of workManager
-        val workManager = WorkManager.getInstance(this)
-
-        //create the constraints to verify in the user phone
-        val consts = Constraints.Builder()
-            .setRequiresCharging(false)
-            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
-            .setRequiresBatteryNotLow(true)
-            .build()
-
-        //create the workRequest with the details of the routine
-        val mWorkRequest =
-            PeriodicWorkRequestBuilder<NotificationWorkManager>(60, TimeUnit.MINUTES).setConstraints(
-                consts
-            ).build()
-
-        //start the routine
-        workManager.enqueueUniquePeriodicWork("Check_expired_bills", ExistingPeriodicWorkPolicy.KEEP, mWorkRequest)
+       WorkManagerBuilder(binding.root).buildService()
     }
 
     fun updateUser() {

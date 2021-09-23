@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.databinding.ActivitySplashBinding
@@ -39,6 +40,7 @@ class SplashActivity : AppCompatActivity() {
         } else
             Handler().postDelayed({
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }, 3000)
 
 
@@ -55,7 +57,10 @@ class SplashActivity : AppCompatActivity() {
                 Handler().postDelayed({
                     viewModelMain.getIncome(it.uid)
                 }, 3000)
-            } else startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
 
         })
         viewModelMain.mIncomeModel.observe(this, {
