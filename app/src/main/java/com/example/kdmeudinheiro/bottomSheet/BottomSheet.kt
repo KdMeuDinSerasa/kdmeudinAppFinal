@@ -13,7 +13,6 @@ import com.example.kdmeudinheiro.databinding.InputBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
 import com.example.kdmeudinheiro.databinding.TipChartBinding
 import com.example.kdmeudinheiro.enums.StatusBills
-import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
@@ -23,8 +22,8 @@ import java.util.*
 
 
 class BottomSheet(
-  private  val parentView: View,
-   private val bill: BillsModel?,
+    private val parentView: View,
+    private val bill: BillsModel?,
 ) {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
@@ -166,22 +165,19 @@ class BottomSheet(
     }
 }
 
-class BottomSheetTips(val parentView: View, val typeTip: TipType) {
+class BottomSheetTips(val parentView: View) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/
 
     fun loadTip() {
-
-        if (typeTip == TipType.TIP_BILL_CATEGORY) {
-            bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
-            bottomSheetDialog = BottomSheetDialog(parentView.context)
-            bottomSheetDialog.setContentView(bottomSheetView)
-            bottomSheetDialog.show()
-            val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
-            bottomSheetBinding.backButton.setOnClickListener {
-                bottomSheetDialog.dismiss()
-            }
+        bottomSheetView = View.inflate(parentView.context, R.layout.tip_bill_layout, null)
+        bottomSheetDialog = BottomSheetDialog(parentView.context)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
+        val bottomSheetBinding = TipBillLayoutBinding.bind(bottomSheetView)
+        bottomSheetBinding.backButton.setOnClickListener {
+            bottomSheetDialog.dismiss()
         }
     }
 }
@@ -233,13 +229,13 @@ class BottomSheetChart(
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
         bottomSheetBinding = TipChartBinding.bind(bottomSheetView)
-        /* setup recyclerview */
 
+        /* setup recyclerview */
         recyclerView = bottomSheetBinding.recyclerViewIdTipChart
         recyclerView.layoutManager = LinearLayoutManager(bottomSheetView.context)
         recyclerView.adapter = adapter
 
-        /* filter to show based at parameter */
+        /* filter to show based by parameter the correct informations. */
         if (typeClicked == 4 /* fix */) {
             bottomSheetBinding.textViewTipChart.text =
                 bottomSheetView.context.getString(R.string.text_tip_chart_fix)
@@ -247,12 +243,14 @@ class BottomSheetChart(
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/como-ganhar-dinheiro/")
         } else if (typeClicked == 5 /* leisure */) {
-            bottomSheetBinding.textViewTipChart.text = "Lazer" //TODO string for this
+            bottomSheetBinding.textViewTipChart.text =
+                bottomSheetView.context.getString(R.string.leisure_text)
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             var list = articleList.filter { it.typeArticle.toInt() == 1 }
             adapter.update(list)
         } else if (typeClicked == 6 /* emergency */) {
-            bottomSheetBinding.textViewTipChart.text = "Emergenciais" //TODO string for this
+            bottomSheetBinding.textViewTipChart.text =
+                bottomSheetView.context.getString(R.string.emergency_text)
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             var list = articleList.filter { it.typeArticle.toInt() == 2 }
             adapter.update(list)
