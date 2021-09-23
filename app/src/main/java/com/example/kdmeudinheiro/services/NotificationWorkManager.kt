@@ -31,7 +31,7 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
         val calendar = Calendar.getInstance()
 
 
-        if (mSharedPreferences.getBoolean(KeysShared.ACTIVE_PUSH.key, false)){
+        if (mSharedPreferences.getBoolean(KeysShared.ACTIVE_PUSH.key, false)) {
             CoroutineScope(Dispatchers.Default).launch {
                 var count: Int = 0
                 userId?.let { mBillsRepository.getBills(it) }!!.forEach {
