@@ -4,7 +4,7 @@ import android.view.View
 import androidx.work.*
 import java.util.concurrent.TimeUnit
 
-class WorkMangerBuilder(val parentView: View) {
+class WorkManagerBuilder(val parentView: View) {
 
     fun buildService(){
         //create the instance of workManager

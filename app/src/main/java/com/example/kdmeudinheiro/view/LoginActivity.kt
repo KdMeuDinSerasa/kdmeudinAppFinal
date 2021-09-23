@@ -39,8 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadViewModels() {
         /**
-         * Checa se a sessão esta ativa ou expirou somente se o checkbox remember-me tiver
-         * sido marcado em uma sessão anterior
+         * checks if user session still active or not, then start the correct activity.
          */
 
         viewModel.mFirebaseUser.observe(this, {

@@ -57,6 +57,7 @@
     <string name="error_to_excute_action">Erro ao executar a acao </string>
     <string name="leisure_text">Lazer, sempre pensamos que tudo esta muito caro ou que nao podemos nos divertir gastanto pouco né? parta desmistificar isso temos abaixo, alguns artigos que irao te ajudar. </string>
     <string name="emergency_text">Emergenciais, bom o propio nome já diz, aqui talvez nao tenha muito como fugir porem nao desistimos facil, abaixo algumas materias para te ajudar.</string>
+    <string name="edited_with_success">"Editado com sucesso"</string>
 
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
 </resources>

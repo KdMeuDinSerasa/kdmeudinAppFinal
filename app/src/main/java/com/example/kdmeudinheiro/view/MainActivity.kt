@@ -13,18 +13,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.*
 import com.bumptech.glide.Glide
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.services.NotificationWorkManager
-import com.example.kdmeudinheiro.services.WorkMangerBuilder
+import com.example.kdmeudinheiro.services.WorkManagerBuilder
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -46,8 +43,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
+    /* invoke the work manager builder class to make a notification scheduler.*/
     private fun createScheduler() {
-       WorkMangerBuilder(binding.root).buildService()
+       WorkManagerBuilder(binding.root).buildService()
     }
 
     fun updateUser() {
