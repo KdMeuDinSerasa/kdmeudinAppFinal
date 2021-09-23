@@ -51,9 +51,12 @@ class ViewHolderNews(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val binding = NewsModelBinding.bind(itemView)
     fun bind(mNewsLetter: NewsLetter) {
         binding.tvTitleNews.text = mNewsLetter.title
-        Glide.with(binding.root).load(mNewsLetter.imageUrl).into(binding.ivImageNews)
         binding.tvSourceNews.text = mNewsLetter.source.siteName
         binding.tvDateNews.text = mNewsLetter.date.substring(0, 10).replace("-", "/")
-
+        Glide.with(binding.root)
+            .load(mNewsLetter.imageUrl)
+            .placeholder(R.drawable.ic_baseline_help_24)
+            .into(binding.ivImageNews)
     }
+
 }
