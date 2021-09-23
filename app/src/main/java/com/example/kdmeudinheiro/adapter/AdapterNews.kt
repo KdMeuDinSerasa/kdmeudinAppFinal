@@ -34,6 +34,8 @@ class AdapterNews(private val mClick: ClickNews) :
     }
 }
 
+
+/*this is a specific diff utils for news so we are going to leave mocked gere */
 class DiffUtilsNews : DiffUtil.ItemCallback<NewsLetter>() {
     override fun areItemsTheSame(oldItem: NewsLetter, newItem: NewsLetter): Boolean {
         return oldItem == newItem

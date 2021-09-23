@@ -1,6 +1,5 @@
 package com.example.kdmeudinheiro.utils
 
-import android.app.AlertDialog
 import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -14,10 +13,10 @@ object DialogToFilter {
         builder.setTitle("Selecione o filtro desejado")
 
         val options = hashMapOf(
-                0 to "A Vencer",
-                1 to "Vencidas",
-                2 to "Pagas",
-                3 to "Todas"
+            0 to "A Vencer",
+            1 to "Vencidas",
+            2 to "Pagas",
+            3 to "Todas"
         )
 
         builder.setSingleChoiceItems(options.values.toTypedArray(), -1) { dialog, index ->
