@@ -63,7 +63,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             }
         }
         binding.About.setOnClickListener {
-            BottomSheetTips(requireView(), TipType.TIP_BILL_CATEGORY).loadTip()
+            BottomSheetTips(requireView()).loadTip()
         }
     }
 
