@@ -5,12 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
-import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
@@ -20,7 +19,6 @@ import com.example.kdmeudinheiro.pieChart.PieChartClass
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.formatCurrency
 import com.example.kdmeudinheiro.viewModel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -113,7 +111,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     private fun loadComponents() {
         viewModel.getArticles()
         binding.addButton.setOnClickListener {
-            bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
+            BottomSheetIncome(requireView()).loadIncome() { incomeFound ->
                 val mIncome = IncomeModel(null, incomeFound.toString(), userId)
                 if (incomeValue == null)
                     viewModel.addIncome(mIncome)

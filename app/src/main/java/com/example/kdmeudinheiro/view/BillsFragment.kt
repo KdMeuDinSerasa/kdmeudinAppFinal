@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.adapter.AdapterBillsList
-import com.example.kdmeudinheiro.bottomSheet.BottomSheet
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetBills
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
@@ -33,7 +33,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private lateinit var userId: String
     private var adapter = AdapterBillsList() { bill ->
-        BottomSheet(requireView(), bill).loadBottomBill() { billFromCb, type ->
+        BottomSheetBills(requireView(), bill).loadBottomBill() { billFromCb, type ->
             handlerForDialogResponse(billFromCb, type)
         }
     }
@@ -56,7 +56,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
     private fun loadBinding() {
         binding.floatButtonAddBill.setOnClickListener {
-            BottomSheet(requireView(), null).loadBottomBill() { bill, type ->
+            BottomSheetBills(requireView(), null).loadBottomBill() { bill, type ->
                 bill.id_user = userId
                 viewModel.addBill(bill)
                 viewModel.getAllBills(userId)
