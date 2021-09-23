@@ -24,13 +24,13 @@ object DialogToFilter {
             selectedItem = options.filterKeys { it == index }
         }
 
-        builder.setPositiveButton("Submit") { dialog, which ->
+        builder.setPositiveButton("Filtrar") { dialog, which ->
             if (selectedItem != null) {
                 callback(selectedItem)
             }
         }
 
-        builder.setNeutralButton("Cancel", null)
+        builder.setNeutralButton("Cancelar", null)
 
         builder.setCancelable(false)
 
