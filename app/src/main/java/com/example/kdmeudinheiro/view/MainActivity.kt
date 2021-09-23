@@ -20,6 +20,7 @@ import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.services.NotificationWorkManager
+import com.example.kdmeudinheiro.services.WorkMangerBuilder
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,31 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun createScheduler() {
-        //create the instance of workManager
-        val workManager = WorkManager.getInstance(this)
-
-        //create the constraints to verify in the user phone
-        val consts = Constraints.Builder()
-            .setRequiresCharging(false)
-            .setRequiredNetworkType(NetworkType.METERED)
-            .setRequiresBatteryNotLow(true)
-            .build()
-
-        //create the workRequest with the details of the routine
-        val mWorkRequest =
-            PeriodicWorkRequestBuilder<NotificationWorkManager>(
-                60,
-                TimeUnit.MINUTES
-            ).setConstraints(
-                consts
-            ).build()
-
-        //start the routine
-        workManager.enqueueUniquePeriodicWork(
-            "Check_expired_bills",
-            ExistingPeriodicWorkPolicy.KEEP,
-            mWorkRequest
-        )
+       WorkMangerBuilder(binding.root).buildService()
     }
 
     fun updateUser() {
