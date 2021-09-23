@@ -47,12 +47,12 @@ class BottomSheetChart(
             bottomSheetBinding.materialCardForChartTips.visibility = View.VISIBLE
             bottomSheetBinding.webViewList.loadUrl("https://www.serasa.com.br/ensina/como-ganhar-dinheiro/")
         } else if (typeClicked == 5 /* leisure */) {
-            bottomSheetBinding.textViewTipChart.text = "Lazer" //TODO string for this
+            bottomSheetBinding.textViewTipChart.text =  bottomSheetView.context.getString(R.string.leisure_text)
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             var list = articleList.filter { it.typeArticle.toInt() == 1 }
             adapter.update(list)
         } else if (typeClicked == 6 /* emergency */) {
-            bottomSheetBinding.textViewTipChart.text = "Emergenciais" //TODO string for this
+            bottomSheetBinding.textViewTipChart.text =  bottomSheetView.context.getString(R.string.emergency_text)
             bottomSheetBinding.materialCardForChartTips.visibility = View.GONE
             var list = articleList.filter { it.typeArticle.toInt() == 2 }
             adapter.update(list)
