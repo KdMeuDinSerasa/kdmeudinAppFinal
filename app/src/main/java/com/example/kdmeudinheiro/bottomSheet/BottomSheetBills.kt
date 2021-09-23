@@ -108,6 +108,7 @@ class BottomSheetBills(
                     callback(billObject, 0)
                     bottomSheetDialog.dismiss()
                 } else
+                    feedback(parentView, R.string.validation_registration_failure, R.color.failure)
                     bottomSheetDialog.dismiss()
             }
 
