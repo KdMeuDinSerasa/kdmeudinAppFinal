@@ -47,9 +47,12 @@ class PieChartClass(
         colors.add(Color.CYAN)
         colors.add(Color.GRAY)
 
+        /* create the arrays */
         val pieChartEntry = ArrayList<Entry>()
         val arrayDoubles = arrayListOf(0f, 0f, 0f, 0f)
         val priceArray = arrayListOf(0f, 0f, 0f, 0f)
+
+        /* take the bill prices sum all and make a new array*/
         listBills.forEach {
             if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName) {
                 priceArray[0] += it.price.toFloat()
@@ -65,6 +68,7 @@ class PieChartClass(
             }
         }
 
+        /*the the array with all prices sum, and transform to percentages */
         for (price in priceArray.withIndex()) {
             val income = incomes.income.toFloat()
             val final = 100 - (((income - price.value) / income) * 100)
@@ -73,14 +77,11 @@ class PieChartClass(
         }
         val colorsFix = java.util.ArrayList<Int>()
         for (categories in arrayDoubles.withIndex()) {
-            if (categories.value != 0F){
+            if (categories.value != 0F) {
                 pieChartEntry.add(Entry(categories.value, categories.index))
                 colorsFix.add(colors[categories.index])
             }
-//            colors.removeAt(categories.index)
         }
-
-
 
 
         val income = incomes.income.toFloat()
@@ -112,15 +113,9 @@ class PieChartClass(
         binding.chartIncluded.pieChart.elevation = 50f
         binding.chartIncluded.pieChart.legend.isEnabled = false
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
-//        mpieDataset.yVals.forEach {
-//            if (it.`val` == 0F){
-//                mpieDataset.isVisible
-//            }
-//        }
         binding.chartIncluded.pieChart.getEntriesAtIndex(0)
         binding.chartIncluded.pieChart.getEntriesAtIndex(1)
         binding.chartIncluded.pieChart.getEntriesAtIndex(2)
-
 
 
     }
