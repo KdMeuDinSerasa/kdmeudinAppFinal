@@ -33,5 +33,8 @@
     <color name="HeartPinkForbg">#C92F86</color>
     <color name="OrangePinkForbg">#F39923 </color>
 
+    //night mode color
+    <color name="mainForDark">#0F2F63</color>
+
 
 </resources>
