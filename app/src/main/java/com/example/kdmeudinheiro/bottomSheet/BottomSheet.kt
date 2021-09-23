@@ -18,6 +18,7 @@ import com.example.kdmeudinheiro.enums.TypesOfBills
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
+import com.example.kdmeudinheiro.utils.feedback
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
@@ -106,10 +107,8 @@ class BottomSheet(
                         )
                     callback(billObject, 0)
                     bottomSheetDialog.dismiss()
-
-                    true
                 } else
-                    false
+                    bottomSheetDialog.dismiss()
             }
 
         } else {
@@ -130,7 +129,6 @@ class BottomSheet(
                     val selectedType = bottomSheetBinding.spinnerExposed.text.toString()
                     val billName = bottomSheetBinding.editTextInputBillName.text.toString()
                     val billPrice = bottomSheetBinding.editTextInputBillPrice.text.toString()
-                    val billDate = bottomSheetBinding.editTextInputBillExpireDate.text.toString()
 
                     val time = Calendar.getInstance().apply {
                         set(date.year, date.month, date.dayOfMonth)

@@ -127,7 +127,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
             viewModel.getAllBills(userId)
 
         } else if (type == 3) {
-
+            feedback(requireView(), R.string.validation_registration_failure, R.color.failure)
 
         } else if (type == 4) {
             viewModel.editBill(billFromCb)
