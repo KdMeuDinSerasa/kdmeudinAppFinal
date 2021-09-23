@@ -68,6 +68,7 @@ class PieChartClass(
             }
         }
 
+        /*the the array with all prices sum, and transform to percentages */
         for (price in priceArray.withIndex()) {
             val income = incomes.income.toFloat()
             val final = 100 - (((income - price.value) / income) * 100)
