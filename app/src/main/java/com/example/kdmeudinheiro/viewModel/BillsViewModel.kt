@@ -89,14 +89,17 @@ class BillsViewModel @Inject constructor(
     }
 
     fun filterBill(filter: String) {
+
+        _copyBillList.value = _billList.value
+
         viewModelScope.launch {
-            if (filter.isNullOrEmpty())
+            if (filter.isNullOrBlank())
                 _copyBillList.value = _billList.value
-            val filtered = _copyBillList.value?.filter {
+
+            var filtered = _copyBillList.value?.filter {
                 it.name_bill.contains(filter)
             }
             _copyBillList.value = filtered!!
         }
-
     }
 }

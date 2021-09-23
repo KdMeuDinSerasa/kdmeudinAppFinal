@@ -135,7 +135,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                 setPositiveButton(R.string.ok,
                     DialogInterface.OnClickListener { dialog, id ->
                         mUserModel.name = newUserName.text.toString()
-                        Toast.makeText(requireContext(), "Editado com sucesso", Toast.LENGTH_SHORT).show()
+                        feedback(requireView(), R.string.edited_with_success, R.color.success)
                         viewModel.editUser(mUserModel)
                         viewModel.userLoged()
                         (requireActivity() as? MainActivity?)?.updateUser()
