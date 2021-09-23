@@ -20,7 +20,7 @@ class WorkManagerBuilder(val parentView: View) {
         //create the workRequest with the details of the routine
         val mWorkRequest =
             PeriodicWorkRequestBuilder<NotificationWorkManager>(
-                60,
+                15,
                 TimeUnit.MINUTES
             ).setConstraints(
                 consts
