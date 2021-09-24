@@ -1,14 +1,15 @@
 package com.example.kdmeudinheiro.services
 
+import android.content.Context
 import android.view.View
 import androidx.work.*
 import java.util.concurrent.TimeUnit
 
-class WorkManagerBuilder(val parentView: View) {
+class WorkManagerBuilder(val context: Context) {
 
     fun buildService(){
         //create the instance of workManager
-        val workManager = WorkManager.getInstance(parentView.context)
+        val workManager = WorkManager.getInstance(context)
 
         //create the constraints to verify in the user phone
         val consts = Constraints.Builder()
@@ -20,8 +21,9 @@ class WorkManagerBuilder(val parentView: View) {
         //create the workRequest with the details of the routine
         val mWorkRequest =
             PeriodicWorkRequestBuilder<NotificationWorkManager>(
-                30,
-                TimeUnit.MINUTES
+                15,
+                TimeUnit.MINUTES,
+                5, TimeUnit.MINUTES
             ).setConstraints(
                 consts
             ).build()

@@ -65,6 +65,7 @@ class SplashActivity : AppCompatActivity() {
         })
         viewModelMain.mIncomeModel.observe(this, {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         })
     }
 }
