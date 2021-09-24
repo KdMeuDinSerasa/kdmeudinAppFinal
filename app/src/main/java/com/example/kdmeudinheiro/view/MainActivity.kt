@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: MainActivityBinding
     private lateinit var binding2: HeaderDrawerBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadComponents()
         loadViewModels()
         createScheduler()
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
@@ -116,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         when (item.itemId) {
             R.id.btnLogout -> {
                 viewModel.logoutUser()
