@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_default"
     android:orientation="vertical"
-    tools:context=".view.UserPreferencesFragment"
-    android:background="@drawable/bg_default">
+    tools:context=".view.UserPreferencesFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userAvatarUserPrefs"
@@ -24,21 +24,21 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/username_label_prefs"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/userAvatarUserPrefs"
         tools:layout_editor_absoluteX="7dp" />
 
     <TextView
-        android:textColor="@color/white"
         android:id="@+id/tvUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_10dp_margin"
         android:gravity="center"
-        android:textSize="16sp"
         android:text="@string/useremail_label_prefs"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
     <View
@@ -55,8 +55,8 @@
         android:id="@+id/emailSwitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:text="Receber notificaçōes por e-mail"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -65,8 +65,8 @@
         android:id="@+id/pushSwitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:text="Receber notificaçōes via push"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailSwitch" />
@@ -92,5 +92,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/notification_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
