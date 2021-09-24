@@ -59,6 +59,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(message)
+            .setAutoCancel(true)
             .setContentIntent(createPendingIntent())
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         return builder.build()
