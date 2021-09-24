@@ -33,6 +33,9 @@ class UserPreferencesViewModel @Inject constructor(
     private var _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
+    private var _notificationType = MutableLiveData<Int>()
+    val notificationType: LiveData<Int> = _notificationType
+
     private var _imgUser = MutableLiveData<Uri>()
     val imgUser: LiveData<Uri> = _imgUser
 
@@ -66,7 +69,6 @@ class UserPreferencesViewModel @Inject constructor(
 
     fun sendNotifications(usedId: String?, acceptNotifications: Boolean, context: Context) {
         viewModelScope.launch {
-            val calendar = Calendar.getInstance()
             var count = 0
             var toExpire = 0
             val notificationManager = NotificationManagerCompat.from(context)
@@ -78,11 +80,13 @@ class UserPreferencesViewModel @Inject constructor(
                             toExpire++
                         }
                     }
-                    if (count > 0) mNotificationHandler.createNotification(
-                        "Você possui contas vencidas",
-                        "Total de contas vencidas: $count"
-                    ).apply {
-                        notificationManager.notify(1, this)
+                    if (count > 0)
+                        _notificationType.value = 1
+//                        mNotificationHandler.createNotification(
+//                        "Você possui contas vencidas",
+//                        "Total de contas vencidas: $count"
+//                    ).apply {
+//                        notificationManager.notify(1, this)
 
                     } else if (toExpire > 0) {
                         mNotificationHandler.createNotification(
