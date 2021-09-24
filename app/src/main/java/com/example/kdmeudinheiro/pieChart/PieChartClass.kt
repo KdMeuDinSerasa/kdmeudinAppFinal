@@ -112,7 +112,7 @@ class PieChartClass(
         binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
         binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
         binding.chartIncluded.pieChart.setDescription(null)
-        binding.chartIncluded.pieChart.animateXY(3000, 3000)
+        binding.chartIncluded.pieChart.animateX(10)
         binding.chartIncluded.pieChart.elevation = 50f
         binding.chartIncluded.pieChart.legend.isEnabled = false
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
