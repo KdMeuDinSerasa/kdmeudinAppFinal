@@ -15,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
-    private val userRepo: UserRepository
 ) : ViewModel() {
 
     private val _billList = MutableLiveData<List<BillsModel>>()
@@ -73,11 +72,11 @@ class BillsViewModel @Inject constructor(
 
             if (getUserChoice == 0)
                 filtered = filtered?.filter {
-                    it.expire_date.after(date) && it.status == 0
+                    it.checkToExpire()
                 }
             else if (getUserChoice == 1)
                 filtered = filtered?.filter {
-                    it.expire_date.before(date) && it.status == 0
+                   it.checkExpired()
                 }
             else if (getUserChoice == 2)
                 filtered = filtered?.filter {

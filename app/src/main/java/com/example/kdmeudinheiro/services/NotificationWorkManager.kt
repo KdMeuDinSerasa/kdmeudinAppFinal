@@ -43,7 +43,7 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
                     else {
                         var datePlus = Date();
                         calendar.setTime(datePlus)
-                        calendar.add(Calendar.DATE, 1)
+                        calendar.add(Calendar.DATE, 2)
                         datePlus = calendar.getTime()
                         if (it.expire_date.before(datePlus) && it.status == 0) toExpire++
                     }
