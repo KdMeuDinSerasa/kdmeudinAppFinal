@@ -60,7 +60,10 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
                 binding.incomeValue.text = "Renda Mensal: ${auxFormat.formatCurrency()}"
                 incomeValue = it
                 viewModel.getOutcome(userId)
-
+            }
+            else{
+                binding.tvNoGraph.visibility = View.VISIBLE
+                binding.ivNoGraph.visibility = View.VISIBLE
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
