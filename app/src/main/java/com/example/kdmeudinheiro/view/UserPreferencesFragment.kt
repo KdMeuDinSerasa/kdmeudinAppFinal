@@ -11,7 +11,6 @@ import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.edit
@@ -152,8 +151,8 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
 
     fun userLoadImg() {
         val galeryIntent = Intent()
-        galeryIntent.setType("image/*")
-        galeryIntent.setAction(Intent.ACTION_GET_CONTENT)
+        galeryIntent.type = "image/*"
+        galeryIntent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(galeryIntent, 2)
     }
 
@@ -185,7 +184,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                 layout.orientation = LinearLayout.VERTICAL
 
                 val newUserName = EditText(requireContext())
-                newUserName.setHint("Nome")
+                newUserName.hint = "Nome"
                 layout.addView(newUserName)
                 this.setView(layout)
 
