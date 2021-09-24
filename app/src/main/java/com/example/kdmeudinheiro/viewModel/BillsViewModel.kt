@@ -15,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class BillsViewModel @Inject constructor(
     private val billRepo: BillsRepository,
-    private val userRepo: UserRepository
 ) : ViewModel() {
 
     private val _billList = MutableLiveData<List<BillsModel>>()
