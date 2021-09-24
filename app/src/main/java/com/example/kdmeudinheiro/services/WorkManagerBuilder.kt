@@ -22,7 +22,8 @@ class WorkManagerBuilder(val context: Context) {
         val mWorkRequest =
             PeriodicWorkRequestBuilder<NotificationWorkManager>(
                 15,
-                TimeUnit.MINUTES
+                TimeUnit.MINUTES,
+                5, TimeUnit.MINUTES
             ).setConstraints(
                 consts
             ).build()

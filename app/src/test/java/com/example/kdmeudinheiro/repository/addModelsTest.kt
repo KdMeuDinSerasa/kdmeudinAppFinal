@@ -27,8 +27,9 @@ import java.util.concurrent.Executor
 @RunWith(JUnit4::class)
 class UserRepositoryFirestore: addObjectListener {
 
-
+    @Mock
     private lateinit var successTask: Task<DocumentReference>
+    @Mock
     private lateinit var failureTask: Task<DocumentReference>
 
     @Mock
@@ -53,148 +54,6 @@ class UserRepositoryFirestore: addObjectListener {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        successTask = object : Task<DocumentReference>() {
-            override fun addOnCompleteListener(
-                p0: Executor,
-                p1: OnCompleteListener<DocumentReference>
-            ): Task<DocumentReference> {
-                p1.onComplete(successTask)
-                return successTask
-            }
-
-            override fun isComplete(): Boolean {
-                return true
-            }
-
-            override fun isSuccessful(): Boolean {
-                return true
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): DocumentReference? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): DocumentReference? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in DocumentReference>): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in DocumentReference>
-            ): Task<DocumentReference> {
-                return this
-            }
-
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in DocumentReference>
-            ): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<DocumentReference> {
-                return this
-            }
-
-        }
-        failureTask = object : Task<DocumentReference>() {
-            override fun addOnCompleteListener(
-                p0: Executor,
-                p1: OnCompleteListener<DocumentReference>
-            ): Task<DocumentReference> {
-                p1.onComplete(failureTask)
-                return failureTask
-            }
-
-            override fun isComplete(): Boolean {
-                return true
-            }
-
-            override fun isSuccessful(): Boolean {
-                return false
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): DocumentReference? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): DocumentReference? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in DocumentReference>): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in DocumentReference>
-            ): Task<DocumentReference> {
-                return this
-            }
-
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in DocumentReference>
-            ): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<DocumentReference> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<DocumentReference> {
-                return this
-            }
-
-        }
         mCreateUser = CreateUser(this, db)
         mCreateBill = CreateBill(this, db)
         mCreateIncome = CreateIncome(this, db)
@@ -203,6 +62,7 @@ class UserRepositoryFirestore: addObjectListener {
     @Test
     fun addUserSucess_test() {
         val mUserModel = UserModel("", "", "", "", "")
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         Mockito.`when`(db.collection("table_user")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mUserModel)).thenReturn(successTask)
         mCreateUser.addUser(mUserModel)
@@ -211,6 +71,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     @Test
     fun addUserFailure_test() {
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         val mUserModel = UserModel("", "", "", "", "")
         Mockito.`when`(db.collection("table_user")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mUserModel)).thenReturn(failureTask)
@@ -220,6 +81,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     @Test
     fun addBillSuccess_test(){
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         val mBillsModel = BillsModel("", "", "", "", "", Calendar.getInstance().time, 0, )
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mBillsModel)).thenReturn(successTask)
@@ -229,6 +91,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     @Test
     fun addBillFailure_test(){
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         val mBillsModel = BillsModel("", "", "", "", "", Calendar.getInstance().time, 0, )
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mBillsModel)).thenReturn(failureTask)
@@ -238,6 +101,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     @Test
     fun addIncomeSuccess_test(){
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         val mIncome = IncomeModel("", "", "")
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mIncome)).thenReturn(successTask)
@@ -247,6 +111,7 @@ class UserRepositoryFirestore: addObjectListener {
 
     @Test
     fun addIncomeFailure_test(){
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         val mIncome = IncomeModel("", "", "")
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.add(mIncome)).thenReturn(failureTask)
