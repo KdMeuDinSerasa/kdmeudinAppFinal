@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 val initi = Intent(this, LoginActivity::class.java)
                 startActivity(initi)
+                finish()
             }
             R.id.btnUserPreferences -> {
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
