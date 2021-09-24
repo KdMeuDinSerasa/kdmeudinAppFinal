@@ -62,4 +62,5 @@
     <string name="edited_with_success">"Editado com sucesso"</string>
 
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
+    <string name="notification_button">Notificação</string>
 </resources>
