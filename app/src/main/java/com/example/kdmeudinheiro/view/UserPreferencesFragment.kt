@@ -92,6 +92,16 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         binding.userAvatarUserPrefs.setOnClickListener {
             userLoadImg()
         }
+        binding.btnNotification.setOnClickListener {
+            sendNotification()
+        }
+    }
+
+    fun sendNotification(){
+        val mSharedPreferences =
+            requireContext().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        viewModel.sendNotifications(mSharedPreferences.getString(KeysShared.USERID.key, ""), mSharedPreferences.getBoolean(KeysShared.ACTIVE_PUSH.key, false), requireContext())
+
     }
 
     fun userLoadImg(){
