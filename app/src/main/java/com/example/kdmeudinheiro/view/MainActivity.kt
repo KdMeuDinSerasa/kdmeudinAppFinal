@@ -38,15 +38,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
-        createScheduler()
+
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
     /* invoke the work manager builder class to make a notification scheduler.*/
-    private fun createScheduler() {
-       WorkManagerBuilder(binding.root).buildService()
-    }
+
 
     fun updateUser() {
         viewModel.userLoged()
