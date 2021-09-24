@@ -73,14 +73,9 @@ class UserPreferencesViewModel @Inject constructor(
             if (acceptNotifications) {
                 if (usedId != null) {
                     mBillsRepository.getBills(usedId)?.forEach {
-                        if (it.expire_date.after(calendar.time) && it.status == 0) {
-                            count++
-                        } else {
-                            var datePlus = Date();
-                            calendar.setTime(datePlus)
-                            calendar.add(Calendar.DATE, 1)
-                            datePlus = calendar.getTime()
-                            if (it.expire_date.before(datePlus) && it.status == 0) toExpire++
+                        if (it.checkExpired()) count++
+                        else if (it.checkToExpire()){
+                            toExpire++
                         }
                     }
                     if (count > 0) mNotificationHandler.createNotification(
@@ -91,7 +86,7 @@ class UserPreferencesViewModel @Inject constructor(
 
                     } else if (toExpire > 0) {
                         mNotificationHandler.createNotification(
-                            "Você possui há vencer",
+                            "Você possui contas há vencer",
                             "Total de contas há vencer: $toExpire"
                         ).apply {
                             notificationManager.notify(1, this)
