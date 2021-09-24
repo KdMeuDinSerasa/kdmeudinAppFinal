@@ -13,6 +13,7 @@ data class BillsModel(
     var status: Int?
 ){
     private val calendar = Calendar.getInstance()
+    private val presentDate = calendar.time
 
 
     fun checkExpired(): Boolean{
@@ -21,9 +22,9 @@ data class BillsModel(
     }
 
     fun checkToExpire(): Boolean{
-        calendar.add(Calendar.DATE, 1)
+        calendar.add(Calendar.DATE, 2)
         val datePlus = calendar.time
-        if (expire_date.before(datePlus) && status == 0) return true
+        if (expire_date.before(datePlus) && expire_date.after(presentDate)  && status == 0) return true
         return false
     }
 }

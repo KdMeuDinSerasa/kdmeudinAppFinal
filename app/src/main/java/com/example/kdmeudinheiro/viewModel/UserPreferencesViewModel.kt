@@ -14,7 +14,6 @@ import com.example.kdmeudinheiro.services.NotificationHandler
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -76,7 +75,7 @@ class UserPreferencesViewModel @Inject constructor(
                 if (usedId != null) {
                     mBillsRepository.getBills(usedId)?.forEach {
                         if (it.checkExpired()) count++
-                        else if (it.checkToExpire()){
+                        else if (it.checkToExpire()) {
                             toExpire++
                         }
                     }
@@ -88,13 +87,12 @@ class UserPreferencesViewModel @Inject constructor(
 //                    ).apply {
 //                        notificationManager.notify(1, this)
 
-                    } else if (toExpire > 0) {
-                        mNotificationHandler.createNotification(
-                            "Você possui contas há vencer",
-                            "Total de contas há vencer: $toExpire"
-                        ).apply {
-                            notificationManager.notify(1, this)
-                        }
+                } else if (toExpire > 0) {
+                    mNotificationHandler.createNotification(
+                        "Você possui contas há vencer",
+                        "Total de contas há vencer: $toExpire"
+                    ).apply {
+                        notificationManager.notify(1, this)
                     }
                 }
             }
