@@ -211,34 +211,11 @@ class FirebaseTest : LogInLIstener {
     }
 
     override fun logInSuccess(email: String?, password: String?) {
-        val existingUsers = listOf<UserModel>(
-            UserModel("", "janeDoe@gmail.com", "DoeJane21", "Jane Doe", ""),
-            UserModel("", "admin@gmail.com", "ADM123", "Admin Kaze Gi", ""),
-            UserModel("", "janeGmail.com", "123_456", "", "")
-        )
-
-
-        val thisUserModel = UserModel("", email = email!!, password = password!!, "", "")
-        if (existingUsers.contains(thisUserModel)) {
             logInResult = SUCCESS
-        } else {
-            logInResult = FAILURE
-        }
     }
 
     override fun logInFailure(email: String?, password: String?) {
-        val existingUsers = listOf<UserModel>(
-            UserModel("", "janeDoe@gmail.com", "DoeJane21", "Jane Doe", ""),
-            UserModel("", "admin@gmail.com", "ADM123", "Admin Kaze Gi", ""),
-            UserModel("", "janeGmail.com", "ADM123", "", "")
-        )
-
-        val thisUserModel = UserModel("", email = email!!, password = password!!, "", "")
-        if (existingUsers.contains(thisUserModel)) {
-            logInResult = SUCCESS
-        } else {
             logInResult = FAILURE
-        }
     }
 
 

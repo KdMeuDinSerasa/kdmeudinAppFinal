@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: MainActivityBinding
     private lateinit var binding2: HeaderDrawerBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +40,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
-        createScheduler()
+        mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
     /* invoke the work manager builder class to make a notification scheduler.*/
-    private fun createScheduler() {
-       WorkManagerBuilder(binding.root).buildService()
-    }
+
 
     fun updateUser() {
         viewModel.userLoged()
@@ -116,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         when (item.itemId) {
             R.id.btnLogout -> {
                 viewModel.logoutUser()
@@ -126,6 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 val initi = Intent(this, LoginActivity::class.java)
                 startActivity(initi)
+                finish()
             }
             R.id.btnUserPreferences -> {
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)

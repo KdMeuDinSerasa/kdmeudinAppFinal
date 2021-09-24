@@ -16,8 +16,6 @@ class UserRepository @Inject constructor(
     private val UserControler: FirebaseAuth,
     private val mFirestorage: FirebaseStorage
 ) {
-
-    private val root = mFirestorage.getReference("Image")
     private val reference = mFirestorage.reference
 
 

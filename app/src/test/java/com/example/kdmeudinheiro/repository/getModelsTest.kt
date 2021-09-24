@@ -22,8 +22,9 @@ import java.util.concurrent.Executor
 
 @RunWith(JUnit4::class)
 class getModelsTest: getObjectListener {
-
+    @Mock
     private lateinit var successTask: Task<QuerySnapshot>
+    @Mock
     private lateinit var failureTask: Task<QuerySnapshot>
 
     @Mock
@@ -45,152 +46,13 @@ class getModelsTest: getObjectListener {
     @Before
     fun setup(){
         MockitoAnnotations.openMocks(this)
-        successTask = object : Task<QuerySnapshot>(){
-            override fun isComplete(): Boolean {
-                return true
-            }
-
-            override fun addOnCompleteListener(
-                p0: Executor,
-                p1: OnCompleteListener<QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                p1.onComplete(successTask)
-                return successTask
-            }
-
-            override fun isSuccessful(): Boolean {
-                return true
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): QuerySnapshot? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): QuerySnapshot? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in QuerySnapshot>): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-        }
-        failureTask = object : Task<QuerySnapshot>(){
-            override fun isComplete(): Boolean {
-                return true
-            }
-
-            override fun isSuccessful(): Boolean {
-                return false
-            }
-
-            override fun addOnCompleteListener(
-                p0: Executor,
-                p1: OnCompleteListener<QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                p1.onComplete(failureTask)
-                return failureTask
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): QuerySnapshot? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): QuerySnapshot? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in QuerySnapshot>): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in QuerySnapshot>
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<QuerySnapshot> {
-                return this
-            }
-
-        }
         mDbFirestore = DbFirestore(this, db)
     }
     
 
     @Test
     fun getListOfUsersSucess(){
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         Mockito.`when`(db.collection("table_user")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(successTask)
         mDbFirestore.getUsers()
@@ -200,6 +62,7 @@ class getModelsTest: getObjectListener {
 
     @Test
     fun getListOfUsersFailure(){
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         Mockito.`when`(db.collection("table_user")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(failureTask)
         mDbFirestore.getUsers()
@@ -208,6 +71,7 @@ class getModelsTest: getObjectListener {
 
     @Test
     fun getListOfBillsSuccess(){
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(successTask)
         mDbFirestore.getBills()
@@ -215,6 +79,7 @@ class getModelsTest: getObjectListener {
     }
     @Test
     fun getListOfBillsFailure(){
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         Mockito.`when`(db.collection("table_account")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(failureTask)
         mDbFirestore.getBills()
@@ -222,6 +87,7 @@ class getModelsTest: getObjectListener {
     }
     @Test
     fun getListOfIncomeSuccess(){
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(successTask)
         mDbFirestore.getIncome()
@@ -229,6 +95,7 @@ class getModelsTest: getObjectListener {
     }
     @Test
     fun getListOfIncomeFailure(){
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         Mockito.`when`(db.collection("table_income")).thenReturn(collectionReference)
         Mockito.`when`(collectionReference.get()).thenReturn(failureTask)
         mDbFirestore.getIncome()

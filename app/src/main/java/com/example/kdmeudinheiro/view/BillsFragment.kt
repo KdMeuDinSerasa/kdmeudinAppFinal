@@ -154,7 +154,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
     private fun searchBill() {
         binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0.let {
                     if (it?.length!! >= 1)
                         viewModel.filterBill(it.toString())
@@ -180,7 +180,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 if (getListPosition == 3)
                     viewModel.filterBill(it.toString())
 
-                viewModel.filterPay(date.time, getListPosition!!)
+                 viewModel.filterPay(date.time, getListPosition!!)
             }
         }
     }

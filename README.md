@@ -42,7 +42,7 @@ financial life</p>
 
 <div>
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
-<img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" > 
+<a href="https://drive.google.com/file/d/15w7MBMkJKgamNX24or0cSU86bQ8D2abK/view?usp=sharing"> <img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" >  </a>
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
 	<img width="225" alt="Screen Shot 2021-09-20 at 11 39 03" src="https://user-images.githubusercontent.com/80124800/134022391-4df4bd77-7b50-4135-9225-e96de09c76af.png">
@@ -75,20 +75,31 @@ financial life</p>
 			<img width="355" alt="Screen Shot 2021-09-20 at 10 26 12" src="https://user-images.githubusercontent.com/80124800/134010628-d6475ca4-cc63-49f1-a7a7-2b911c8f0200.png">
 	<img width="357" alt="Screen Shot 2021-09-20 at 13 14 54" src="https://user-images.githubusercontent.com/80124800/134037129-3c0625c3-cb6b-4ca0-8be9-dfc60ba6ad77.png">
 	<img width="320" alt="Screen Shot 2021-09-20 at 13 16 34" src="https://user-images.githubusercontent.com/80124800/134037173-a1737493-59b6-4700-bb6d-37262059e9c9.png">
+<p> 6.1º the bill list from release 3.0 know have a filter and search bar, where you can search your bills by name, and filter by expired, paid and more. </p>
+	<img width="229" alt="Screen Shot 2021-09-22 at 13 47 37" src="https://user-images.githubusercontent.com/80124800/134386822-f5e36721-7438-44b3-83e7-1231827b7cd1.png">
+	<img width="230" alt="Screen Shot 2021-09-22 at 13 48 38" src="https://user-images.githubusercontent.com/80124800/134386960-9543cda5-e77f-4b66-8e2a-261796897eda.png">
+	
+<img width="202" alt="Screen Shot 2021-09-22 at 13 52 23" src="https://user-images.githubusercontent.com/80124800/134387590-06fc260f-e4f1-4583-84ac-df206b47b677.png">
+
+
 
 <p>7º if you have bills listed, you can click on it and will apper a details where you can edit or delete, and change a status thats tags the bill to payed.  </p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 10 27 38" src="https://user-images.githubusercontent.com/80124800/134010437-5d4e3f89-1724-4d9b-b3b2-a578f67e8bb2.png">
 
 <p>8º now back to dashboard you will find an menu icon up left, on click will open an drawer menu, listing some info abaout yor user and contains a logout button and a user preferences button.</p>
 	<img width="328" alt="Screen Shot 2021-09-20 at 11 06 02" src="https://user-images.githubusercontent.com/80124800/134016448-d20f2490-c794-44aa-87e9-76e18807e5ee.png"><img width="322" alt="Screen Shot 2021-09-20 at 11 07 34" src="https://user-images.githubusercontent.com/80124800/134016725-cf94ec45-c44b-40a0-9b5f-46fb0f936ad1.png">
+<p> 9º Clicking over any colored part of the chart, will apper a dialog with tips & tricks ans articles about the selected category </p>
+<img width="234" alt="Screen Shot 2021-09-22 at 13 42 56" src="https://user-images.githubusercontent.com/80124800/134386212-78cff2ee-11ed-4148-b551-5c57c5d6ac7f.png">
+<img width="244" alt="Screen Shot 2021-09-22 at 13 44 09" src="https://user-images.githubusercontent.com/80124800/134386368-142bd2be-221f-473c-b811-a8d380fb3930.png">
 
 
-<p>9º clicking at user prefs you will be redirected to user preferences page where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
+<p>10º clicking at user prefs you will be redirected to user preferences page where you can choose some prefres like recieve push notification, you can change you name as well and click at user avatar its possible to upload a photo to from you galery. </p>
 	<img width="325" alt="Screen Shot 2021-09-20 at 13 41 02" src="https://user-images.githubusercontent.com/80124800/134040801-b28e7569-a968-49f5-aa2b-0f271e2120c8.png">
 <img width="311" alt="Screen Shot 2021-09-20 at 13 40 56" src="https://user-images.githubusercontent.com/80124800/134041418-11ddd44c-5b70-47fb-85f6-cd8da9996028.png">
 <img width="317" alt="Screen Shot 2021-09-20 at 13 46 50" src="https://user-images.githubusercontent.com/80124800/134041481-c7735ac0-846d-478a-943b-46ac0dd999ef.png">
 
 
+<h2> <strong> So you my notice, at user preference has a button where you can toogle recive or not push notifications, so the paid status is for that, if a bill expires the app will end you a notification telling you that you have expired bills, but if the toogle are off, we dont send notifications to you. </strong> </h2>
 </div>
 
 

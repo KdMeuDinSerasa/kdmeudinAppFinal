@@ -7,66 +7,96 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/default_10dp_margin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="@dimen/default_10dp_margin"
+        app:cardElevation="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@drawable/retagle_news"
+            android:padding="@dimen/default_10dp_margin">
 
             <TextView
                 android:id="@+id/tvTitleNews"
                 android:layout_width="@dimen/default_0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_10dp_margin"
+                android:alpha="1.0"
+                android:fontFamily="@font/roboto_black"
+                android:justificationMode="inter_word"
+                android:maxLines="3"
                 android:text="Nome da noticia"
-                android:layout_marginLeft="10dp"
-                android:maxLines="2"
-                app:layout_constraintBottom_toBottomOf="@+id/ivImageNews"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView"
                 app:layout_constraintEnd_toStartOf="@+id/ivImageNews"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/ivImageNews" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivImageNews"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="5dp"
                 android:src="@drawable/ic_launcher_background"
-                app:layout_constraintBottom_toTopOf="@id/tvSourceNews"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.111" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvSourceNews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Fonte da noticia"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/tvDateNews"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleNews" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="0dp"
+                android:layout_height="27dp"
+                android:layout_marginEnd="@dimen/default_10dp_margin"
+                app:cardElevation="@dimen/default_0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivImageNews"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/tvDateNews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Data da noticia"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvSourceNews"
-                app:layout_constraintLeft_toRightOf="@id/tvSourceNews"
-                app:layout_constraintRight_toRightOf="@id/tvTitleNews"
-                app:layout_constraintTop_toTopOf="@+id/tvSourceNews" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/retagle_news"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivImageNews"
+                    app:layout_constraintStart_toStartOf="@+id/tvTitleNews">
+
+                    <TextView
+                        android:id="@+id/tvSourceNews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_10dp_margin"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="start|center"
+                        android:maxLines="1"
+                        android:text="Fonte da noticia"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvDateNews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="end|center"
+                        android:maxLines="1"
+                        android:text="Data da noticia"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
 
-
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     this.putString(KeysShared.USERID.key, it.uid)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         })
 
