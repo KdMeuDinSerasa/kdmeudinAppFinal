@@ -14,26 +14,23 @@ import com.example.kdmeudinheiro.services.NotificationHandler
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class UserPreferencesViewModel @Inject constructor(
     private val mUserRepository: UserRepository,
-    private val mNotificationHandler: NotificationHandler,
     private val mBillsRepository: BillsRepository
 ) : ViewModel() {
 
     private var _mUserModel = MutableLiveData<UserModel>()
     val mUserModel: LiveData<UserModel> = _mUserModel
 
-    private var _mFirebaseUser = MutableLiveData<FirebaseUser?>()
-    val mFirebaseUser: LiveData<FirebaseUser?> = _mFirebaseUser
-
     private var _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private var _notificationType = MutableLiveData<Int>()
-    val notificationType: LiveData<Int> = _notificationType
+    private var _notificationType = MutableLiveData<List<Int>>()
+    val notificationType: LiveData<List<Int>> = _notificationType
 
     private var _imgUser = MutableLiveData<Uri>()
     val imgUser: LiveData<Uri> = _imgUser
@@ -46,11 +43,6 @@ class UserPreferencesViewModel @Inject constructor(
         }
     }
 
-    fun userLoged() {
-        mUserRepository.getSession().apply {
-            _mFirebaseUser.value = this
-        }
-    }
 
     fun editUser(mUserModel: UserModel) {
         viewModelScope.launch {
@@ -70,32 +62,18 @@ class UserPreferencesViewModel @Inject constructor(
         viewModelScope.launch {
             var count = 0
             var toExpire = 0
-            val notificationManager = NotificationManagerCompat.from(context)
             if (acceptNotifications) {
                 if (usedId != null) {
                     mBillsRepository.getBills(usedId)?.forEach {
                         if (it.checkExpired()) count++
-                        else if (it.checkToExpire()) {
+                        else if (it.checkToExpire()){
                             toExpire++
                         }
                     }
-                    if (count > 0)
-                        _notificationType.value = 1
-//                        mNotificationHandler.createNotification(
-//                        "Você possui contas vencidas",
-//                        "Total de contas vencidas: $count"
-//                    ).apply {
-//                        notificationManager.notify(1, this)
-
-                } else if (toExpire > 0) {
-                    mNotificationHandler.createNotification(
-                        "Você possui contas há vencer",
-                        "Total de contas há vencer: $toExpire"
-                    ).apply {
-                        notificationManager.notify(1, this)
-                    }
+                    if (count > 0) _notificationType.value = listOf(1, count)
+                    else if (toExpire > 0) _notificationType.value = listOf(2, toExpire)
+                    } else _notificationType.value = listOf(3, 0)
                 }
             }
         }
     }
-}

@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
@@ -21,14 +22,13 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModelLogin: LoginViewModel
     private lateinit var viewModelMain: MainViewModel
+    private lateinit var mSharedPreferences: SharedPreferences
 
-    @Inject
-    lateinit var mNotificationHandler: NotificationHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+        mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModelMain = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(binding.root)
@@ -48,7 +48,6 @@ class SplashActivity : AppCompatActivity() {
 
     fun loadViewModels() {
         viewModelLogin.mFirebaseUser.observe(this, {
-            val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
             if (it != null) {
                 mSharedPreferences.edit {
                     this.putString(KeysShared.USERID.key, it.uid)
