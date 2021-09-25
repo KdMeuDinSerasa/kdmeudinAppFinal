@@ -1,8 +1,10 @@
 package com.example.kdmeudinheiro.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityForgetPasswordBinding
 import com.example.kdmeudinheiro.utils.feedback
@@ -18,8 +20,14 @@ class ForgetPasswordActivity : AppCompatActivity() {
         binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(ForgetPasswordViewModel::class.java)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         loadViewModels()
         loadComponents()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     fun loadViewModels(){
