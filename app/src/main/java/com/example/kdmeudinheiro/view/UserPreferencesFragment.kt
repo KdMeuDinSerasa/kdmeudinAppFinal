@@ -99,7 +99,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
             when (it[0]) {
                 1 -> {
                     mNotificationHandler.createNotification(
-                        "Você possui contas vencidas",
+                        "Você tem contas vencidas!",
                         "Total de contas vencidas: ${it[1]}"
                     ).apply {
                         notificationManager.notify(1, this)
@@ -107,7 +107,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                 }
                 2 -> {
                     mNotificationHandler.createNotification(
-                        "Você possui contas há vencer",
+                        "Você tem contas há vence!r",
                         "Total de contas há vencer: ${it[1]}"
                     ).apply {
                         notificationManager.notify(1, this)
@@ -115,8 +115,8 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
                 }
                 3 -> {
                     mNotificationHandler.createNotification(
-                        "Você Não possui contas vencidas",
-                        "Contas em dia"
+                        "Você não possui contas vencidas",
+                        "Parabéns!! Contas em dia!!"
                     ).apply {
                         notificationManager.notify(1, this)
                     }
@@ -177,7 +177,7 @@ class UserPreferencesFragment : Fragment(R.layout.user_preferences_fragment) {
         val alertDialog: AlertDialog = this.let {
             val builder = AlertDialog.Builder(requireContext())
             builder.apply {
-                setMessage("Informe os dados para serem editador")
+                setMessage("Insira os dados a serem editados")
                 setTitle("Edição")
 
                 val layout = LinearLayout(requireContext())
