@@ -20,6 +20,8 @@ import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.services.WorkManagerBuilder
+import com.example.kdmeudinheiro.utils.checkConnection
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (!checkConnection()) feedback(binding.root, R.string.no_connection_slow_warning, R.color.failure)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
