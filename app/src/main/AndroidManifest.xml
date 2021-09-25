@@ -12,12 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KdMeuDinheiro">
         <activity
+            android:name=".view.NoConnectionActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.ForgetPasswordActivity"
             android:exported="true" />
         <activity
             android:name=".view.LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SplashActivity"
             android:exported="true"
@@ -31,7 +34,7 @@
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
