@@ -56,10 +56,11 @@ class UserRepository @Inject constructor(
             }
     }
 
-    suspend fun ResetUserPassword(email: String): Boolean{
+    suspend fun ResetUserPassword(email: String, callback: (Boolean, String?) -> Unit){
         val task = mUserControler.sendPasswordResetEmail(email)
         task.await()
-        return true
+        if (task.isSuccessful) callback(true, null)
+        else return callback(false, task.exception.toString())
 
     }
 
