@@ -135,4 +135,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         return true
     }
+
+    override fun onBackPressed() {
+        mNavController.popBackStack()
+    }
 }
