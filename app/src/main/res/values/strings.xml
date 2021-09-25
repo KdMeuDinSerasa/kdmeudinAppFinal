@@ -60,7 +60,8 @@
     <string name="leisure_text">Lazer, sempre pensamos que tudo está muito caro ou que não podemos nos divertir gastanto pouco né? Para desmistificar isso temos abaixo, alguns artigos que irão te ajudar. </string>
     <string name="emergency_text">Emergenciais, bom o próprio nome já diz, aqui talvez não tenha muito como fugir porem não desistimos facil, abaixo algumas materias para te ajudar.</string>
     <string name="edited_with_success">"Editado com sucesso"</string>
-
+    <string name="redefinition_email_send">"Email de redefinição enviado"</string>
+    <string name="redefinition_email_not_found">"Email não encontrado"</string>
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
     <string name="notification_button">Notificação</string>
     <string name="reset_password">Esqueci minha senha</string>

@@ -81,6 +81,9 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadComponents() {
 
+        binding.tvForgetPassword.setOnClickListener {
+            startActivity(Intent(this, ForgetPasswordActivity::class.java))
+        }
         binding.createRegister.setOnClickListener {
             loadBottomSheet()
         }
