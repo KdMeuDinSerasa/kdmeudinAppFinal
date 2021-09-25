@@ -63,4 +63,6 @@
 
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
     <string name="notification_button">Notificação</string>
+    <string name="reset_password">Esqueci minha senha</string>
+    <string name="title_to_reset_password">Informe seu email para redefinição de senha</string>
 </resources>
