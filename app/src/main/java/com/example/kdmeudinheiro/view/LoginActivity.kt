@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -14,6 +15,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,11 +33,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContentView(binding.root)
-
         loadViewModels()
-
         loadComponents()
     }
+
+
 
     fun loadViewModels() {
         /**
