@@ -1,14 +1,22 @@
 package com.example.kdmeudinheiro.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kdmeudinheiro.databinding.OfflineLayoutBinding
 
 class NoConnectionActivity : AppCompatActivity() {
-    private lateinit var noConnection: OfflineLayoutBinding
+    private lateinit var binding: OfflineLayoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        noConnection = OfflineLayoutBinding.inflate(layoutInflater)
-        setContentView(noConnection.root)
+        binding = OfflineLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        binding.tvTryAgain.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
     }
 }

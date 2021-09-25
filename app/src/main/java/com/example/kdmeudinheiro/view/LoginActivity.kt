@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!checkConnection()) startActivity(Intent(this, NoConnectionActivity::class.java))
         binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         setContentView(binding.root)
