@@ -1,5 +1,6 @@
 package com.example.kdmeudinheiro.utils
 
+import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.Gravity
@@ -7,7 +8,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -61,6 +64,17 @@ fun feedback(parentView: View, @StringRes resId: Int, @ColorRes colorRes: Int) {
     setupSnackBar(parentView, resId, colorRes).apply {
         this.show()
     }
+}
+
+fun AppCompatActivity.checkConnection(): Boolean{
+    val connectivityManager = getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.activeNetworkInfo
+    // In here we return true if network is not null and Network is connected
+    if(networkInfo != null && networkInfo.isConnected){
+        return true
+    }
+    return false
+
 }
 
 private fun setupSnackBar(
