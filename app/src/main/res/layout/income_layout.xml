@@ -36,6 +36,9 @@
             android:id="@+id/editTextIncome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:focusable="true"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
