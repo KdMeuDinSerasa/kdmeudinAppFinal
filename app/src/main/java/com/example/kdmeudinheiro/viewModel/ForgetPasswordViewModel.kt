@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kdmeudinheiro.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,9 +24,11 @@ class ForgetPasswordViewModel @Inject constructor(
 
     fun sendRedefinitionEmail(email: String) {
         viewModelScope.launch {
-            mUserRepository.ResetUserPassword(email) { sucess, exception ->
-                if (sucess) _success.value = true
-                else _failure.value = exception
+            try {
+                mUserRepository.ResetUserPassword(email)
+                _success.value = true
+            } catch (e: Exception){
+                _failure.value = "error"
             }
 
 
