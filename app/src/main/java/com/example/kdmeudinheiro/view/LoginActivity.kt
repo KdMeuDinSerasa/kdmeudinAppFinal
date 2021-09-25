@@ -81,6 +81,9 @@ class LoginActivity : AppCompatActivity() {
 
     fun loadComponents() {
 
+        binding.tvForgetPassword.setOnClickListener {
+            startActivity(Intent(this, ForgetPasswordActivity::class.java))
+        }
         binding.createRegister.setOnClickListener {
             loadBottomSheet()
         }
@@ -130,6 +133,7 @@ class LoginActivity : AppCompatActivity() {
         if (mUser.checkInsertData()) {
             viewModel.createUserWithEmailEPassword(mUser)
             bottomSheetDialog.dismiss()
+            binding.etUserEmail.setText(mUser.email)
         } else {
             bottomSheetDialog.dismiss()
             feedback(binding.root, R.string.validation_registration_failure, R.color.failure)

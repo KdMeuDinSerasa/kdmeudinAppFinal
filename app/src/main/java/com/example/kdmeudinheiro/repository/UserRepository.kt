@@ -8,12 +8,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
 class UserRepository @Inject constructor(
     private val db: FirebaseFirestore,
-    private val UserControler: FirebaseAuth,
+    private val mUserControler: FirebaseAuth,
     private val mFirestorage: FirebaseStorage
 ) {
     private val reference = mFirestorage.reference
@@ -44,7 +46,7 @@ class UserRepository @Inject constructor(
         password: String,
         callback: (FirebaseUser?, String?) -> Unit
     ) {
-        UserControler.createUserWithEmailAndPassword(email, password)
+        mUserControler.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 callback(it.user, null)
             }
@@ -52,6 +54,11 @@ class UserRepository @Inject constructor(
             .addOnFailureListener {
                 callback(null, it.message)
             }
+    }
+
+    suspend fun ResetUserPassword(email: String){
+        val task = mUserControler.sendPasswordResetEmail(email)
+        task.await()
     }
 
     suspend fun addUser(mUserModel: UserModel): Boolean {
@@ -89,7 +96,7 @@ class UserRepository @Inject constructor(
         password: String,
         callback: (FirebaseUser?, String?) -> Unit
     ) {
-        UserControler.signInWithEmailAndPassword(email, password)
+        mUserControler.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 callback(it.user, null)
             }
@@ -98,11 +105,11 @@ class UserRepository @Inject constructor(
             }
     }
 
-    fun getSession(): FirebaseUser? = UserControler.currentUser
+    fun getSession(): FirebaseUser? = mUserControler.currentUser
 
 
     fun logOut() {
-        UserControler.signOut()
+        mUserControler.signOut()
     }
 
     suspend fun editUser(mUserModel: UserModel): Boolean {
