@@ -11,6 +11,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.NewsModelBinding
 import com.example.kdmeudinheiro.interfaces.ClickNews
 import com.example.kdmeudinheiro.model.NewsLetter
+import com.example.kdmeudinheiro.utils.fixApiDate
 
 class AdapterNews(private val mClick: ClickNews) :
     ListAdapter<NewsLetter, ViewHolderNews>(DiffUtilsNews()) {
@@ -52,7 +53,7 @@ class ViewHolderNews(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(mNewsLetter: NewsLetter) {
         binding.tvTitleNews.text = mNewsLetter.title
         binding.tvSourceNews.text = mNewsLetter.source.siteName
-        binding.tvDateNews.text = mNewsLetter.date.substring(0, 10).replace("-", "/")
+        binding.tvDateNews.text = mNewsLetter.date.substring(0, 10).replace("-", "/").fixApiDate()
         Glide.with(binding.root)
             .load(mNewsLetter.imageUrl)
             .placeholder(R.drawable.ic_baseline_help_24)

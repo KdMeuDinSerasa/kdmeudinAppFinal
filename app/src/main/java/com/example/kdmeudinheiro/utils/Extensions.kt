@@ -65,6 +65,9 @@ fun feedback(parentView: View, @StringRes resId: Int, @ColorRes colorRes: Int) {
         this.show()
     }
 }
+fun String.fixApiDate(): String{
+    return  this.substring(8, 10) + this.substring(4, 7) + "/" + this.substring(0,4)
+}
 
 fun AppCompatActivity.checkConnection(): Boolean{
     val connectivityManager = getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
