@@ -33,7 +33,9 @@ data class LogInModel(val observer: LogInLIstener, val mAuth: FirebaseAuth) {
 
 @RunWith(JUnit4::class)
 class FirebaseTest : LogInLIstener {
+    @Mock
     private lateinit var successTask: Task<AuthResult>
+    @Mock
     private lateinit var failureTask: Task<AuthResult>
 
     @Mock
@@ -52,140 +54,6 @@ class FirebaseTest : LogInLIstener {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        successTask = object : Task<AuthResult>() {
-            override fun isComplete(): Boolean = true
-
-            override fun isSuccessful(): Boolean = true
-
-            // ...
-            override fun addOnCompleteListener(
-                executor: Executor,
-                onCompleteListener: OnCompleteListener<AuthResult>
-            ): Task<AuthResult> {
-                onCompleteListener.onComplete(successTask)
-                return successTask
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): AuthResult? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): AuthResult? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in AuthResult>): Task<AuthResult> {
-                return this
-
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in AuthResult>
-            ): Task<AuthResult> {
-                return this
-
-            }
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in AuthResult>
-            ): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<AuthResult> {
-                return this
-            }
-        }
-        failureTask = object : Task<AuthResult>() {
-            override fun isComplete(): Boolean = true
-
-            override fun isSuccessful(): Boolean = false
-
-            // ...
-            override fun addOnCompleteListener(
-                executor: Executor,
-                onCompleteListener: OnCompleteListener<AuthResult>
-            ): Task<AuthResult> {
-                onCompleteListener.onComplete(failureTask)
-                return failureTask
-            }
-
-            override fun isCanceled(): Boolean {
-                return false
-            }
-
-            override fun getResult(): AuthResult? {
-                return result
-            }
-
-            override fun <X : Throwable?> getResult(p0: Class<X>): AuthResult? {
-                return result
-            }
-
-            override fun getException(): Exception? {
-                return exception
-            }
-
-            override fun addOnSuccessListener(p0: OnSuccessListener<in AuthResult>): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Executor,
-                p1: OnSuccessListener<in AuthResult>
-            ): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnSuccessListener(
-                p0: Activity,
-                p1: OnSuccessListener<in AuthResult>
-            ): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Executor,
-                p1: OnFailureListener
-            ): Task<AuthResult> {
-                return this
-            }
-
-            override fun addOnFailureListener(
-                p0: Activity,
-                p1: OnFailureListener
-            ): Task<AuthResult> {
-                return this
-            }
-        }
         logInModel = LogInModel(this, mAuth)
     }
 
@@ -194,6 +62,7 @@ class FirebaseTest : LogInLIstener {
     fun logInSuccess_test() {
         val email = "janeDoe@gmail.com"
         val password = "DoeJane21"
+        Mockito.`when`(successTask.isSuccessful).thenReturn(true)
         Mockito.`when`(mAuth!!.signInWithEmailAndPassword(email, password))
             .thenReturn(successTask)
         logInModel!!.logIn(email, password)
@@ -204,6 +73,7 @@ class FirebaseTest : LogInLIstener {
     fun logInFailure_test() {
         val email = "janeGmail.com"
         val password = "123_456"
+        Mockito.`when`(failureTask.isSuccessful).thenReturn(false)
         Mockito.`when`(mAuth!!.signInWithEmailAndPassword(email, password))
             .thenReturn(failureTask)
         logInModel.logIn(email, password)
