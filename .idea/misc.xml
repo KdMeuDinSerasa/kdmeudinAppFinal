@@ -17,6 +17,7 @@
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/main_fragment.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_letter_fragment.xml" value="0.17395833333333333" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_model.xml" value="0.17395833333333333" />
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/offline_layout.xml" value="0.171875" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/pie_chart_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_bill_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_chart.xml" value="0.14336372847011145" />
@@ -42,7 +43,6 @@
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
-        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.15534420289855072" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
@@ -60,7 +60,6 @@
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.32814710042432815" />
         <entry key="app/src/main/res/layout/news_letter_fragment.xml" value="0.12208713272543059" />
         <entry key="app/src/main/res/layout/news_model.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/offline_layout.xml" value="0.15534420289855072" />
         <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
         <entry key="app/src/main/res/layout/tip_chart.xml" value="0.3098958333333333" />
