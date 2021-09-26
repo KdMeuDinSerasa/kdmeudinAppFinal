@@ -1,6 +1,5 @@
 package com.example.kdmeudinheiro.repository
 
-import com.example.kdmeudinheiro.model.NewsLetter
 import com.example.kdmeudinheiro.model.ReciviedArticles
 import com.example.kdmeudinheiro.services.NewsLetterService
 import kotlinx.coroutines.Dispatchers

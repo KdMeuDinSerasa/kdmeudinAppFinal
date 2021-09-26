@@ -1,8 +1,18 @@
 package com.example.kdmeudinheiro.utils
 
+import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.Gravity
+import android.view.View
+import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.gms.tasks.Task
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.text.DecimalFormat
 import java.util.*
@@ -48,3 +58,40 @@ fun Double.formatCurrency(): String {
 fun Date.adjustYear(): String {
     return this.toString().substring(this.toString().length - 4)
 }
+
+fun feedback(parentView: View, @StringRes resId: Int, @ColorRes colorRes: Int) {
+
+    setupSnackBar(parentView, resId, colorRes).apply {
+        this.show()
+    }
+}
+fun String.fixApiDate(): String{
+    return  this.substring(8, 10) + this.substring(4, 7) + "/" + this.substring(0,4)
+}
+
+fun AppCompatActivity.checkConnection(): Boolean{
+    val connectivityManager = getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.activeNetworkInfo
+    // In here we return true if network is not null and Network is connected
+    if(networkInfo != null && networkInfo.isConnected){
+        return true
+    }
+    return false
+
+}
+
+private fun setupSnackBar(
+    v: View,
+    @StringRes resId: Int,
+    @ColorRes color: Int
+): Snackbar {
+    return Snackbar.make(v, resId, Snackbar.LENGTH_LONG).apply {
+        view.setBackgroundColor(ContextCompat.getColor(context, color))
+        view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
+            gravity = Gravity.CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+        }
+    }
+}
+
+

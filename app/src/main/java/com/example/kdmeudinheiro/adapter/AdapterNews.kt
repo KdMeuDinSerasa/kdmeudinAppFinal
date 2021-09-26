@@ -11,8 +11,9 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.NewsModelBinding
 import com.example.kdmeudinheiro.interfaces.ClickNews
 import com.example.kdmeudinheiro.model.NewsLetter
+import com.example.kdmeudinheiro.utils.fixApiDate
 
-class AdapterNews(val mClick: ClickNews) :
+class AdapterNews(private val mClick: ClickNews) :
     ListAdapter<NewsLetter, ViewHolderNews>(DiffUtilsNews()) {
     private val mList = mutableListOf<NewsLetter>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNews {
@@ -34,6 +35,8 @@ class AdapterNews(val mClick: ClickNews) :
     }
 }
 
+
+/*this is a specific diff utils for news so we are going to leave mocked gere */
 class DiffUtilsNews : DiffUtil.ItemCallback<NewsLetter>() {
     override fun areItemsTheSame(oldItem: NewsLetter, newItem: NewsLetter): Boolean {
         return oldItem == newItem
@@ -49,9 +52,12 @@ class ViewHolderNews(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val binding = NewsModelBinding.bind(itemView)
     fun bind(mNewsLetter: NewsLetter) {
         binding.tvTitleNews.text = mNewsLetter.title
-        Glide.with(binding.root).load(mNewsLetter.imageUrl).into(binding.ivImageNews)
         binding.tvSourceNews.text = mNewsLetter.source.siteName
-        binding.tvDateNews.text = mNewsLetter.date.substring(0, 10).replace("-", "/")
-
+        binding.tvDateNews.text = mNewsLetter.date.substring(0, 10).replace("-", "/").fixApiDate()
+        Glide.with(binding.root)
+            .load(mNewsLetter.imageUrl)
+            .placeholder(R.drawable.ic_baseline_help_24)
+            .into(binding.ivImageNews)
     }
+
 }

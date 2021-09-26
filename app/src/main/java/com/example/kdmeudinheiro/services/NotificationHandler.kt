@@ -20,6 +20,12 @@ class NotificationHandler @Inject constructor(private val context: Context) {
         createNotificationChannel()
     }
 
+
+    /**
+     * here we are creating the channel, we have to create a channel
+     * for each type of notifications, so if the user
+     * wants to cancel only one type of notification he can
+     */
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Expired docs"
@@ -53,15 +59,9 @@ class NotificationHandler @Inject constructor(private val context: Context) {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(message)
+            .setAutoCancel(true)
             .setContentIntent(createPendingIntent())
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         return builder.build()
     }
 }
-/**
- * Example of how to use
- */
-//mNotificationHandler.createNotification("Teste", "Testando notificaçao na splash").apply {
-//    val notificationManager = NotificationManagerCompat.from(this@SplashActivity)
-//    notificationManager.notify(1, this)
-//}

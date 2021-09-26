@@ -47,9 +47,12 @@ class PieChartClass(
         colors.add(Color.CYAN)
         colors.add(Color.GRAY)
 
+        /* create the arrays */
         val pieChartEntry = ArrayList<Entry>()
-        val arrayDoubles = arrayListOf<Float>(0f, 0f, 0f, 0f)
-        val priceArray = arrayListOf<Float>(0f, 0f, 0f, 0f)
+        val arrayPercentages = arrayListOf(0f, 0f, 0f, 0f)
+        val priceArray = arrayListOf(0f, 0f, 0f, 0f)
+
+        /* take the bill prices sum all and make a new array*/
         listBills.forEach {
             if (it.type_bill == TypesOfBills.EMERGENCY_BILL.catName) {
                 priceArray[0] += it.price.toFloat()
@@ -65,22 +68,31 @@ class PieChartClass(
             }
         }
 
+        /*the the array with all prices sum, and transform to percentages */
         for (price in priceArray.withIndex()) {
             val income = incomes.income.toFloat()
             val final = 100 - (((income - price.value) / income) * 100)
-            arrayDoubles[price.index] = +final
+            arrayPercentages[price.index] = +final
 
         }
 
-        for (categories in arrayDoubles.withIndex()) {
-            pieChartEntry.add(Entry(categories.value, categories.index))
+        /* make the dynamic colors to no show empty percentages */
+        val colorsFix = java.util.ArrayList<Int>()
+        for (categories in arrayPercentages.withIndex()) {
+            if (categories.value != 0F) {
+                pieChartEntry.add(Entry(categories.value, categories.index))
+                colorsFix.add(colors[categories.index])
+            }
         }
+
 
         val income = incomes.income.toFloat()
         val final = (((income - outComes) / income) * 100)
-        pieChartEntry.add(Entry(final, 5))
+        pieChartEntry.add(Entry(final, pieChartEntry.size))
+        colorsFix.add(colors[4])
 
-        setData(category, pieChartEntry, colors)
+
+        setData(category, pieChartEntry, colorsFix)
     }
 
     private fun setData(cat: ArrayList<String>, pieEntries: ArrayList<Entry>?, colors: List<Int>) {
@@ -91,6 +103,7 @@ class PieChartClass(
         mpieDataset.valueTextSize = 16f
         mpieDataset.setValueFormatter(PercentFormatter())
 
+
         val dataSet = PieData(cat, mpieDataset)
 
         //bindings
@@ -99,13 +112,20 @@ class PieChartClass(
         binding.chartIncluded.pieChart.setHoleColor(R.color.PinkForbg)
         binding.chartIncluded.pieChart.setCenterTextSizePixels(150f)
         binding.chartIncluded.pieChart.setDescription(null)
-        binding.chartIncluded.pieChart.animateXY(3000, 3000)
+        binding.chartIncluded.pieChart.animateX(10)
         binding.chartIncluded.pieChart.elevation = 50f
         binding.chartIncluded.pieChart.legend.isEnabled = false
         binding.chartIncluded.pieChart.setOnChartValueSelectedListener(this)
+        binding.chartIncluded.pieChart.getEntriesAtIndex(0)
+        binding.chartIncluded.pieChart.getEntriesAtIndex(1)
+        binding.chartIncluded.pieChart.getEntriesAtIndex(2)
+
 
     }
 
+
+    /*intercept the click at the chart, call a interface to pass the selected index
+    to call the correct information at the bottom dialog*/
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
         when (e?.xIndex) {
             0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)
@@ -116,6 +136,6 @@ class PieChartClass(
     }
 
     override fun onNothingSelected() {
-        //   TODO("Not yet implemented")
+
     }
 }

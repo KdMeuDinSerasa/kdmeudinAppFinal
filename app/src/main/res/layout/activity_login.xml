@@ -4,38 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_default"
     android:orientation="vertical"
-    tools:context=".view.LoginActivity"
     android:padding="20dp"
-    android:background="@drawable/bg_default">
+    tools:context=".view.LoginActivity">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_marginTop="92dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:text="@string/bem_vindo_login"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_regular"
         android:textSize="44sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageViewLogin"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/default_10dp_margin"
+        android:src="@drawable/ic_currency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_10dp_margin"
         android:hint="Email"
-        android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:endIconDrawable="@drawable/ic_baseline_email_24"
+        app:endIconMode="custom"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogin"
+        tools:layout_editor_absoluteX="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUserEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etUserEmail"/>
+            android:layout_weight="1"
+            android:focusableInTouchMode="true"
+            android:inputType="text"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,20 +65,22 @@
         app:layout_constraintTop_toBottomOf="@+id/etEmail">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUserPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etUserPassword"
-            android:inputType="textPassword"/>
+            android:focusableInTouchMode="true"
+            android:inputType="textPassword"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
         android:id="@+id/cbRememberMe"
-        android:layout_marginTop="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/roboto_light_italic"
         android:text="@string/mantenha_me_conectado"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_light_italic"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
         tools:layout_editor_absoluteX="20dp" />
 
@@ -70,8 +89,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="7dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="50dp"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,15 +98,30 @@
         app:layout_constraintTop_toBottomOf="@+id/cbRememberMe" />
 
     <TextView
+        android:id="@+id/tvForgetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_black"
+        android:gravity="center"
+        android:text="@string/reset_password"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/createRegister" />
+
+    <TextView
         android:id="@+id/createRegister"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Cadastre-se"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Cadastre-se"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

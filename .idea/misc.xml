@@ -17,6 +17,7 @@
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/main_fragment.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_letter_fragment.xml" value="0.17395833333333333" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_model.xml" value="0.17395833333333333" />
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/offline_layout.xml" value="0.171875" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/pie_chart_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_bill_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_chart.xml" value="0.14336372847011145" />
@@ -36,9 +37,9 @@
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/ic_news.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.26197916666666665" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/retagle.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/retagle_black.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/retagle_news.xml" value="0.178125" />
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
@@ -47,7 +48,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/bills_at_dashboard_layout.xml" value="0.39014373716632444" />
-        <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.336734693877551" />
         <entry key="app/src/main/res/layout/crud_bill_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/date_picker.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/graphic_legend.xml" value="0.2015625" />
@@ -57,12 +58,8 @@
         <entry key="app/src/main/res/layout/item_list_chart.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.375" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.32814710042432815" />
-
-        <entry key="app/src/main/res/layout/news_letter_fragment.xml" value="0.12552083333333333" />
+        <entry key="app/src/main/res/layout/news_letter_fragment.xml" value="0.12208713272543059" />
         <entry key="app/src/main/res/layout/news_model.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
-        <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
-        <entry key="app/src/main/res/layout/tip_chart.xml" value="0.335" />
         <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
         <entry key="app/src/main/res/layout/tip_chart.xml" value="0.3098958333333333" />

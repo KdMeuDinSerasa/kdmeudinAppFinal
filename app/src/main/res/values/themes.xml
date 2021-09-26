@@ -13,6 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme"> @style/AppBottomSheetDialogTheme </item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
     </style>
     <!-- themes for bottom sheet-->
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog" >
@@ -20,5 +23,6 @@
     </style>
     <style name="AppModelStyle"  parent="Widget.Design.BottomSheet.Modal" >
         <item name="android:background"> @drawable/bg_tips </item>
+
     </style>
 </resources>

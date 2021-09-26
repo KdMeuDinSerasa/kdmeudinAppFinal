@@ -2,6 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,9 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
+import com.example.kdmeudinheiro.services.WorkManagerBuilder
+import com.example.kdmeudinheiro.utils.checkConnection
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,17 +33,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: MainActivityBinding
     private lateinit var binding2: HeaderDrawerBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (!checkConnection()) feedback(binding.root, R.string.no_connection_slow_warning, R.color.failure)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         loadComponents()
         loadViewModels()
+        mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
+
+    /* invoke the work manager builder class to make a notification scheduler.*/
 
 
     fun updateUser() {
@@ -110,7 +120,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+
         when (item.itemId) {
             R.id.btnLogout -> {
                 viewModel.logoutUser()
@@ -120,11 +130,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 val initi = Intent(this, LoginActivity::class.java)
                 startActivity(initi)
+                finish()
             }
             R.id.btnUserPreferences -> {
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
             }
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        mNavController.popBackStack()
     }
 }

@@ -5,18 +5,18 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetChart
-import com.example.kdmeudinheiro.bottomSheet.bottomSheetIncome
+import com.example.kdmeudinheiro.bottomSheet.BottomSheetIncome
 import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.pieChart.PieChartClass
+import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.formatCurrency
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +45,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         checkUser()
     }
 
+
     fun loadViewModels() {
         viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -59,11 +60,14 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
                 binding.incomeValue.text = "Renda Mensal: ${auxFormat.formatCurrency()}"
                 incomeValue = it
                 viewModel.getOutcome(userId)
-
+            }
+            else{
+                binding.tvNoGraph.visibility = View.VISIBLE
+                binding.ivNoGraph.visibility = View.VISIBLE
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), "Erro $it", Toast.LENGTH_SHORT).show()
+           feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
         })
         viewModel.articlesList.observe(viewLifecycleOwner, {
             articlesList.clear()
@@ -82,8 +86,27 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
             restValue = (incomeValue?.income?.toDouble()?.minus(it!!.toDouble()))
 
         })
+
         viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            PieChartClass(requireView(), it, incomeValue!!, outCome!!.toFloat(), this).loadChart()
+            if (it.size >= 1 && incomeValue != null) {
+                binding.chartIncluded.pieChart.visibility = View.VISIBLE
+                binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
+                binding.ivNoGraph.visibility = View.GONE
+                binding.tvNoGraph.visibility = View.GONE
+                PieChartClass(
+                    requireView(),
+                    it,
+                    incomeValue!!,
+                    outCome!!.toFloat(),
+                    this
+                ).loadChart()
+            } else {
+                binding.chartIncluded.pieChart.visibility = View.GONE
+                binding.ivGraphLegend.cardLegend.visibility = View.GONE
+                binding.ivNoGraph.visibility = View.VISIBLE
+                binding.tvNoGraph.visibility = View.VISIBLE
+            }
+
         })
 
     }
@@ -91,7 +114,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
     private fun loadComponents() {
         viewModel.getArticles()
         binding.addButton.setOnClickListener {
-            bottomSheetIncome(requireView()).loadIncome() { incomeFound ->
+            BottomSheetIncome(requireView()).loadIncome() { incomeFound ->
                 val mIncome = IncomeModel(null, incomeFound.toString(), userId)
                 if (incomeValue == null)
                     viewModel.addIncome(mIncome)
