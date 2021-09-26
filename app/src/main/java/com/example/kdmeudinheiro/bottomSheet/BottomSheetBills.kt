@@ -120,6 +120,8 @@ class BottomSheetBills(
             bottomSheetBinding.editBillButton.visibility = View.VISIBLE
             bottomSheetBinding.deleteBillButton.visibility = View.VISIBLE
             bottomSheetBinding.payBillButton.visibility = View.VISIBLE
+            setEditSpinnerPos(bill.type_bill)
+
 
             bottomSheetBinding.editBillButton.setOnClickListener {
                 if (!bottomSheetBinding.editTextInputBillName.text.isNullOrEmpty() &&
@@ -163,7 +165,25 @@ class BottomSheetBills(
             }
         }
     }
+
+    fun setEditSpinnerPos(type: String){
+        when (type){
+            TypesOfBills.EMERGENCY_BILL.catName -> {
+                bottomSheetBinding.spinnerExposed.setText(TypesOfBills.EMERGENCY_BILL.catName, false)
+            }
+            TypesOfBills.LEISURE_BILLS.catName -> {
+                bottomSheetBinding.spinnerExposed.setText(TypesOfBills.LEISURE_BILLS.catName, false)
+            }
+            TypesOfBills.FIX_BILLS.catName -> {
+                bottomSheetBinding.spinnerExposed.setText(TypesOfBills.FIX_BILLS.catName, false)
+            }
+            TypesOfBills.MONTHLY_BILLS.catName -> {
+                bottomSheetBinding.spinnerExposed.setText(TypesOfBills.MONTHLY_BILLS.catName, false)
+            }
+        }
+    }
 }
+
 
 
 
