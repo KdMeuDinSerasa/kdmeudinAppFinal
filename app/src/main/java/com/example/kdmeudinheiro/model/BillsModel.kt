@@ -17,7 +17,7 @@ data class BillsModel(
 
 
     fun checkExpired(): Boolean{
-        if (expire_date.before(calendar.time) && status == 0) return true
+        if (expire_date.before(presentDate) && status == 0) return true
         return false
     }
 
