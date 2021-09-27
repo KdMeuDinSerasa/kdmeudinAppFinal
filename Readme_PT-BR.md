@@ -10,13 +10,13 @@
 
 
 ## Descrição do Projeto
-<p align="center">Uma aplicação para demonstrar como o usuario usa sua renda e como melhorar sua organização financeira com dicas e artigos.</p>
+<p align="center">Uma aplicação para demonstrar como o usuário interage com seu dinheiro, dando dicas de como melhorar sua organização financeira com dicas e artigos.</p>
 
 
 <h4 align="center"> 
 	🚧   Projeto em desenvolvimento - Conferir a branch develop para ver o progresso de novas funcionalidades  🚧
    </h4>
-   <h5 align="center" >  qualquer "bug" ou problema pode ser reportado por meio de uma issue ou diretamente aos devs.</h5>
+   <h5 align="center" >  Qualquer "bug" ou problema pode ser reportado por meio de uma issue ou diretamente aos devs.</h5>
 
 
 ### Funcionalidades
@@ -38,7 +38,7 @@
 
 ## Como usar o App
 <h4 align="center"> 
-	🚧 🚨  Atenção - o aplicativo usa internet para funcionar. 🚨 🚧 
+	🚧 🚨  Atenção - O aplicativo usa internet para funcionar. 🚨 🚧 
 </h4>
 
 <div>
