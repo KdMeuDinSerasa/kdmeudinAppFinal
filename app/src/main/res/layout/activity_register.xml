@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="text"
+            android:maxLines="1"
             android:focusableInTouchMode="true"
             android:id="@+id/etNameUserRegister"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -49,7 +50,8 @@
             android:layout_width="match_parent"
             android:id="@+id/etEmailUserRegister"
             android:layout_weight="1"
-            android:inputType="text"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
             android:focusableInTouchMode="true"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>

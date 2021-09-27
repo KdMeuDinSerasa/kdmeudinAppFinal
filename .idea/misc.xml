@@ -21,7 +21,6 @@
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_bill_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_chart.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/user_preferences_fragment.xml" value="0.14336372847011145" />
-        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_default.xml" value="0.13385416666666666" />
         <entry key="app/src/main/res/drawable/bg_test_bill_fragment.xml" value="0.1328125" />
@@ -63,6 +62,7 @@
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.32814710042432815" />
         <entry key="app/src/main/res/layout/news_letter_fragment.xml" value="0.12208713272543059" />
         <entry key="app/src/main/res/layout/news_model.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/offline_layout.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/pie_chart_layout.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/tip_bill_layout.xml" value="0.33568904593639576" />
         <entry key="app/src/main/res/layout/tip_chart.xml" value="0.3098958333333333" />
