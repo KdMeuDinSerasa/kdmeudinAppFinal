@@ -40,9 +40,11 @@ financial life</p>
 	🚧 🚨  Atention - the application uses internet 🚨 🚧 
 </h4>
 
-<div>
+
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
-<a href="https://drive.google.com/file/d/15w7MBMkJKgamNX24or0cSU86bQ8D2abK/view?usp=sharing"> <img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" >  </a>
+	
+Install APK [Here](output)
+
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
 	<img width="225" alt="Screen Shot 2021-09-20 at 11 39 03" src="https://user-images.githubusercontent.com/80124800/134022391-4df4bd77-7b50-4135-9225-e96de09c76af.png">
@@ -100,7 +102,7 @@ financial life</p>
 
 
 <h2> <strong> So you my notice, at user preference has a button where you can toogle recive or not push notifications, so the paid status is for that, if a bill expires the app will end you a notification telling you that you have expired bills, but if the toogle are off, we dont send notifications to you. </strong> </h2>
-</div>
+
 
 
 
