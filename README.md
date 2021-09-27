@@ -43,7 +43,7 @@ financial life</p>
 
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
 	
-Install APK [Here](output/)
+Install APK [Here](output)
 
  <p>2º run the downloaded apk to install </p>
  <p>3º at first, you have two options, Sign-in or Sign-up, you may create an account for that.  </p>
