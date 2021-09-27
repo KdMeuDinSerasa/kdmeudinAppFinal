@@ -40,7 +40,7 @@ financial life</p>
 	🚧 🚨  Atention - the application uses internet 🚨 🚧 
 </h4>
 
-<div>
+
 <p> 1º Dowload the app beta apk at, drive. (Link on ##APK beta) </p>
 	Install APK [Here](output/app-debug.apk)
 
@@ -101,7 +101,7 @@ financial life</p>
 
 
 <h2> <strong> So you my notice, at user preference has a button where you can toogle recive or not push notifications, so the paid status is for that, if a bill expires the app will end you a notification telling you that you have expired bills, but if the toogle are off, we dont send notifications to you. </strong> </h2>
-</div>
+
 
 
 
