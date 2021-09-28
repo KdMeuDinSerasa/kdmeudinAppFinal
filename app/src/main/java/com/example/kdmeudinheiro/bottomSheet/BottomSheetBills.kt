@@ -1,7 +1,10 @@
 package com.example.kdmeudinheiro.bottomSheet
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +22,7 @@ import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.feedback
+import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
@@ -54,6 +58,15 @@ class BottomSheetBills(
                 listType
             )
         )
+
+        bottomSheetBinding.editTextInputBillPrice.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP){
+                parentView.context.hideKeyboard(view)
+                return@setOnKeyListener true
+            }
+
+            return@setOnKeyListener false
+        }
 
         bottomSheetBinding.editTextInputBillExpireDate.setOnClickListener {
             val calendar = Calendar.getInstance(Locale.US)
