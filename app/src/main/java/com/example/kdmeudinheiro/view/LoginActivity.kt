@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +19,7 @@ import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
+import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,6 +86,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loadComponents() {
+
+        binding.etPassword.setOnKeyListener { view, keycode, keyEvent ->
+            if (keycode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP){
+                hideKeyboard()
+                return@setOnKeyListener true
+            }
+
+            return@setOnKeyListener false
+
+        }
 
         binding.tvForgetPassword.setOnClickListener {
             startActivity(Intent(this, ForgetPasswordActivity::class.java))
