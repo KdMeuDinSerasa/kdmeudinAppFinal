@@ -142,11 +142,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.btnNews -> {
                 hideKeyboard()
                 if (checkConnection())
-                mNavController.navigate(R.id.action_mainFragment_to_newsLetterFragment)
+                mNavController.navigate(R.id.newsLetterFragment)
                 else startActivity(Intent(this, NoConnectionActivity::class.java))
             }
             R.id.btnBills -> {
-                mNavController.navigate(R.id.action_mainFragment_to_BillsFragment)
+                mNavController.navigate(R.id.BillsFragment)
             }
         }
         return true
