@@ -13,6 +13,7 @@ import com.example.kdmeudinheiro.adapter.AdapterNews
 import com.example.kdmeudinheiro.databinding.NewsLetterFragmentBinding
 import com.example.kdmeudinheiro.interfaces.ClickNews
 import com.example.kdmeudinheiro.model.NewsLetter
+import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.viewModel.NewsLetterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

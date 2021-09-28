@@ -20,7 +20,7 @@ class NotificationWorkManager(val context: Context, param: WorkerParameters) :
 
     override fun doWork(): Result {
 
-        checkBills()
+         checkBills()
         return Result.success()
     }
 

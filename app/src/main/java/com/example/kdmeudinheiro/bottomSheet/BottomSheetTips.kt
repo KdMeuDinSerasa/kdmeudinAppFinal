@@ -5,7 +5,7 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.TipBillLayoutBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class BottomSheetTips(val parentView: View) {
+class BottomSheetTips(private val parentView: View) {
 
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog /* Dismiss method needs to be implemented aways here*/

@@ -17,11 +17,12 @@
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/main_fragment.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_letter_fragment.xml" value="0.17395833333333333" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/news_model.xml" value="0.17395833333333333" />
-        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/offline_layout.xml" value="0.171875" />
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/offline_layout.xml" value="0.11367753623188406" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/pie_chart_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_bill_layout.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/tip_chart.xml" value="0.14336372847011145" />
         <entry key="../../projetofinal/KdMeuDin/app/src/main/res/layout/user_preferences_fragment.xml" value="0.14336372847011145" />
+        <entry key="../../projetofinal/KdMeuDin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_default.xml" value="0.13385416666666666" />
         <entry key="app/src/main/res/drawable/bg_test_bill_fragment.xml" value="0.1328125" />
@@ -31,9 +32,11 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res/drawable/ic_bills 2.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/ic_bills.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_new.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/drawable/ic_news.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.26197916666666665" />
@@ -43,7 +46,7 @@
         <entry key="app/src/main/res/font-v26/fonts.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.2164102564102564" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.11820652173913043" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/bill_item_list.xml" value="0.335" />
@@ -51,6 +54,7 @@
         <entry key="app/src/main/res/layout/bills_fragment.xml" value="0.336734693877551" />
         <entry key="app/src/main/res/layout/crud_bill_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/date_picker.xml" value="0.22056159420289856" />
+        <entry key="app/src/main/res/layout/dialog_filter_date.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/graphic_legend.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/header_drawer.xml" value="0.335" />
         <entry key="app/src/main/res/layout/income_layout.xml" value="0.22056159420289856" />
@@ -67,6 +71,8 @@
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.11822916666666666" />
         <entry key="app/src/main/res/menu/pie.xml" value="0.2375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17395833333333333" />
       </map>
     </option>
   </component>
