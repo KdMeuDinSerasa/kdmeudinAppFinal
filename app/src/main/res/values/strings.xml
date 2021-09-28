@@ -70,6 +70,8 @@
     <string name="title_to_reset_password">Informe seu email para redefinição de senha</string>
     <string name="try_again_connection">Sem Conexao, tente novamente mais tarde.</string>
     <string name="insert_income">Insira sua renda mensal para comecar --></string>
+    <string name="button_entrar">Entrar</string>
+    <string name="string_senha">Senha</string>
 
 
 </resources>
