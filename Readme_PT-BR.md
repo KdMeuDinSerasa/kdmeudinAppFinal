@@ -39,10 +39,11 @@
 	🚧 🚨  Atenção - O aplicativo usa internet para funcionar. 🚨 🚧 
 </h4>
 
-<div>
+
 <p> 1º Baixe o app beta apk no drive. (Link APK beta acima) </p>
-<a href="https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/tree/main/output"> <img width="225" alt="Print APK BETA LINK" src="https://user-images.githubusercontent.com/80124800/134037458-4658a24f-0ebb-43bf-946b-dad6ce2ea213.png" >  </a>
- <p>2º Rode o apk baixado para instalar </p>
+Instalar APK [Aqui](output)
+<div>
+ <p>2º Rode o apk baixado parainstalar </p>
  <p>3º Agora você tem duas opções, login ou cadastro, você pode criar uma conta para testar.  </p>
 	<img width="225" alt="Screen Shot 2021-09-20 at 11 39 03" src="https://user-images.githubusercontent.com/80124800/134022391-4df4bd77-7b50-4135-9225-e96de09c76af.png">
 <img width="229" alt="Screen Shot 2021-09-20 at 11 42 16" src="https://user-images.githubusercontent.com/80124800/134022406-bbe33111-3052-4baa-b4da-430220a6a570.png">
