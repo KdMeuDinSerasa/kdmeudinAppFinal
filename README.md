@@ -5,8 +5,6 @@
 - [English](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/README.md)
 - [Português](https://github.com/KdMeuDinSerasa/kdmeudinAppFinal/blob/main/Readme_PT-BR.md)
 
-## APK Beta
-[Link](https://drive.google.com/file/d/1_kE7LdQkXm0hA_yBKANjvyQRzxN2gWNh/view?usp=sharing)
 
 
 ## Project Description
