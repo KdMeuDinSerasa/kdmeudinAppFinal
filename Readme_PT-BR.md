@@ -41,7 +41,9 @@
 
 
 <p> 1º Baixe o app beta apk no drive. (Link APK beta acima) </p>
+
 Instalar APK [Aqui](output)
+
 <div>
  <p>2º Rode o apk baixado parainstalar </p>
  <p>3º Agora você tem duas opções, login ou cadastro, você pode criar uma conta para testar.  </p>
