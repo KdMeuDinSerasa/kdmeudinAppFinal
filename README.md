@@ -92,7 +92,7 @@ Install APK [Here](output)
 <img width="234" alt="Screen Shot 2021-09-22 at 13 42 56" src="https://user-images.githubusercontent.com/80124800/134386212-78cff2ee-11ed-4148-b551-5c57c5d6ac7f.png">
 <img width="244" alt="Screen Shot 2021-09-22 at 13 44 09" src="https://user-images.githubusercontent.com/80124800/134386368-142bd2be-221f-473c-b811-a8d380fb3930.png">
 
-🚧 🚨  Atention - only will open if you have at least one bell for each category.🚨 🚧 
+🚧 🚨  Atention - only will open if you have at least one bill for each category.🚨 🚧 
 <h1> we are planning to change this, but for now will be keep this way.</h1>
 
 
