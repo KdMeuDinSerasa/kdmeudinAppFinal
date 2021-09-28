@@ -56,18 +56,19 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
         viewModel.mIncomeModel.observe(viewLifecycleOwner, {
             if (it != null) {
+                binding.addYourIncomeWarn.visibility = View.GONE
                 val auxFormat = it.income.toDouble()
                 binding.incomeValue.text = "Renda Mensal: ${auxFormat.formatCurrency()}"
                 incomeValue = it
                 viewModel.getOutcome(userId)
-            }
-            else{
+            } else {
+                binding.addYourIncomeWarn.visibility = View.VISIBLE
                 binding.tvNoGraph.visibility = View.VISIBLE
                 binding.ivNoGraph.visibility = View.VISIBLE
             }
         })
         viewModel.mError.observe(viewLifecycleOwner, {
-           feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
+            feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
         })
         viewModel.articlesList.observe(viewLifecycleOwner, {
             articlesList.clear()
@@ -93,6 +94,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
                 binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
                 binding.ivNoGraph.visibility = View.GONE
                 binding.tvNoGraph.visibility = View.GONE
+                binding.addYourIncomeWarn.visibility = View.GONE
                 PieChartClass(
                     requireView(),
                     it,

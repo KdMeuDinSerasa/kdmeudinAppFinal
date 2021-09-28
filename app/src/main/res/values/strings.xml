@@ -43,7 +43,7 @@
     <string name="text_tip_chart_fix">Nas contas fixas, é dito por varias empresas como por exemplo: Nubank, que o ideal é que até 50% junto das suas contas mensais, mas sabemos que não é tão simples não é mesmo? então separamos algumas dicas para você! </string>
     <string name="no_bills_msg">Ainda não possui contas? Adicione agora!</string>
     <string name="no_bills_hint"><![CDATA[Adicione uma conta aqui ->]]></string>
-    <string name="no_graph">Ainda não há informações suficientes para a composição do gráfico</string>
+    <string name="no_graph">Ainda não há informações suficientes para a composição do gráfico, insira sua renda mensal e contas para comecar.</string>
     <string name="error_to_call_bills">Erro ao solicitar contas</string>
     <string name="bill_add_success">Conta adicionada com sucesso</string>
     <string name="bill_add_failure">Erro ao adicionar a conta</string>
@@ -63,9 +63,13 @@
     <string name="redefinition_email_send">"Email de redefinição enviado"</string>
     <string name="redefinition_email_not_found">"Email não encontrado"</string>
     <string name="no_connection_slow_warning">"Detectamos que está sem conexão, algumas funções vão ficar lentas"</string>
+    <string name="no_connection_news">"Detectamos que está sem conexão, as notícias não podem ser disponibilizadas "</string>
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
     <string name="notification_button">Notificação</string>
     <string name="reset_password">Esqueci minha senha</string>
     <string name="title_to_reset_password">Informe seu email para redefinição de senha</string>
+    <string name="try_again_connection">Sem Conexao, tente novamente mais tarde.</string>
+    <string name="insert_income">Insira sua renda mensal para comecar --></string>
     <string name="try_again_connection">Sem conexão, tente novamente mais tarde.</string>
+
 </resources>

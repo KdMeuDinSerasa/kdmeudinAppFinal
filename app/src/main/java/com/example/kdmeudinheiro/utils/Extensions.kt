@@ -1,6 +1,9 @@
 package com.example.kdmeudinheiro.utils
 
+import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.Gravity
@@ -93,5 +96,4 @@ private fun setupSnackBar(
         }
     }
 }
-
 
