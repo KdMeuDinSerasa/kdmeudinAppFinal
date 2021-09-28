@@ -63,6 +63,7 @@
     <string name="redefinition_email_send">"Email de redefinição enviado"</string>
     <string name="redefinition_email_not_found">"Email não encontrado"</string>
     <string name="no_connection_slow_warning">"Detectamos que está sem conexão, algumas funções vão ficar lentas"</string>
+    <string name="no_connection_news">"Detectamos que está sem conexão, as notícias não podem ser disponibilizadas "</string>
     <string name="text_insert_incame"> Renda mensal: Composta da soma dos ganhos menos a dedução de impostos, por exemplo: Imposto de renda, INSS, entre outros. </string>
     <string name="notification_button">Notificação</string>
     <string name="reset_password">Esqueci minha senha</string>

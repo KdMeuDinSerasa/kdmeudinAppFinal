@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
@@ -23,11 +24,12 @@ import com.example.kdmeudinheiro.services.WorkManagerBuilder
 import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.viewModel.MainViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     lateinit var mAppBarConfiguration: AppBarConfiguration
     lateinit var mNavController: NavController
     private lateinit var binding: MainActivityBinding
@@ -78,6 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationUI.setupWithNavController(binding.drawerMenuMain, mNavController)
 
         binding.drawerMenuMain.setNavigationItemSelectedListener(this)
+        binding.bottomNavMain.setOnItemSelectedListener(this)
 
     }
 
@@ -134,6 +137,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.btnUserPreferences -> {
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
+            }
+            R.id.btnNews -> {
+                if (checkConnection())
+                mNavController.navigate(R.id.action_mainFragment_to_newsLetterFragment)
+                else startActivity(Intent(this, NoConnectionActivity::class.java))
+            }
+            R.id.btnBills -> {
+                mNavController.navigate(R.id.action_mainFragment_to_BillsFragment)
             }
         }
         return true
