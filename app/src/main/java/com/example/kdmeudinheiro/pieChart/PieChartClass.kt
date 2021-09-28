@@ -26,6 +26,7 @@ class PieChartClass(
     OnChartValueSelectedListener {
 
     private lateinit var binding: MainFragmentBinding
+    private lateinit var pieChartEntry: ArrayList<Entry>
 
     fun loadChart() {
 
@@ -48,7 +49,7 @@ class PieChartClass(
         colors.add(Color.GRAY)
 
         /* create the arrays */
-        val pieChartEntry = ArrayList<Entry>()
+        pieChartEntry = ArrayList<Entry>()
         val arrayPercentages = arrayListOf(0f, 0f, 0f, 0f)
         val priceArray = arrayListOf(0f, 0f, 0f, 0f)
 
@@ -127,11 +128,13 @@ class PieChartClass(
     /*intercept the click at the chart, call a interface to pass the selected index
     to call the correct information at the bottom dialog*/
     override fun onValueSelected(e: Entry?, dataSetIndex: Int, h: Highlight?) {
-        when (e?.xIndex) {
-            0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)
-            1 -> clickInterceptor.interceptClick(TipType.CHART_LEISURE.type)
-            2 -> clickInterceptor.interceptClick(TipType.CHART_FIX.type)
-            3 -> clickInterceptor.interceptClick(TipType.CHART_MONTHLY.type)
+        if (pieChartEntry.size >= 5) {
+            when (e?.xIndex) {
+                0 -> clickInterceptor.interceptClick(TipType.CHART_EMERGENCY.type)
+                1 -> clickInterceptor.interceptClick(TipType.CHART_LEISURE.type)
+                2 -> clickInterceptor.interceptClick(TipType.CHART_FIX.type)
+                3 -> clickInterceptor.interceptClick(TipType.CHART_MONTHLY.type)
+            }
         }
     }
 
