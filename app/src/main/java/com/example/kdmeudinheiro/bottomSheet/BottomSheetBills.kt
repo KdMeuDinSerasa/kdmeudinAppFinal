@@ -63,7 +63,14 @@ class BottomSheetBills(
                 parentView.context,
                 DatePickerDialog.OnDateSetListener { datePicker, year, month, dayOfMonth ->
                     date = datePicker
-                    bottomSheetBinding.editTextInputBillExpireDate.setText("$dayOfMonth/0${month + 1}/$year")
+                    if (month + 1 > 9){
+                        if (dayOfMonth > 9) bottomSheetBinding.editTextInputBillExpireDate.setText("$dayOfMonth/${month + 1}/$year")
+                        else bottomSheetBinding.editTextInputBillExpireDate.setText("0$dayOfMonth/${month + 1}/$year")
+                    } else{
+                        if (dayOfMonth > 9) bottomSheetBinding.editTextInputBillExpireDate.setText("$dayOfMonth/0${month + 1}/$year")
+                        else bottomSheetBinding.editTextInputBillExpireDate.setText("0$dayOfMonth/0${month + 1}/$year")
+                    }
+
                 }, calendar.get(Calendar.YEAR), month, day
             )
             datePicker.show()
