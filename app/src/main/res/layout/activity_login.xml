@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:hint="Password"
+        android:hint="@string/string_senha"
         app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@+id/etEmail">
 
@@ -92,7 +92,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="50dp"
-        android:text="Login"
+        android:text="@string/button_entrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbRememberMe" />

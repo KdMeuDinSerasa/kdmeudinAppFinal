@@ -46,80 +46,114 @@ android {
 
 dependencies {
     //LottieFiles
-    implementation "com.airbnb.android:lottie:3.4.0"
+    var lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     //hilt
-    implementation "com.google.dagger:hilt-android:2.37"
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
-    implementation 'com.google.firebase:firebase-messaging-ktx:22.0.0'
-    kapt "com.google.dagger:hilt-compiler:2.37"
+    var hiltVersion = "2.37"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+
+    //Firebase storage, databse, messaging
+    var fbStorageVersion = "20.0.1" //older 20.0.0
+    var fbDataBaseVersion = "20.0.4" // older 20.0.2
+    var fbMessagingVersion = "23.0.2" // older 20.0.0
+    implementation "com.google.firebase:firebase-storage-ktx:$fbStorageVersion"
+    implementation "com.google.firebase:firebase-database-ktx:$fbDataBaseVersion"
+    implementation "com.google.firebase:firebase-messaging-ktx:$fbMessagingVersion"
 
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    var coroutinesVersion = "1.5.0" //older 1.3.9
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // workmanager
-    implementation("androidx.work:work-runtime-ktx:2.5.0")
+    var workmanagerVersion = "2.7.1" //older 2.5.0
+    implementation "androidx.work:work-runtime-ktx:$workmanagerVersion"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    var glideVersion = "4.12.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Firebase
-    implementation 'com.google.firebase:firebase-auth:21.0.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-firestore:23.0.3'
-    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.3'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    var fbAuthVersion = "21.0.3" //older 21.0.1'
+    var androidLegacySptVersion = "1.0.0"
+    var fbFireStoreVersion = "24.1.0" //older 23.0.3
+    var fbFireStoreKXTVersion = "24.1.0" //older 23.0.3
+    implementation "com.google.firebase:firebase-auth:$fbAuthVersion"
+    implementation "androidx.legacy:legacy-support-v4:$androidLegacySptVersion"
+    implementation "com.google.firebase:firebase-firestore:$fbFireStoreVersion"
+    implementation "com.google.firebase:firebase-firestore-ktx:$fbFireStoreKXTVersion"
+
     //Navigation
-    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
-    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
-    implementation "com.google.android.material:material:1.1.0"
+    var NavFragmentVersion = "1.0.0"
+    var NavUIKXTVersion = "1.0.0"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$NavFragmentVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$NavUIKXTVersion"
+
+    //Material.io
+    var materialVersion = "1.5.0" //older 1.1.0
+    implementation "com.google.android.material:material:$materialVersion"
+
     //Mp Android Charts
-    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    var mpChartsVersion = "2.2.4"
+    implementation "com.github.PhilJay:MPAndroidChart:$mpChartsVersion"
+
 
     // Circle Images view.
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    var imageCircleViewVersion = "3.1.0"
+    implementation "de.hdodenhof:circleimageview:$imageCircleViewVersion"
 
     //unit test
-    testImplementation "com.google.truth:truth:1.0.1"
-    androidTestImplementation "com.google.truth:truth:1.0.1"
+    var truthVersion = "1.1.3" //older1.0.1
+    var junitVersion = "4.+" //older 4.+
+    var junitExtVersion = "1.1.3"
+    var espressoVersion = "3.4.0"
+    var mockitoVersion = "3.12.4"
+    var mockitoCoreVersion = "4.0.0" //older 3.12.4
+    var roboeletricVersion = "4.6.1"
+    var hiltTestingVersion = "2.38.1"
+    var hiltTestingCompilerVersion = "2.38.1"
+    var retrofitMockVersion = "2.9.0"
+    var jupiterVersion = "5.8.1" //older 5.6.2
+    testImplementation "com.google.truth:truth:$truthVersion"
+    androidTestImplementation "com.google.truth:$truthVersion"
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+    androidTestImplementation "org.robolectric:robolectric:$roboeletricVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltTestingVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingCompilerVersion"
+    androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitMockVersion"
+    androidTestImplementation "org.junit.jupiter:junit-jupiter-params:$jupiterVersion"
+    androidTestImplementation "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$jupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
 
     //retrofit
-    implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    var gsonConverterVersion = "2.8.7"
+    var retrofitVersion = "2.9.0"
+    var retrofitConverterGsonVersion = "2.9.0"
+    implementation "com.google.code.gson:gson:$gsonConverterVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterGsonVersion"
 
-    /*test imports init*/
+    //Android core
+    var androidCore = "1.7.0" //older 1.6.0
+    implementation "androidx.core:core-ktx:$androidCore"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation 'com.google.truth:truth:1.1.3'
-    androidTestImplementation 'org.mockito:mockito-android:3.12.4'
-    androidTestImplementation "org.robolectric:robolectric:4.6.1"
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
+    //AppCompat, constraintLayout
+    var appcompatVersion = "1.4.1" //older 1.3.1
+    var constraintVersion = "2.1.3" // older2.1.0
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
 
-    androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.9.0'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
-    testImplementation 'com.squareup.retrofit2:retrofit-mock:2.9.0'
+    //MVVM e LiveData
+    var lifecycleLivedataAndViewModelVersion = "2.4.1" //older 2.3.1
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleLivedataAndViewModelVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleLivedataAndViewModelVersion"
 
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'com.google.truth:truth:1.1.3'
-    testImplementation 'org.mockito:mockito-core:3.12.4'
-
-
-    /*test imports finish*/
-
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

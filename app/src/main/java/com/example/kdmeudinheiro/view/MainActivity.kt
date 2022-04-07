@@ -23,6 +23,7 @@ import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.services.WorkManagerBuilder
 import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
+import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -139,12 +140,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
             }
             R.id.btnNews -> {
+                hideKeyboard()
                 if (checkConnection())
-                mNavController.navigate(R.id.action_mainFragment_to_newsLetterFragment)
+                mNavController.navigate(R.id.newsLetterFragment)
                 else startActivity(Intent(this, NoConnectionActivity::class.java))
             }
             R.id.btnBills -> {
-                mNavController.navigate(R.id.action_mainFragment_to_BillsFragment)
+                mNavController.navigate(R.id.BillsFragment)
             }
         }
         return true
