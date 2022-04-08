@@ -72,6 +72,10 @@
     <string name="insert_income">Insira sua renda mensal para comecar --></string>
     <string name="button_entrar">Entrar</string>
     <string name="string_senha">Senha</string>
+    <string name="none_leftovers">Sobras 0</string>
+    <string name="leftovers">Sobras:</string>
+    <string name="total_expenses">Gastos totais:</string>
+    <string name="monthy_income">Renda Mensal:</string>
 
 
 </resources>
