@@ -2,7 +2,7 @@ package com.example.kdmeudinheiro.view
 
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -14,14 +14,15 @@ import androidx.core.content.edit
 import androidx.lifecycle.ViewModelProvider
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityLoginBinding
-import com.example.kdmeudinheiro.databinding.OfflineLayoutBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.model.UserModel
+import com.example.kdmeudinheiro.utils.Constants
 import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.example.kdmeudinheiro.viewModel.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,97 +31,91 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var bottomSheetView: View
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var viewModel: LoginViewModel
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!checkConnection()) startActivity(Intent(this, NoConnectionActivity::class.java))
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         setContentView(binding.root)
-        loadViewModels()
+        loadViewModelsObservers()
         loadComponents()
     }
 
 
-
-    fun loadViewModels() {
+    private fun loadViewModelsObservers() {
         /**
          * checks if user session still active or not, then start the correct activity.
          */
 
         viewModel.mFirebaseUser.observe(this, {
             if (it != null) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                startMainActivity()
             }
         })
 
-        viewModel.mFirebaseUserLoged.observe(this, {
-            if (it != null) {
-                val mSharedPreferences =
-                    getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
-                if (binding.cbRememberMe.isChecked) {
-                    mSharedPreferences.edit {
-                        this.putBoolean(KeysShared.REMEMBERME.key, true)
-                    }
-                }
-                mSharedPreferences.edit {
-                    this.putString(KeysShared.USERID.key, it.uid)
-                }
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        })
+        viewModel.mFirebaseUserLoged.observe(this, { saveLoginPreferences(it) })
 
-        viewModel.error.observe(this, {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
-        viewModel.result.observe(this, {
-            if (it) feedback(
-                binding.root,
-                R.string.registration_on_firebase_success,
-                R.color.success
-            )
-            else feedback(binding.root, R.string.registration_on_firebase_failure, R.color.failure)
-        })
+        viewModel.error.observe(this, { showErrorOnToast(it) })
+
+        viewModel.result.observe(this, { showFeedback(it) })
     }
 
-    fun loadComponents() {
+    private fun startMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
 
-        binding.etPassword.setOnKeyListener { view, keycode, keyEvent ->
-            if (keycode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP){
+    private fun saveLoginPreferences(userFound: FirebaseUser?) {
+        if (userFound != null) {
+            mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
+            if (binding.cbRememberMe.isChecked) {
+                mSharedPreferences.edit {
+                    this.putBoolean(KeysShared.REMEMBERME.key, true)
+                }
+            }
+            mSharedPreferences.edit {
+                this.putString(KeysShared.USERID.key, userFound.uid)
+            }
+            startMainActivity()
+        }
+    }
+
+    private fun showErrorOnToast(err: String) {
+        Toast.makeText(this, err, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showFeedback(feedType: Boolean) {
+
+        if (feedType) feedback(
+            binding.root,
+            R.string.registration_on_firebase_success,
+            R.color.success
+        )
+        else feedback(binding.root, R.string.registration_on_firebase_failure, R.color.failure)
+    }
+
+    private fun loadComponents() {
+
+        binding.etPassword.setOnKeyListener { _, keycode, keyEvent ->
+            if (keycode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
                 hideKeyboard()
                 return@setOnKeyListener true
             }
 
             return@setOnKeyListener false
-
         }
 
-        binding.tvForgetPassword.setOnClickListener {
-            startActivity(Intent(this, ForgetPasswordActivity::class.java))
-        }
-        binding.createRegister.setOnClickListener {
-            loadBottomSheet()
-        }
-        binding.btnLogin.setOnClickListener {
-            val mUser = UserModel(
-                id = "",
-                email = binding.etEmail.editText?.text.toString(),
-                password = binding.etPassword.editText?.text.toString(),
-                name = "",
-                null
-            )
-            if (mUser.checkLogin()) {
-                viewModel.loginWithEmailEPassword(mUser)
-            } else {
-                feedback(binding.root, R.string.validation_login_failure, R.color.failure)
-            }
-        }
+        binding.tvForgetPassword.setOnClickListener { startForgotPassword() }
+
+        binding.createRegister.setOnClickListener { loadBottomSheet() }
+
+        binding.btnLogin.setOnClickListener { attemptToLogin() }
     }
 
 
-    fun loadBottomSheet() {
+    private fun loadBottomSheet() {
 
         bottomSheetView = View.inflate(this, R.layout.activity_register, null)
         bottomSheetDialog = BottomSheetDialog(this)
@@ -131,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
         loadBottomSheetComponents()
     }
 
-    fun loadBottomSheetComponents() {
+    private fun loadBottomSheetComponents() {
         bottomSheetView.findViewById<Button>(R.id.btnRegister).setOnClickListener {
             checkLoginRegister()
         }
@@ -140,7 +135,26 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun checkLoginRegister() {
+    private fun startForgotPassword() {
+        startActivity(Intent(this, ForgetPasswordActivity::class.java))
+    }
+
+    private fun attemptToLogin() {
+        val mUser = UserModel(
+            id = Constants.EMPYT,
+            email = binding.etEmail.editText?.text.toString(),
+            password = binding.etPassword.editText?.text.toString(),
+            name = Constants.EMPYT,
+            null
+        )
+        if (mUser.checkLogin()) {
+            viewModel.loginWithEmailEPassword(mUser)
+        } else {
+            feedback(binding.root, R.string.validation_login_failure, R.color.failure)
+        }
+    }
+
+    private fun checkLoginRegister() {
         val mUser = UserModel(
             email = bottomSheetView.findViewById<EditText>(R.id.etEmailUserRegister).text.toString(),
             password = bottomSheetView.findViewById<EditText>(R.id.etPasswordUserRegister).text.toString(),
