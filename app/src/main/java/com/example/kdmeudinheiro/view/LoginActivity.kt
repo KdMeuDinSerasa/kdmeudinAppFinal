@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun loadViewModelsObservers() {
+    private fun loadViewModelsObservers() {
         /**
          * checks if user session still active or not, then start the correct activity.
          */
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loadComponents() {
 
-        binding.etPassword.setOnKeyListener { view, keycode, keyEvent ->
+        binding.etPassword.setOnKeyListener { _, keycode, keyEvent ->
             if (keycode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
                 hideKeyboard()
                 return@setOnKeyListener true
