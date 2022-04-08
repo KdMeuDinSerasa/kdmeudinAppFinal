@@ -1,11 +1,9 @@
 package com.example.kdmeudinheiro.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.ActivityForgetPasswordBinding
 import com.example.kdmeudinheiro.utils.feedback
@@ -23,7 +21,7 @@ class ForgetPasswordActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(ForgetPasswordViewModel::class.java)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        loadViewModels()
+        loadViewModelsObservers()
         loadComponents()
     }
 
@@ -33,19 +31,22 @@ class ForgetPasswordActivity : AppCompatActivity() {
     }
 
 
-    fun loadViewModels(){
-        viewModel.success.observe(this, {
-            if (it) feedback(binding.root, R.string.redefinition_email_send, R.color.success)
-        })
-        viewModel.failure.observe(this, {
-            feedback(binding.root, R.string.redefinition_email_not_found, R.color.failure)
-        })
+    private fun loadViewModelsObservers(){
+        viewModel.success.observe(this, { showSuccess(it) })
+
+        viewModel.failure.observe(this, { showFailure() })
     }
 
-    fun loadComponents(){
-        binding.btnSendEmail.setOnClickListener {
-            viewModel.sendRedefinitionEmail(binding.tvEmail.text.toString())
-        }
+    private fun showSuccess(show: Boolean){
+        if (show) feedback(binding.root, R.string.redefinition_email_send, R.color.success)
+    }
+
+    private fun showFailure(){
+        feedback(binding.root, R.string.redefinition_email_not_found, R.color.failure)
+    }
+
+    private fun loadComponents(){
+        binding.btnSendEmail.setOnClickListener { sendRedefinitionEmail() }
 
         binding.tvEmail.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP){
@@ -54,5 +55,9 @@ class ForgetPasswordActivity : AppCompatActivity() {
             }
             return@setOnKeyListener false
         }
+    }
+
+    private fun sendRedefinitionEmail(){
+        viewModel.sendRedefinitionEmail(binding.tvEmail.text.toString())
     }
 }
