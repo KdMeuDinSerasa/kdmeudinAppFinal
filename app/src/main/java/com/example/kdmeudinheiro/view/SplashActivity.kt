@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         viewModelMain = ViewModelProvider(this)[MainViewModel::class.java]
         setContentView(binding.root)
 
-        loadViewModels()
+        loadViewModelsObservers()
 
         if (mSharedPreferences.getBoolean(KeysShared.REMEMBERME.key, false)) {
             viewModelLogin.checkSession()
@@ -42,8 +42,6 @@ class SplashActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 startLoginActivity()
             }, 3000)
-
-
     }
 
    private fun loadViewModelsObservers() {
