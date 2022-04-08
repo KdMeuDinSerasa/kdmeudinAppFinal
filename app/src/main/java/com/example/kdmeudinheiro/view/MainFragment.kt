@@ -14,19 +14,17 @@ import com.example.kdmeudinheiro.databinding.MainFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
 import com.example.kdmeudinheiro.interfaces.ChartClickInterceptor
 import com.example.kdmeudinheiro.model.Articles
+import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.model.IncomeModel
 import com.example.kdmeudinheiro.pieChart.PieChartClass
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.formatCurrency
 import com.example.kdmeudinheiro.viewModel.MainViewModel
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
@@ -38,97 +36,146 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding = MainFragmentBinding.bind(view)
-        loadViewModels()
+        loadViewModelsObservers()
         loadComponents()
         checkUser()
     }
 
 
-    fun loadViewModels() {
-        viewModel.mFirebaseUser.observe(viewLifecycleOwner, {
-            if (it != null) {
-                userId = it.uid
-                viewModel.getIncome(userId)
-            }
-        })
+    private fun loadViewModelsObservers() {
+        viewModel.mFirebaseUser.observe(viewLifecycleOwner, { checkUserIdAndRequestIncome(it) })
 
-        viewModel.mIncomeModel.observe(viewLifecycleOwner, {
-            if (it != null) {
-                binding.addYourIncomeWarn.visibility = View.GONE
-                val auxFormat = it.income.toDouble()
-                binding.incomeValue.text = "Renda Mensal: ${auxFormat.formatCurrency()}"
-                incomeValue = it
-                viewModel.getOutcome(userId)
-            } else {
-                binding.addYourIncomeWarn.visibility = View.VISIBLE
-                binding.tvNoGraph.visibility = View.VISIBLE
-                binding.ivNoGraph.visibility = View.VISIBLE
-            }
-        })
-        viewModel.mError.observe(viewLifecycleOwner, {
-            feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
-        })
-        viewModel.articlesList.observe(viewLifecycleOwner, {
-            articlesList.clear()
-            articlesList.addAll(it)
-        })
+        viewModel.mIncomeModel.observe(viewLifecycleOwner, { handlerIncome(it) })
+
+        viewModel.mError.observe(viewLifecycleOwner, { feedbackErrorOnExecuteAction() })
+
+        viewModel.articlesList.observe(viewLifecycleOwner, { loadNewArticlesList(it) })
+
         viewModel.outCome.observe(viewLifecycleOwner, {
-            if (incomeValue == null)
-                binding.tvRest.text = "Sobras 0"
-            else {
-                val sum = incomeValue?.income?.toDouble()?.minus(it!!.toDouble())
-                binding.tvRest.text = "Sobras: ${sum?.formatCurrency()}"
+            if (it != null) {
+                handlerOutCome(it)
             }
-
-            binding.tvOutcome.text = "Gastos totais: ${it?.formatCurrency()}"
-            outCome = it
-            restValue = (incomeValue?.income?.toDouble()?.minus(it!!.toDouble()))
-
         })
 
-        viewModel.billsPercentage.observe(viewLifecycleOwner, {
-            if (it.size >= 1 && incomeValue != null) {
-                binding.chartIncluded.pieChart.visibility = View.VISIBLE
-                binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
-                binding.ivNoGraph.visibility = View.GONE
-                binding.tvNoGraph.visibility = View.GONE
-                binding.addYourIncomeWarn.visibility = View.GONE
-                PieChartClass(
-                    requireView(),
-                    it,
-                    incomeValue!!,
-                    outCome!!.toFloat(),
-                    this
-                ).loadChart()
-            } else {
-                binding.chartIncluded.pieChart.visibility = View.GONE
-                binding.ivGraphLegend.cardLegend.visibility = View.GONE
-                binding.ivNoGraph.visibility = View.VISIBLE
-                binding.tvNoGraph.visibility = View.VISIBLE
+        viewModel.billsPercentage.observe(viewLifecycleOwner, { handlerBillsList(it) })
+
+    }
+
+    private fun checkUserIdAndRequestIncome(user: FirebaseUser?) {
+        if (user != null) {
+            userId = user.uid
+            viewModel.getIncome(userId)
+        }
+    }
+
+    private fun handlerIncome(incomeFounded: IncomeModel?) {
+        if (incomeFounded != null) {
+            binding.addYourIncomeWarn.visibility = View.GONE
+            val auxFormat = incomeFounded.income.toDouble()
+            binding.incomeValue.text = "${this.getString(R.string.monthy_income)} ${auxFormat.formatCurrency()}"
+            incomeValue = incomeFounded
+            viewModel.getOutcome(userId)
+        } else {
+            setupIncomeWarns()
+        }
+    }
+
+    private fun setupIncomeWarns() {
+        binding.addYourIncomeWarn.visibility = View.VISIBLE
+        binding.tvNoGraph.visibility = View.VISIBLE
+        binding.ivNoGraph.visibility = View.VISIBLE
+    }
+
+    private fun feedbackErrorOnExecuteAction() {
+        feedback(requireView(), R.string.error_to_excute_action, R.color.failure)
+    }
+
+    private fun loadNewArticlesList(newList: List<Articles>) {
+        articlesList.clear()
+        articlesList.addAll(newList)
+    }
+
+    private fun handlerOutCome(outcome: Double) {
+        when (incomeValue) {
+            null -> {
+                binding.tvRest.text = this.getString(R.string.none_leftovers)
             }
+            else -> {
+                val sum = incomeValue?.income?.toDouble()?.minus(outcome)
+                binding.tvRest.text =
+                    "${this.getString(R.string.leftovers)} ${sum?.formatCurrency()}"
+            }
+        }
+        outCome = outcome
+        restValue = (incomeValue?.income?.toDouble()?.minus(outcome))
+        binding.tvOutcome.text =
+            "${this.getString(R.string.total_expenses)} ${outcome.formatCurrency()}"
+    }
 
-        })
+    private fun handlerBillsList(billsList: List<BillsModel>) {
+        if (billsList.isNullOrEmpty() && incomeValue != null) {
+            showPieChart()
+            loadPieChartInfo(billsList)
 
+        } else {
+            hidePieChart()
+        }
+    }
+
+    private fun showPieChart() {
+        binding.chartIncluded.pieChart.visibility = View.VISIBLE
+        binding.ivGraphLegend.cardLegend.visibility = View.VISIBLE
+        binding.ivNoGraph.visibility = View.GONE
+        binding.tvNoGraph.visibility = View.GONE
+        binding.addYourIncomeWarn.visibility = View.GONE
+    }
+
+    private fun hidePieChart() {
+        binding.chartIncluded.pieChart.visibility = View.GONE
+        binding.ivGraphLegend.cardLegend.visibility = View.GONE
+        binding.ivNoGraph.visibility = View.VISIBLE
+        binding.tvNoGraph.visibility = View.VISIBLE
+    }
+
+    private fun loadPieChartInfo(billsList: List<BillsModel>) {
+        val mIncome = incomeValue
+        val mOutCome = outCome
+        if (mIncome != null && mOutCome != null) {
+            PieChartClass(
+                requireView(),
+                billsList,
+                mIncome,
+                mOutCome.toFloat(),
+                this
+            ).loadChart()
+        } else {
+            // TODO() error treatment
+        }
     }
 
     private fun loadComponents() {
         viewModel.getArticles()
         binding.addButton.setOnClickListener {
-            BottomSheetIncome(requireView()).loadIncome() { incomeFound ->
-                val mIncome = IncomeModel(null, incomeFound.toString(), userId)
-                if (incomeValue == null)
-                    viewModel.addIncome(mIncome)
-                else {
-                    incomeValue!!.income = incomeFound.toString()
-                    viewModel.editIncome(incomeValue!!)
-                }
-
-                viewModel.getIncome(userId)
-            }
+            handleAddButtonClick()
         }
 
+    }
+
+    private fun handleAddButtonClick() {
+        BottomSheetIncome(requireView()).loadIncome() { incomeFound ->
+            val mIncome = IncomeModel(null, incomeFound.toString(), userId)
+
+            if (incomeValue != null) {
+                incomeValue!!.income = incomeFound.toString()
+                viewModel.editIncome(incomeValue!!)
+            } else {
+                viewModel.addIncome(mIncome)
+            }
+
+            viewModel.getIncome(userId)
+        }
     }
 
     override fun interceptClick(index: Int) {
@@ -140,7 +187,7 @@ class MainFragment : Fragment(R.layout.main_fragment), ChartClickInterceptor {
         startActivity(browser)
     }
 
-    fun checkUser() {
+    private fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
