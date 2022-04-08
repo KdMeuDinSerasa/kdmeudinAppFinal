@@ -24,7 +24,6 @@ import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.example.kdmeudinheiro.viewModel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
