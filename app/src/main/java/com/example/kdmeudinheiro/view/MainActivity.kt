@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
@@ -20,17 +19,20 @@ import com.example.kdmeudinheiro.R
 import com.example.kdmeudinheiro.databinding.HeaderDrawerBinding
 import com.example.kdmeudinheiro.databinding.MainActivityBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.services.WorkManagerBuilder
+import com.example.kdmeudinheiro.model.UserModel
 import com.example.kdmeudinheiro.utils.checkConnection
 import com.example.kdmeudinheiro.utils.feedback
 import com.example.kdmeudinheiro.utils.hideKeyboard
 import com.example.kdmeudinheiro.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    NavigationBarView.OnItemSelectedListener {
     lateinit var mAppBarConfiguration: AppBarConfiguration
     lateinit var mNavController: NavController
     private lateinit var binding: MainActivityBinding
@@ -42,41 +44,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (!checkConnection()) feedback(binding.root, R.string.no_connection_slow_warning, R.color.failure)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        loadComponents()
-        loadViewModels()
+        checkConnectionBeforeAll()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        loadNavigationComponents()
+        loadViewModelsObservers()
         mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
-
-        val mSharedPreferences = getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         mSharedPreferences.getString(KeysShared.USERID.key, "")?.let { viewModel.getUserById(it) }
     }
 
-    /* invoke the work manager builder class to make a notification scheduler.*/
+    private fun checkConnectionBeforeAll() {
+        runBlocking {
+            if (!checkConnection()) feedback(
+                binding.root,
+                R.string.no_connection_slow_warning,
+                R.color.failure
+            )
+        }
+    }
 
+    /* invoke the work manager builder class to make a notification scheduler.*/
 
     fun updateUser() {
         viewModel.userLoged()
     }
 
-    fun loadComponents() {
+    private fun loadNavigationComponents() {
         /**
-         * Nav controler que vai controlar a transição entre os fragments
-         * realocando eles no hostfragment criado dentro da activity
+         * Nav controller who will control fragments transitions
+         * relocating then on hostfragment created inside activity
          */
         mNavController = findNavController(R.id.hostFragment)
         binding.bottomNavMain.apply {
             this.setupWithNavController(mNavController)
         }
+
         mAppBarConfiguration = AppBarConfiguration(mNavController.graph, binding.drawerLayoutMain)
         /**
-         * Botao de sanduiche para abrir o menu
+         * sandwich button to open navbar
          */
         NavigationUI.setupActionBarWithNavController(this, mNavController, binding.drawerLayoutMain)
 
-
         /**
-         * seta navigation viewer com o controle do NavController
+         * setups navigation viewer with NavController
          */
         NavigationUI.setupWithNavController(binding.drawerMenuMain, mNavController)
 
@@ -85,19 +94,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun loadViewModels() {
-        viewModel.mUserModel.observe(this, { userDetails ->
-            binding.drawerMenuMain.getHeaderView(0).apply {
-                binding2 = HeaderDrawerBinding.bind(this)
-                binding2.userEmailLoged.text = userDetails.email
-                binding2.userNameLoged.text = userDetails.name
-                if (userDetails.img == null) {
+    private fun loadViewModelsObservers() {
+        viewModel.mUserModel.observe(this, { setupDrawerMenuWithUserDetails(it) })
+
+        viewModel.mFirebaseUser.observe(this, { if (it != null) viewModel.getUserById(it.uid) })
+    }
+
+    private fun setupDrawerMenuWithUserDetails(userDetails: UserModel) {
+        binding.drawerMenuMain.getHeaderView(0).apply {
+            binding2 = HeaderDrawerBinding.bind(this)
+            binding2.userEmailLoged.text = userDetails.email
+            binding2.userNameLoged.text = userDetails.name
+
+            when (userDetails.img) {
+                null -> {
                     binding2.userAvatarDrawer.let {
                         Glide.with(it)
                             .load(R.drawable.man_png)
                             .into(it)
                     }
-                } else {
+                }
+                else -> {
                     binding2.userAvatarDrawer.let {
                         Glide.with(it)
                             .load(userDetails.img)
@@ -105,51 +122,57 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
                 }
             }
-        })
 
-        viewModel.mFirebaseUser.observe(this, {
-            if (it != null) {
-                viewModel.getUserById(it.uid)
-            }
-        })
+        }
     }
 
-    /**
-     * Para onde voltar quando o botao de voltar for clicado
-     */
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        //close menu when clicked
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
 
         when (item.itemId) {
             R.id.btnLogout -> {
-                viewModel.logoutUser()
-                mSharedPreferences.edit {
-                    this.putString(KeysShared.USERID.key, "")
-                    this.putBoolean(KeysShared.REMEMBERME.key, false)
-                }
-                val initi = Intent(this, LoginActivity::class.java)
-                startActivity(initi)
-                finish()
+                logoutUser()
             }
             R.id.btnUserPreferences -> {
                 mNavController.navigate(R.id.action_mainFragment_to_userPreferencesFragment)
             }
             R.id.btnNews -> {
-                hideKeyboard()
-                if (checkConnection())
-                mNavController.navigate(R.id.newsLetterFragment)
-                else startActivity(Intent(this, NoConnectionActivity::class.java))
+                navigateToNews()
             }
             R.id.btnBills -> {
                 mNavController.navigate(R.id.BillsFragment)
             }
         }
         return true
+    }
+
+    private fun logoutUser() {
+        viewModel.logoutUser()
+        clearSharedPreferences()
+        navigateBackToLogin()
+    }
+
+    private fun clearSharedPreferences() {
+        mSharedPreferences.edit {
+            this.putString(KeysShared.USERID.key, "")
+            this.putBoolean(KeysShared.REMEMBERME.key, false)
+        }
+    }
+
+    private fun navigateBackToLogin() {
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
+        finish()
+    }
+
+    private fun navigateToNews() {
+        hideKeyboard()
+        if (checkConnection()) mNavController.navigate(R.id.newsLetterFragment)
+        else startActivity(Intent(this, NoConnectionActivity::class.java))
     }
 
     override fun onBackPressed() {
