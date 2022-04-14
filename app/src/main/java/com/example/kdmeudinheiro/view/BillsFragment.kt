@@ -16,7 +16,6 @@ import com.example.kdmeudinheiro.bottomSheet.BottomSheetBills
 import com.example.kdmeudinheiro.bottomSheet.BottomSheetTips
 import com.example.kdmeudinheiro.databinding.BillsFragmentBinding
 import com.example.kdmeudinheiro.enums.KeysShared
-import com.example.kdmeudinheiro.enums.TipType
 import com.example.kdmeudinheiro.model.BillsModel
 import com.example.kdmeudinheiro.utils.DialogToFilter
 import com.example.kdmeudinheiro.utils.feedback
@@ -26,22 +25,17 @@ import java.util.*
 
 @AndroidEntryPoint
 class BillsFragment : Fragment(R.layout.bills_fragment) {
-    //var goes here
     private lateinit var viewModel: BillsViewModel
     private lateinit var binding: BillsFragmentBinding
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var userId: String
-    private var adapter = AdapterBillsList() { bill ->
-        BottomSheetBills(requireView(), bill).loadBottomBill() { billFromCb, type ->
-            handlerForDialogResponse(billFromCb, type)
-        }
-    }
+    private var adapter = AdapterBillsList() { bill -> handlerSelectBill(bill) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(BillsViewModel::class.java)
-        LoadViewModelAndsObservers()
+        loadViewModelObservers()
         binding = BillsFragmentBinding.bind(view)
         recyclerView = binding.recyclerViewIdNoXML
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -55,65 +49,52 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
 
 
     private fun loadBinding() {
-        binding.floatButtonAddBill.setOnClickListener {
-            BottomSheetBills(requireView(), null).loadBottomBill() { bill, type ->
-                bill.id_user = userId
-                viewModel.addBill(bill)
-                viewModel.getAllBills(userId)
-            }
-        }
-        binding.About.setOnClickListener {
-            BottomSheetTips(requireView()).loadTip()
-        }
+        binding.floatButtonAddBill.setOnClickListener { loadBottomSheetBills() }
+        binding.About.setOnClickListener { loadBottomSheetTips() }
     }
 
-    private fun LoadViewModelAndsObservers() {
-        viewModel.billList.observe(viewLifecycleOwner, {
-            if (it.size == 0) {
-                binding.ivArrowDown.visibility = View.VISIBLE
-                binding.tvNoBills.visibility = View.VISIBLE
-                binding.tvAddBillHint.visibility = View.VISIBLE
-                binding.progressAnimation.visibility = View.GONE
-                binding.recyclerViewIdNoXML.visibility = View.GONE
-            } else {
-                adapter.refresh(it.toMutableList())
-                binding.recyclerViewIdNoXML.visibility = View.VISIBLE
-                binding.progressAnimation.visibility = View.GONE
-                binding.ivArrowDown.visibility = View.GONE
-                binding.tvAddBillHint.visibility = View.GONE
-                binding.tvNoBills.visibility = View.GONE
-            }
-        })
+    private fun loadViewModelObservers() {
+        viewModel.billList.observe(viewLifecycleOwner, { handleBillList(it) })
 
-        viewModel.billList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
-        viewModel.copyBillList.observe(viewLifecycleOwner, { adapter.refresh(it.toMutableList()) })
+        viewModel.copyBillList.observe(viewLifecycleOwner, { refreshAdapterBillList(it) })
+
         viewModel.error.observe(viewLifecycleOwner, {
             if (it != null) {
-                feedback(requireView(), R.string.error_to_call_bills, R.color.failure)
+                showFeedBack(
+                    type = false,
+                    successString = R.string.error_to_call_bills,
+                    failureString = R.string.error_to_call_bills
+                )
             }
         })
         viewModel.addResponse.observe(viewLifecycleOwner, {
-            if (it == true) {
-                feedback(requireView(), R.string.bill_add_success, R.color.success)
-            } else {
-                feedback(requireView(), R.string.bill_add_failure, R.color.failure)
-            }
+            showFeedBack(
+                type = it,
+                successString = R.string.bill_add_success,
+                failureString = R.string.bill_add_failure
+            )
         })
         viewModel.editResponse.observe(viewLifecycleOwner, {
-            if (it == true) {
-                feedback(requireView(), R.string.bill_edit_success, R.color.success)
-            } else {
-                feedback(requireView(), R.string.bill_edit_success, R.color.success)
-            }
+            showFeedBack(
+                type = it,
+                successString = R.string.bill_edit_success,
+                failureString = R.string.bill_edit_failure
+            )
         })
         viewModel.deleteResponse.observe(viewLifecycleOwner, {
-            if (it == true) {
-                feedback(requireView(), R.string.bill_delete_success, R.color.success)
-            } else {
-                feedback(requireView(), R.string.bill_delete_failure, R.color.failure)
-            }
+            showFeedBack(
+                type = it,
+                successString = R.string.bill_delete_success,
+                failureString = R.string.bill_delete_failure
+            )
         })
 
+    }
+
+    private fun handlerSelectBill(bill: BillsModel) {
+        BottomSheetBills(requireView(), bill).loadBottomBill() { billFromCb, type ->
+            handlerForDialogResponse(billFromCb, type)
+        }
     }
 
     private fun handlerForDialogResponse(billFromCb: BillsModel, type: Int?) {
@@ -137,36 +118,83 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         } else viewModel.getAllBills(userId)
     }
 
-    companion object {
-        fun newInstance() = BillsFragment()
+    private fun loadBottomSheetBills() {
+        BottomSheetBills(requireView(), null).loadBottomBill() { bill, _ ->
+            bill.id_user = userId
+            viewModel.addBill(bill)
+            viewModel.getAllBills(userId)
+        }
     }
 
-    fun checkUser() {
+    private fun loadBottomSheetTips() {
+        BottomSheetTips(requireView()).loadTip()
+    }
+
+    private fun handleBillList(billList: List<BillsModel>) {
+        if (billList.isEmpty()) {
+            loadEmptyBillListTips()
+        } else {
+            refreshAdapterBillList(billList)
+            loadBillListUIState()
+        }
+    }
+
+    private fun loadEmptyBillListTips() {
+        binding.ivArrowDown.visibility = View.VISIBLE
+        binding.tvNoBills.visibility = View.VISIBLE
+        binding.tvAddBillHint.visibility = View.VISIBLE
+        binding.progressAnimation.visibility = View.GONE
+        binding.recyclerViewIdNoXML.visibility = View.GONE
+    }
+
+    private fun loadBillListUIState() {
+        binding.recyclerViewIdNoXML.visibility = View.VISIBLE
+        binding.progressAnimation.visibility = View.GONE
+        binding.ivArrowDown.visibility = View.GONE
+        binding.tvAddBillHint.visibility = View.GONE
+        binding.tvNoBills.visibility = View.GONE
+    }
+
+    private fun refreshAdapterBillList(newBillList: List<BillsModel>) {
+        adapter.refresh(newBillList.toMutableList())
+    }
+
+    private fun showFeedBack(type: Boolean, successString: Int, failureString: Int) {
+        if (type) feedback(requireView(), successString, R.color.success)
+        else feedback(requireView(), failureString, R.color.success)
+    }
+
+    private fun checkUser() {
         val mSharedPreferences =
             requireActivity().getSharedPreferences(KeysShared.APP.key, Context.MODE_PRIVATE)
         userId = mSharedPreferences.getString(KeysShared.USERID.key, "").toString()
         if (userId.isNullOrBlank()) {
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+          startLogin()
         }
         viewModel.getAllBills(userId)
+    }
+
+    private fun startLogin(){
+        startActivity(Intent(requireActivity(), LoginActivity::class.java))
     }
 
     private fun searchBill() {
         binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0.let {
                     if (it?.length!! >= 1)
                         viewModel.filterBill(it.toString())
                     else
-                        viewModel.filterBill(it.toString())
+                        feedback(requireView(), R.string.error_search_bill, R.color.failure)
                 }
             }
+
             override fun afterTextChanged(p0: Editable?) {}
         })
     }
 
-    private fun filterByValidate(){
+    private fun filterByValidate() {
         val date = Calendar.getInstance()
 
         binding.buttonFilter.setOnClickListener {
@@ -180,7 +208,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
                 if (getListPosition == 3)
                     viewModel.filterBill(it.toString())
 
-                 viewModel.filterPay(date.time, getListPosition!!)
+                viewModel.filterPay(date.time, getListPosition!!)
             }
         }
     }
