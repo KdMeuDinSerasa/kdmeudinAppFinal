@@ -27,30 +27,27 @@ class NewsLetterFragment : Fragment(R.layout.news_letter_fragment), ClickNews {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = NewsLetterFragmentBinding.bind(view)
-        viewModel = ViewModelProvider(this).get(NewsLetterViewModel::class.java)
+        viewModel = ViewModelProvider(this)[NewsLetterViewModel::class.java]
         loadViewModels()
         loadComponents()
         viewModel.getNews(page)
 
     }
 
-    fun loadViewModels() {
+    private fun loadViewModels() {
         viewModel.mNewsList.observe(viewLifecycleOwner, {
             adapter.update(it.news)
             binding.progressAnimation.visibility = View.GONE
         })
     }
 
-    fun loadComponents() {
+    private fun loadComponents() {
         binding.recyclerNews.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerNews.adapter = adapter
 
         binding.recyclerNews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-
-                }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && !recyclerView.canScrollVertically(
                         1
                     )
@@ -67,6 +64,5 @@ class NewsLetterFragment : Fragment(R.layout.news_letter_fragment), ClickNews {
         val browser = Intent(Intent.ACTION_VIEW, Uri.parse(mNewsLetter.url))
         startActivity(browser)
     }
-
 
 }
