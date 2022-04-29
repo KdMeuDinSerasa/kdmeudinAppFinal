@@ -178,6 +178,7 @@ class BillsFragment : Fragment(R.layout.bills_fragment) {
         startActivity(Intent(requireActivity(), LoginActivity::class.java))
     }
 
+    //TODO NEEDS FURTHER ANALYSIS TO REFACTOR THIS FUNCTIONS
     private fun searchBill() {
         binding.textFieldSearch.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
